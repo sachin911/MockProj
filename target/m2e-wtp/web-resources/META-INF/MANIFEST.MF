@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: kbark1
-=======
-Built-By: pkoshy
->>>>>>> 3d1f353fca5b38fc9c4af13908807ae2c56045b2
 Build-Jdk: 1.8.0_101
 Created-By: Maven Integration for Eclipse
 
