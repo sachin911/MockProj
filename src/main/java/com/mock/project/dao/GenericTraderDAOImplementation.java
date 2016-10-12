@@ -1,4 +1,4 @@
-package com.sapient.mockProject.dao;
+package com.mock.project.dao;
 
 
 
@@ -50,6 +50,12 @@ public class GenericTraderDAOImplementation<T> implements GenericTraderDAO<T> {
 
 		em.remove(object);
 
+	}
+
+	@Override
+	public List<T> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*@SuppressWarnings("unchecked")
