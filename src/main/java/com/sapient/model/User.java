@@ -32,6 +32,15 @@ public class User {
 	@Column(name="USER_ADDRESS",nullable=false,length=40)
 	private String user_address;
 	
+	@Column(name="FIRST_NAME",nullable=false,length=40)
+	private String first_name;
+	
+	@Column(name="LAST_NAME",nullable=false,length=40)
+	private String last_name;
+	
+	@Column(name="EMAIL",nullable=false,length=40)
+	private String email;
+	
 	@Column(name="DELETED",nullable=false,length=40)
 	private boolean deleted;
 
@@ -72,15 +81,43 @@ public class User {
 	}
 	
 	
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String user_name, String secret_key, String user_address, boolean deleted) {
+	public User(String user_name, String secret_key, String user_address, String first_name, String last_name,
+			String email, boolean deleted) {
 		super();
 		this.user_name = user_name;
 		this.secret_key = secret_key;
 		this.user_address = user_address;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
 		this.deleted = deleted;
 	}
 
@@ -95,12 +132,19 @@ public class User {
 		builder.append(secret_key);
 		builder.append(", user_address=");
 		builder.append(user_address);
+		builder.append(", first_name=");
+		builder.append(first_name);
+		builder.append(", last_name=");
+		builder.append(last_name);
+		builder.append(", email=");
+		builder.append(email);
 		builder.append(", deleted=");
 		builder.append(deleted);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
+		
 	
 	
 }
