@@ -41,30 +41,19 @@ public class GenericTraderDAOImplementation<T> implements GenericTraderDAO<T> {
 	 */
 
 	@Override
-	public void update(T entity) {
-		// TODO Auto-generated method stub
+	public List<T> findAll() {
+
+		return em.createQuery("from Order").getResultList();
 
 	}
+
+
 
 	public void remove(T object) {
 
 		em.remove(object);
 
 	}
-
-	@Override
-	public List<T> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*@SuppressWarnings("unchecked")
-	@Override
-	public List<T> displayAll(T object) {
-
-		return em.createQuery("from User").getResultList();
-
-	}*/
 
 
 
