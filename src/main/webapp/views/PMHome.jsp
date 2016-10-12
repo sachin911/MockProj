@@ -19,7 +19,7 @@
 				<a class="navbar-brand" href="#">Portfolio Manager</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
+				<li class="active"><a href="#">Home Page</a></li>
 				<li><a href="#">Create Trader</a></li>
 				<li><a href="#">Order Blotter</a></li>
 				<li><a href="#">History</a></li>
