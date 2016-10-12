@@ -20,9 +20,9 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home Page</a></li>
-				<li><a href="#">Create Trader</a></li>
-				<li><a href="#">Order Blotter</a></li>
-				<li><a href="#">History</a></li>
+				<li><a href="">Create Trader</a></li>
+				<li><a href="OrderBlotter.jsp">Order Blotter</a></li>
+				<li><a href="">History</a></li>
 			</ul>
 		</div>
 		<div class="container">
