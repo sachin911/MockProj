@@ -15,5 +15,6 @@ public class TradingController {
 		ModelAndView view = new ModelAndView("test");
 		view.addObject("name", name);
 		return view;
+		
 	}
 }
