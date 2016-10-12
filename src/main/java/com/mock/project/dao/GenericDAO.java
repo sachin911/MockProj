@@ -3,7 +3,7 @@ package com.mock.project.dao;
 import java.util.List;
 
 
-public interface GenericTraderDAO<T> {
+public interface GenericDAO<T> {
 
 	void add(T entity);
 

@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 
 
 
-public class GenericTraderDAOImplementation<T> implements GenericTraderDAO<T> {
+public class GenericDAOImplementation<T> implements GenericDAO<T> {
 
 	@PersistenceContext
 	private EntityManager em;
