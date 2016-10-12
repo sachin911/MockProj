@@ -8,8 +8,7 @@ public interface GenericTraderDAO<T> {
 	
 	void add(T object);
 	void remove(T object);
-	List<T> displayAll(T object);
-	void update(T object);
+	List<T> displayAll(T object, String table);
 	
 
 }

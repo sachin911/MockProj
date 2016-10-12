@@ -28,16 +28,11 @@ public class GenericTraderDAOImplementation<T> implements GenericTraderDAO<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> displayAll(T object) {
+	public List<T> displayAll(T object, String table) {
 
-		return em.createQuery("from User").getResultList();
+		return em.createQuery("from " + table).getResultList();
 
 	}
 
-	@Override
-	public void update(T object) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
