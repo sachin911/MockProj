@@ -14,6 +14,8 @@ public class TradingController {
 		// Name of your jsp file as parameter
 		ModelAndView view = new ModelAndView("test");
 		view.addObject("name", name);
+		System.out.println("Test");
 		return view;
+		
 	}
 }
