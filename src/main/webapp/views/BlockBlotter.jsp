@@ -26,7 +26,7 @@
   <div class="well">
       <h2>Block Blotter</h2>
  
- <div class="container">
+ 
 
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
@@ -90,9 +90,9 @@
 </div>
    <button type="button" class="btn btn-default">SEND</button>
      <button type="button" class="btn btn-default">CANCEL</button>
+
 </div>
-</div>
-    
+    </div>
         
 </nav>
 </body>
