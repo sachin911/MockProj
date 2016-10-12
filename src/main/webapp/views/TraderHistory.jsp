@@ -28,7 +28,7 @@
     <div class="container">
         
     <div class="well">
-      <h2>Block Blotter</h2>
+      <h2>Trader History</h2>
  
  <div class="container">
 
