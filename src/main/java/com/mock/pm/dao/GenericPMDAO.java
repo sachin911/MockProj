@@ -7,6 +7,6 @@ public interface GenericPMDAO<T> {
 	void add(T object);
 	void remove(T object);
 	void update(T object);
-	List<T> displayAll(T object);
+	List<T> displayAll(T object, String table);
 
 }

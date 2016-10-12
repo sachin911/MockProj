@@ -11,7 +11,6 @@ public class GenericPMDAOImpl<T> implements GenericPMDAO<T> {
 	@Override
 	public void add(T object) {
 		em.persist(object);
-		
 	}
 
 	@Override
@@ -25,8 +24,10 @@ public class GenericPMDAOImpl<T> implements GenericPMDAO<T> {
 	}
 
 	@Override
-	public List<T> displayAll(T object) {
-		return em.createQuery("from class").getResultList();
+	public List<T> displayAll(T object, String table) {
+		return em.createQuery("from " + table + " ").getResultList();
 	}
+	
+	
 
 }
