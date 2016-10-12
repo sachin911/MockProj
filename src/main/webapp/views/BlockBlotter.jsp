@@ -17,7 +17,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">View Blocks</a></li>
-      <li><a href="#">Pending Orders</a></li>
+      <li><a href="Pending_orders.jsp">Pending Orders</a></li>
       <li><a href="#">History</a></li> 
     </ul>
   </div>
