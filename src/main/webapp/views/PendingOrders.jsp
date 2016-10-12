@@ -18,10 +18,10 @@
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Home</a></li>
+     
       <li ><a href="BlockBlotter.jsp">View Blocks</a></li>
-      <li class="active"><a href="Pending_orders.jsp">Pending Orders</a></li>
-      <li><a href="#">History</a></li>
+      <li class="active"><a href="PendingOrders.jsp">Pending Orders</a></li>
+      <li><a href="TraderHistory.jsp">History</a></li>
     </ul>
   </div>
 </nav>
