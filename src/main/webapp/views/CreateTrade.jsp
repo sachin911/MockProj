@@ -24,10 +24,10 @@
       <a class="navbar-brand" href="#">Portfolio Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Trade</a></li>
-      <li><a href="#">Blotter</a></li> 
-      <li><a href="#">History</a></li> 
+				<li><a href="PMHome.jsp">Home Page</a></li>		
+				<li class="active"><a href="CreateTrade.jsp">Create Trader</a></li>
+				<li><a href="OrderBlotter.jsp">Order Blotter</a></li>
+				<li><a href="PMHistory.jsp">History</a></li>
     </ul>
   </div>
     
