@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class AppConfig {
 	
-	
+	//this is test comment
 	//<bean id="date" class="java.util.Date"></bean>
 	@Bean
 	public Date date(){
