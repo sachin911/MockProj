@@ -17,8 +17,8 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">View Blocks</a></li>
-      <li><a href="Pending_orders.jsp">Pending Orders</a></li>
-      <li><a href="#">History</a></li> 
+      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
+      <li><a href="TraderHistory.jsp">History</a></li> 
     </ul>
   </div>
     <div class="container">
@@ -26,20 +26,29 @@
   <div class="well">
       <h2>Block Blotter</h2>
  
- <div class="container">
+ 
 
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div class="panel-heading">
-        
-         <table class="table">
+        <table class="table">
+             
+             <thead>
+                 <th></th>
+                 <th>ID</th>
+                 <th>Symbol</th>
+                 <th>Side</th>
+                 <th>Timestamp</th>
+                 
+             </thead>  
+           
              
              <tr>
                  <td><input type="checkbox"/></td>
-                 <td>ID: 123</td>
-                 <td>Symbol: GOOG</td>
-                 <td>Side:Sell</td>
-                 <td>Timestamp:12:23</td>
+                 <td>123</td>
+                 <td>GOOG</td>
+                 <td>Sell</td>
+                 <td>12:23</td>
                  <td>
                  <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-default">+</button></a>
@@ -64,10 +73,10 @@
              
              <tr>
                  <td><input type="checkbox"/></td>
-                 <td>ID: 123</td>
-                 <td>Symbol: GOOG</td>
-                 <td>Side:Sell</td>
-                 <td>Timestamp:12:23</td>
+                 <td>123</td>
+                 <td>GOOG</td>
+                 <td>Sell</td>
+                 <td>12:23</td>
                  <td>
                  <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><button type="button" class="btn btn-default">+</button></a>
@@ -90,9 +99,9 @@
 </div>
    <button type="button" class="btn btn-default">SEND</button>
      <button type="button" class="btn btn-default">CANCEL</button>
+
 </div>
-</div>
-    
+    </div>
         
 </nav>
 </body>
