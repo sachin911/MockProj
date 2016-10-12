@@ -1,4 +1,4 @@
-package com.mock.pm.dao;
+package com.mock.project.dao;
 
 import java.util.List;
 
