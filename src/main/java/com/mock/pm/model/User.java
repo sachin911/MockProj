@@ -11,7 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-@Table(name="USERS")
+@Table(name="User")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 @SelectBeforeUpdate
