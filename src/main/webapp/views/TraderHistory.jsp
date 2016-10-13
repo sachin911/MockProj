@@ -20,8 +20,8 @@
       <a class="navbar-brand">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">View Blocks</a></li>
-      <li><a href="#">Pending Orders</a></li>
+      <li><a href="BlockBlotter.jsp">View Blocks</a></li>
+      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
       <li class="active"><a href="#">History</a></li> 
     </ul>
   </div>
