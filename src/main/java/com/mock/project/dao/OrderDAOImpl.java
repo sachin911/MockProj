@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.sapient.mockProject.pojo.Order;
 
 @Repository
-public class OrderDAOImpl extends GenericTraderDAOImplementation<Order> implements OrderDAO{
+public class OrderDAOImpl extends GenericDAOImplementation<Order> implements OrderDAO{
 
 	
 	private EntityManager em;

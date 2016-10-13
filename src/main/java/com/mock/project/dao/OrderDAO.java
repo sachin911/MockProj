@@ -5,7 +5,7 @@ import java.util.List;
 import com.sapient.mockProject.pojo.Order;
 
 
-public interface OrderDAO extends GenericTraderDAO<Order>
+public interface OrderDAO extends GenericDAO<Order>
 {
 	List<Order> findAll();
 	
