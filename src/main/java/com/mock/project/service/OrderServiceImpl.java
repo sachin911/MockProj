@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mock.project.dao.OrderDAO;
+import com.mock.project.model.Status;
 import com.sapient.mockProject.pojo.Order;
 
 
@@ -23,9 +24,22 @@ public class OrderServiceImpl implements OrderService{
 		return dao.findAll();
 	}
 	@Override
-	public void updateStatus(long block_id, List order_id) {
+	public void updateStatusInOrder(long block_id, List order_id) {
 		
 		dao.updateStatus(block_id, order_id);
+		
+	}
+	
+	
+	public void updateStatus(String status, List block_id) {
+		Status currentStatus = Status.valueOf(status);
+		Status changeStatus;
+		switch(currentStatus){
+		case New : changeStatus = Status.Open; break;
+		case Open : changeStatus = Status.Pending; break;
+		default : changeStatus = Status.Error;
+		}
+		dao.updateBlock(changeStatus, block_id);
 		
 	}
 

@@ -3,9 +3,11 @@ package com.mock.project.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.mock.project.model.Status;
 import com.sapient.mockProject.pojo.Order;
 
 @Repository
@@ -26,10 +28,23 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order> implements Ord
 		for(int i=0; i<order_id.size();i++){
 			
 			long o_id=(Long) order_id.get(i);
-		    em.createQuery("update order set block_id =:block_id" + " where order_id = :o_id");
+			Query query =  em.createQuery("update order set block_id =:block_id" + " where order_id = :o_id");
+			query.setParameter("block_id", block_id);
+			query.setParameter("o_id", o_id);
 		}
 
 		
+	}
+
+	@Override
+	public void updateBlock(Status changeStatus, List block_id) {
+		for(int i=0; i<block_id.size();i++){
+			
+			long b_id=(Long) block_id.get(i);
+		Query query = em.createQuery("update order set status =:status" + "where block_id = :b_id");
+		query.setParameter("status", changeStatus);
+		query.setParameter("b_id", b_id);
+		}
 	}
 	 
 }

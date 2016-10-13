@@ -8,6 +8,6 @@ public interface OrderService {
 	
 	List<Order> display();
 	
-	void updateStatus(long block_id,List order_id);
+	void updateStatusInOrder(long block_id,List order_id);
 
 }
