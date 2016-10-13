@@ -14,7 +14,7 @@
 	<int-jms:inbound-channel-adapter
 		channel="processEmpChannel" connection-factory="connectionFactory"
 		destination-name="empQueue">
-		<int:poller fixed-delay="500" />
+		<int:poller fixed-delay="500" /> 
 	</int-jms:inbound-channel-adapter>
 
 	<bean id="connectionFactory"
@@ -32,7 +32,7 @@
 	</bean>
 
 	<bean id="springIntExample"
-		class="tradingApplication.ServiceActivator">
+		class="com.sapient.service.ServiceActivator">
 		<property name="jmsTemplate" ref="jmsTemplate" />
 	</bean>
 

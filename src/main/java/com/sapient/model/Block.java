@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -18,6 +19,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SelectBeforeUpdate
+@XmlRootElement
 public class Block {
 
 	@Id
@@ -51,6 +53,9 @@ public class Block {
 	
 	@Column(name="EXECUTED_DATE",nullable=true)
 	private Date executed_date;
+	
+	
+	
 	
 	public Block() {
 		// TODO Auto-generated constructor stub
