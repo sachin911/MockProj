@@ -20,8 +20,8 @@
       <a class="navbar-brand">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">View Blocks</a></li>
-      <li><a href="#">Pending Orders</a></li>
+      <li><a href="BlockBlotter.jsp">View Blocks</a></li>
+      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
       <li class="active"><a href="#">History</a></li> 
     </ul>
   </div>
@@ -30,7 +30,6 @@
     <div class="well">
       <h2>Trader History</h2>
  
- <div class="container">
 
   <div class="panel-group" style = "width: 1060px">
     <div class="panel panel-default">
@@ -108,7 +107,7 @@
       </div>
       </div>
         </div>
-        </div>
+        
         
         <div class="query">
           <input id="q" placeholder="Search" autocomplete="off">
