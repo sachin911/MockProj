@@ -35,19 +35,16 @@ public class ServiceActivator {
 		this.jmsTemplate = jmsTemplate;
 	}
 
-	public void processEmployee(String str) {
+
+	public void processBlocksFromQueue(String str) {
 		System.out.println(str);
 		try {
 			System.out.println(unmarshal(str));
+			// save the unmarshalled block object to the database
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public void processBlock(Block bl) {
-		System.out.println(bl);
-
 	}
 
 	public Employee unmarshal(String objectAsString) throws JAXBException {

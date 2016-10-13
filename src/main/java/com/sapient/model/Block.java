@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -55,8 +56,95 @@ public class Block {
 	private Date executed_date;
 	
 	
+	public Long getId() {
+		return id;
+	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getSide() {
+		return side;
+	}
 	
+	@XmlElement
+	public void setSide(String side) {
+		this.side = side;
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+	
+	@XmlElement
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
+
+	public Long getTotal_quantity() {
+		return total_quantity;
+	}
+	
+	@XmlElement
+	public void setTotal_quantity(Long total_quantity) {
+		this.total_quantity = total_quantity;
+	}
+
+	public String getType() {
+		return type;
+	}
+	
+	@XmlElement
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+	
+	@XmlElement
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public double getLimit_price() {
+		return limit_price;
+	}
+	
+	@XmlElement
+	public void setLimit_price(double limit_price) {
+		this.limit_price = limit_price;
+	}
+
+	public double getStop_price() {
+		return stop_price;
+	}
+	
+	@XmlElement
+	public void setStop_price(double stop_price) {
+		this.stop_price = stop_price;
+	}
+
+	public Long getExecuted_quantity() {
+		return executed_quantity;
+	}
+	
+	@XmlElement
+	public void setExecuted_quantity(Long executed_quantity) {
+		this.executed_quantity = executed_quantity;
+	}
+
+	public Date getExecuted_date() {
+		return executed_date;
+	}
+	
+	@XmlElement
+	public void setExecuted_date(Date executed_date) {
+		this.executed_date = executed_date;
+	}
+
 	public Block() {
 		// TODO Auto-generated constructor stub
 	}

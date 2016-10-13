@@ -7,15 +7,26 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
 
-	<int:channel id="processEmpChannel">
-		<int:queue/>
+	<int:channel id="processBlockChannel">
+		<int:queue />
+	</int:channel>
+
+	<int:channel id="sendBlockChannel">
+		<int:queue />
 	</int:channel>
 
 	<int-jms:inbound-channel-adapter
-		channel="processEmpChannel" connection-factory="connectionFactory"
-		destination-name="empQueue">
-		<int:poller fixed-delay="500" /> 
+		channel="processBlockChannel" connection-factory="connectionFactory"
+		destination-name="blockQueue">
+		<int:poller fixed-delay="500" />
 	</int-jms:inbound-channel-adapter>
+
+	<int-jms:inbound-channel-adapter
+		channel="sendBlockChannel" connection-factory="connectionFactory"
+		destination-name="sendBlockQueue">
+		<int:poller fixed-delay="500" />
+	</int-jms:inbound-channel-adapter>
+
 
 	<bean id="connectionFactory"
 		class="org.springframework.jms.connection.CachingConnectionFactory">
@@ -31,12 +42,16 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
 
-	<bean id="springIntExample"
-		class="com.sapient.service.ServiceActivator">
+	<bean id="MessageProducer" class="com.sapient.jms.MarshallAndSend">
 		<property name="jmsTemplate" ref="jmsTemplate" />
 	</bean>
 
-<int:service-activator input-channel="processEmpChannel" ref="springIntExample" method="processEmployee">
+	<bean id="BlockServiceListener" class="com.sapient.service.ServiceActivator">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+	</bean>
+
+	<int:service-activator input-channel="processBlockChannel"
+		ref="BlockServiceListener" method="processBlocksFromQueue">
 		<int:poller fixed-delay="500" />
 	</int:service-activator>
 </beans>
