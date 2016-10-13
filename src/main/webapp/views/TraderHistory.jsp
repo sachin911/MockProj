@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <!-- hello -->
     <title>Test Page</title>
 </head>
 <body>
@@ -30,7 +30,6 @@
     <div class="well">
       <h2>Trader History</h2>
  
- <div class="container">
 
   <div class="panel-group" style = "width: 1060px">
     <div class="panel panel-default">
@@ -108,7 +107,7 @@
       </div>
       </div>
         </div>
-        </div>
+        
         
         <div class="query">
           <input id="q" placeholder="Search" autocomplete="off">

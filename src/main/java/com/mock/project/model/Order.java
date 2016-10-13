@@ -248,9 +248,7 @@ public class Order {
 		return orderId;
 	}
 
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
+	
 
 	public String getSymbol() {
 		return symbol;

@@ -1,4 +1,6 @@
-package com.mock.project.model;
+package com.mock.pm.model;
+
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-@Table(name="User")
+@Table(name="USERS")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 @SelectBeforeUpdate
@@ -27,7 +29,7 @@ public class User {
 	@Column(name="password",nullable=false)
 	private String password;
 	
-	@Column(name="user_Type",nullable=false)
+	@Column(name="user_type",nullable=false)
 	private String usertype;
 	
 	public User() {
@@ -38,7 +40,9 @@ public class User {
 		return id;
 	}
 
-	
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return username;

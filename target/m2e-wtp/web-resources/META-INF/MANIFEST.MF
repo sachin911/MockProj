@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: nhebba
 Build-Jdk: 1.8.0_101
+=======
+Built-By: cbagla
+Build-Jdk: 1.8.0-ea
+>>>>>>> refs/remotes/origin/trader_master
 Created-By: Maven Integration for Eclipse
 
