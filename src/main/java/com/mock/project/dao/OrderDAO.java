@@ -2,12 +2,12 @@ package com.mock.project.dao;
 
 import java.util.List;
 
-import com.sapient.mockProject.pojo.Order;
+import com.mock.project.model.Order;
 
 
-public interface OrderDAO extends GenericTraderDAO<Order>
+public interface OrderDAO extends GenericDAO<Order>
 {
 	List<Order> findAll();
 	
-	void updateStatus(long block_id,List order_id);
+	public void updateStatus(long block_id,List order_id);
 }

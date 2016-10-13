@@ -6,10 +6,10 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import com.sapient.mockProject.pojo.Order;
+import com.mock.project.model.Order;
 
 @Repository
-public class OrderDAOImpl extends GenericTraderDAOImplementation<Order> implements OrderDAO{
+public class OrderDAOImpl extends GenericDAOImplementation<Order> implements OrderDAO{
 
 	
 	private EntityManager em;
