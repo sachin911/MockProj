@@ -11,7 +11,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
+ 
 @Entity
 @Table(name="ORDER")
 
@@ -58,7 +61,7 @@ public class Order {
 	private double price;
 	
 	@Column(name="ORDER_DATE")
-	private Date orderDate;
+	private String orderDate;
 	
 	@Column(name="EXECUTED_DATE")
 	private Date executedDate;
@@ -76,15 +79,36 @@ public class Order {
 	private Long portfolioId;
 
 	
+		
 	public Order() {
-		// TODO Auto-generated constructor stub
+		
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		Date dateobj = new Date(); 
+		this.orderId =0L;
+		this.symbol = null;
+		this.side = null;
+		this.orderType = null;
+		this.qualifier = null;
+		this.accountType = null;
+		this.qtyPlaced = 0;
+		this.qtyExecuted = 0;
+		this.stopPrice = 0;
+		this.limitPrice = 0;
+		this.status = null;
+		this.price = 0;
+		this.orderDate = df.format(dateobj);
+		this.executedDate = null;
+		this.traderId = null;
+		this.pmId = null;
+		this.blockId = null;
+		this.portfolioId = null;
 	}
-	
 
-	
-	
-	
-	
+
+
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -338,11 +362,11 @@ public class Order {
 		this.price = price;
 	}
 
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 
