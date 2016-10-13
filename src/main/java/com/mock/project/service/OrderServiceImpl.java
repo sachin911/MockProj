@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mock.project.dao.OrderDAO;
-import com.sapient.mockProject.pojo.Order;
+import com.mock.project.model.*;
 
 
 @Service("Order service")
@@ -17,6 +17,7 @@ public class OrderServiceImpl implements OrderService{
 
 	@Autowired
 	private OrderDAO dao;
+	
 	@Override
 	public List<Order> display() {
 		
