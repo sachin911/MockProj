@@ -1,4 +1,4 @@
-package com.sapient.mockProject.dao;
+package com.mock.project.dao;
 
 
 
@@ -32,13 +32,14 @@ public class GenericTraderDAOImplementation<T> implements GenericTraderDAO<T> {
 
 	}
 
-	/*
-	 * @SuppressWarnings("unchecked")
-	 * 
-	 * @Override public List<T> findAll() {
-	 * 
-	 * return em.createQuery("from User").getResultList(); }
-	 */
+	
+	 @SuppressWarnings("unchecked")
+	 
+	 @Override 
+	 public List<T> findAll() {
+	
+	 return em.createQuery("from order").getResultList(); }
+	 
 
 	@Override
 	public void update(T entity) {
