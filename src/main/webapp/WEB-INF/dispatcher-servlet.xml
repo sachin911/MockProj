@@ -29,8 +29,6 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
 
-
-
 	<bean id="springIntExample"
 		class="com.javarticles.spring.integration.jms.SpringIntegrationJmsExample">
 		<property name="jmsTemplate" ref="jmsTemplate" />
@@ -62,18 +60,7 @@
 
 	<context:annotation-config />
 
-<<<<<<< HEAD
-	<bean		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/views/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-	</bean>
-</beans>
-</beans>
-=======
+
        <context:component-scan base-package="tradingApplication" />
 
        <bean id="viewResolver"
@@ -92,4 +79,5 @@
  </bean>
      
 </beans>
->>>>>>> 5942ac85648724f0deae08872212cb2e7d4dfff0
+</beans>
+
