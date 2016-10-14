@@ -43,6 +43,8 @@ public class SpringIntegrationJms {
 //			String str = marshal(iter);
 //			getJmsTemplate().convertAndSend("blockQueue", str);
 //		}
+		
+		
 
 	}
 

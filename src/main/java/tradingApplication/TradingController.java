@@ -17,7 +17,7 @@ public class TradingController {
 
 	private OrderService orderService;
 	
-	@RequestMapping("/CreateOrder")
+	@RequestMapping("/views/CreateOrder")
 	public ModelAndView addCreateOrder(@ModelAttribute("order") Order d){
 		d.setStatus("New");
 		
