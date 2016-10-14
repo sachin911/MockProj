@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mock.project.model.User;
 
-public interface UserDAO extends GenericDAO<User> {
+public interface UserDAO extends GenericDAO<User, Long> {
 
 	List<User> findAll(String username, String password);
 

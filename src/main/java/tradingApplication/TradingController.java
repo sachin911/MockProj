@@ -17,7 +17,7 @@ public class TradingController {
 
 	private OrderService orderService;
 	
-	@RequestMapping("/CreateOrder")
+	/*@RequestMapping("/views/CreateOrder")
 	public ModelAndView addCreateOrder(@ModelAttribute("order") Order d){
 		d.setStatus("New");
 		
@@ -25,7 +25,7 @@ public class TradingController {
 		this.orderService.addOrder(d);
 		ModelAndView view = new ModelAndView("redirect:index.jsp");
 		return view;
-	}
+	}*/
 		
 	@RequestMapping("/test")
 	public ModelAndView welcomeMessage(@RequestParam(value = "name", required = false) String name) {
