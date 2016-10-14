@@ -13,9 +13,9 @@ import com.mock.project.service.LoginServiceImpl;
 
 
 @Controller
-@RequestMapping("views/login")
+//@RequestMapping("views/login")
 public class LoginController {
-	@RequestMapping("/hello")
+	@RequestMapping("views/hello")
 
 	public ModelAndView sysLogin(HttpServletRequest req) {
 		String uname = req.getParameter("username");
@@ -29,7 +29,7 @@ public class LoginController {
 		String ourType = user.getUsertype();
 		
 		if(ourType == "PM"){
-			return new ModelAndView("PMpage", "currentUser", user);
+			return new ModelAndView("PMHome", "currentUser", user);
 		} else if (ourType == "TRADER"){
 			return new ModelAndView("TRADERpage", "currentUser", user);
 		} else if (ourType == "PMTRADER") {
