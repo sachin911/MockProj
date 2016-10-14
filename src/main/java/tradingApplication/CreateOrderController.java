@@ -35,7 +35,7 @@ public class CreateOrderController {
                                 
                                 container.close();
 
-                                ModelAndView view = new ModelAndView("redirect:CreateTrader.jsp");
+                                ModelAndView view = new ModelAndView("redirect:CreateTrade.jsp");
                                 return view;
                 }
 }

@@ -30,4 +30,10 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 		return null;
 	}
 
+	@Override
+	public User findByPrimaryKey(User id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

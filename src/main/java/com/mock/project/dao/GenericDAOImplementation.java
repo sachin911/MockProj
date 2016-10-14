@@ -67,7 +67,11 @@ public class GenericDAOImplementation<T,ID extends Serializable> implements Gene
 
 	}
 
-
+	@Override
+	public T findByPrimaryKey(T id) {
+		// TODO Auto-generated method stub
+		return null;
+	} 
 
 
 

@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>PM-Trader Login</title>
 <style>
 login-submit
 {
@@ -54,21 +54,20 @@ width=100px
 <body style="background: #eceeef">
 	<div class="login">
 	<img src="img/logo.png">
-		<h1><b>Login</b></h1>
-		<form method="post" class="login" action="handleLogin">
-			<p>
-				<label for="login">Username:</label> <input type="text"
-					name="username" id="username" placeholder="Enter username" required>
-			</p>
-			<p>
-				<label for="password">Password:</label> <input type="password"
-					name="password" id="password" placeholder="Enter password" required>
-			</p>
-			<p class="login-submit">
-				<input type="submit" value="LOGIN" class="btn btn-primary btn-block"/>
-			</p>
-			<p class="forgot-password"><a href="ForgetPassword.jsp">Forgot your password?</a></p>
+		<h1><b>Please Select Desired User Login Type</b></h1>
+		<h3><b>You are able to log in either as a Trader or a PM.</b></h3>
+		<form method="post" class="selectType" action="selectPM">
+			<p class="selectType-submit">
+				<input type="submit" value="Portfolio Manager" class="btn btn-primary btn-block"/>
+			</p>	
 		</form>
+		<form method="post" class="selectType" action="selectTrader">
+			<p class="selectType-submit">
+				<input type="submit" value="Trader" class="btn btn-primary btn-block"/>
+			</p>	
+		</form>
+		
+		
 	</div>
 </body>
 </html>
