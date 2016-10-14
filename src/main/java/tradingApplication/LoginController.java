@@ -13,17 +13,15 @@ import com.mock.project.service.LoginServiceImpl;
 
 
 @Controller
-//@RequestMapping("views/login")
 public class LoginController {
-	@RequestMapping("views/hello")
-
+	@RequestMapping("views/handleLogin")
 	public ModelAndView sysLogin(HttpServletRequest req) {
 		String uname = req.getParameter("username");
 		String pass = req.getParameter("password");
 		
 		//LoginService ls = new LoginServiceImpl();
 		//User user = ls.checkUser(uname, pass);
-		User user = new User("amy", "bbb", "PM");
+		User user = new User("amy", "bbb", "PMTRADER");
 		System.out.println("just got user in logincontroller");
 		
 		String ourType = user.getUsertype();
@@ -31,23 +29,31 @@ public class LoginController {
 		if(ourType == "PM"){
 			return new ModelAndView("PMHome", "currentUser", user);
 		} else if (ourType == "TRADER"){
-			return new ModelAndView("TRADERpage", "currentUser", user);
+			return new ModelAndView("BlockBlotter", "currentUser", user);
 		} else if (ourType == "PMTRADER") {
-			return new ModelAndView("PMTRADERpage", "currentUser", user);
+			return new ModelAndView("PMTraderSelector", "currentUser", user);
 		} else {
 			return new ModelAndView("type_not_found");
 		}
 	}
+	
+	@RequestMapping("views/selectPM")
+	public ModelAndView selectPMLogin(HttpServletRequest req) {
+		//GET USERNAME FROM SESSION
+		User user = new User("amy", "bbb", "PM");
+		System.out.println("just got PM in pm-trader-select");
+		
+		return new ModelAndView("PMHome", "currentUser", user);
+	}
+	
+	@RequestMapping("views/selectTrader")
+	public ModelAndView selectTraderLogin(HttpServletRequest req) {
+		//GET USERNAME FROM SESSION
+		User user = new User("bob", "bbb", "Trader");
+		System.out.println("just got Trader in pm-trader-select");
+		
+		return new ModelAndView("BlockBlotter", "currentUser", user);
+	}
+	
+	
 }
-		/*
-		if(ourType == "PM"){
-			//get pm page
-			windowToOpen = "PMHome";
-		} else if (ourType == "TRADER"){
-			//get trader page
-			windowToOpen = "TraderHistory";
-		} else if (ourType == "PMTRADER") {
-			//popup window asking which one you want to log in as
-			windowToOpen = "PMTraderPopup";
-		}
-		*/
