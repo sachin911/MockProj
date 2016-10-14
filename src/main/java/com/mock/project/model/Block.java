@@ -35,10 +35,10 @@ public class Block {
 	private String orderType;
 	
 	@Column(name="QTY_PLACED", nullable=false)
-	private int qtyPlaced;
+	private long qtyPlaced;
 	
 	@Column(name="QTY_EXECUTED")
-	private int qtyExecuted;
+	private long qtyExecuted;
 	
 	@Column(name="STOP_PRICE")
 	private double stopPrice;
@@ -87,19 +87,19 @@ public class Block {
 		this.orderType = orderType;
 	}
 
-	public int getQtyPlaced() {
+	public long getQtyPlaced() {
 		return qtyPlaced;
 	}
 
-	public void setQtyPlaced(int qtyPlaced) {
+	public void setQtyPlaced(long qtyPlaced) {
 		this.qtyPlaced = qtyPlaced;
 	}
 
-	public int getQtyExecuted() {
+	public long getQtyExecuted() {
 		return qtyExecuted;
 	}
 
-	public void setQtyExecuted(int qtyExecuted) {
+	public void setQtyExecuted(long qtyExecuted) {
 		this.qtyExecuted = qtyExecuted;
 	}
 
@@ -154,8 +154,8 @@ public class Block {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
 		result = prime * result + ((orderType == null) ? 0 : orderType.hashCode());
-		result = prime * result + qtyExecuted;
-		result = prime * result + qtyPlaced;
+		result = prime * result + (int) (qtyExecuted ^ (qtyExecuted >>> 32));
+		result = prime * result + (int) (qtyPlaced ^ (qtyPlaced >>> 32));
 		result = prime * result + ((side == null) ? 0 : side.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		temp = Double.doubleToLongBits(stopPrice);
@@ -247,6 +247,8 @@ public class Block {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	
 
 	
 	
