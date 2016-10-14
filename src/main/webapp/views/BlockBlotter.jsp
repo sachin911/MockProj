@@ -1,3 +1,4 @@
+<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -19,8 +20,9 @@
       <a class="navbar-brand" href="#">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">View Blocks</a></li>
-      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
+      <li class="active"><a href="BlockBlotter.jsp">View Blocks</a></li>
+     <li class="active"><a href="updateTable" id="pending_orders" value="pending_orders">Pending Orders</a></li>
+      
       <li><a href="TraderHistory.jsp">History</a></li> 
     </ul>
   </div>

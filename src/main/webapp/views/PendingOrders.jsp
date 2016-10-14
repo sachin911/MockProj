@@ -1,5 +1,9 @@
+
+<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.util.List" %>
+    <%@ page import="com.mock.project.model.Order"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +26,8 @@
     <ul class="nav navbar-nav">
      
       <li ><a href="BlockBlotter.jsp">View Blocks</a></li>
-      <li class="active"><a href="PendingOrders.jsp">Pending Orders</a></li>
+      <li class="active"><a href="PendingOrders.jsp" id="pending_orders" value="pending_orders">Pending Orders</a></li>
+      
       <li><a href="TraderHistory.jsp">History</a></li>
     </ul>
   </div>
@@ -34,7 +39,7 @@
   <h2>PENDING ORDERS</h2>
   <p>You can select multiple orders to create a block</p>
   
-  <form>
+ <form method="post" class="login" action="fetchOrder">
       <div class="Recommendations">
       <div style="height:300px;overflow-y:scroll;;">
     <div class="checkbox">
@@ -53,13 +58,47 @@
           <th>ALLOCATED QTY.</th>
         <th>STATUS</th>
         <th>MANAGER</th>
+        
           <th>ACCOUNT TYPE</th>
         <th>PORT ID</th>
         <th>ORDER ID</th>
       </tr>
     </thead>
         <tbody>
-      <tr>
+   
+         
+          <%
+			List<Order> list = (List<Order>)request.getAttribute("Orders");
+			for(Order e: list){
+		%>
+			<tr>
+			 <td> <label><input type="checkbox" id="check" name="check" ></label></td>
+				<td><%=e.getSymbol()%></td>
+				<td><%=e.getSide() %></td>
+				
+			</tr>
+		<% 
+			}
+		%>
+       <%--  <%=request.getAttribute("Orders") %>">
+     <TD><input type="text" name="sym" readonly=true value=<%=request.getAttribute("Order.symbol")%>/></TD>
+ <TD><%=request.getAttribute("Order.side")%></TD>
+  <TD><%=request.getAttribute("Order.qtyPlaced")%></TD>
+   <TD><%=request.getAttribute("Order.limitPrice")%></TD>
+    <TD><%=request.getAttribute("Order.stopPrice")%></TD>
+     <TD><%=request.getAttribute("Order.price")%></TD>
+      <TD><%=request.getAttribute("Order.qtyExecuted")%></TD>
+       <TD><%=request.getAttribute("Order.status")%></TD>
+        <TD><%=request.getAttribute("Order.pmId")%></TD>
+        <TD><%=request.getAttribute("Order.accountType")%></TD>
+       <TD><%=request.getAttribute("Order.portfolioId")%></TD>
+        <TD><%=request.getAttribute("Order.orderId")%></TD>
+     </TR>
+     </c:forEach>  
+             --%>
+             
+            
+           <!--   <tr>
           <td> <label><input type="checkbox" value=""></label></td>
         <td>GOOGLE</td>
         <td>BUY</td>
@@ -90,23 +129,6 @@
           <td>1344</td>
           <td>123445</td>
             </tr>
-            
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLE</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-            
              <tr>
           <td> <label><input type="checkbox" value=""></label></td>
         <td>GOOGLE</td>
@@ -124,7 +146,22 @@
             </tr>
              <tr>
           <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLE</td>
+        <td>GOOGLEee</td>
+        <td>sell</td>
+        <td>500</td>
+          <td>345</td>
+        <td>222</td>
+        <td>12</td>
+          <td>34</td>
+          <td>NEW</td>
+        <td>P.K.GUPTA</td>
+        <td>NORMAL</td>
+          <td>1344</td>
+          <td>123445</td>
+            </tr>
+             <tr>
+          <td> <label><input type="checkbox" value=""></label></td>
+        <td>oshin</td>
         <td>BUY</td>
         <td>1000</td>
           <td>345</td>
@@ -136,10 +173,10 @@
         <td>NORMAL</td>
           <td>1344</td>
           <td>123445</td>
-            </tr>
+            </tr>  -->
         </tbody></table></div></div></div>
         
-    </form>
+
     <script>
     function alert_message() {
         alert("Your block has been successfully created");
@@ -148,9 +185,11 @@
     </script>
       <button type="button" class="btn btn-primary" onclick=alert_message() id=demo">Create Block</button>
 
-      <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Add to Block
+      <input type="submit" class="btn btn-info" data-toggle="collapse" data-target="#demo" id="add">Add to Block
       </button>
+        </form>
       <div id="demo" class="collapse">
+        
    The Recommendations for blocks should be displayed here
           <div class="Recommendations">
           <div style="height:200px;overflow-y:scroll;;">

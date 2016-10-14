@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mock.project.dao.OrderDAO;
-import com.sapient.mockProject.pojo.Order;
+import com.mock.project.dao.OrderDAOImpl;
+import com.mock.project.model.Order;
+
 
 
 @Service("Order service")
@@ -16,11 +18,12 @@ import com.sapient.mockProject.pojo.Order;
 public class OrderServiceImpl implements OrderService{
 
 	@Autowired
-	private OrderDAO dao;
+	private OrderDAO dao=new OrderDAOImpl();
 	@Override
 	public List<Order> display() {
-		
+		System.out.println("hello");
 		return dao.findAll();
+		
 	}
 	@Override
 	public void updateStatus(long block_id, List order_id) {
