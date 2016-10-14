@@ -1,4 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<<<<<<< HEAD
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sapient.mockproj</groupId>
@@ -8,6 +9,17 @@
 	<name>tradingApplication Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
+=======
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>tradingApplication</groupId>
+  <artifactId>tradingApplication</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>tradingApplication Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+ <properties>
+>>>>>>> 5942ac85648724f0deae08872212cb2e7d4dfff0
 		<java-version>1.6</java-version>
 		<org.springframework-version>4.3.0.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>

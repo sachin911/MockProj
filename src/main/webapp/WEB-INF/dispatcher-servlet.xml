@@ -53,16 +53,16 @@
 
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans.xsd
-http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<context:component-scan base-package="com.javatechig.controller" />
+	<context:annotation-config />
 
+<<<<<<< HEAD
 	<bean		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/views/</value>
@@ -73,3 +73,23 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 	</bean>
 </beans>
 </beans>
+=======
+       <context:component-scan base-package="tradingApplication" />
+
+       <bean id="viewResolver"
+  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <property name="prefix" value="/WEB-INF/jsp/" />
+  <property name="suffix" value=".jsp" />
+ </bean>
+       
+       <bean id="dataSource"
+  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@10.150.222.69:1521:xe" />
+		<property name="username" value="mockproj" />
+		<property name="password" value="sapi123" />
+ </bean>
+     
+</beans>
+>>>>>>> 5942ac85648724f0deae08872212cb2e7d4dfff0
