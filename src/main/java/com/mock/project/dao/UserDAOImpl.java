@@ -4,17 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.mock.project.model.Order;
 import com.mock.project.model.User;
 
-public class UserDAOImpl implements UserDAO {
+public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements UserDAO {
 	
 	private EntityManager em;
 	
-	@Override
-	public void add(User entity) {
-		// TODO Add user to db
-		
-	}
+	
 
 	@Override
 	public void delete(User entity) {

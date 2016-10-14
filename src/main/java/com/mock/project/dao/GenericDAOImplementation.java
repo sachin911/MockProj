@@ -1,7 +1,8 @@
 package com.mock.project.dao;
 
 
-
+import java.lang.reflect.ParameterizedType;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,20 +10,31 @@ import javax.persistence.PersistenceContext;
 
 
 
-public class GenericDAOImplementation<T> implements GenericDAO<T> {
-
+public class GenericDAOImplementation<T,ID extends Serializable> implements GenericDAO<T,ID> {
+	
+	private final Class<T> type;
 	@PersistenceContext
 	private EntityManager em;
+
+	
+	@SuppressWarnings("unchecked")
+	public GenericDAOImplementation() {
+        //            this.type = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+        
+                        this.type = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+                        //System.out.println(this.type);
+        }
 
 	@Override
 
 
-	public void add(T object) {
+    public T add(T object) {
 
-		em.persist(object);
+        em.persist(object);
+        return object;
 
+}
 
-	}
 
 	@Override
 

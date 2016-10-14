@@ -15,7 +15,7 @@ import com.mock.project.model.Order;
 
 
 @Repository
-public class OrderDAOImpl extends GenericDAOImplementation<Order> implements OrderDAO{
+public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implements OrderDAO{
 
 	
 	private EntityManager em;

@@ -10,7 +10,7 @@ import com.mock.project.model.Order;
 
 
 
-public interface OrderDAO extends GenericDAO<Order>
+public interface OrderDAO extends GenericDAO<Order, Long>
 {
 	List<Order> findAll(int traderId);
 	
