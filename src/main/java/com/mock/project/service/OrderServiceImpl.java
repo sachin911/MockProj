@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public void addOrder(Order d) {
-		this.dao.add(d);
+		dao.add(d);
 
 	}
 
