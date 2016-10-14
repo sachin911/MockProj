@@ -14,13 +14,13 @@
 </head>
 <body>
     <nav class="navbar navbar-default">
-  <div class="container-fluid">
+    <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Execution Trader</a>
+    <a class="navbar-brand" href="#">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">View Blocks</a></li>
-      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
+      <li><a href="updateTable">Pending Orders</a></li>
       <li><a href="TraderHistory.jsp">History</a></li> 
     </ul>
   </div>
