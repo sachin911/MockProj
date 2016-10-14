@@ -8,9 +8,13 @@ import com.mock.project.model.*;
 
 public interface OrderService {
 	
-	List<Order> display();
+	List<Order> display(int traderId);
 	
+
+	void updateStatusInOrder(long block_id,List order_id);
+
 	public void addOrder(Order d);
-	void updateStatus(long block_id,List order_id);
+	void updateStatus(String status, List block_id);
+
 
 }
