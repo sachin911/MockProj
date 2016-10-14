@@ -1,12 +1,18 @@
 package tradingApplication;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletResponse;
 
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+>>>>>>> 6cf722738cd4450751cd314ea341a81274a57c6d
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mock.project.model.Order;
 import com.mock.project.service.OrderService;
+<<<<<<< HEAD
 import com.mock.project.service.OrderServiceImpl;
 import javax.servlet.http.HttpServletRequest;
+
+
+
 @Controller
 public class TradingController {
 		@RequestMapping(value = "/views/fetchOrder", method = RequestMethod.POST)
@@ -26,6 +36,7 @@ public class TradingController {
 				
 		        //httpServletResponse.setHeader("Location", "www.google.com"); 
 				return null;
+
 
 }
 		@RequestMapping(value = "/views/updateTable", method = RequestMethod.GET)
@@ -48,4 +59,25 @@ public class TradingController {
 			
 	    
 	    }  
+
+	private OrderService orderService;
+	
+	/*@RequestMapping("/views/CreateOrder")
+	public ModelAndView addCreateOrder(@ModelAttribute("order") Order d){
+		d.setStatus("New");
+		
+		System.out.println(d);
+		this.orderService.addOrder(d);
+		ModelAndView view = new ModelAndView("redirect:index.jsp");
+		return view;
+	}*/
+		
+	@RequestMapping("/test")
+	public ModelAndView welcomeMessage(@RequestParam(value = "name", required = false) String name) {
+		// Name of your jsp file as parameter
+		ModelAndView view = new ModelAndView("test");
+		view.addObject("name", name);
+		return view;
+	}
+
 }

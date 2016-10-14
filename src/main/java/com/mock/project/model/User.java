@@ -38,7 +38,18 @@ public class User {
 		return id;
 	}
 
-	
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public User(String username, String password, String usertype) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
+	}
 
 	public String getName() {
 		return username;

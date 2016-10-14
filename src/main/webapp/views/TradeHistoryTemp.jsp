@@ -1,4 +1,3 @@
-<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,8 +15,7 @@
     <title>Test Page</title>
 </head>
 <body>
-
-.td { width = 10%}
+ .td { width = "10%" }
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -39,7 +37,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
           
-        <table class="table" colspan = "5">
+        <table class="table">
            
             <th>Symbol</th>
             <th>Side</th>
@@ -51,14 +49,19 @@
             <th>Status</th>
             <th>Date</th>
            
-
-              <%for(int i = 0;i<9;i++) { %>
-              <table class="table" >
-          
-                <div>
-                <tr>
+       </table>
+       </div>
+             </div>
+      </div>
+           <%for(int i = 0;i<5;i++) { %>
+           
+        <div class="panel-group" style = "width: 1060px"> 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+           <table class="table">
+           <div>    <tr>
                  <td>data</td>
-                 <td><a data-toggle="collapse" data-parent="#accordion" href = "#collapseGamma">Gamma</a></td>
+               <td><a data-toggle="collapse" data-toggle = "#i" href ="#">Alpha</a></td>
                  <td>data</td>
                  <td>data</td>
                  <td>data</td>
@@ -67,17 +70,25 @@
                  <td>data</td>
                  <td>data</td>
                 </tr>
-                    </div>
-          </table>
-         
-                  <div id="collapseGamma" class="collapse">
+            
+         		</table>
+               <div id="i" class="collapse">
+            
         <div class="panel-body">Orders present in block</div>
       </div>
-          
       </div>
+
+            </div>
       </div>
+    
+         
+        
+	<% }%>
+	
+         
+
         </div>
-         	<% }%>
+        
         
         <div class="query">
           <input id="q" placeholder="Search" autocomplete="off">
@@ -86,4 +97,8 @@
         <button type="button" class="btn btn-info">Filter</button>
         
         </div>
+        <script>
+        function generateId () {return "id" + Math.random().toString(16).slice(2)};
+        
+        </script>
      </html>
