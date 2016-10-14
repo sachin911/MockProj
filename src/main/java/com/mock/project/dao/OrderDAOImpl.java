@@ -7,8 +7,12 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+
 import com.mock.project.model.Status;
-import com.sapient.mockProject.pojo.Order;
+
+
+import com.mock.project.model.Order;
+
 
 @Repository
 public class OrderDAOImpl extends GenericDAOImplementation<Order> implements OrderDAO{
@@ -18,9 +22,11 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order> implements Ord
 
 	 @SuppressWarnings("unchecked")
 	 @Override 
-	 public List<Order> findAll() {
+	 public List<Order> findAll(int traderId) {
 	
-	 return em.createQuery("from order where block_id is null").getResultList(); 
+	Query query = em.createQuery("from order where traderId = :traderId");
+	query.setParameter("traderId", traderId);
+	return query.getResultList();
 	 }
 
 	@Override
