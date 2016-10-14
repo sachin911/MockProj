@@ -1,5 +1,10 @@
 package com.sapient.model;
 
-public class Securities {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Securities {
+@Id
+int id;
 }
