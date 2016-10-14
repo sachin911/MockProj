@@ -1,198 +1,74 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Test Page</title>
-</head>
+<meta charset="UTF-8">
+<title>Login</title>
+<style>
+login-submit
+{
+height=20px
+width=100px
+}
+</style>
+<link
+	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
 
-<script>
- function alert_message(){
-	 
-	 alert("New Equity Order created!");
-	 
- }
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+<!--  link rel="stylesheet"
+       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+       crossorigin="anonymous" -->
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous">
+	
 </script>
-<body>
-    <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Portfolio Manager</a>
-    </div>
-    <ul class="nav navbar-nav">
-				<li><a href="PMHome.jsp">Home Page</a></li>		
-				<li class="active"><a href="CreateTrade.jsp">Create Trader</a></li>
-				<li><a href="OrderBlotter.jsp">Order Blotter</a></li>
-				<li><a href="PMHistory.jsp">History</a></li>
-    </ul>
-  </div>
-    
-      <h2 style="margin-left:146px;" >Create Equity Order</h2>
- 
- <div class="container">
 
-  <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        
-       <!--   <div class="container">-->
-        <div class="well">
-        <form action="#" method="post">
-        
-        <p> <font size="3"><b>Client Id: </b></font>
-         <input type="text" style="margin-left:148px;" required/>
-        
-        </p>
-        
-        <p> <font size="3"><b>Symbol: </b></font>
-         <input type="text" style="margin-left:153px;" required/>
-        
-      
-        
-        </p>
-        
-         <p> <font size="3"><b>Security Name: </b></font>
-         <input type="text" style="margin-left:100px;" required/>
-        
-        </p>
-        
-         <p> <font size="3"><b>Side: </b></font>
-         <select style="margin-left:177px;" required>
-         <option> BUY</option>
-         <option> SELL</option>
-         
-        
-         
-         </select>
-        
-        </p>
-        <p> <font size="3"><b>Order Type: </b></font>
-         <select style="margin-left:125px;" required>
-         <option> Market</option>
-         <option> Limit</option>
-         <option> Stop-Limit</option>
-         <option> Stop </option>
-         
-         
-         </select>
-        
-        </p>
-        
-        <p> <font size="3"><b>Order Qualifier: </b></font>
-         <select style="margin-left:97px;" required>
-         <option> Day Order</option>
-         <option> GTC</option>
-        
-         
-         </select>
-        
-        </p>
-        
-        <p> <font size="3"><b>Trader: </b></font>
-         <select style="margin-left:159px;" required>
-         <option> Select</option>
-         <option> T1</option>
-         <option> T2</option>
-         <option> T3 </option>
-         <option> T4</option>
-         
-         </select>
-        
-        </p>
-        
-        <p> <font size="3"><b>Account Type: </b></font>
-         <select style="margin-left:104px;" required>
-         <option> Cash</option>
-         <option> Margin</option>
-         
-         
-         </select>
-        
-        </p>
-        
-        <p> <font size="3"><b>Portfolio: </b></font>
-         <select style="margin-left:143px;" required>
-         <option> Select</option>
-         <option> P1</option>
-         <option> P2</option>
-         <option> P3 </option>
-         <option> P4</option>
-         
-         </select>
-        
-        </p>
-        
-         </p>
-        
-         <p> <font size="3"><b>Quantity: </b></font>
-         <input type="number" style="margin-left:142px;" required/>
-        
-        </p>
-        
-         </p>
-        
-         <p> <font size="3"><b>Stop Price: </b></font>
-         <input type="text" style="margin-left:127px;" />
-        
-        </p>
-        
-         </p>
-        
-         <p> <font size="3"><b>Limit Price: </b></font>
-         <input type="text" style="margin-left:124px;" />
-        
-        </p>
-        
-        
-        
-        
-        
-        
-        
-        </form> 
-         </div> 
-         </div>
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-    
-    
-  </div>
-</div>
-   <button type="button" class="btn btn-default" onclick=alert_message()>CREATE</button>
-     <button type="button" class="btn btn-default" >NOTIFY</button>
-</div>
-</div>
-    
-        
-</nav>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="CSS/styles.css">
+</head>
+<body style="background: #eceeef">
+	<div class="login">
+	<img src="img/logo.png">
+		<h1><b>Login</b></h1>
+		<form method="post" class="login" action="login/hello">
+			<p>
+				<label for="login">Username:</label> <input type="text"
+					name="username" id="username" placeholder="Enter username" required>
+			</p>
+			<p>
+				<label for="password">Password:</label> <input type="password"
+					name="password" id="password" placeholder="Enter password" required>
+			</p>
+			<p class="login-submit">
+				<input type="submit" value="LOGIN" class="btn btn-primary btn-block"/>
+			</p>
+			<p class="forgot-password"><a href="ForgetPassword.jsp">Forgot your password?</a></p>
+		</form>
+	</div>
 </body>
 </html>
