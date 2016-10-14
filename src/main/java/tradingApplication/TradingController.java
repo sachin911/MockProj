@@ -1,16 +1,10 @@
 package tradingApplication;
 
-<<<<<<< HEAD
+
 import java.util.List;
-
-
-
 import javax.servlet.http.HttpServletResponse;
-
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
->>>>>>> 10938457427447923ac97833d801c3630431e2e3
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,17 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mock.project.model.Order;
-<<<<<<< HEAD
 import com.mock.project.service.TraderService;
 import com.mock.project.service.TraderServiceImpl;
-=======
 import com.mock.project.service.OrderService;
->>>>>>> 10938457427447923ac97833d801c3630431e2e3
+
 
 @Controller
 public class TradingController {
 
-<<<<<<< HEAD
+
 	@RequestMapping(value = "**/fetchOrder", method = RequestMethod.GET)
     public void method(HttpServletResponse httpServletResponse) {
 		System.out.println("test");
@@ -46,7 +38,7 @@ public class TradingController {
         
      } 
 
-=======
+
 	private OrderService orderService;
 	
 	@RequestMapping("/views/CreateOrder")
@@ -66,5 +58,4 @@ public class TradingController {
 		view.addObject("name", name);
 		return view;
 	}
->>>>>>> 10938457427447923ac97833d801c3630431e2e3
 }
