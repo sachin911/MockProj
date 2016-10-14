@@ -33,4 +33,10 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
+	@Override
+	public User findByPrimaryKey(User id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

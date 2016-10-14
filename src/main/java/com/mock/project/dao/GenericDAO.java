@@ -11,7 +11,7 @@ public interface GenericDAO<T> {
 
 	List<T> findAll();
 
-
+	T findByPrimaryKey(T id);
 
 
 }

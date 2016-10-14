@@ -55,7 +55,11 @@ public class GenericDAOImplementation<T> implements GenericDAO<T> {
 
 	}
 
-
+	@Override
+	public T findByPrimaryKey(T id) {
+		// TODO Auto-generated method stub
+		return null;
+	} 
 
 
 
