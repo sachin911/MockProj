@@ -24,10 +24,11 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 	@Override
 	public List<Order> findAll(Long pmid) {
 		List<Order> list = new ArrayList<>();
-		Query query = em.createQuery("from Order where pm_id=:pmid ");
+		Query query = em.createQuery("from Order where pm_id= :pmid");
 		query.setParameter("pmid", pmid);
 
 		list = query.getResultList();
+		//System.out.println(list);
 		return list;
 
 	}
