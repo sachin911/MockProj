@@ -11,23 +11,23 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-@Table(name="User")
+@Table(name="USERS")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 @SelectBeforeUpdate
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="uid")
-	private long id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="USER_ID")
+	private Long id;
 	
-	@Column(name="username",nullable=false,length=40)
+	@Column(name="USERNAME",nullable=false)
 	private String username;
 	
-	@Column(name="password",nullable=false)
+	@Column(name="PASSWORD",nullable=false) 
 	private String password;
 	
-	@Column(name="user_Type",nullable=false)
+	@Column(name="USER_TYPE")
 	private String usertype;
 	
 	public User() {
@@ -44,8 +44,17 @@ public class User {
 		this.password = password;
 	}
 
+ 
 	public User(String username, String password, String usertype) {
 		super();
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
+	}
+
+	public User(long id, String username, String password, String usertype) {
+		super();
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;

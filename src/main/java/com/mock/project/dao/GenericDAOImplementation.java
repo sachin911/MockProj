@@ -28,10 +28,10 @@ public class GenericDAOImplementation<T,ID extends Serializable> implements Gene
 	@Override
 
 
-    public T add(T object) {
+    public void add(T object) {
 
         em.persist(object);
-        return object;
+       
 
 }
 
