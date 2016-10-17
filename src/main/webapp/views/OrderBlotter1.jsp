@@ -39,9 +39,6 @@
 	orderList=pMSendToTraderImpl.display();
 	%>  --%>
  
-
-
-
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -96,6 +93,7 @@
 			   <td><c:out value='${Orders.accountType}'/></td>
 
 			</tr> 
+			
 			</c:forEach> 
 			
 			
@@ -117,7 +115,6 @@
 				<%
 					}
 				%> --%>
-
 							</table>
 							
 							

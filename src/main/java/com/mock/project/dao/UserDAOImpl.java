@@ -13,22 +13,13 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 	
 	
 
-	@Override
-	public void delete(User entity) {
-		// TODO delete a user from db
-		
-	}
 
 	@Override
 	public List<User> findAll(String username, String password) {
 		return em.createQuery("from user where username= " + username + " and password= " + password).getResultList(); 
 	}
 
-	@Override
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public User findByPrimaryKey(User id) {
