@@ -20,6 +20,6 @@ public interface OrderService {
 
 	public void addOrder(Order d);
 	void updateStatus(String status, List block_id);
-
+	Order findOrderByOrderId(int orderId);
 
 }
