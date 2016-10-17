@@ -38,8 +38,17 @@ public class User {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public User(String username, String password, String usertype) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
 	}
 
 	public String getName() {
