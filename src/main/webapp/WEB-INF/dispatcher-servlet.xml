@@ -1,8 +1,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context" 
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
-       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
-       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
@@ -10,34 +10,34 @@
 	<context:annotation-config />
 
 
-       <context:component-scan base-package="tradingApplication" />
-       
-       <bean id="connectionFactory"
+	<context:component-scan base-package="tradingApplication" />
+
+<!-- 	<bean id="connectionFactory"
 
 		class="org.springframework.jms.connection.CachingConnectionFactory">
 		<property name="targetConnectionFactory">
 			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
-				<!-- <property name="brokerURL" value="vm://localhost?broker.persistent=false" 
-					/> -->
+				<property name="brokerURL" value="vm://localhost?broker.persistent=false" 
+					/>
 				<property name="brokerURL" value="tcp://localhost:61616" />
 			</bean>
 		</property>
 		<property name="sessionCacheSize" value="10" />
 		<property name="cacheProducers" value="false" />
-	</bean>
+	</bean> -->
 
 
-       <bean id="viewResolver"
-  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-  <property name="prefix">
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
 			<value>/views/</value>
 		</property>
 		<property name="suffix">
 			<value>.jsp</value>
 		</property>
- </bean>
-       
-      <!-- <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+	</bean>
+
+<!-- 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
 
@@ -55,16 +55,7 @@
 		<property name="destination" ref="messageDestination" />
 		<property name="jmsTemplate" ref="jmsTemplate" />
 	</bean> -->
-      
-   <!--     <bean id="dataSource"
-  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
- <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<property name="url"
-			value="jdbc:oracle:thin:@10.150.222.69:1521:xe" />
-		<property name="username" value="mockproj" />
-		<property name="password" value="sapi123" />
- </bean> -->
-     
+
 </beans>
 
 

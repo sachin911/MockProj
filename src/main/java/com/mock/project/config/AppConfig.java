@@ -4,14 +4,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.jms.ConnectionFactory;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -19,12 +22,16 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.mock.project.jms.SpringIntegrationJms;
+
 @Configuration
 @ComponentScan(basePackages="com.mock.project")
 @EnableTransactionManagement
 public class AppConfig {
        
-       @Bean
+       private ConnectionFactory connectionFactory;
+
+	@Bean
        public Date date(){
               return new Date();
        }
@@ -50,6 +57,34 @@ public class AppConfig {
               
               return dataSource;
        }
+       
+      
+       public JmsTemplate jmsTemplate(){
+    	   JmsTemplate jmsTemplate = new JmsTemplate();
+    	   jmsTemplate.setConnectionFactory(connectionFactory);
+    	   return jmsTemplate;
+       }
+       
+       
+       public SpringIntegrationJms springIntExample(){
+    	   SpringIntegrationJms springIntExample = new SpringIntegrationJms();
+    	   springIntExample.setJmsTemplate(jmsTemplate());
+    	   return springIntExample;  	   
+       }
+       
+       
+       public ActiveMQQueue messageDestination(){
+    	   ActiveMQQueue messageDestination = new ActiveMQQueue();
+    	   //ActiveMQQueue("messageQueue1");
+    	   return messageDestination;
+       }
+       
+      
+//       public SpringJmsProducer springJmsProducer(){
+//    	   
+//       }
+       
+       
        
        private Properties properties(){
               Properties properties = new Properties();
