@@ -33,12 +33,12 @@
       <li><a href="TraderHistory.jsp">History</a></li>
     </ul>
   </div>
-</nav>
+
   
 
 <div class="container">
  <div class="well">
-  <h2>PENDING ORDERS</h2>
+  <h2>Pending Orders</h2>
   <p>You can select multiple orders to create a block</p>
   
  <form method="post" class="login" action="fetchOrder">
@@ -254,6 +254,7 @@
     </div>
         </div>
  </div>
+ </nav>
 </body>
 </html>
 
