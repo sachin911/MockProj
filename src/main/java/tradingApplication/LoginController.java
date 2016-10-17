@@ -7,6 +7,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mock.project.config.AppConfig;
@@ -21,56 +22,41 @@ import com.mock.project.service.OrderService;
 @Controller
 public class LoginController {
 	@RequestMapping("views/handleLogin")
-	public ModelAndView sysLogin(@ModelAttribute("user") User u) {
-		//String uname = req.getParameter("username");
-		//String pass = req.getParameter("password");
+	public ModelAndView sysLogin(@ModelAttribute("user") User u, HttpServletRequest request) {
 
-
+		String usern = request.getParameter("username");
+		u.setName(usern);
 		System.out.println("Received user:" + u.toString());
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
 		LoginService loginService = container.getBean(LoginService.class);
-		u.setName("ceren");
-		loginService.addUser(u);
-
+		User completeUser = loginService.checkUser(usern, u.getPassword());
 		container.close();
+		if(completeUser == null)	{
+			return new ModelAndView("LoginFailed", "message", "Login failed, wrong username or password combination.");
+		}
 
-
-		User user = new User("amy", "bbb");
-		user.setUsertype("PMTRADER");
 		System.out.println("just got user in logincontroller");
-
-		String ourType = user.getUsertype();
-
-		if(ourType == "PM"){
-			return new ModelAndView("PMHome", "currentUser", user);
-		} else if (ourType == "TRADER"){
-			return new ModelAndView("BlockBlotter", "currentUser", user);
-		} else if (ourType == "PMTRADER") {
-			return new ModelAndView("PMTraderSelector", "currentUser", user);
+		request.getSession().setAttribute("user", completeUser);
+		String ourType = completeUser.getUsertype();
+		System.out.println("LoginController:  completeUser:   " + completeUser.toString());
+		
+		if(ourType.equals("PM")){
+			return new ModelAndView("PMHome", "currentUser", u);
+		} else if (ourType.equals("TRADER")){
+			return new ModelAndView("BlockBlotter", "currentUser", u);
+		} else if (ourType.equals("PMTRADER")) {
+			return new ModelAndView("PMTraderSelector", "currentUser", u);
 		} else {
 			return new ModelAndView("type_not_found");
 		}
 	}
-
-	@RequestMapping("views/selectPM")
-	public ModelAndView selectPMLogin(HttpServletRequest req) {
-		//GET USERNAME FROM SESSION
-		User user = new User("amy", "bbb");
-		user.setUsertype("PM");
-		System.out.println("just got PM in pm-trader-select");
-
-		return new ModelAndView("PMHome", "currentUser", user);
-	}
-
-	@RequestMapping("views/selectTrader")
-	public ModelAndView selectTraderLogin(HttpServletRequest req) {
-		//GET USERNAME FROM SESSION
-		User user = new User("bob", "bbb");
-		user.setUsertype("Trader");
-		System.out.println("just got Trader in pm-trader-select");
-
-		return new ModelAndView("BlockBlotter", "currentUser", user);
+	
+	public void manualAddUser(User u){
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+		container.registerShutdownHook();
+		LoginService loginService = container.getBean(LoginService.class);
+		loginService.addUser(u);
 	}
 
 
