@@ -50,7 +50,6 @@ public class LoginServiceImpl implements LoginService {
 		return 10;
 	}
 
-	@Override
 	public void addUser(User u) {
 		dao.add(u);
 	}
