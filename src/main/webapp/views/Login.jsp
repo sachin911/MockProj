@@ -48,7 +48,7 @@
 	<div class="login">
 	<img src="img/logo.png">
 		<h1><b>Login</b></h1>
-		<form method="post" class="login">
+		<form method="post" class="login" action="hello">
 			<p>
 				<label for="login">Username:</label> <input type="text"
 					name="username" id="username" placeholder="Enter username" required>
