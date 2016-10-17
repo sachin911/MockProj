@@ -32,10 +32,10 @@ public class PMDAOImplementation implements PMDAO<Order> {
 	}
 
 	@Override
-	public Order add(Order object) {
+	public void add(Order object) {
 		System.out.println("DAO : " + object);
 		em.persist(object);
-		return object;	
+			
 	}
 	
 	@Override

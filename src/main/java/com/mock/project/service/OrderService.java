@@ -8,7 +8,7 @@ import com.mock.project.model.*;
 
 public interface OrderService {
 	
-	List<Order> display(int traderId);
+	List<Order> displaylist(int traderId);
 	
 
 	void updateStatusInOrder(long block_id,List order_id);

@@ -26,8 +26,8 @@ public class OrderServiceImpl implements OrderService{
 	private OrderDAO dao;
 	
 	@Override
-	public List<Order> display(int traderId) {
-		
+	public List<Order> displaylist(int traderId) {
+		System.out.println("inside Service");
 		return dao.findAll(traderId);
 	}
 	@Override
