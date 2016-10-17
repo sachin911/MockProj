@@ -36,4 +36,8 @@ public class PMServiceImplementation implements PMServices {
 		return (Order) dao.findByPrimaryKey(id);
 	}
 
+public List<Order> displayForPM(Long pmid) {
+		
+		return dao.findAll(pmid);
+	}
 }
