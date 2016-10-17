@@ -26,6 +26,17 @@ public class User {
 	@Column(name="USER_NAME",nullable=false,length=40)
 	private String user_name;
 	
+	@Column(name="PASSWORD",nullable=false,length=40)
+	private String password;
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Column(name="SECRET_KEY",nullable=false,length=40)
 	private String secret_key;
 	
@@ -41,8 +52,8 @@ public class User {
 	@Column(name="EMAIL",nullable=false,length=40)
 	private String email;
 	
-	@Column(name="DELETED",nullable=false,length=40)
-	private boolean deleted;
+	@Column(name="DELETED")
+	private char deleted;
 
 	public String getUser_name() {
 		return user_name;
@@ -68,11 +79,11 @@ public class User {
 		this.user_address = user_address;
 	}
 
-	public boolean isDeleted() {
+	public char getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(char deleted) {
 		this.deleted = deleted;
 	}
 
@@ -110,7 +121,7 @@ public class User {
 	}
 
 	public User(String user_name, String secret_key, String user_address, String first_name, String last_name,
-			String email, boolean deleted) {
+			String email, char deleted) {
 		super();
 		this.user_name = user_name;
 		this.secret_key = secret_key;
