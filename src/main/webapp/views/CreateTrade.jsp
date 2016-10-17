@@ -33,47 +33,46 @@
 				<li><a href="PMHistory.jsp">History</a></li>
 			</ul>
 		</div>
+	</nav>
+	<h2 style="margin-left: 146px;">Create Equity Order</h2>
 
-		<h2 style="margin-left: 146px;">Create Equity Order</h2>
+	<div class="container">
 
-		<div class="container">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
 
-			<div class="panel-group" id="accordion">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-
-						<!--   <div class="container">-->
-						<div class="well">
-							<form action="CreateOrder">
-
-								<p>
-									<font size="3"><b>Symbol: </b></font> <input type="text"
-										name="symbol" style="margin-left: 153px;" required />
-								</p>
-								<p>
-									<font size="3"><b>Side: </b></font> <select
-										style="margin-left: 177px;" name="side" required>
-										<option value="Buy">BUY</option>
-										<option value="Sell">SELL</option>
-									</select>
-								</p>
-								<p>
-									<font size="3"><b>Order Type: </b></font> <select
-										name="orderType" style="margin-left: 125px;" required>
-										<option value="Market">Market</option>
-										<option value="Limit">Limit</option>
-										<option value="Stop-Limit">Stop-Limit</option>
-										<option value="Stop">Stop</option>
-									</select>
-								</p>
-								<p>
-									<font size="3"><b>Order Qualifier: </b></font> <select
-										name="qualifier" style="margin-left: 97px;" required>
-										<option value="Day Order">Day Order</option>
-										<option value="GTC">GTC</option>
-									</select>
-								</p>
-								<!-- <p>
+					<!--   <div class="container">-->
+					<div class="well">
+						<form action="CreateOrder">
+							<p>
+								<font size="3"><b>Symbol: </b></font> <input type="text"
+									name="symbol" style="margin-left: 153px;" required />
+							</p>
+							<p>
+								<font size="3"><b>Side: </b></font> <select
+									style="margin-left: 177px;" name="side" required>
+									<option value="Buy">BUY</option>
+									<option value="Sell">SELL</option>
+								</select>
+							</p>
+							<p>
+								<font size="3"><b>Order Type: </b></font> <select
+									name="orderType" style="margin-left: 125px;" required>
+									<option value="Market">Market</option>
+									<option value="Limit">Limit</option>
+									<option value="Stop-Limit">Stop-Limit</option>
+									<option value="Stop">Stop</option>
+								</select>
+							</p>
+							<p>
+								<font size="3"><b>Order Qualifier: </b></font> <select
+									name="qualifier" style="margin-left: 97px;" required>
+									<option value="Day Order">Day Order</option>
+									<option value="GTC">GTC</option>
+								</select>
+							</p>
+							<!-- <p>
 									<font size="3"><b>Trader: </b></font> <select name="traderId"
 										style="margin-left: 159px;" required>
 										<option value="T1">T1</option>
@@ -82,19 +81,19 @@
 										<option value="T4">T4</option>
 									</select>
 								</p> -->
-								<p>
-									<font size="3"><b>Trader: </b></font> <input type="text"
-										name="traderId" style="margin-left: 159px;" />
+							<p>
+								<font size="3"><b>Trader: </b></font> <input type="text"
+									name="traderId" style="margin-left: 159px;" />
 
-								</p>
-								<p>
-									<font size="3"><b>Account Type: </b></font> <select
-										name="accountType" style="margin-left: 104px;" required>
-										<option value="Cash">Cash</option>
-										<option value="Margin">Margin</option>
-									</select>
-								</p>
-								<!-- <p>
+							</p>
+							<p>
+								<font size="3"><b>Account Type: </b></font> <select
+									name="accountType" style="margin-left: 104px;" required>
+									<option value="Cash">Cash</option>
+									<option value="Margin">Margin</option>
+								</select>
+							</p>
+							<!-- <p>
 									<font size="3"><b>Portfolio: </b></font> <select
 										name="portfolioId" style="margin-left: 143px;" required>
 										<option value="P1">P1</option>
@@ -103,44 +102,30 @@
 										<option value="P4">P4</option>
 									</select>
 								</p> -->
-								
-								<p>
-									<font size="3"><b>Portfolio: </b></font> <input type="number"
-										name="portfolioId" style="margin-left: 143px;" required />
-								</p>
-								
-								<p>
-									<font size="3"><b>Quantity: </b></font> <input type="number"
-										name="qtyPlaced" style="margin-left: 142px;" required />
-								</p>
-
-								
-
-								<p>
-									<font size="3"><b>Stop Price: </b></font> <input type="text"
-										name="stopPrice" style="margin-left: 127px;" />
-
-								</p>
-
-							
-
-								<p>
-									<font size="3"><b>Limit Price: </b></font> <input type="text"
-										name="limitPrice" style="margin-left: 124px;" />
-
-								</p>
-								<input type="submit" class="btn btn-default" value="Create" />
-							</form>
-						</div>
+							<p>
+								<font size="3"><b>Portfolio: </b></font> <input type="number"
+									name="portfolioId" style="margin-left: 143px;" required />
+							</p>
+							<p>
+								<font size="3"><b>Quantity: </b></font> <input type="number"
+									name="qtyPlaced" style="margin-left: 142px;" required />
+							</p>
+							<p>
+								<font size="3"><b>Stop Price: </b></font> <input type="text"
+									name="stopPrice" style="margin-left: 127px;" />
+							</p>
+							<p>
+								<font size="3"><b>Limit Price: </b></font> <input type="text"
+									name="limitPrice" style="margin-left: 124px;" />
+							</p>
+							<input type="submit" class="btn btn-default" value="Create" />
+						</form>
 					</div>
 				</div>
 			</div>
-
-		</div>
 		</div>
 
-
-	</nav>
-
+	</div>
+	</div>
 </body>
 </html>
