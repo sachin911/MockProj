@@ -1,7 +1,5 @@
 
-<%@page import="com.mock.project.service.PMSendToTrader"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.mock.project.service.PMSendToTraderImpl"%>
 <%@page import="org.springframework.context.support.AbstractApplicationContext"%>
 <% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
