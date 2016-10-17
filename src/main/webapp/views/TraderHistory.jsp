@@ -1,3 +1,4 @@
+<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -15,8 +16,6 @@
     <title>Test Page</title>
 </head>
 <body>
-
-.td { width = 10%}
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -24,7 +23,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="BlockBlotter.jsp">View Blocks</a></li>
-      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
+      <li><a href="updateTable">Pending Orders</a></li>
       <li class="active"><a href="#">History</a></li> 
     </ul>
   </div>
@@ -52,7 +51,6 @@
            
 
               <%for(int i = 0;i<9;i++) { %>
-              <table class="table" >
           
                 <div>
                 <tr>
@@ -67,7 +65,7 @@
                  <td>data</td>
                 </tr>
                     </div>
-          </table>
+
          
                   <div id="collapseGamma" class="collapse">
         <div class="panel-body">Orders present in block</div>
@@ -77,7 +75,7 @@
       </div>
         </div>
          	<% }%>
-        
+        </div></table>
         <div class="query">
           <input id="q" placeholder="Search" autocomplete="off">
           <a class="submit"><span class="header-sprite icon-search"></span></a>
