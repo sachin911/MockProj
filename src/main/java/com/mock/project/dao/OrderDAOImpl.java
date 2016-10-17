@@ -78,7 +78,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		for (int i = 0; i < block_id.size(); i++) {
 
 			long b_id = (Long) block_id.get(i);
-			Query query = em.createQuery("update order set status =:status" + "where block_id = :b_id");
+			Query query = em.createQuery("update Order set status =:status" + "where block_id = :b_id");
 			query.setParameter("status", changeStatus);
 			query.setParameter("b_id", b_id);
 		}
@@ -103,6 +103,18 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	public void addBlock(Block block) {
 		// TODO Auto-generated method stub
 		em.persist(block);
+	}
+
+	@Override
+	public List<Block> findBlock(int blockId) {
+		List<Block> blocks=new ArrayList<Block>();
+		Query query=em.createQuery("from Block where block_Id=:blockId");
+	query.setParameter("blockId",blockId);
+		//System.out.println(query);
+	blocks=query.getResultList();
+	//System.out.println(orders.get(0));
+	
+	return blocks;
 	}
 
 }

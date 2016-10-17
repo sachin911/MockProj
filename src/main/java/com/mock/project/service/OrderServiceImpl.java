@@ -10,13 +10,6 @@ import org.springframework.stereotype.Service;
 import com.mock.project.dao.OrderDAO;
 
 import com.mock.project.dao.OrderDAOImpl;
-import com.mock.project.model.Order;
-
-
-import com.mock.project.model.Status;
-
-
-
 import com.mock.project.model.*;
 
 
@@ -75,6 +68,11 @@ public class OrderServiceImpl implements OrderService{
 		return order;
 	}
 	
-
+	@Override
+	public List<Block> findBlockByBlockId(int blockId)
+	{
+		List<Block> blocks=dao.findBlock(blockId);
+		return blocks;
+	}
 
 }

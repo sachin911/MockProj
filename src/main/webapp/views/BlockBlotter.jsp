@@ -36,7 +36,7 @@ td {
     <ul class="nav navbar-nav">
 
       <li class="active"><a href="PopulateBB">View Blocks</a></li>
-      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
+      <li><a href="updateTable">Pending Orders</a></li>
 
       <li><a href="TraderHistory.jsp">History</a></li> 
     </ul>
@@ -52,7 +52,7 @@ td {
 
    <!--  <div class="panel panel-default">
       <div class="panel-heading">  -->
-        <table class="table" id="sendBlockTable"> 
+        <table class="table" > 
 
              
             <thead>
@@ -69,10 +69,10 @@ td {
            <%List<Order> l =(List<Order>) request.getAttribute("Orders"); %>
                <div class="panel panel-default">
       <div class="panel-heading">
-      <table class="table"> 
+      <table class="table" id="sendBlockTable"> 
              <tr id = "getId();">
-                 <td><input type="checkbox"/></td>
-                  <td><c:out  value='${Orders.orderId}'/></td>
+                 <td><input type="checkbox" id="check" name="check" class="checkboxClick"/></td>
+                  <td class="blockId"><c:out  value='${Orders.orderId}'/></td>
                 <td><c:out  value='${Orders.symbol}'/></td>
                <td><c:out  value='${Orders.side}'/></td>
                 <td><c:out  value='${Orders.orderDate}'/></td>

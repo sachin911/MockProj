@@ -13,7 +13,7 @@ import com.mock.project.model.Block;
 @Transactional
 public class BrokerServiceImpl implements BrokerService {
 	
-	@Autowired
+	
 	private BrokerDAO dao;
 
 	@Override
