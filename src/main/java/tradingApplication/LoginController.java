@@ -32,8 +32,11 @@ public class LoginController {
 		LoginService loginService = container.getBean(LoginService.class);
 		User completeUser = loginService.checkUser(usern, u.getPassword());
 		container.close();
-		if(completeUser == null)	{
-			return new ModelAndView("LoginFailed", "message", "Login failed, wrong username or password combination.");
+		
+		if(completeUser == null){
+			return new ModelAndView("LoginFailed", "message", "Login failed,  this username does not exist. Please try again.");
+		} else if(completeUser.getName() == null && completeUser.getPassword() == null) {
+			return new ModelAndView("LoginWrongPassword", "message", "Login failed, you have entered the wrong password. Please try again.");
 		}
 
 		System.out.println("just got user in logincontroller");
