@@ -2,7 +2,9 @@ package tradingApplication;
 
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
+
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -19,12 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mock.project.config.AppConfig;
+
 import com.mock.project.dao.OrderDAO;
 import com.mock.project.dao.OrderDAOImpl;
 import com.mock.project.model.Order;
 import com.mock.project.service.OrderService;
 import com.mock.project.service.OrderServiceImpl;
 import com.mock.project.service.TraderService;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,7 +39,9 @@ public class TradingController {
 		@RequestMapping(value = "/views/fetchOrder", method = RequestMethod.POST)
 		    public ModelAndView method(HttpServletRequest req,HttpServletResponse httpServletResponse) {
 			//String []out=req.getParameter("check");				
+
 			 System.out.println("testasbasd");
+
 			// System.out.println(out);
 				
 		        //httpServletResponse.setHeader("Location", "www.google.com"); 
@@ -43,6 +49,7 @@ public class TradingController {
 
 
 }
+
 		
 		@RequestMapping(value = "/views/fetchOrder2", method = RequestMethod.POST)
 	    public ModelAndView method2(HttpServletRequest req,HttpServletResponse httpServletResponse) {
@@ -74,11 +81,15 @@ public class TradingController {
 		@RequestMapping(value = "/views/updateTable", method = RequestMethod.GET)
 	    public ModelAndView methodToUpdateTable(HttpServletResponse httpServletResponse) 
 	    {
-	      	//System.out.println("Updating the order table with pending orders");
+	      	System.out.println("Updating the order table with pending orders");
+
 	      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
             container.registerShutdownHook();
             OrderService orderService = container.getBean(OrderService.class);
 	      	List<Order> p=new ArrayList<Order>();
+
+	   
+
 	      	//System.out.println("here2");
 	      	p=orderService.displaylist();
 	      	//System.out.println("here1");
@@ -95,6 +106,7 @@ public class TradingController {
 			
 	    
 	    }  
+
 
 	private OrderService orderService;
 	
@@ -117,4 +129,30 @@ public class TradingController {
 		return view;
 	}
 
-}
+	
+	
+	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
+    public ModelAndView populateBlockBlotter(HttpServletResponse httpServletResponse) 
+    {
+      	System.out.println("Comes here");
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+        System.out.println("Comes here too");
+        OrderService orderService = container.getBean(OrderService.class);
+        System.out.println("Maybe comes here too");
+      	List<Order> O=new ArrayList<Order>();
+      	O = orderService.displaylist(5);
+      
+      	ModelAndView model = new ModelAndView("BlockBlotter");
+		model.addObject("Orders",O);
+		
+
+		return model;
+      // httpServletResponse.setHeader("Location", "www.google.com");
+		
+    }
+    }
+
+
+
+

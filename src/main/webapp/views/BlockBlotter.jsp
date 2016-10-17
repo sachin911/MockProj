@@ -1,8 +1,11 @@
 <% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
+	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	 <%@ page import="java.util.List,com.mock.project.model.Order" %>
 <!DOCTYPE html>
 <head>
+<%@ page isELIgnored="false" %>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -14,15 +17,27 @@
     <title>Test Page</title>
 </head>
 <body>
+<style>
+	th {
+	
+	color: blue;
+	}
+
+td {
+	width : 218px;
+	}
+
+</style>
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="BlockBlotter.jsp">View Blocks</a></li>
-     <li><a href="updateTable" id="pending_orders" value="pending_orders">Pending Orders</a></li>
-      
+
+      <li class="active"><a href="PopulateBB">View Blocks</a></li>
+      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
+
       <li><a href="TraderHistory.jsp">History</a></li> 
     </ul>
   </div>
@@ -32,31 +47,37 @@
       <h2>Block Blotter</h2>
  
  
-
+<%int i=0; %>
   <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <table class="table">
+   <!--  <div class="panel panel-default">
+      <div class="panel-heading">  -->
+        <table class="table"> 
              
-             <thead>
-                 <th></th>
+            <thead>
+              <th></th>
                  <th>ID</th>
                  <th>Symbol</th>
                  <th>Side</th>
                  <th>Timestamp</th>
                  
              </thead>  
-           
-             
-             <tr>
+
+     <%int j=0;%>
+           <c:forEach items='${Orders}' var="Orders">  
+           <%List<Order> l =(List<Order>) request.getAttribute("Orders"); %>
+               <div class="panel panel-default">
+      <div class="panel-heading">
+      <table class="table"> 
+             <tr id = "getId();">
                  <td><input type="checkbox"/></td>
-                 <td>123</td>
-                 <td>GOOG</td>
-                 <td>Sell</td>
-                 <td>12:23</td>
+                  <td><c:out  value='${Orders.orderId}'/></td>
+                <td><c:out  value='${Orders.symbol}'/></td>
+               <td><c:out  value='${Orders.side}'/></td>
+                <td><c:out  value='${Orders.orderDate}'/></td>
                  <td>
+               
                  <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><button type="button" class="btn btn-default">+</button></a>
+            <a data-toggle="collapse" data-parent="#accordion" href = "'#a'+j"><button type="button" class="btn btn-default">Details</button></a>
                  </h4></td>
                  <td>
                  <h4 class="panel-title">
@@ -68,39 +89,33 @@
         <div id="collapse1-edit" class="panel-collapse collapse">
         <div class="panel-body">Orders present in block</div>
       </div>
-      <div id="collapse1" class="panel-collapse collapse ">
-        <div class="panel-body">Block Details</div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-     
+
+      <div id= "'a'+j" class="panel-collapse collapse-in ">
+        <div class="panel-body"><table class="table"> 
+
              
+            <thead>
+              
+                 <th>Status</th>
+                 <th>Limit Price</th>
+                 <th>Stop Price</th>
+                 <th>Total Quantity</th>
+                 
+             </thead> 
+             <%System.out.println(l.get(j).getQtyPlaced()); %>
              <tr>
-                 <td><input type="checkbox"/></td>
-                 <td>123</td>
-                 <td>GOOG</td>
-                 <td>Sell</td>
-                 <td>12:23</td>
-                 <td>
-                 <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><button type="button" class="btn btn-default">+</button></a>
-                 </h4></td>
-                 <td>
-                 <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2-edit"><button type="button" class="btn btn-default">Edit</button></a>
-                 </h4></td>
-             </tr>  
-            </table>  
+              <td><%= l.get(j).getStatus() %></td>
+                <td><%= l.get(j).getLimitPrice() %></td>
+               <td><%= l.get(j).getStopPrice() %></td>
+                <td><%= l.get(j).getQtyPlaced() %></td>
+                </tr>
+                 </table> </div>
+      </div>
     </div>
-        <div id="collapse2-edit" class="panel-collapse collapse">
-        <div class="panel-body">Orders present in block</div>
-      </div>
-        <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">Block Details</div>
-      </div>
-    
-  </div>
+ </table>
+ <%j++; %>
+      </c:forEach>
+   
 </div>
    <button type="button" class="btn btn-default">SEND</button>
      <button type="button" class="btn btn-default">CANCEL</button>
@@ -110,4 +125,10 @@
         
 </nav>
 </body>
+<script>
+function getId(){
+	return i++;
+}
+
+</script>
 </html>
