@@ -56,14 +56,14 @@ width=100px
 	<img src="img/logo.png">
 		<h1><b>Login</b></h1>
 		<form method="post" class="login" action="handleLogin">
-			<p>
-				<label for="login">Username:</label> <input type="text"
-					name="username" id="username" placeholder="Enter username" required>
-			</p>
-			<p>
+
+			
 				<label for="password">Password:</label> <input type="password"
 					name="password" id="password" placeholder="Enter password" required>
-			</p>
+					<label for="username">Username:</label> <input type="text"
+					name="username" id="username" placeholder="Enter username" required>
+				<label for="usertype">Type:</label> <input type="text"
+					name="usertype" id="usertype" placeholder="Enter usertype" required>
 			<p class="login-submit">
 				<input type="submit" value="LOGIN" class="btn btn-primary btn-block"/>
 			</p>

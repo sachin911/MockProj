@@ -4,9 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.stereotype.Repository;
+
 import com.mock.project.model.Order;
 import com.mock.project.model.User;
 
+
+@Repository
 public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements UserDAO {
 	
 	private EntityManager em;
