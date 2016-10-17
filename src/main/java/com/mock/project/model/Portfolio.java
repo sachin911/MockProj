@@ -12,22 +12,22 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-@Table(name="Portfolio")
+@Table(name="PORTFOLIO")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 @SelectBeforeUpdate
 public class Portfolio {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="portid")
-	private long portid;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="PORTFOLIO_ID")
+	private Long portid;
 	
-	@Column(name="portname",nullable=false,length=40)
+	@Column(name="NAME",nullable=false,length=40)
 	private String portname;
 	
-	@Column(name="uid")
-	private long id;
+	@Column(name="PM_ID")
+	private Long id;
 
 	public Portfolio(long portid, String portname, long id) {
 		super();
