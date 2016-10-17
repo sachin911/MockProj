@@ -21,11 +21,11 @@
 		<int:poller fixed-delay="500" />
 	</int-jms:inbound-channel-adapter>
 
-	<int-jms:inbound-channel-adapter
+	<int-jms:outbound-channel-adapter
 		channel="sendBlockChannel" connection-factory="connectionFactory"
 		destination-name="sendBlockQueue">
 		<int:poller fixed-delay="500" />
-	</int-jms:inbound-channel-adapter>
+	</int-jms:outbound-channel-adapter>
 
 
 	<bean id="connectionFactory"
@@ -46,7 +46,7 @@
 		<property name="jmsTemplate" ref="jmsTemplate" />
 	</bean>
 
-	<bean id="BlockServiceListener" class="com.sapient.service.ServiceActivator">
+	<bean id="BlockServiceListener" class="com.sapient.jms.UnmarshallAndSave">
 		<property name="jmsTemplate" ref="jmsTemplate" />
 	</bean>
 

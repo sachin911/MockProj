@@ -40,7 +40,7 @@ public class MarshallAndSend {
 	
 	public void marshallAndSendBlock(Block block) throws JAXBException{
 		String convertedObj = marshal(block);
-		getJmsTemplate().convertAndSend("sendBlockChannel", convertedObj);
+		getJmsTemplate().convertAndSend("blockQueue", convertedObj);
 	}
 	
 	
