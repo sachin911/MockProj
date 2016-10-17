@@ -26,24 +26,23 @@ public class GenericDAOImplementation<T,ID extends Serializable> implements Gene
         }
 
 
-//	@Override
+	@Override
 
 
-//    public T add(T object) {
-//
-//        em.persist(object);
-//        return object;
-//
-//}
-//
-//
-//	@Override
-//
-//	public void delete(T entity) {
-//
-//		em.remove(entity);
-//
-//	}
+    public T add(T object) {
+
+       em.persist(object);
+      return object;
+
+}
+
+
+	@Override
+
+	public void delete(T entity) {
+
+		em.remove(entity);
+	}
 
 
 	/*
