@@ -41,8 +41,8 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 	//@org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
 	public T save(T entity) {
 		
-		em.persist(em.contains(entity) ? entity : em.merge(entity));
-		//em.persist(entity);
+		//em.persist(em.contains(entity) ? entity : em.merge(entity));
+		em.persist(entity);
 		
 		return entity;
 	}
@@ -70,12 +70,12 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 		return em.find(type, id);
 	}
 
-//	@SuppressWarnings("unchecked")
-//	@Override
-//	public List<T> findAll() {
-//
-//		return em.createQuery("from ShoppingCart").getResultList();
-//	}
+	/*@SuppressWarnings("unchecked")
+	@Override
+	public List<T> findAll() {
+
+	return em.createQuery("from ShoppingCart").getResultList();
+	}*/
 	
 	
 	
