@@ -1,10 +1,11 @@
 
-<% response.addHeader("Refresh","10"); %>
+<% response.addHeader("Refresh","100"); %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.List" %>
     <%@ page import="com.mock.project.model.Order"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,15 +42,16 @@
   <h2>Pending Orders</h2>
   <p>You can select multiple orders to create a block</p>
   
- <form method="post" class="login" action="fetchOrder">
+  <%-- <form:form id="yourForm" action="/views/fetchOrder" method="POST" modelAttribute="functionList"> --%>
       <div class="Recommendations">
       <div style="height:300px;overflow-y:scroll;;">
     <div class="checkbox">
         
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="PendingOrderTable">
     <thead>
       <tr>
          <th></th>
+        
         
         <th>SYMBOL</th>
           <th>SIDE</th>
@@ -67,31 +69,23 @@
       </tr>
     </thead>
         <tbody>
-   
-         
-           <%-- <%
-			List<Order> list = (List<Order>)request.getAttribute("Orders");
-			for(Order e: list){
-		--%>
 			<c:forEach items='${Orders}' var="Orders">     
-   <%--  <c:forEach var="listValue" items="${lists}">
-				<li>${listValue}</li>
-			</c:forEach> --%>
+   
 
 			<tr>
-			 <td> <label><input type="checkbox" id="check" name="check" ></label></td>
-			 <td><c:out value='${Orders.symbol}'/></td>
-			 <td><c:out value='${Orders.side}'/></td>
+			<td> <label><input type="checkbox" id="check" name="check" class="checkboxClick"></label></td>
+			 <td ><c:out value='${Orders.symbol}'/></td> -
+			 <td class="orderSide"><c:out value='${Orders.side}'/></td>
 			  <td><c:out value='${Orders.qtyPlaced}'/></td>
 			  <td><c:out value='${Orders.limitPrice}'/></td>
 			  <td><c:out value='${Orders.stopPrice}'/></td>
 			   <td><c:out value='${Orders.price}'/></td>
 			      <td><c:out value='${Orders.qtyExecuted}'/></td>
-			         <td><c:out value='${Orders.status}'/></td>
+			         <td class="orderStatus"><c:out value='${Orders.status}'/></td>
 			            <td><c:out value='${Orders.pmId}'/></td>
 			               <td><c:out value='${Orders.accountType}'/></td>
 			                  <td><c:out value='${Orders.portfolioId}'/></td>
-			                     <td><c:out value='${Orders.orderId}'/></td>
+			                     <td class="orderId"><c:out value='${Orders.orderId}'/></td>
 			                     
 			         
 			         
@@ -100,108 +94,56 @@
 				
 			</tr>
 			</c:forEach>
-		<%--<% 
-			}
-		--%> 
-		<%--
-		<tr>
-                  <td> <label><input type="checkbox" value=""></label></td>
-                <c:forEach var="Order" items='<%=request.getAttribute("Orders") %>'>
-     <TD><input type="text" name="sym" readonly=true value='<%=request.getAttribute("Order.symbol")%>'/></TD>
- <TD><%=request.getAttribute("Order.side")%></TD>
-  <TD><%=request.getAttribute("Order.qtyPlaced")%></TD>
-   <TD><%=request.getAttribute("Order.limitPrice")%></TD>
-    <TD><%=request.getAttribute("Order.stopPrice")%></TD>
-     <TD><%=request.getAttribute("Order.price")%></TD>
-      <TD><%=request.getAttribute("Order.qtyExecuted")%></TD>
-       <TD><%=request.getAttribute("Order.status")%></TD>
-        <TD><%=request.getAttribute("Order.pmId")%></TD>
-        <TD><%=request.getAttribute("Order.accountType")%></TD>
-       <TD><%=request.getAttribute("Order.portfolioId")%></TD>
-        <TD><%=request.getAttribute("Order.orderId")%></TD>
-     </TR>
-     </c:forEach>  
-            --%>  
-             
-            
-           <!--   <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLE</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-            
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLE</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLE</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLEee</td>
-        <td>sell</td>
-        <td>500</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>oshin</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>  -->
+		
         </tbody></table></div></div></div>
-        
+        <script>
+    
+    
+    $(document).ready(function(){
+    	$('#add').click(function() {
+    		var data=[];
+    	$('#PendingOrderTable tr').each(function()
+    	{
+    	if($(this).find("input[type=checkbox]").prop("checked")===true)
+    	{
+    		
+    		
+		console.log("sakjs");
+    	var out1=$(this).find('.orderId').html();
+    	//var out2=$(this).find('.orderSymbol').html();
+    	//var out3=$(this).find('.orderStatus').html();
+    	//var out4=$(this).find('.orderSide').html();
+    	console.log(out1);
+    	/*console.log(out2);
+    	console.log(out3);
+    	console.log(out4);*/
+    	data.push(out1);
+    	//data.push(out2);
+    	//data.push(out3);
+    	//data.push(out4);
+    	}
+    	 
+    	}
+    	);	
+    	  console.log(data);  
+    	  
+    	  $.ajax({
+    		  type: "POST",
+    		  url: "fetchOrder5",
+    		  dataType: 'json',
+    		  data:"data="+data,
+    		  success: function(data) {
+    		    console.log("data is sent");
+    		  }
+    		});
+    	  
+    	  
+    	});
+    	});
+    
+    
+    
+    </script>
 
     <script>
     function alert_message() {
@@ -211,9 +153,9 @@
     </script>
       <button type="button" class="btn btn-primary" onclick=alert_message() id=demo">Create Block</button>
 
-      <input type="submit" class="btn btn-info" data-toggle="collapse" data-target="#demo" id="add">Add to Block
+      <button type="submit" class="btn btn-info" data-toggle="collapse" data-target="#demo" id="add">Add to Block
       </button>
-        </form>
+      <%-- </form:form> --%>
       <div id="demo" class="collapse">
         
    The Recommendations for blocks should be displayed here

@@ -27,13 +27,48 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TradingController {
+	TraderService traderService=new TraderService();
+	@RequestMapping(value = "/views/fetchOrder5", method = RequestMethod.POST)
+    public ModelAndView method5(HttpServletRequest req,HttpServletResponse httpServletResponse) {
+	//String []out=req.getParameter("check");	
+		
+	 System.out.println("testasbasd");
+	 List<Integer> orderId=new ArrayList<Integer>();
+		String[] out=req.getParameterValues("data");
+	
+		String[] tokens=out[0].split(",");
+		 System.out.println("testasbasd");
+		for(String order:tokens)
+		{
+			orderId.add(Integer.parseInt(order));
+			
+		}
+		for(int order:orderId)
+		{
+			System.out.println(order);
+			
+		}
+		return traderService.recommend(orderId); 
+
+
+} 
+	
+	
 		@RequestMapping(value = "/views/fetchOrder", method = RequestMethod.POST)
 		    public ModelAndView method(HttpServletRequest req,HttpServletResponse httpServletResponse) {
-			//String []out=req.getParameter("check");				
-			 System.out.println("test");
+			 String[] selectedUserIdParameter = req.getParameterValues("data");
+			 System.out.println("yup1"+ selectedUserIdParameter[0]);
+			for(int i=0;i<selectedUserIdParameter.length;i++){
+				 System.out.println(selectedUserIdParameter[i]);
+			}
+						
+			 System.out.println("yup");
 			// System.out.println(out);
 				
 		        //httpServletResponse.setHeader("Location", "www.google.com"); 
+			// ModelAndView model = new ModelAndView("PendingOrders");
+				
+
 				return null;
 
 
