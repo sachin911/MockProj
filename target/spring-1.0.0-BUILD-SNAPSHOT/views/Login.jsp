@@ -1,4 +1,7 @@
+
 <%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -11,6 +14,7 @@ body {
 }
 
 </style>
+
 <link
 	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
 	rel="stylesheet">
@@ -53,6 +57,10 @@ body {
 <body style=" background-color: blo">
 	<div class="login">
 	<!-- <img src="img/logo.png"> -->
+
+<body style="background: #eceeef">
+	<div class="login">
+	<img src="img/logo.png">
 		<h1><b>Login</b></h1>
 		<form method="post" class="login">
 			<p>
@@ -67,6 +75,10 @@ body {
 				<input type="submit" value="LOGIN" class="btn btn-primary" position=/>
 			</p>
 			<p class="forgot-password"><a href="ForgetPassword.jsp">Forgot your password?</a></p>
+
+				<input type="submit" value="LOGIN" class="btn btn-primary btn-block"/>
+			</p>
+			<p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
 		</form>
 	</div>
 </body>
@@ -367,3 +379,4 @@ FOOTER
 	</form>
 	
 	</body>
+

@@ -1,9 +1,13 @@
+
 <%@page import="com.sapient.service.BrokerService"%>
 <%@page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
 <%@page import="org.springframework.context.support.AbstractApplicationContext"%>
 <%@page import="com.sapient.dao.* ,com.sapient.model.Block, java.util.List ,java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" %>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!DOCTYPE html>
@@ -24,6 +28,7 @@ table {
 </head>
 <body>
 
+
 	<%
 	AbstractApplicationContext container=new AnnotationConfigApplicationContext(com.sapient.config.AppConfig.class);
 	container.registerShutdownHook();
@@ -33,12 +38,14 @@ table {
 		
 		blockList=brokerService.findALL();
 	%> 
+
 <div class="container">
   <h3>Broker</h3>
   <ul class="nav nav-pills">
     <li ><a href="BrokerMainScreen.jsp">Home</a></li>
     <li ><a href="ConfigureSecurity.jsp">Configure</a></li>
     <li class="active"><a href="ViewFills.jsp">View Fills</a></li>
+
          <li><a href="Login.jsp">Logout</a></li>
   </ul>
   <table class="table table-striped" id="dataTable">
@@ -106,6 +113,30 @@ table {
 			</tbody> -->
 
 		</table>
+
+  </ul>
+  <table style="width:100%">
+  <tr>
+    <th>symbol</th>
+    <th>type</th>
+    <th>status</th>
+  </tr>
+  <tr>
+    <td>goog</td>
+    <td>market</td>
+    <td>open</td>
+  </tr>
+  <tr>
+    <td>appl</td>
+    <td>limit</td>
+    <td>partial</td>
+  </tr>
+  <tr>
+    <td>mmm</td>
+    <td>stop</td>
+    <td>completed</td>
+  </tr>
+</table>
 </div >
 </div>
 

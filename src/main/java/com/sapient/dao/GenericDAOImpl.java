@@ -21,7 +21,7 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 	private Class<T> type;
 	
 	@PersistenceContext
-	private EntityManager em;
+	protected EntityManager em;
 	
 	@SuppressWarnings("unchecked")
 	public GenericDAOImpl() {
