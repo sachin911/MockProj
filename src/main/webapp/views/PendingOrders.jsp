@@ -4,9 +4,11 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.List" %>
     <%@ page import="com.mock.project.model.Order"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%@ page isELIgnored="false" %>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -67,21 +69,45 @@
         <tbody>
    
          
-          <%
+           <%-- <%
 			List<Order> list = (List<Order>)request.getAttribute("Orders");
 			for(Order e: list){
-		%>
+		--%>
+			<c:forEach items='${Orders}' var="Orders">     
+   <%--  <c:forEach var="listValue" items="${lists}">
+				<li>${listValue}</li>
+			</c:forEach> --%>
+
 			<tr>
 			 <td> <label><input type="checkbox" id="check" name="check" ></label></td>
-				<td><%=e.getSymbol()%></td>
-				<td><%=e.getSide() %></td>
+			 <td><c:out value='${Orders.symbol}'/></td>
+			 <td><c:out value='${Orders.side}'/></td>
+			  <td><c:out value='${Orders.qtyPlaced}'/></td>
+			  <td><c:out value='${Orders.limitPrice}'/></td>
+			  <td><c:out value='${Orders.stopPrice}'/></td>
+			   <td><c:out value='${Orders.price}'/></td>
+			      <td><c:out value='${Orders.qtyExecuted}'/></td>
+			         <td><c:out value='${Orders.status}'/></td>
+			            <td><c:out value='${Orders.pmId}'/></td>
+			               <td><c:out value='${Orders.accountType}'/></td>
+			                  <td><c:out value='${Orders.portfolioId}'/></td>
+			                     <td><c:out value='${Orders.orderId}'/></td>
+			                     
+			         
+			         
+			         
+			     
 				
 			</tr>
-		<% 
+			</c:forEach>
+		<%--<% 
 			}
-		%>
-       <%--  <%=request.getAttribute("Orders") %>">
-     <TD><input type="text" name="sym" readonly=true value=<%=request.getAttribute("Order.symbol")%>/></TD>
+		--%> 
+		<%--
+		<tr>
+                  <td> <label><input type="checkbox" value=""></label></td>
+                <c:forEach var="Order" items='<%=request.getAttribute("Orders") %>'>
+     <TD><input type="text" name="sym" readonly=true value='<%=request.getAttribute("Order.symbol")%>'/></TD>
  <TD><%=request.getAttribute("Order.side")%></TD>
   <TD><%=request.getAttribute("Order.qtyPlaced")%></TD>
    <TD><%=request.getAttribute("Order.limitPrice")%></TD>
@@ -95,7 +121,7 @@
         <TD><%=request.getAttribute("Order.orderId")%></TD>
      </TR>
      </c:forEach>  
-             --%>
+            --%>  
              
             
            <!--   <tr>

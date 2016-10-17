@@ -31,13 +31,11 @@ public class OrderServiceImpl implements OrderService{
 
 	private OrderDAO dao=new OrderDAOImpl();
 	@Override
-	public List<Order> display() {
+	public List<Order> displaylist() {
 		System.out.println("hello");
 		return dao.findAll();
-		
+	}
 
-	private OrderDAO dao;
-	
 	@Override
 	public List<Order> display(int traderId) {
 		

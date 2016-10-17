@@ -12,7 +12,7 @@ import com.mock.project.model.*;
 
 
 public interface OrderService {
-	
+	List<Order> displaylist();
 	List<Order> display(int traderId);
 	
 

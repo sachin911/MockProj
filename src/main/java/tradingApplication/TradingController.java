@@ -6,11 +6,10 @@ import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletResponse;
-
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
->>>>>>> 6cf722738cd4450751cd314ea341a81274a57c6d
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mock.project.config.AppConfig;
 import com.mock.project.model.Order;
 import com.mock.project.service.OrderService;
-<<<<<<< HEAD
 import com.mock.project.service.OrderServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,18 +42,22 @@ public class TradingController {
 	    public ModelAndView methodToUpdateTable(HttpServletResponse httpServletResponse) 
 	    {
 	      	System.out.println("Updating the order table with pending orders");
-	      	OrderService object = new OrderServiceImpl();
-	      	
+	      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+            container.registerShutdownHook();
+            OrderService orderService = container.getBean(OrderService.class);
 	      	List<Order> p=new ArrayList<Order>();
 	      	System.out.println("here2");
-	      	p=object.display();
-	      	
+	      	p=orderService.displaylist();
 	      	System.out.println("here1");
 	      for(Order l: p){
 	    	  System.out.println("here");
 	      		System.out.println(l);
 	      	}
-	      	return new ModelAndView("redirect:views/PendingOrders.jsp","Orders",p);
+	      ModelAndView model = new ModelAndView("PendingOrders");
+			model.addObject("Orders",p);
+
+			return model;
+	      	
 	      // httpServletResponse.setHeader("Location", "www.google.com");
 			
 	    

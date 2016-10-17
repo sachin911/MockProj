@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -23,9 +24,9 @@ import com.mock.project.model.Order;
 @Repository
 public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implements OrderDAO{
 
-
+	@PersistenceContext
 	private EntityManager em;
-
+	
 
 	 @SuppressWarnings("unchecked")
 	 @Override 
@@ -33,15 +34,17 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		 System.out.println("hey");
 	List<Order> l=new ArrayList<Order>();
 	System.out.println("malvika");
-	List<Order> l1=( em.createQuery("from orders")).getResultList();
-	System.out.println(l1);
+	Query query=em.createQuery("from Order where block_id is null");
+	System.out.println("mm");
+	List<Order>l1=query.getResultList();
+	System.out.println("mmee");
 	System.out.println("oshin");
 	for(Order i:l1){
 		System.out.println("aish");
 		System.out.println(i);
 	}
 	System.out.println("madie");
-	return em.createQuery("from order where block_id is null").getResultList(); 
+	return query.getResultList(); 
 	 }
 
 	@SuppressWarnings("unchecked")
