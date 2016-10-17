@@ -13,4 +13,5 @@ public interface PMServices {
 	public void ammendOrder(Order order);
 	public List<Order> findAllOrders();
 	public Order findByPrimaryKey(Long id);
+	List<Order> displayForPM(Long pmid);
 }
