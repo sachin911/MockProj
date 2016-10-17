@@ -1,3 +1,4 @@
+<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -33,8 +34,10 @@ td {
       <a class="navbar-brand" href="#">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
+
       <li class="active"><a href="PopulateBB">View Blocks</a></li>
       <li><a href="PendingOrders.jsp">Pending Orders</a></li>
+
       <li><a href="TraderHistory.jsp">History</a></li> 
     </ul>
   </div>
@@ -81,13 +84,15 @@ td {
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse1-edit"><button type="button" class="btn btn-default">Edit</button></a>
                  </h4></td>
              </tr>  
-            </table>  
+          
       </div>
         <div id="collapse1-edit" class="panel-collapse collapse">
         <div class="panel-body">Orders present in block</div>
       </div>
+
       <div id= "'a'+j" class="panel-collapse collapse-in ">
         <div class="panel-body"><table class="table"> 
+
              
             <thead>
               
