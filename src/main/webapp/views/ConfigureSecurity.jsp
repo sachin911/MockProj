@@ -1,3 +1,4 @@
+<%@page import="com.sapient.config.AppConfig"%>
 <%@page import="com.sapient.service.SecuritiesService"%>
 <%@page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
 <%@page import="org.springframework.context.support.AbstractApplicationContext"%>
@@ -39,7 +40,7 @@ thead {
 		securityList = dao.findAll();
 	%> --%>
 	<%
-	AbstractApplicationContext container=new AnnotationConfigApplicationContext(com.sapient.config.AppConfig.class);
+	AbstractApplicationContext container=new AnnotationConfigApplicationContext(AppConfig.class);
 	container.registerShutdownHook();
  SecuritiesService securityService= (SecuritiesService)
  container.getBean("securitiesService");

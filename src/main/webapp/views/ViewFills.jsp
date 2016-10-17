@@ -1,3 +1,4 @@
+<%@page import="com.sapient.config.AppConfig"%>
 <%@page import="com.sapient.service.BrokerService"%>
 <%@page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
 <%@page import="org.springframework.context.support.AbstractApplicationContext"%>
@@ -25,7 +26,7 @@ table {
 <body>
 
 	<%
-	AbstractApplicationContext container=new AnnotationConfigApplicationContext(com.sapient.config.AppConfig.class);
+	AbstractApplicationContext container=new AnnotationConfigApplicationContext(AppConfig.class);
 	container.registerShutdownHook();
  BrokerService brokerService= (BrokerService)
  container.getBean("brokerService");

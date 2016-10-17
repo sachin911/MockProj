@@ -1,3 +1,4 @@
+<%@page import="com.sapient.config.AppConfig"%>
 <%@page import="com.sapient.service.BrokerService"%>
 <%@page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
 <%@page import="org.springframework.context.support.AbstractApplicationContext"%>
@@ -27,7 +28,7 @@ table {
 </head>
 <body>
 	<%
-	AbstractApplicationContext container=new AnnotationConfigApplicationContext(com.sapient.config.AppConfig.class);
+	AbstractApplicationContext container=new AnnotationConfigApplicationContext(AppConfig.class);
 	container.registerShutdownHook();
  BrokerService brokerService= (BrokerService)
  container.getBean("brokerService");
@@ -44,7 +45,7 @@ table {
 			<li><a href="Login.jsp">Logout</a></li>
 		</ul>
 	</div>
-	<div class="container"> 
+	<div  class="container" style="height:300px;overflow-y:scroll;;"> 
 		<table style="width: 100%" class="table table-striped">
 			
 			<tr>
