@@ -1,5 +1,5 @@
 
-<% response.addHeader("Refresh","10"); %>
+<% response.addHeader("Refresh","100"); %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.List" %>
@@ -46,7 +46,7 @@
       <div style="height:300px;overflow-y:scroll;;">
     <div class="checkbox">
         
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="PendingOrderTable">
     <thead>
       <tr>
          <th></th>
@@ -69,17 +69,12 @@
         <tbody>
    
          
-           <%-- <%
-			List<Order> list = (List<Order>)request.getAttribute("Orders");
-			for(Order e: list){
-		--%>
+           
 			<c:forEach items='${Orders}' var="Orders">     
-   <%--  <c:forEach var="listValue" items="${lists}">
-				<li>${listValue}</li>
-			</c:forEach> --%>
+   
 
 			<tr>
-			 <td> <label><input type="checkbox" id="check" name="check" ></label></td>
+			 <td> <label><input type="checkbox" id="check" name="check" class="checkboxClick"></label></td>
 			 <td><c:out value='${Orders.symbol}'/></td>
 			 <td><c:out value='${Orders.side}'/></td>
 			  <td><c:out value='${Orders.qtyPlaced}'/></td>
@@ -90,8 +85,8 @@
 			         <td><c:out value='${Orders.status}'/></td>
 			            <td><c:out value='${Orders.pmId}'/></td>
 			               <td><c:out value='${Orders.accountType}'/></td>
-			                  <td><c:out value='${Orders.portfolioId}'/></td>
-			                     <td><c:out value='${Orders.orderId}'/></td>
+			                  <td ><c:out value='${Orders.portfolioId}'/></td>
+			                     <td class="orderId"><c:out value='${Orders.orderId}'/></td>
 			                     
 			         
 			         
@@ -100,116 +95,49 @@
 				
 			</tr>
 			</c:forEach>
-		<%--<% 
-			}
-		--%> 
-		<%--
-		<tr>
-                  <td> <label><input type="checkbox" value=""></label></td>
-                <c:forEach var="Order" items='<%=request.getAttribute("Orders") %>'>
-     <TD><input type="text" name="sym" readonly=true value='<%=request.getAttribute("Order.symbol")%>'/></TD>
- <TD><%=request.getAttribute("Order.side")%></TD>
-  <TD><%=request.getAttribute("Order.qtyPlaced")%></TD>
-   <TD><%=request.getAttribute("Order.limitPrice")%></TD>
-    <TD><%=request.getAttribute("Order.stopPrice")%></TD>
-     <TD><%=request.getAttribute("Order.price")%></TD>
-      <TD><%=request.getAttribute("Order.qtyExecuted")%></TD>
-       <TD><%=request.getAttribute("Order.status")%></TD>
-        <TD><%=request.getAttribute("Order.pmId")%></TD>
-        <TD><%=request.getAttribute("Order.accountType")%></TD>
-       <TD><%=request.getAttribute("Order.portfolioId")%></TD>
-        <TD><%=request.getAttribute("Order.orderId")%></TD>
-     </TR>
-     </c:forEach>  
-            --%>  
-             
-            
-           <!--   <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLE</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-            
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLE</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLE</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>GOOGLEee</td>
-        <td>sell</td>
-        <td>500</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>
-             <tr>
-          <td> <label><input type="checkbox" value=""></label></td>
-        <td>oshin</td>
-        <td>BUY</td>
-        <td>1000</td>
-          <td>345</td>
-        <td>222</td>
-        <td>12</td>
-          <td>34</td>
-          <td>NEW</td>
-        <td>P.K.GUPTA</td>
-        <td>NORMAL</td>
-          <td>1344</td>
-          <td>123445</td>
-            </tr>  -->
-        </tbody></table></div></div></div>
+		        </tbody></table></div></div></div>
         
 
     <script>
-    function alert_message() {
-        alert("Your block has been successfully created");
-        
-    } 
+    
+    
+    $(document).ready(function(){
+    	$('#createBlock').click(function() {
+    		var data=[];
+    	$('#PendingOrderTable tr').each(function()
+    	{
+    	if($(this).find("input[type=checkbox]").prop("checked")===true)
+    	{
+    		
+    		
+		console.log("sakjs");
+    	var out=$(this).find('.orderId').html();
+    	console.log(out);
+    	data.push(out);
+    	}
+    	 
+    	}
+    	);	
+    	  console.log(data);  
+    	  
+    	  $.ajax({
+    		  type: "POST",
+    		  url: "fetchOrder2",
+    		  dataType: 'json',
+    		  data:"data="+data,
+    		  success: function(data) {
+    		    console.log("data is sent");
+    		  }
+    		});
+    	  
+    	  
+    	});
+    	});
+    
+    
+    
     </script>
-      <button type="button" class="btn btn-primary" onclick=alert_message() id=demo">Create Block</button>
+      <button type="button" class="btn btn-primary" id="createBlock">Create Block</button>
 
       <input type="submit" class="btn btn-info" data-toggle="collapse" data-target="#demo" id="add">Add to Block
       </button>

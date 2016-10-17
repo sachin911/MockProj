@@ -68,6 +68,13 @@ public class OrderServiceImpl implements OrderService{
 
 	}
 
+	@Override
+	public Order findOrderByOrderId(int orderId)
+	{
+		Order order=dao.findOrder(orderId).get(0);
+		return order;
+	}
+	
 
 
 }
