@@ -52,8 +52,18 @@ public class Block {
 	@Column(name="BLOCK_DATE")
 	private Date orderDate;
 	
-	@Column(name="EXECUTED_DATE")
+	@Column(name="EXECUTED_DATE") 
 	private Date executedDate;
+
+	
+	public Block() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Block(String string, String string2, long l, String string3, String string4, double d, double e, long m,
+			Date current, double f) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getBlockId() {
 		return blockId;

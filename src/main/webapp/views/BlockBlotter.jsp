@@ -34,7 +34,7 @@
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <table class="table">
+        <table class="table" id="sendBlockTable">
              
              <thead>
                  <th></th>
@@ -100,11 +100,51 @@
     
   </div>
 </div>
-   <button type="button" class="btn btn-default">SEND</button>
+   <button type="button" class="btn btn-default" id="sendBlock">SEND</button>
      <button type="button" class="btn btn-default">CANCEL</button>
 
 </div>
     </div>
+    
+     <script>
+    
+    
+    $(document).ready(function(){
+    	$('#sendBlock').click(function() {
+    		var data=[];
+    	$('#sendBlockTable tr').each(function()
+    	{
+    	if($(this).find("input[type=checkbox]").prop("checked")===true)
+    	{
+    		
+    		
+		console.log("sakjs");
+    	var out=$(this).find('.blockId').html();
+    	console.log(out);
+    	data.push(out);
+    	}
+    	 
+    	}
+    	);	
+    	  console.log(data);  
+    	  
+    	  $.ajax({
+    		  type: "POST",
+    		  url: "saveBlock",
+    		  dataType: 'json',
+    		  data:"data="+data,
+    		  success: function(data) {
+    		    console.log("data is sent");
+    		  }
+    		});
+    	  
+    	  
+    	});
+    	});
+    
+    
+    
+    </script>
         
 </nav>
 </body>

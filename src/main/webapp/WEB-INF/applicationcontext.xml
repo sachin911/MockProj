@@ -1,29 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
-	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+              http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
 
-	<context:annotation-config />
-
-
-	<context:component-scan base-package="tradingApplication" />
-
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/views/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-	</bean>
-
-<!-- <int:channel id="processBlockChannel">
+       <int:channel id="processBlockChannel">
               <int:queue />
        </int:channel>
 
@@ -34,13 +18,13 @@
        <int-jms:inbound-channel-adapter
               channel="processBlockChannel" connection-factory="connectionFactory"
               destination-name="blockQueue">
-              <int:poller fixed-delay="500" />
+              <!-- <int:poller fixed-delay="500" /> -->
        </int-jms:inbound-channel-adapter>
 
        <int-jms:inbound-channel-adapter
               channel="sendBlockChannel" connection-factory="connectionFactory"
               destination-name="sendBlockQueue">
-              <int:poller fixed-delay="500" />
+              <!-- <int:poller fixed-delay="500" /> -->
        </int-jms:inbound-channel-adapter>
 
 
@@ -54,7 +38,6 @@
               <property name="sessionCacheSize" value="10" />
               <property name="cacheProducers" value="false" />
        </bean>
-       
        <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
               <property name="connectionFactory" ref="connectionFactory" />
        </bean>
@@ -69,13 +52,6 @@
 
        <int:service-activator input-channel="processBlockChannel"
               ref="BlockServiceListener" method="processBlocksFromQueue">
-              <int:poller fixed-delay="500" />
+              <!-- <int:poller fixed-delay="500" /> -->
        </int:service-activator>
- -->
-
 </beans>
-
-
-
-
-
