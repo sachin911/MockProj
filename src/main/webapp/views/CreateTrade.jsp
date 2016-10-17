@@ -1,131 +1,178 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%> 
 <!DOCTYPE html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>Create Order</title>
-</head>
+    <html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <title>Create Order</title>
+<!--       <script type="text/javascript" src="pm-createorder-script.js"></script>
+     <link rel="stylesheet" href="pm-createorder-style.css" /> -->
+     <style>
+      #creat-order-form{
+    width:80%;
+    border: 
+}
 
-<script>
-	function alert_message() {
+.form-input-label{
+    margin-bottom: 10px;
+}
 
-		alert("New Equity Order created!");
+.form-input-fields{
+    width:auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    padding:4px;
+}
 
-	}
-</script>
+
+.form-input-fields input, select{
+    border:none;
+    background-color: transparent;
+}
+
+.form-input-fields select:onfocus{
+    border: none;
+}
+
+input[type="number"]:disabled {
+    background-color:grey;
+    border-radius: 10px;
+    opacity: 0.3;
+}
+
+textarea:focus, select:focus, input:focus{
+    outline: none;
+}
+
+
+
+$dia: 6em;
+$outcolor: #fff;
+$bdrwidth: 10px;
+$time: 0.15s;
+</style>
+      
+      
+       <script>   
+function changetextbox(obj)
+{  
+      var limit = document.getElementById("limit");
+     var stop = document.getElementById("stop");
+    	
+        stop.disabled =(obj.value == "limit" || obj.value == "market");
+        limit.disabled =(obj.value == "stop" || obj.value == "market");
+    
+}
+     </script>
+   </head>
+
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Portfolio Manager</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="PMHome.jsp">Home Page</a></li>
-				<li class="active"><a href="CreateTrade.jsp">Create Order</a></li>
-				<li><a href="OrderBlotter.jsp">Order Blotter</a></li>
-				<li><a href="PMHistory.jsp">History</a></li>
-			</ul>
-		</div>
-	</nav>
-	<h2 style="margin-left: 146px;">Create Equity Order</h2>
+	 <!-- Navigation Bar -->
+   <nav class="navbar navbar-default">
+      <div class="container-fluid">
+         <div class="navbar-header">
+            <a class="navbar-brand" href="./PMHome.jsp">Portfolio Manager</a>
+         </div>
+         <ul class="nav navbar-nav">
+             <li><a href="./PMHome.jsp">Home</a></li>
+            <li class="active"><a href="./CreateTrade.jsp">Create Trade</a></li>
+            <li ><a href="./OrderBlotter.jsp">Order Blotter</a></li>
+            <li ><a href="./PendingOrder.jsp">Pending Orders</a></li>
+            <li><a href="./PMHistory.jsp">History</a></li>
+         </ul>
+      </div>
+    </nav>
+    
+    <div id="creat-order-form" class="container well">
+	<h2 id="eqorder">Create Equity Order</h2>
 
-	<div class="container">
+	
+						<form action="CreateOrder">           
+             <div class="well" >  
+            
 
-		<div class="panel-group" id="accordion">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-
-					<!--   <div class="container">-->
-					<div class="well">
-						<form action="CreateOrder">
-							<p>
-								<font size="3"><b>Symbol: </b></font> <input type="text"
-									name="symbol" style="margin-left: 153px;" required />
-							</p>
-							<p>
-								<font size="3"><b>Side: </b></font> <select
-									style="margin-left: 177px;" name="side" required>
-									<option value="Buy">BUY</option>
-									<option value="Sell">SELL</option>
-								</select>
-							</p>
-							<p>
-								<font size="3"><b>Order Type: </b></font> <select
-									name="orderType" style="margin-left: 125px;" required>
-									<option value="Market">Market</option>
-									<option value="Limit">Limit</option>
-									<option value="Stop-Limit">Stop-Limit</option>
-									<option value="Stop">Stop</option>
-								</select>
-							</p>
-							<p>
-								<font size="3"><b>Order Qualifier: </b></font> <select
-									name="qualifier" style="margin-left: 97px;" required>
-									<option value="Day Order">Day Order</option>
-									<option value="GTC">GTC</option>
-								</select>
-							</p>
-							<!-- <p>
-									<font size="3"><b>Trader: </b></font> <select name="traderId"
-										style="margin-left: 159px;" required>
-										<option value="T1">T1</option>
-										<option value="T2">T2</option>
-										<option value="T3">T3</option>
-										<option value="T4">T4</option>
-									</select>
-								</p> -->
-							<p>
-								<font size="3"><b>Trader: </b></font> <input type="text"
-									name="traderId" style="margin-left: 159px;" />
-
-							</p>
-							<p>
-								<font size="3"><b>Account Type: </b></font> <select
-									name="accountType" style="margin-left: 104px;" required>
-									<option value="Cash">Cash</option>
-									<option value="Margin">Margin</option>
-								</select>
-							</p>
-							<!-- <p>
-									<font size="3"><b>Portfolio: </b></font> <select
-										name="portfolioId" style="margin-left: 143px;" required>
-										<option value="P1">P1</option>
-										<option value="P2">P2</option>
-										<option value="P3">P3</option>
-										<option value="P4">P4</option>
-									</select>
-								</p> -->
-							<p>
-								<font size="3"><b>Portfolio: </b></font> <input type="number"
-									name="portfolioId" style="margin-left: 143px;" required />
-							</p>
-							<p>
-								<font size="3"><b>Quantity: </b></font> <input type="number"
-									name="qtyPlaced" style="margin-left: 142px;" required />
-							</p>
-							<p>
-								<font size="3"><b>Stop Price: </b></font> <input type="text"
-									name="stopPrice" style="margin-left: 127px;" />
-							</p>
-							<p>
-								<font size="3"><b>Limit Price: </b></font> <input type="text"
-									name="limitPrice" style="margin-left: 124px;" />
-							</p>
-							<input type="submit" class="btn btn-default" value="Create" />
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</div>
-	</div>
-</body>
+                <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Symbol: </div>
+               <div class="form-input-fields col col-sm-8"><input type="text" id="symbol" placeholder="Enter Stock Name" required/></div>
+                   </div>
+                 
+                <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Side: </div>
+               <div class="form-input-fields col col-sm-8"><select id="side"  required>
+                  <option> BUY</option>
+                  <option> SELL</option>
+               </select>
+              </div>
+                    </div>
+                <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Order Type: </div>
+               <div class="form-input-fields col col-sm-8"><select id="ordertype" onChange="changetextbox(this);" id="order-type" name="order-type" required>
+                  <option value="market"> Market</option>
+                  <option value="limit"> Limit</option>
+                  <option value="stoplimit"> Stop-Limit</option>
+                  <option value="stop"> Stop </option>
+               </select>
+                </div>   
+                   </div>
+                 
+                   <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Order Qualifier: </div>
+               <div class="form-input-fields col col-sm-8"><select id="orderqual" name="qualifier" required>
+                  <option> Day Order</option>
+                  <option> GTC</option>
+               </select>
+                   </div>
+                   </div>
+						 <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Trader: </div>
+               <div class="form-input-fields col col-sm-8">
+                   <input type="text" name="traderId" id="trader"  required>
+                 
+          
+                   </div>
+                   </div>
+				
+				
+                 <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Account Type: </div>
+               <div class="form-input-fields col col-sm-8"><select id="acctype" name="accountType" style="" required>
+                  <option> Cash</option>
+                  <option> Margin</option>
+               </select>
+                   </div>
+                  </div>
+							   <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Portfolio: </div>
+               <div class="form-input-fields col col-sm-8">
+                   <input type="number" name="portfolioId" id="portfolio" required>
+      
+                   </div>
+                   </div>
+				
+						    <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Quantity: </div>
+               <div class="form-input-fields col col-sm-8"><input type="number" min="0" id="quantity" required/></div>
+                    </div>   
+               
+                <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Stop Price: </div>
+               <div class="form-input-fields col col-sm-8"><input type="number" id="stop" min="0" disabled required/></div>
+                  </div>
+                <div class="row">
+                <div id="" class="form-input-label col col-sm-4"> Limit Price: </div>
+               <div class="form-input-fields col col-sm-8"><input type="number" id="limit" min="0"  disabled required/></div>
+                   </div>
+                 </div>
+							 <input type="submit" class="btn btn-default"  value="CREATE"/>
+            </form>
+           
+         </div>
+           
+   </body>
 </html>
