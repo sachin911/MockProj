@@ -39,19 +39,31 @@ public class LoginController {
 		System.out.println("just got user in logincontroller");
 		request.getSession().setAttribute("user", completeUser);
 		String ourType = completeUser.getUsertype();
-		System.out.println("LoginController:  completeUser:   " + completeUser.toString());
+		System.out.println("LoginController:  completeUser: " + completeUser.toString());
 		
 		if(ourType.equals("PM")){
-			return new ModelAndView("PMHome", "currentUser", u);
+			return new ModelAndView("PMHome");
 		} else if (ourType.equals("TRADER")){
-			return new ModelAndView("BlockBlotter", "currentUser", u);
+			return new ModelAndView("BlockBlotter");
 		} else if (ourType.equals("PMTRADER")) {
-			return new ModelAndView("PMTraderSelector", "currentUser", u);
+			return new ModelAndView("PMTraderSelector");
 		} else {
 			return new ModelAndView("type_not_found");
 		}
 	}
 	
+	@RequestMapping("views/selectPM")
+	public ModelAndView selectPM(@ModelAttribute("user") User u, HttpServletRequest request) {
+		request.getSession().setAttribute("currentType", "PM");
+		return new ModelAndView("PMHome");	
+	}
+	
+	@RequestMapping("views/selectTrader")
+	public ModelAndView selectTrader(HttpServletRequest request) {
+		request.getSession().setAttribute("currentType", "Trader");
+		return new ModelAndView("BlockBlotter");	
+	}
+		
 	public void manualAddUser(User u){
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
