@@ -54,12 +54,6 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 	}
 
 	@Override
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public User findByPrimaryKey(User id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -78,5 +72,5 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 			return true;
 		}	
 	}
-
 }
+

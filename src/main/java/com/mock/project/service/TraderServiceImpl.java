@@ -69,9 +69,9 @@ public class TraderServiceImpl implements TraderService {
 		
 		
 		//for selecting the limit and stop price 
-		List<Double> limitPrice=new ArrayList<>();
-		List<Double> stopPrice=new ArrayList<>();
-		List<Long>	orderId=new ArrayList<>();
+		List<Double> limitPrice=new ArrayList<Double>();
+		List<Double> stopPrice=new ArrayList<Double>();
+		List<Long>	orderId=new ArrayList<Long>();
 		
 		for(Order order: orders)
 		{

@@ -25,13 +25,16 @@ public class GenericDAOImplementation<T,ID extends Serializable> implements Gene
                         //System.out.println(this.type);
         }
 
+
 	@Override
 
 
     public void add(T object) {
 
-        em.persist(object);
-       
+       em.persist(object);
+//      return object;
+
+
 
 }
 
@@ -41,8 +44,8 @@ public class GenericDAOImplementation<T,ID extends Serializable> implements Gene
 	public void delete(T entity) {
 
 		em.remove(entity);
-
 	}
+
 
 	/*
 	 * @SuppressWarnings("unchecked")
@@ -52,12 +55,13 @@ public class GenericDAOImplementation<T,ID extends Serializable> implements Gene
 	 * return em.createQuery("from User").getResultList(); }
 	 */
 
-	@Override
-	public List<T> findAll() {
 
-		return em.createQuery("from Order").getResultList();
-
-	}
+//	@Override
+//	public List<T> findAll() {
+//
+//		return em.createQuery("from Order").getResultList();
+//
+//	}
 
 
 
@@ -71,6 +75,14 @@ public class GenericDAOImplementation<T,ID extends Serializable> implements Gene
 	public T findByPrimaryKey(T id) {
 		// TODO Auto-generated method stub
 		return null;
+
+	}
+
+	@Override
+	public List<T> findAll(List id) {
+		// TODO Auto-generated method stub
+		return null;
+
 	} 
 
 

@@ -1,0 +1,44 @@
+#creat-order-form{
+    width:80%;
+    border: 
+}
+
+.form-input-label{
+    margin-bottom: 10px;
+}
+
+.form-input-fields{
+    width:auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    padding:4px;
+}
+
+
+.form-input-fields input, select{
+    border:none;
+    background-color: transparent;
+}
+
+.form-input-fields select:onfocus{
+    border: none;
+}
+
+input[type="number"]:disabled {
+    background-color:grey;
+    border-radius: 10px;
+    opacity: 0.3;
+}
+
+textarea:focus, select:focus, input:focus{
+    outline: none;
+}
+
+
+
+$dia: 6em;
+$outcolor: #fff;
+$bdrwidth: 10px;
+$time: 0.15s;
+
