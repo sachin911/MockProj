@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -17,7 +18,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 
 @DynamicUpdate(true)
 @SelectBeforeUpdate(true)
-
+@XmlRootElement
 public class Block {
 
 	@Id
@@ -60,10 +61,22 @@ public class Block {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Block(String string, String string2, long l, String string3, String string4, double d, double e, long m,
-			Date current, double f) {
-		// TODO Auto-generated constructor stub
+	public Block(String symbol, String side, String orderType, long qtyPlaced, long qtyExecuted, double stopPrice,
+			double limitPrice, String status, Date orderDate, Date executedDate) {
+		super();
+		this.symbol = symbol;
+		this.side = side;
+		this.orderType = orderType;
+		this.qtyPlaced = qtyPlaced;
+		this.qtyExecuted = qtyExecuted;
+		this.stopPrice = stopPrice;
+		this.limitPrice = limitPrice;
+		this.status = status;
+		this.orderDate = orderDate;
+		this.executedDate = executedDate;
 	}
+
+
 
 	public Long getBlockId() {
 		return blockId;
@@ -257,10 +270,6 @@ public class Block {
 		builder.append("]");
 		return builder.toString();
 	}
-
-	
-
-	
 	
 	
 }

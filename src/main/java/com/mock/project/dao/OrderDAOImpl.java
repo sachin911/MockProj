@@ -116,6 +116,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	//System.out.println(orders.get(0));
 	
 	return blocks;
+	}
 
 	public List<Block> findAllBlocks(int traderId) {
 		Query query = em.createQuery("from Block");

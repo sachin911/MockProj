@@ -1,10 +1,12 @@
 package tradingApplication;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBException;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mock.project.config.AppConfig;
+import com.mock.project.jms.MarshallAndSend;
 import com.mock.project.model.Block;
 import com.mock.project.model.Order;
 import com.mock.project.service.OrderService;
@@ -22,7 +25,7 @@ import com.mock.project.service.OrderService;
 public class TraderToBrokerController {
 
 	@RequestMapping(value = "/views/saveBlock", method = RequestMethod.POST)
-	public ModelAndView saveblock(HttpServletRequest req,HttpServletResponse httpServletResponse){
+	public ModelAndView saveblock(HttpServletRequest req,HttpServletResponse httpServletResponse) throws URISyntaxException, JAXBException, Exception{
 		
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
         container.registerShutdownHook();
@@ -40,11 +43,19 @@ public class TraderToBrokerController {
 			
 		}
 		
-		for(int orders1:blockId)
-		{
-			System.out.println(orders1);
-			blocks = (orderService.findBlockByBlockId(orders1));
-		}
+		
+//		for(int orders1:blockId)
+//		{
+//			System.out.println(orders1);
+//			blocks = (orderService.findBlockByBlockId(orders1));
+//		}
+		
+		blocks = (orderService.findBlockByBlockId(1160));
+		
+		MarshallAndSend msobj = new MarshallAndSend();
+		msobj.sendExecutedBlock(blocks);
+		
+		
 		System.out.println(blocks);
 		return null;
 	}

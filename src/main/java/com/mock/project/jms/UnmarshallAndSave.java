@@ -45,33 +45,39 @@ public class UnmarshallAndSave {
 
 	public void processBlocksFromQueue(String blockAsString) {
 
-		
+		System.out.println(blockAsString);
 //		ApplicationContext ac = new AnnotationConfigApplicationContext();
 //		BrokerService brokerService = ac.getBean(BrokerService.class);
 		try {
-			System.out.println(unmarshal(blockAsString));
+			System.out.println("reached the unmarshal");
 			
 			Block blockToSave = unmarshal(blockAsString);
+			
+			System.out.println("go from unmarshal");
+			
 			saveTheBlocks(blockToSave);
+			
 			// save the unmarshalled block object to the database
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (JAXBException e) {
 			e.printStackTrace();
-		}finally {
+		}
+		finally {
 			//container.close();
 		}
-		
-		
-		//System.out.println(blockAsString);
 	}
+	
 	
 	public void saveTheBlocks(Block block){
 		
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(com.mock.project.config.AppConfig.class);
 		container.registerShutdownHook();
-		//BrokerService brokerService = container.getBean(BrokerService.class);
 		
-		BrokerService brokerService  = (BrokerService) container.getBean("brokerService");
+		System.out.println("comes from unmarshal");
+		
+		BrokerService brokerService = container.getBean(BrokerService.class);
+		
+		//BrokerService brokerService  = (BrokerService) container.getBean("brokerService");
 		System.out.println("reached here before the service");
 		brokerService.saveblock(block);
 	

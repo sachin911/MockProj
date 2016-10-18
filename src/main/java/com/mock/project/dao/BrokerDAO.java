@@ -5,6 +5,6 @@ import com.mock.project.model.Order;
 
 public interface BrokerDAO extends GenericDAO<Order, Long>{
 
-	void updateBlock(Block block);
+	void saveBlock(Block block);
 
 }
