@@ -214,11 +214,11 @@ public class TradingController {
       
         OrderService orderService = container.getBean(OrderService.class);
       
-      	List<Order> block=new ArrayList<Order>();
-      	block = orderService.displaylist(5);
+        List<Block> Blocks =new ArrayList<Block>();
+      	Blocks = orderService.displayBlock(5);
 
       	ModelAndView model = new ModelAndView("BlockBlotter");
-		model.addObject("Blocks",block);
+		model.addObject("Blocks",Blocks);
 		
 
 		return model;	
@@ -235,8 +235,8 @@ public class TradingController {
         OrderService orderService = container.getBean(OrderService.class);
         
         String arr[] = req.getParameterValues("data");
-        System.out.println(arr[0]);
-        System.out.println("inPopulatesadplpasdlpasd");
+       // System.out.println(arr[0]);
+      //  System.out.println("inPopulatesadplpasdlpasd");
       /*	List<Order> O=new ArrayList<Order>();
       	O = orderService.displaylist(blockId);*/
       

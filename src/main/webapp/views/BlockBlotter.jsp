@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	 <%@ page import="java.util.List,com.mock.project.model.Order" %>
+	 <%@ page import="java.util.List,com.mock.project.model.Block" %>
 <!DOCTYPE html>
 <head>
 <%@ page isELIgnored="false" %>
@@ -64,17 +64,17 @@ td {
                  
              </thead>  
              </table>
- <table class="Ordertable">
+ <table id="sendBlockTable">
      <%int j=0;%>
 
            <c:forEach items='${Blocks}' var="Orders" varStatus="Loop">   
-           <%List<Order> l =(List<Order>) request.getAttribute("Blocks"); %>
+           <%List<Block> l =(List<Block>) request.getAttribute("Blocks"); %>
       <!--          <div class="panel panel-default">
       <div class="panel-heading">  -->
       
              <tr id = "getId();">
                  <td><input type="checkbox"/></td>
-                  <td class="orderId"><c:out  value='${Orders.orderId}'/></td>
+                  <td class="blockId"><c:out  value='${Orders.blockId}'/></td>
 
                 <td><c:out  value='${Orders.symbol}'/></td>
                <td><c:out  value='${Orders.side}'/></td>
@@ -119,11 +119,11 @@ td {
           
              <tr  id="hideEditD${Loop.index +1}" style="display:none;">
              <th></th>
-              <td><%= l.get(j).getOrderId() %></td>
+             <td><%= l.get(j).getBlockId() %></td> 
                 <td><%= l.get(j).getLimitPrice() %></td>
                <td><%= l.get(j).getStopPrice() %></td>
                 <td><%= l.get(j).getQtyPlaced() %></td>
-                <td><%= l.get(j).getPmId() %></td>
+              <%--   <td><%= l.get(j).getPmId() %></td> --%>
                </tr>
                  
          
@@ -225,38 +225,6 @@ function toggleEdit(i) {
  <script>
     
     
- $(document).ready(function(){
- 	$('#createBlock').click(function() {
- 		var data=[];
- 	$('#PendingOrderTable tr').each(function()
- 	{
- 	if($(this).find("input[type=checkbox]").prop("checked")===true)
- 	{
- 		
- 		
-		console.log("sakjs");
- 	var out=$(this).find('.orderId').html();
- 	console.log(out);
- 	data.push(out);
- 	}
- 	 
- 	}
- 	);	
- 	  console.log(data);  
- 	  
- 	  $.ajax({
- 		  type: "POST",
- 		  url: "fetchOrder2",
- 		  dataType: 'json',
- 		  data:"data="+data,
- 		  success: function(data) {
- 		    console.log("data is sent");
- 		  }
- 		});
- 	  
- 	  
- 	});
- 	});
  
  
     

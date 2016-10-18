@@ -35,13 +35,13 @@ public class TraderServiceImpl implements TraderService {
     }
    @Override
     public void addToSelectedBlock(Integer selectedBlock) {
-	   System.out.println("selected");
-	   System.out.println("addtoselectedblock:::::"+TraderServiceImpl.listOforder);
+	  // System.out.println("selected");
+	  // System.out.println("addtoselectedblock:::::"+TraderServiceImpl.listOforder);
              for(Order order:listOforder){
-            	 System.out.println(order);
+            	// System.out.println(order);
                     dao.addToThisBlock(order,selectedBlock);
              }
-             System.out.println("selectedblock");
+          //   System.out.println("selectedblock");
     }       
 
 	@Override
@@ -76,7 +76,7 @@ public class TraderServiceImpl implements TraderService {
 		for(Order order: orders)
 		{
 			//System.out.println("here"+ order);
-			orderId.add(orders.get(0).getOrderId());
+			orderId.add(order.getOrderId());
 			
 			//Checking whether the status of all the orders is OPEN
 			if((order.getStatus()).equals("Open"))
@@ -94,12 +94,12 @@ public class TraderServiceImpl implements TraderService {
 			if((order.getOrderType()).equals(orderType))
 			{
 				
-				openStatus=true;
+				orderTypeStatus=true;
 			}
 			else
 			{
 				
-				openStatus=false;
+				orderTypeStatus=false;
 				break;
 			}
 			
@@ -174,7 +174,7 @@ public class TraderServiceImpl implements TraderService {
 			//System.out.println(block);
 			dao.addBlock(block);
 			
-			System.out.println("asdkdasjas: "+block.getBlockId());
+		//	System.out.println("asdkdasjas: "+block.getBlockId());
 			
 			dao.updateStatus(block.getBlockId(),orderId);
 			//insert all the orders into block

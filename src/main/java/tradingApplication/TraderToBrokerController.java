@@ -31,26 +31,23 @@ public class TraderToBrokerController {
         container.registerShutdownHook();
         OrderService orderService = container.getBean(OrderService.class);
 		List<Integer> blockId=new ArrayList<Integer>();
+		List<Block> blocks=new ArrayList<Block>();
 		System.out.println("saveblocks");
 		String[] out=req.getParameterValues("data");
-		List<Block> blocks = new ArrayList<Block>();
-		//System.out.println(blocks);
-		//ModelAndView view = new ModelAndView("BlockBlotter");
+		
+		
 		String[] tokens=out[0].split(",");
-		for(String orderIdString:tokens)
+		for(String blockIdString:tokens)
 		{
-			blockId.add(Integer.parseInt(orderIdString));
+			blockId.add(Integer.parseInt(blockIdString));
 			
 		}
+		for(int block1:blockId)
+		{
+			//System.out.println(orders1);
+			blocks.add(orderService.findBlockByBlockId(block1));
+		}
 		
-		
-//		for(int orders1:blockId)
-//		{
-//			System.out.println(orders1);
-//			blocks = (orderService.findBlockByBlockId(orders1));
-//		}
-		
-		blocks = (orderService.findBlockByBlockId(1160));
 		
 		MarshallAndSend msobj = new MarshallAndSend();
 		msobj.sendExecutedBlock(blocks);

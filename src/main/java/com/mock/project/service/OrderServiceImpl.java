@@ -80,10 +80,10 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
-	public List<Block> findBlockByBlockId(int blockId)
+	public Block findBlockByBlockId(int blockId)
 	{
-		List<Block> blocks=dao.findBlock(blockId);
-		return blocks;
+		Block block=dao.findBlock(blockId);
+		return block;
 	}
 
 }

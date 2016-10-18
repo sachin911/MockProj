@@ -28,7 +28,7 @@ public interface OrderService {
 	Order findOrderByOrderId(int orderId);
 
 
-	List<Block> findBlockByBlockId(int blockId);
+	Block findBlockByBlockId(int blockId);
 
 
 }
