@@ -8,9 +8,11 @@ import java.util.Random;
 import javax.xml.bind.JAXBException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Propagation;
@@ -48,7 +50,8 @@ public class BrokerServiceImpl implements BrokerService {
 
 		List<Block> blockList = new ArrayList<>();
 		blockList = blockDAO.findAll();
-		MarshallAndSend send = new MarshallAndSend();
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		MarshallAndSend send = (MarshallAndSend) context.getBean("MessageProducer");
 		for (Block blocks : blockList) {
 			System.out.println(blocks);
 			if (!blocks.getStatus().equalsIgnoreCase("Completed")) {

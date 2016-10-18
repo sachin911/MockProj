@@ -64,6 +64,9 @@ public class MarshallAndSend {
 	}
 
 	public void sendExecutedBlockList(List<Block> blockList) throws JAXBException {
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		MarshallAndSend ms = (MarshallAndSend) context.getBean("MessageProducer");
+
 		LoggerConfig logConfig = new LoggerConfig();
 		Logger log = logConfig.getLogConfig();
 		if (blockList == null) {
@@ -74,7 +77,7 @@ public class MarshallAndSend {
 		for (Block iter : blockList) {
 			log.info("The Block being sent is" + iter);
 			System.out.println("The Block being sent is" + iter);
-			marshallAndSendBlock(iter);
+			ms.marshallAndSendBlock(iter);
 		}
 	}
 

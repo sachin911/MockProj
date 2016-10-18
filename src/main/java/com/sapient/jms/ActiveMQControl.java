@@ -12,7 +12,10 @@ public class ActiveMQControl {
 	
 	public void startBroker() throws URISyntaxException, Exception{
 		broker = BrokerFactory.createBroker(new URI("broker:(tcp://localhost:61616)"));
-		broker.start();
+		if(!broker.isStarted()){
+			broker.start();
+		}
+
 	}
 	
 	public void stopBroker() throws Exception{
