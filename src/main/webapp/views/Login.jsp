@@ -346,7 +346,7 @@ FOOTER
 
 </style>
  <body>
- <form name="login-form" class="login-form" action="" method="post">
+ <form name="login-form" class="login-form" action="hello" method="post">
 	
 		<div class="header">
 		<h1>Welcome to broker Site</h1>
@@ -361,9 +361,13 @@ FOOTER
 		</div>
 
 		<div class="footer">
-		<a href="BrokerMainScreen.jsp" class="button">Login</a>
+		<a href="ForgetPassword.jsp">Forgot Password</a>
+			<input type="submit" value="Login" class="button" name="submit"/>
+	
+		<!-- <a href="BrokerMainScreen.jsp" class="button">Login</a> -->
 		</div>
 	
 	</form>
-	
+	<%if(request.getSession().getAttribute("message")!=null) %>
+	<p><%=request.getSession().getAttribute("message") %></p>
 	</body>

@@ -1,19 +1,14 @@
 package com.sapient.main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.persistence.EntityManagerFactory;
-
-import javax.persistence.Persistence;
+import java.util.Map;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
-
 import com.sapient.config.AppConfig;
-import com.sapient.dao.GenericDAO;
-import com.sapient.dao.GenericDAOImpl;
 import com.sapient.model.User;
 import com.sapient.service.UserService;
 
@@ -92,6 +87,29 @@ public String checkuser(User user)
 			}
 			container.close();
 			return vm;
+}
+
+public void updatepass(User user) {
+	// TODO Auto-generated method stub
+	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+
+	 
+	 ((AbstractApplicationContext) container).registerShutdownHook();
+	 UserService userService=  (UserService) container.getBean(UserService.class);
+		List<User> userlist=userService.findAll();
+		
+		Map<String,String> userkey=new HashMap<>();
+		for (User user2 : userlist) {
+			userkey.put(user2.getUser_name(),user2.getSecret_key());
+		}
+	if(userkey.keySet().contains(user.getUser_name()))
+			{
+		if(userkey.get(user.getUser_name()).equals(user.getSecret_key()))
+{
+	userService.changePass(user);
+}
+			}
+		
 }
 	
 	}
