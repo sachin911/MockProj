@@ -20,6 +20,11 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 	
 	
 
+	@Override
+	public void delete(User entity) {
+		// TODO delete a user from db
+		
+	}
 
 	@Override
 	public List<User> findAll(String username, String password) {
@@ -48,8 +53,6 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 		*/
 	}
 
-
-
 	@Override
 	public User findByPrimaryKey(User id) {
 		// TODO Auto-generated method stub
@@ -69,5 +72,5 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 			return true;
 		}	
 	}
-
 }
+

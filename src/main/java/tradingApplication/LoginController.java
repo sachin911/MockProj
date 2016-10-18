@@ -18,7 +18,6 @@ import com.mock.project.service.LoginServiceImpl;
 import com.mock.project.service.OrderService;
 
 
-
 @Controller
 public class LoginController {
 	@RequestMapping("views/handleLogin")
@@ -73,6 +72,12 @@ public class LoginController {
 		LoginService loginService = container.getBean(LoginService.class);
 		loginService.addUser(u);
 	}
-
-
+	
+	@RequestMapping("views/logout")
+	public ModelAndView handleLogout(HttpServletRequest request) {
+		//GET USERNAME FROM SESSION
+		System.out.println("Attempted logout");
+		request.getSession().setAttribute("user", null);
+		return new ModelAndView("Login");
+	}	
 }
