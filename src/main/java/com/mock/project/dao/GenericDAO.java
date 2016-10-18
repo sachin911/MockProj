@@ -8,7 +8,7 @@ import com.mock.project.model.Order;
 
 public interface GenericDAO<T,ID> {
 
-	T add(T entity);
+	void add(T entity);
 
 	void delete(T entity);
 

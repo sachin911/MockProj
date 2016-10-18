@@ -58,6 +58,16 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		return null;
 	}
 
+
+
+
+
+	@Override
+	public List<Order> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// @Override
 	// public void updateStatus(Status status,List orderid) {
 	// List<Order> getOrders=new ArrayList();

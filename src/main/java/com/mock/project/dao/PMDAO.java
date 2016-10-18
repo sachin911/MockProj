@@ -18,5 +18,7 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 
 	Order ammend(Order object);
 
+	List<Order> findAll();
+
 
 }

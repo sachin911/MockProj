@@ -27,9 +27,18 @@ public class LoginServiceImpl implements LoginService {
 		List<User> users = dao.findAll(username, password);
 		
 		if(users.isEmpty() || users == null){
-			return null;
+			System.out.println("User returned is null");
+			boolean exists = dao.findIfUsernameExists(username);
+			if(exists == true) {
+				User wrongPassUser = new User(null, null);
+				return wrongPassUser;
+			} else {
+				return null;
+			}
 		} else {
-			return users.get(0);
+			User us = users.get(0);
+			System.out.println("User returned: " + us.toString());
+			return us;
 		}
 	}
 
@@ -47,7 +56,6 @@ public class LoginServiceImpl implements LoginService {
 		return 10;
 	}
 
-	@Override
 	public void addUser(User u) {
 		dao.add(u);
 	}

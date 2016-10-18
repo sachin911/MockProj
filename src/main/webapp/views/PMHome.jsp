@@ -123,8 +123,18 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="./PMHome.jsp">Portfolio Manager</a>
 			</div>
+<<<<<<< HEAD
 			<ul class="nav navbar-nav" style="float:right;">
 				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+=======
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="PMHome.jsp">Home Page</a></li>		
+				<li><a href="CreateTrade.jsp">Create Order</a></li>
+				<li><a href="OrderBlotter.jsp">Order Blotter</a></li>
+				<li><a href="PMHistory.jsp">History</a></li>
+
+
+>>>>>>> 07f610fafcbdb28a458551b1995e432456208169
 			</ul>
 		</div>
     </nav>
