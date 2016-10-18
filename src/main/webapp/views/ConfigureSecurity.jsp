@@ -58,8 +58,8 @@ thead {
 
 		</ul>
 	</div>
-	<div class="container">
-		<table style="width: 100%" class="table table-striped"  height: 100px;
+	<div class="container" style="height:300px;overflow-y:scroll;;">
+		<table  id="securities" style="width: 100%"  class="table table-striped"  height: 100px;
   overflow-y: scroll>
 
 			<tr>
@@ -198,40 +198,38 @@ thead {
 
 						</head>
 						<body>
-
-							<form class="myForm" method="get"
-								enctype="application/x-www-form-urlencoded"
-								action="/html/codes/html_form_handler.cfm">
+							<div allign="centre">
+							<form class="myForm" method="post" action="editSecurity">
 
 								<p>
-									<label>Ticker <input type="text" name="ticker" id="ticker1" placeholder="Ticker";
-										required>
+									<label>Ticker <input type="text"  allign=right"name="ticker" id="ticker1" placeholder="Ticker";
+										disabled>
 									</label>
 								</p>
 
 								<p>
-									<label>Name <input type="text" name="Symbol" placeholder="Symbol Name"  id="Symbol" value="Google">
+									<label>Name <input type="text" allign=right" name="Symbol name" placeholder="Symbol Name"  id="Symbol" value="Google" disabled>
 									</label>
 								</p>
 
 								<p>
-									<label>Last traded Price <input type="Number" name="Last traded Price" id="Last traded Price" value="120.0">
+									<label>Last traded Price <input type="Number" allign=right" name="Last traded Price" id="Last traded Price" value="120.0">
 									</label>
 								</p>
 								<p>
-									<label>Maximum Price Spread <input type="Number" name="Maximum Price Spread " id="Maximum Price Spread "value="12">
+									<label>Maximum Price Spread <input type="Number" allign=right" name="Maximum Price Spread " id="Maximum Price Spread "value="12">
 									</label>
 								</p>
 								<p>
-									<label>Maximum Executions Per Order <input type="Number" name="Maximum Executions Per Order " id="Maximum Executions Per Order " value="100">
+									<label>Maximum Executions Per Order <input type="Number" allign=right" name="Maximum Executions Per Order " id="Maximum Executions Per Order " value="100">
 									</label>
 								</p>
 								<p>
-									<label>Maximum Interval<input type="Number" name="Maximum Interval " id="Maximum Interval" value="100">
+									<label>Maximum Interval<input type="Number" allign=right" name="Maximum Interval " id="Maximum Interval" value="100">
 									</label>
 								</p>
 								<p>
-									<label>Maximum Probable Percentage<input type="Number" name="Maximum Probable Percentage" id="Maximum Probable Percentage" value="10">
+									<label>Maximum Probable Percentage<input type="Number" allign=right" name="Maximum Probable Percentage" id="Maximum Probable Percentage" value="10">
 									</label>
 								</p>
 
@@ -240,7 +238,7 @@ thead {
 								</p>
 
 							</form>
-
+</div>
 						</body>
 </html>
 </form>
@@ -254,13 +252,25 @@ thead {
 </div>
 </div>
 <script>
-document.getElementById("ticker1").value =document.getElementById("ticker").innerHTML ;
-document.getElementById("Symbol").value =document.getElementById("name").innerHTML ;
-document.getElementById("Last traded Price").value =document.getElementById("lastTradedPrice").innerHTML ;
-document.getElementById("Maximum Price Spread ").value =document.getElementById("MaxPriceSpread").innerHTML ;
-document.getElementById("Maximum Executions Per Order ").value =document.getElementById("MaximumExecutions").innerHTML ;
-document.getElementById("Maximum Interval").value =document.getElementById("MaximumInterval").innerHTML ;
-document.getElementById("Maximum Probable Percentage").value =document.getElementById("MaxProbable").innerHTML ;
+function GetSecuritiesData(button)
+{
+	var rown = button.parentNode.parentNode.rowIndex;
+	/* var u=document.getElementById("securities").rows[rown].cells[0].innerHTML; */
+	//alert(u);
+/* 	document.Removeform.action="RemoveServlet?uname="+u;
+	//alert(document.Removeform.action);
+	window.location.href="RemoveServlet?uname="+u; */
+	
+	//document.Removeform.submit();
+
+document.getElementById("ticker1").value =document.getElementById("securities").rows[rown].cells[0].innerHTML;
+document.getElementById("Symbol").value =document.getElementById("securities").rows[rown].cells[1].innerHTML;
+document.getElementById("Last traded Price").value =document.getElementById("securities").rows[rown].cells[2].innerHTML;
+document.getElementById("Maximum Price Spread ").value =document.getElementById("securities").rows[rown].cells[3].innerHTML;
+document.getElementById("Maximum Executions Per Order ").value =document.getElementById("securities").rows[rown].cells[4].innerHTML;
+document.getElementById("Maximum Interval").value =document.getElementById("securities").rows[rown].cells[5].innerHTML;
+document.getElementById("Maximum Probable Percentage").value =document.getElementById("securities").rows[rown].cells[6].innerHTML;
+}
 </script>
 </body>
 </html>

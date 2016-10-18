@@ -1,10 +1,13 @@
 <%@page import="com.sapient.config.AppConfig"%>
 <%@page import="com.sapient.service.BrokerService"%>
-<%@page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
-<%@page import="org.springframework.context.support.AbstractApplicationContext"%>
+<%@page
+	import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
+<%@page
+	import="org.springframework.context.support.AbstractApplicationContext"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@page import="com.sapient.dao.* ,com.sapient.model.Block, java.util.List ,java.util.ArrayList"%>
+<%@page
+	import="com.sapient.dao.* ,com.sapient.model.Block, java.util.List ,java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <!DOCTYPE html>
@@ -28,14 +31,13 @@ table {
 </head>
 <body>
 	<%
-	AbstractApplicationContext container=new AnnotationConfigApplicationContext(AppConfig.class);
-	container.registerShutdownHook();
- BrokerService brokerService= (BrokerService)
- container.getBean("brokerService");
-	List<Block> blockList=new ArrayList();
-		
-		blockList=brokerService.findALL();
-	%> 
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+		container.registerShutdownHook();
+		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
+		List<Block> blockList = new ArrayList();
+
+		blockList = brokerService.findALL();
+	%>
 	<div class="container">
 		<h3>Broker</h3>
 		<ul class="nav nav-pills">
@@ -45,9 +47,9 @@ table {
 			<li><a href="Login.jsp">Logout</a></li>
 		</ul>
 	</div>
-	<div  class="container" style="height:300px;overflow-y:scroll;;"> 
+	<div class="container" style="height: 300px; overflow-y: scroll;">
 		<table style="width: 100%" class="table table-striped">
-			
+
 			<tr>
 				<th>Block Id</th>    
 				<th>Ticker</th>    
@@ -63,21 +65,22 @@ table {
 				<th>Status</th>  
 			</tr>
 			<%
-					for(Block blocks:blockList) {
-				%> 
+				for (Block blocks : blockList) {
+			%> 
 			<tr>
-				<td><%=blocks.getId() %></td>
-				<td><%=blocks.getSymbol() %></td>
+				<td><%=blocks.getId()%></td>
+				<td><%=blocks.getSymbol()%></td>
 				<%-- <td><%=blocks.get %></td> --%>
-				<td><%=blocks.getSide() %></td>
-				<td><%=blocks.getType() %></td>
-				<td><%=blocks.getStop_price() %></td>
-				<td><%=blocks.getLimit_price() %></td>
+				<td><%=blocks.getSide()%></td>
+				<td><%=blocks.getType()%></td>
+				<td><%=blocks.getStop_price()%></td>
+				<td><%=blocks.getLimit_price()%></td>
 				<td><%=blocks.getExecuted_price()%></td>
-				<td><%=blocks.getExecuted_quantity() %></td>
-				<td><%=blocks.getExecuted_date() %></td>
-				<td><%=blocks.getStatus() %></td>
-			</tr> 
+				<td><%=blocks.getTotal_quantity()%></td>
+				<td><%=blocks.getExecuted_quantity()%></td>
+				<td><%=blocks.getExecuted_date()%></td>
+				<td><%=blocks.getStatus()%></td>
+			</tr>
 			<!-- <tr>
 				<td>1</td>
 				<td>GOOG</td>
@@ -104,12 +107,16 @@ table {
 				<td>10/2/2016</td>
 				<td>OPEN</td>
 			</tr>  -->
- <%} %>
+			<%
+				}
+			%>
 		</table>
 	</div>
 	<div class="container">
-		<form method="post">
-			<input type="submit" value="stop" class="btn btn-info btn-lg"">
+		<form method="post" action="startStopService">
+			<input type="submit" name="start" value="start"	class="btn btn-info btn-lg"">
+			<input type="submit" name="stop" value="stop" class="btn btn-info btn-lg"">
+			
 		</form>
 	</div>
 </body>

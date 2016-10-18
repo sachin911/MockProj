@@ -1,6 +1,5 @@
 package com.sapient.controller;
 
-
 import javax.persistence.Persistence;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,20 +19,22 @@ public class LoginController {
 
 	public ModelAndView sysLogin(HttpServletRequest req) {
 		String uname = req.getParameter("username");
+		System.out.println("username: " + uname);
 		System.out.println("Controller");
 		String pass = req.getParameter("password");
+
+		System.out.println("password: " + pass);
 		User user = new User();
 		user.setUser_name(uname);
 		user.setPassword(pass);
 		Login l = new Login();
 
 		String vm = l.checkuser(user);
-req.getSession().setAttribute("message",vm);
+		req.getSession().setAttribute("message", vm);
 		if (vm.equals("Valid user"))
 			return new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
 		else
 			return new ModelAndView("redirect:Login.jsp", "message", vm);
-			
 
 	}
 
