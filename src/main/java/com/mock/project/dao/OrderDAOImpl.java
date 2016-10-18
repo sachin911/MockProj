@@ -106,6 +106,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	}
 
 	@Override
+
 	public List<Block> findBlock(int blockId) {
 		List<Block> blocks=new ArrayList<Block>();
 		Query query=em.createQuery("from Block where block_Id=:blockId");
@@ -115,6 +116,13 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	//System.out.println(orders.get(0));
 	
 	return blocks;
+
+	public List<Block> findAllBlocks(int traderId) {
+		Query query = em.createQuery("from Block");
+		//query.setParameter("traderId", traderId);
+
+		return query.getResultList();
+
 	}
 
 }

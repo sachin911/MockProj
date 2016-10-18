@@ -28,7 +28,13 @@ public class LoginServiceImpl implements LoginService {
 		
 		if(users.isEmpty() || users == null){
 			System.out.println("User returned is null");
-			return null;
+			boolean exists = dao.findIfUsernameExists(username);
+			if(exists == true) {
+				User wrongPassUser = new User(null, null);
+				return wrongPassUser;
+			} else {
+				return null;
+			}
 		} else {
 			User us = users.get(0);
 			System.out.println("User returned: " + us.toString());

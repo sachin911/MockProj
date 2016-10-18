@@ -68,7 +68,6 @@ width=100px
 			<p class="login-submit">
 				<input type="submit" value="LOGIN" class="btn btn-primary btn-block"/>
 			</p>
-			<p class="forgot-password"><a href="ForgetPassword.jsp">Forgot your password?</a></p>
 		</form>
 	</div>
 </body>
