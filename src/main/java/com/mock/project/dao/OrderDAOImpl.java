@@ -105,4 +105,12 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		em.persist(block);
 	}
 
+	@Override
+	public List<Block> findAllBlocks(int traderId) {
+		Query query = em.createQuery("from Block");
+		//query.setParameter("traderId", traderId);
+
+		return query.getResultList();
+	}
+
 }

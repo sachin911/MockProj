@@ -24,6 +24,7 @@ import com.mock.project.config.AppConfig;
 
 import com.mock.project.dao.OrderDAO;
 import com.mock.project.dao.OrderDAOImpl;
+import com.mock.project.model.Block;
 import com.mock.project.model.Order;
 import com.mock.project.service.OrderService;
 import com.mock.project.service.OrderServiceImpl;
@@ -40,7 +41,7 @@ public class TradingController {
 		    public ModelAndView method(HttpServletRequest req,HttpServletResponse httpServletResponse) {
 			//String []out=req.getParameter("check");				
 
-			 System.out.println("testasbasd");
+			// System.out.println("testasbasd");
 
 			// System.out.println(out);
 				
@@ -81,7 +82,7 @@ public class TradingController {
 		@RequestMapping(value = "/views/updateTable", method = RequestMethod.GET)
 	    public ModelAndView methodToUpdateTable(HttpServletResponse httpServletResponse) 
 	    {
-	      	System.out.println("Updating the order table with pending orders");
+	      	//System.out.println("Updating the order table with pending orders");
 
 	      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
             container.registerShutdownHook();
@@ -123,7 +124,7 @@ public class TradingController {
 	@RequestMapping("/test")
 	public ModelAndView welcomeMessage(@RequestParam(value = "name", required = false) String name) {
 		// Name of your jsp file as parameter
-		System.out.println("teststst");
+		//System.out.println("teststst");
 		ModelAndView view = new ModelAndView("test");
 		view.addObject("name", name);
 		return view;
@@ -134,12 +135,12 @@ public class TradingController {
 	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
     public ModelAndView populateBlockBlotter(HttpServletResponse httpServletResponse) 
     {
-      	System.out.println("Comes here");
+      	//System.out.println("Comes here");
       	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
         container.registerShutdownHook();
-        System.out.println("Comes here too");
+      //  System.out.println("Comes here too");
         OrderService orderService = container.getBean(OrderService.class);
-        System.out.println("Maybe comes here too");
+      //  System.out.println("Maybe comes here too");
       	List<Order> O=new ArrayList<Order>();
       	O = orderService.displaylist(5);
       
@@ -151,7 +152,31 @@ public class TradingController {
       // httpServletResponse.setHeader("Location", "www.google.com");
 		
     }
+	
+	@RequestMapping(value = "/views/PopulateTraderHistory", method = RequestMethod.GET)
+    public ModelAndView PopulateTraderHistory(HttpServletResponse httpServletResponse) 
+    {
+      //	System.out.println("Comes here");
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+      //  System.out.println("Comes here too");
+        OrderService orderService = container.getBean(OrderService.class);
+    //    System.out.println("Maybe comes here too");
+      	List<Block> Blocks =new ArrayList<Block>();
+      	Blocks = orderService.displayBlock(5);
+      
+      	ModelAndView model = new ModelAndView("TradeHistoryTemp");
+		model.addObject("Blocks",Blocks);
+		
+
+		return model;
+      // httpServletResponse.setHeader("Location", "www.google.com");
+		
     }
+    
+}
+	
+	
 
 
 

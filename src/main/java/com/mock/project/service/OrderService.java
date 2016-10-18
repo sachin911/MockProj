@@ -18,6 +18,7 @@ public interface OrderService {
 
 	List<Order> displaylist();
 	
+	List<Block> displayBlock(int i);
 
 	
 

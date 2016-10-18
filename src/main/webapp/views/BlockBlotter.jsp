@@ -36,9 +36,9 @@ td {
     <ul class="nav navbar-nav">
 
       <li class="active"><a href="PopulateBB">View Blocks</a></li>
-      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
+      <li><a href="updateTable">Pending Orders</a></li>
 
-      <li><a href="TraderHistory.jsp">History</a></li> 
+      <li><a href="PopulateTraderHistory">History</a></li> 
     </ul>
   </div>
     <div class="container">
