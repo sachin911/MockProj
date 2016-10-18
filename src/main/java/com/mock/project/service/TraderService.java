@@ -9,11 +9,8 @@ public interface TraderService {
 	
 	List<Order> display();
 	
-	List<Block> recommendationsToAddToBlock(Order order);
-	
 	void updateStatus(long block_id,List order_id);
 	
 	void createBlock(List<Order> orders);
-	
 
 }

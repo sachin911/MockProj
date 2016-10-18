@@ -5,13 +5,14 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.mock.project.dao.GenericDAO;
+import com.mock.project.dao.GenericDAOImplementation;
 import com.mock.project.dao.OrderDAO;
+import com.mock.project.dao.OrderDAOImpl;
 import com.mock.project.model.Block;
 import com.mock.project.model.Order;
 
@@ -34,11 +35,7 @@ public class TraderServiceImpl implements TraderService{
 		dao.updateStatus(block_id, order_id);
 		
 	}
-	@Override
-	public List<Block> recommendationsToAddToBlock(Order order) {
-		
-		return dao.recommend(order);
-	}
+	
 	@Override
 	public void createBlock(List<Order> orders) {
 			
@@ -149,18 +146,7 @@ public class TraderServiceImpl implements TraderService{
 				block.setStopPrice(blockStopPrice);
 				block.setLimitPrice(blockLimitPrice);
 				
-				/*
-				GenericDAO<Block> blockDao=new GenericDAOImplementation<>();
-				OrderDAO orderDao=new OrderDAOImpl();
-				blockDao.add(block);
-				orderDao.updateStatus(block.getBlockId(),orderId);
-				*/
 				
-				 
-				//insert all the orders into block
-				//Write Code Here
-				//write the value of block_id in order Table
-			
 			
 			
 			}
@@ -176,5 +162,6 @@ public class TraderServiceImpl implements TraderService{
 		
 	}
 	
+
 
 }

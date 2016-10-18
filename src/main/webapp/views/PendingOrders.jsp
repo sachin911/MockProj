@@ -1,5 +1,5 @@
 
-<% response.addHeader("Refresh","10"); %>
+<% response.addHeader("Refresh","100"); %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.List" %>
@@ -30,10 +30,10 @@
     </div>
     <ul class="nav navbar-nav">
      
-      <li ><a href="BlockBlotter.jsp">View Blocks</a></li>
-      <li class="active"><a href="PendingOrders.jsp" id="pending_orders" value="pending_orders">Pending Orders</a></li>
+      <li ><a href="PopulateBB">View Blocks</a></li>
+      <li class="active"><a href="updateTable" id="pending_orders" value="pending_orders">Pending Orders</a></li>
       
-      <li><a href="TraderHistory.jsp">History</a></li>
+      <li><a href="PopulateTraderHistory">History</a></li>
     </ul>
   </div>
 
@@ -47,8 +47,13 @@
       <div class="Recommendations">
       <div style="height:300px;overflow-y:scroll;;">
     <div class="checkbox">
+<<<<<<< HEAD
       
     <table class="table table-bordered">
+=======
+        
+    <table class="table table-bordered" id="PendingOrderTable">
+>>>>>>> 07f610fafcbdb28a458551b1995e432456208169
     <thead>
       <tr>
         <th></th>
@@ -73,17 +78,12 @@
 
    
          
-           <%-- <%
-			List<Order> list = (List<Order>)request.getAttribute("Orders");
-			for(Order e: list){
-		--%>
+           
 			<c:forEach items='${Orders}' var="Orders">     
-   <%--  <c:forEach var="listValue" items="${lists}">
-				<li>${listValue}</li>
-			</c:forEach> --%>
+   
 
 			<tr>
-			 <td> <label><input type="checkbox" id="check" name="check" ></label></td>
+			 <td> <label><input type="checkbox" id="check" name="check" class="checkboxClick"></label></td>
 			 <td><c:out value='${Orders.symbol}'/></td>
 			 <td><c:out value='${Orders.side}'/></td>
 			  <td><c:out value='${Orders.qtyPlaced}'/></td>
@@ -94,8 +94,8 @@
 			         <td><c:out value='${Orders.status}'/></td>
 			            <td><c:out value='${Orders.pmId}'/></td>
 			               <td><c:out value='${Orders.accountType}'/></td>
-			                  <td><c:out value='${Orders.portfolioId}'/></td>
-			                     <td><c:out value='${Orders.orderId}'/></td>
+			                  <td ><c:out value='${Orders.portfolioId}'/></td>
+			                     <td class="orderId"><c:out value='${Orders.orderId}'/></td>
 			                     
 			         
 			         
@@ -104,6 +104,7 @@
 				
 			</tr>
 			</c:forEach>
+<<<<<<< HEAD
 		<%--<% 
 			}
 		--%> 
@@ -208,15 +209,51 @@
             </tr>  -->
 
         </tbody></table></div></div></div>
+=======
+		        </tbody></table></div></div></div>
+>>>>>>> 07f610fafcbdb28a458551b1995e432456208169
         
 
     <script>
-    function alert_message() {
-        alert("Your block has been successfully created");
-        
-    } 
+    
+    
+    $(document).ready(function(){
+    	$('#createBlock').click(function() {
+    		var data=[];
+    	$('#PendingOrderTable tr').each(function()
+    	{
+    	if($(this).find("input[type=checkbox]").prop("checked")===true)
+    	{
+    		
+    		
+		console.log("sakjs");
+    	var out=$(this).find('.orderId').html();
+    	console.log(out);
+    	data.push(out);
+    	}
+    	 
+    	}
+    	);	
+    	  console.log(data);  
+    	  
+    	  $.ajax({
+    		  type: "POST",
+    		  url: "fetchOrder2",
+    		  dataType: 'json',
+    		  data:"data="+data,
+    		  success: function(data) {
+    		    console.log("data is sent");
+    		  }
+    		});
+    	  
+    	  
+    	});
+    	});
+    
+    
+    
     </script>
-      <button type="button" class="btn btn-primary" onclick=alert_message() id=demo">Create Block</button>
+      <button type="button" class="btn btn-primary" id="createBlock">Create Block</button>
 
       <input type="submit" class="btn btn-info" data-toggle="collapse" data-target="#demo" id="add">Add to Block
       </button>
