@@ -24,6 +24,8 @@ import com.mock.project.config.AppConfig;
 
 import com.mock.project.dao.OrderDAO;
 import com.mock.project.dao.OrderDAOImpl;
+
+import com.mock.project.model.Block;
 import com.mock.project.model.Order;
 import com.mock.project.service.OrderService;
 import com.mock.project.service.OrderServiceImpl;
@@ -36,11 +38,81 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TradingController {
+
+	
+	ModelAndView model = new ModelAndView("PendingOrders");
+	
+	@RequestMapping(value = "/views/fetchOrder5", method = RequestMethod.GET)
+    public ModelAndView method5(HttpServletRequest req,HttpServletResponse httpServletResponse) {
+	//String []out=req.getParameter("check");	
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+        OrderService orderService = container.getBean(OrderService.class);
+	 System.out.println("testasbasd");
+	 List<Block> r=new ArrayList<Block>();
+	 List<Integer> orderId=new ArrayList<Integer>();
+		String[] out=req.getParameterValues("data");
+	
+		String[] tokens=out[0].split(",");
+		 System.out.println("testasbasd");
+		for(String order:tokens)
+		{
+			orderId.add(Integer.parseInt(order));
+			
+		}
+		for(int order:orderId)
+		{
+			System.out.println(order);
+			
+		}
+		r=orderService.recommend(orderId);
+		for(Block b: r){
+			System.out.println(b);
+		}
+		 
+		
+		model.addObject("Blocks",r);
+		//container.close();
+		return model;
+
+
+} 
+	@RequestMapping(value = "/views/fetchOrder6", method = RequestMethod.GET)
+    public ModelAndView method6(HttpServletRequest req,HttpServletResponse httpServletResponse) {
+	//String []out=req.getParameter("check");	
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+        TraderService traderService = container.getBean(TraderService.class);
+	 System.out.println("mango");
+	int bid;
+	String []blockId=(req.getParameterValues("data"));
+	System.out.println("aftergetparameter");
+	System.out.println(blockId[0]);
+	String[] tokens=blockId[0].split(",");
+	
+		//String[] tokens=out[0].split(",");
+		 System.out.println("testasbasd");
+		 bid=Integer.parseInt(tokens[0]);
+		 System.out.println(bid);
+		
+		
+		 traderService.addToSelectedBlock(bid);
+		
+		
+		//model.addObject("Blocks",r);
+		//container.close();
+		return null;
+
+
+} 
+	
+	
+
 		@RequestMapping(value = "/views/fetchOrder", method = RequestMethod.POST)
 		    public ModelAndView method(HttpServletRequest req,HttpServletResponse httpServletResponse) {
 			//String []out=req.getParameter("check");				
 
-			 System.out.println("testasbasd");
+			// System.out.println("testasbasd");
 
 			// System.out.println(out);
 				
@@ -57,7 +129,7 @@ public class TradingController {
 			AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
             container.registerShutdownHook();
             OrderService orderService = container.getBean(OrderService.class);
-			
+			System.out.println("abheejeet");
 			List<Integer> orderId=new ArrayList<Integer>();
 			String[] out=req.getParameterValues("data");
 			List<Order> orders = new ArrayList<Order>();
@@ -77,11 +149,12 @@ public class TradingController {
 			traderSevice.createBlock(orders);
 			return null;
 		}
+
 		
 		@RequestMapping(value = "/views/updateTable", method = RequestMethod.GET)
 	    public ModelAndView methodToUpdateTable(HttpServletResponse httpServletResponse) 
 	    {
-	      	System.out.println("Updating the order table with pending orders");
+	      	//System.out.println("Updating the order table with pending orders");
 
 	      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
             container.registerShutdownHook();
@@ -97,7 +170,7 @@ public class TradingController {
 	    	  //System.out.println("here");
 	      		//System.out.println(l);
 	      	}
-	      ModelAndView model = new ModelAndView("PendingOrders");
+	    
 			model.addObject("Orders",p);
 
 			return model;
@@ -123,7 +196,7 @@ public class TradingController {
 	@RequestMapping("/test")
 	public ModelAndView welcomeMessage(@RequestParam(value = "name", required = false) String name) {
 		// Name of your jsp file as parameter
-		System.out.println("teststst");
+		//System.out.println("teststst");
 		ModelAndView view = new ModelAndView("test");
 		view.addObject("name", name);
 		return view;
@@ -134,6 +207,7 @@ public class TradingController {
 	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
     public ModelAndView populateBlockBlotter(HttpServletResponse httpServletResponse) 
     {
+
       
       	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
         container.registerShutdownHook();
@@ -142,7 +216,7 @@ public class TradingController {
       
       	List<Order> block=new ArrayList<Order>();
       	block = orderService.displaylist(5);
-      
+
       	ModelAndView model = new ModelAndView("BlockBlotter");
 		model.addObject("Blocks",block);
 		
@@ -172,7 +246,31 @@ public class TradingController {
 
 		return model;	
     }
+	
+	@RequestMapping(value = "/views/PopulateTraderHistory", method = RequestMethod.GET)
+    public ModelAndView PopulateTraderHistory(HttpServletResponse httpServletResponse) 
+    {
+      //	System.out.println("Comes here");
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+      //  System.out.println("Comes here too");
+        OrderService orderService = container.getBean(OrderService.class);
+    //    System.out.println("Maybe comes here too");
+      	List<Block> Blocks =new ArrayList<Block>();
+      	Blocks = orderService.displayBlock(5);
+      
+      	ModelAndView model = new ModelAndView("TradeHistoryTemp");
+		model.addObject("Blocks",Blocks);
+		
+
+		return model;
+      // httpServletResponse.setHeader("Location", "www.google.com");
+		
     }
+    
+}
+	
+	
 
 
 
