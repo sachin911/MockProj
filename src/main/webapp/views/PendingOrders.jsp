@@ -194,6 +194,41 @@
     	  
     	  
     	});
+    	
+    	
+    	
+    	$('#sub').click(function() {
+    		console.log("teststs");
+    		var data=[];
+    	$('#recommendedBlocks tr').each(function()
+    	{
+    	if($(this).find("input[type=checkbox]").prop("checked")===true)
+    	{
+    		
+    		
+    	console.log("sakjdsaass");
+    	var out=$(this).find('.blockid').html();
+    	console.log(out);
+    	data.push(out);
+    	}
+    	 
+    	}
+    	);	
+    	  console.log(data);  
+    	  
+    	  $.ajax({
+    		  type: "GET",
+    		  url: "fetchOrder6",
+    		  dataType: 'json',
+    		  data:"data="+data,
+    		  success: function(data) {
+    		    console.log("data is sent");
+    		  }
+    		});
+    	  
+    	  
+    	});
+
     	});
     
     
@@ -253,14 +288,19 @@ $(document).ready(function() {
 			</c:forEach> 
         </tbody></table>
                 </div></div>
-           <button type="button" id="ok" class="btn btn-primary">OK</button>
+          <button type="submit" class="btn btn-info" id="sub">OK
+      </button>
 
 </div>
- <script>
+
+
+ <!-- <script>
     
     
     $(document).ready(function(){
+    	console.log(":asd")
     	$('#ok').click(function() {
+    		console.log(":asd")
     		var data1=0;
     	$('#recommendedBlocks tr').each(function()
     	{
@@ -273,7 +313,7 @@ $(document).ready(function() {
     	//var out2=$(this).find('.orderSymbol').html();
     	//var out3=$(this).find('.orderStatus').html();
     	//var out4=$(this).find('.orderSide').html();
-    	console.log(out1);
+    	console.log(data1);
     	/*console.log(out2);
     	console.log(out3);
     	console.log(out4);*/
@@ -303,7 +343,7 @@ $(document).ready(function() {
     
     
     
-    </script>
+    </script> -->
     </div>
        </div> 
  </div>

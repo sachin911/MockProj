@@ -20,6 +20,8 @@ public interface OrderDAO extends GenericDAO<Order, Long>
 	List<Order> findAll(int traderId);
 
 	 List<Block> recommend(List<Integer> selectedOrders);
+	 void addToThisBlock(Order order, Integer selectedBlock);
+
 
 
 	List<Block> findAllBlocks(int traderId);

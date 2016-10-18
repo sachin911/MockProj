@@ -18,7 +18,8 @@ import com.mock.project.model.Order;
 
 
 import com.mock.project.model.Status;
-
+import com.mock.project.service.TraderService;
+import com.mock.project.service.TraderServiceImpl;
 import com.mock.project.model.Order;
 
 
@@ -92,6 +93,17 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 
 	}
+	@Override
+    public void addToThisBlock(Order order, Integer selectedBlock) {
+		System.out.println("updatingblockid");
+           Query query = em.createQuery("update Order set block_id =:block_id" + " where order_id = :o_id" );
+           query.setParameter("o_id", order.getOrderId());
+           query.setParameter("block_id", selectedBlock);
+           query.executeUpdate();
+           System.out.println("updated");
+    }
+
+
 
 	@Override
 
@@ -129,11 +141,19 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
            Order check=checkedOrdersList.get(0);
            System.out.println("check" + check);
     
-           for(i=1;i<checkedOrdersList.size();i++)
+           for(i=0;i<checkedOrdersList.size();i++)
            {
                   if(check.getStatus()==(checkedOrdersList.get(i)).getStatus()&&check.getSide()==(checkedOrdersList.get(i)).getSide()&&check.getSymbol()==(checkedOrdersList.get(i)).getSymbol())
                   { c=0;
-                  System.out.println("not break");}
+                  System.out.println("not break");
+                 
+                  TraderService object=new TraderServiceImpl();
+                  for(Order o:checkedOrdersList){
+                	  System.out.println(o);
+                  }
+                  object.addToBlock(checkedOrdersList);
+
+}
                   
                   else
                   {c=1;

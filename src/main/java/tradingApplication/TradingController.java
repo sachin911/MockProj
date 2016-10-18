@@ -82,10 +82,12 @@ public class TradingController {
 	//String []out=req.getParameter("check");	
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
         container.registerShutdownHook();
-        OrderService orderService = container.getBean(OrderService.class);
+        TraderService traderService = container.getBean(TraderService.class);
 	 System.out.println("mango");
 	int bid;
-	String []blockId=(req.getParameterValues("data1"));
+	String []blockId=(req.getParameterValues("data"));
+	System.out.println("aftergetparameter");
+	System.out.println(blockId[0]);
 	String[] tokens=blockId[0].split(",");
 	
 		//String[] tokens=out[0].split(",");
@@ -94,12 +96,12 @@ public class TradingController {
 		 System.out.println(bid);
 		
 		
-		orderService.recommend(orderId);
+		 traderService.addToSelectedBlock(bid);
 		
 		
-		model.addObject("Blocks",r);
+		//model.addObject("Blocks",r);
 		//container.close();
-		return model;
+		return null;
 
 
 } 
@@ -127,7 +129,7 @@ public class TradingController {
 			AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
             container.registerShutdownHook();
             OrderService orderService = container.getBean(OrderService.class);
-			
+			System.out.println("abheejeet");
 			List<Integer> orderId=new ArrayList<Integer>();
 			String[] out=req.getParameterValues("data");
 			List<Order> orders = new ArrayList<Order>();
