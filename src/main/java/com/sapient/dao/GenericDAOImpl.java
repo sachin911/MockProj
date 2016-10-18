@@ -13,6 +13,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 
+import com.sapient.model.Securities;
+
 //@Repository
 //@org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
 
@@ -83,8 +85,8 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 
 	@Override
 	public T findByPrimaryKey(ID id) {
-
-		return em.find(type, id);
+	
+		return  em.find(type, id);
 	}
 
 	@Override

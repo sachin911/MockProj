@@ -26,25 +26,29 @@ public class Login {
 			 
 		 ((AbstractApplicationContext) container).registerShutdownHook();
 		 UserService userService=  (UserService) container.getBean("UserService");
-			// EntityManagerFactory emf=Persistence.createEntityManagerFactory("hibernate");
-				//GenericDAO<User,Long> dao=new GenericDAOImpl<>(User.class,emf.createEntityManager());
+		/*
+		 * EntityManagerFactory
+		 * emf=Persistence.createEntityManagerFactory("hibernate");
+		 * GenericDAO<User,Long> dao=new
+		 * GenericDAOImpl<>(User.class,emf.createEntityManager());
+		 */
 				int result;
 				User user1=new User();
-				user1.setUser_name("lavaala1");
-				user1.setPassword("lavaala1");
+				user1.setUser_name("Aaditya");
+				user1.setPassword("aaditya");
 				user1.setDeleted('Y');
-				user1.setEmail("lavaa1la@gmail.com");
-				user1.setFirst_name("laav1anya");
-				user1.setLast_name("N1");
-				user1.setSecret_key("hel1lo");
+				user1.setEmail("aadityagupta@gmail.com");
+				user1.setFirst_name("Aaditya1");
+				user1.setLast_name("Gupta1");
+				user1.setSecret_key("hello2");
 				user1.setUser_address("110 b1 saden thottam");
 
-			//dao.save(user1);
+		userService.save(user1);
 				
 				System.out.println("authenticating user");
 				User user=new User();
-				user.setUser_name("lavaala");
-				user.setPassword("lavaalaaa");
+				user.setUser_name("Aadi");
+				user.setPassword("aadityagupta1@");
 			//	user.setDeleted('Y');
 				
 				result=userService.authenticateUser(user);

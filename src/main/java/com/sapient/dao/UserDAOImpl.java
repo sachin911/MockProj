@@ -37,7 +37,7 @@ public class UserDAOImpl extends GenericDAOImpl<User, Long> implements UserDAO {
 			return 0;
 		else {
 
-			if (temp.getPassword().equals(e.getPassword()) && e.getDeleted() == 'N')
+			if (temp.getPassword().equals(e.getPassword()))
 				return 1;
 			else
 				return 0;

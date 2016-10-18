@@ -17,6 +17,11 @@ public class SecuritiesDAOImpl  extends GenericDAOImpl<Securities, String> imple
 		return em.createQuery("from Securities").getResultList();
 		
 	}
+	@Override
+	public Securities findByPrimaryKey(String id) {
+
+		return  em.find(Securities.class, id);
+	}
 
 	}
 

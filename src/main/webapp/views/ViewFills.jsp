@@ -42,6 +42,7 @@ table {
     <li class="active"><a href="ViewFills.jsp">View Fills</a></li>
          <li><a href="Login.jsp">Logout</a></li>
   </ul>
+  <div style="height:300px;overflow-y:scroll;;">
   <table class="table table-striped" id="dataTable">
 			<thead class="thead-inverse">
 				<tr>
@@ -72,13 +73,15 @@ table {
 				<td><%=blocks.getStop_price() %></td>
 				<td><%=blocks.getLimit_price() %></td>
 				<td><%=blocks.getExecuted_price()%></td>
+				<td><%=blocks.getTotal_quantity()%></td>
 				<td><%=blocks.getExecuted_quantity() %></td>
 				<td><%=blocks.getExecuted_date() %></td>
-				
+				<td><%=blocks.getStatus()%></td>				
 			</tr>
 				<%
 					}
 				%>
+				</div>
 			<!-- <tr>
 				<td>1</td>
 				<td>GOOG</td>

@@ -85,6 +85,14 @@ public class UserServiceImpl implements UserService{
 
 
 
+	@Override
+	public void save(User user1) {
+		// TODO Auto-generated method stub
+		dao.save(user1);
+	}
+
+
+
 	
 
 	
