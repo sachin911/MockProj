@@ -40,9 +40,9 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 	@Override
 	//@org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
 	public T save(T entity) {
-		
-		//em.persist(em.contains(entity) ? entity : em.merge(entity));
-		em.persist(entity);
+		System.out.println("should be saving now");
+		em.persist(em.contains(entity) ? entity : em.merge(entity));
+		//em.persist(entity);
 		
 		return entity;
 	}
