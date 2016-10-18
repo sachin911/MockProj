@@ -1,12 +1,14 @@
 package com.sapient.main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.zip.Checksum;
 
 import javax.persistence.EntityManagerFactory;
 
 import javax.persistence.Persistence;
+import java.util.Map;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -21,19 +23,19 @@ import com.sapient.service.UserService;
 public class Login {
 	public static void main(String[] args) {
 
-		 AbstractApplicationContext container = new
-		 AnnotationConfigApplicationContext(AppConfig.class);
-		
-		
-		 ((AbstractApplicationContext) container).registerShutdownHook();
-		 UserService dao= (UserService)
-		 container.getBean("UserService");
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 
-//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hibernate");
-//		GenericDAO<User, Long> dao = new GenericDAOImpl<>(User.class, emf.createEntityManager());
+		((AbstractApplicationContext) container).registerShutdownHook();
+		UserService dao = (UserService) container.getBean("UserService");
 
-//		com.sapient.dao.GenericDAO<User, Long> dao = new com.sapient.dao.GenericDAOImpl<>(User.class,
-//				Persistence.createEntityManagerFactory("hibernate").createEntityManager());
+		// EntityManagerFactory emf =
+		// Persistence.createEntityManagerFactory("hibernate");
+		// GenericDAO<User, Long> dao = new GenericDAOImpl<>(User.class,
+		// emf.createEntityManager());
+
+		// com.sapient.dao.GenericDAO<User, Long> dao = new
+		// com.sapient.dao.GenericDAOImpl<>(User.class,
+		// Persistence.createEntityManagerFactory("hibernate").createEntityManager());
 
 		int result;
 		User user1 = new User();
@@ -46,7 +48,7 @@ public class Login {
 		user1.setSecret_key("hello2");
 		user1.setUser_address("110 b1 saden thottam");
 
-		//dao.save(user1);
+		// dao.save(user1);
 
 		System.out.println("authenticating user");
 		User user = new User();
@@ -98,5 +100,30 @@ public class Login {
 		container.close();
 		return vm;
 	}
+
+
+
+public void updatepass(User user) {
+	// TODO Auto-generated method stub
+	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+
+	 
+	 ((AbstractApplicationContext) container).registerShutdownHook();
+	 UserService userService=  (UserService) container.getBean(UserService.class);
+		List<User> userlist=userService.findAll();
+		
+		Map<String,String> userkey=new HashMap<>();
+		for (User user2 : userlist) {
+			userkey.put(user2.getUser_name(),user2.getSecret_key());
+		}
+	if(userkey.keySet().contains(user.getUser_name()))
+			{
+		if(userkey.get(user.getUser_name()).equals(user.getSecret_key()))
+{
+	userService.changePass(user);
+}
+			}
+		
+}
 
 }
