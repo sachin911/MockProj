@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.mock.project.dao.PMDAO;
 import com.mock.project.model.Order;
+import com.mock.project.model.Portfolio;
 
 @Service("PMService")
 @Transactional
@@ -49,4 +50,10 @@ public List<Order> displayForPM(Long pmid) {
 		
 		return dao.findAll(pmid);
 	}
+
+@Override
+public void addPort(Portfolio p) {
+	dao.add(p);
+	
+}
 }
