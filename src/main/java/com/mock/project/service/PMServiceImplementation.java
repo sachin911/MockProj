@@ -22,8 +22,8 @@ public class PMServiceImplementation implements PMServices {
 	private PMDAO dao;
 
 	@Override
-	public List<Order> findAllOrdersInPortfolio(String name) {
-		return dao.findAllByName(name);
+	public List<Order> findAllOrdersInPortfolio(String name, Long pmid) {
+		return dao.findAllByName(name, pmid);
 	}
 
 	public List<Order> displayForPM(Long pmid) {
@@ -42,6 +42,12 @@ public class PMServiceImplementation implements PMServices {
 		Status changeStatus;
 		changeStatus=Status.Open;
 		dao.updateStatus(changeStatus, order_id);
+	}
+
+	@Override
+	public List<Order> findAllOrdersInPortfolio(Long id) {
+		return dao.findAllByID(id);
+
 	}
 
 	/*

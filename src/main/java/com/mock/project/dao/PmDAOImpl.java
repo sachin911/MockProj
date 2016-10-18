@@ -63,7 +63,8 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 	}
 
 	@Override
-	public List<Order> findAllByName(String name) {
+	public List<Order> findAllByName(String name, Long id) {
+		
 		Query query = em.createQuery("from Portfolio where portfolio_name =:pname");
 		query.setParameter("pname", name);
 		System.out.println(query.toString());
@@ -78,10 +79,12 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		}
 		
 		if(pid != null) {
-			Query query2 = em.createQuery("from Order where portfolioId =:p_id");
+			Query query2 = em.createQuery("from Order where portfolioId =:p_id" + " and PM_ID =:pm_id");
 			query2.setParameter("p_id", pid);
+			query2.setParameter("pm_id", id);
 			System.out.println(query2.toString());
 			List<Order> correspondingOrders = query2.getResultList();
+			System.out.println("IN PMDAOIMPL: FOUND THESE ORDERS FOR THIS PM ID: " + id + "    " + correspondingOrders.toString());
 			return correspondingOrders;
 		} else {
 			System.out.println("PORTFOLIO ID IS NULL. CANNOT FETCH ORDERS");
@@ -100,6 +103,21 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 			query.setParameter("o_id", o_id);
 			//System.out.println(query);
 			System.out.println("update query" + query.executeUpdate());
+		}
+	}
+
+	@Override
+	public List<Order> findAllByID(Long id) {
+		Query query = em.createQuery("from Order where pm_id =:pid");
+		query.setParameter("pid", id);
+		List<Order> orders = new ArrayList<Order>();
+
+		orders = query.getResultList();
+		if(orders.isEmpty() == false){
+			return orders;
+		} else {
+			System.out.println("ERROR! no orders with this id IN SYSTEM");
+			return orders;
 		}
 	}
 
