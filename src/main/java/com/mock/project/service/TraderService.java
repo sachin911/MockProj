@@ -7,4 +7,8 @@ import com.mock.project.model.Order;
 public interface TraderService {
 
 	public void createBlock(List<Order> orders);
+
+	void addToBlock(List<Order> listOforder);
+
+	void addToSelectedBlock(Integer selectedBlock);
 }

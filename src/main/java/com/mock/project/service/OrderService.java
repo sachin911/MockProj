@@ -21,8 +21,14 @@ public interface OrderService {
 
 	public void addOrder(Order d);
 	void updateStatus(String status, List block_id);
+
+	 public List<Block> recommend(List<Integer> selectedOrders);
+
+
 	Order findOrderByOrderId(int orderId);
 
+
 	List<Block> findBlockByBlockId(int blockId);
+
 
 }
