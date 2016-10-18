@@ -221,23 +221,6 @@
             </center>
         </div>
     </div>
-	
-	<script>
-	
-	function displayPortfolioVar(String var) {
-		$.ajax({
-	        type: "GET",
-	        url: /displayPortfolio,
-	        data: {portfolioId = var},
-	        dataType: "html",
-	        success : function (data) {
-	           console.log("You got the data there");
-	        }
-	    });
-	}
-	
-	</script>
-	
-	
+		
 </body>
 </html>
