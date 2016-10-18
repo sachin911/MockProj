@@ -1,7 +1,4 @@
-
-<%@page import="com.mock.project.service.PMSendToTrader"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.mock.project.service.PMSendToTraderImpl"%>
 <%@page import="org.springframework.context.support.AbstractApplicationContext"%>
 <% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -39,9 +36,6 @@
 	orderList=pMSendToTraderImpl.display();
 	%>  --%>
  
-
-
-
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -96,6 +90,7 @@
 			   <td><c:out value='${Orders.accountType}'/></td>
 
 			</tr> 
+			
 			</c:forEach> 
 			
 			
@@ -117,7 +112,6 @@
 				<%
 					}
 				%> --%>
-
 							</table>
 							
 							

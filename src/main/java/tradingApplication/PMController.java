@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mock.project.config.AppConfig;
 import com.mock.project.model.Order;
 import com.mock.project.model.User;
-import com.mock.project.service.PMSendToTrader;
 import com.mock.project.service.PMServices;
 
 
@@ -28,7 +27,7 @@ public class PMController {
 	    d.setStatus("New");
       //  System.out.println(d);
       PMServices pmservice = null;
-      pmservice.saveOrder(d);
+     // pmservice.saveOrder(d);
       ModelAndView view = new ModelAndView("redirect:PMHome.jsp");
       return view;
    }
@@ -77,20 +76,20 @@ public ModelAndView UpdateOrder(HttpServletRequest req){
 	System.out.println("we r here!!");
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 container.registerShutdownHook();
-    PMServices pmsendtotrader = (PMServices) container.getBean("traderservice");
+    PMServices pmsendtotrader = (PMServices) container.getBean("PMService");
   	List<Order> p=new ArrayList<Order>();
   	System.out.println("here2");
-  	User user = (User) req.getSession().getAttribute("user");
-  	Long pmId =user.getId();
-  	p=pmsendtotrader.displayForPM(pmId);
+  	//User user = (User) req.getSession().getAttribute("user");
+  	//Long pmId =user.getId();
+  	p=pmsendtotrader.displayForPM((long) 11);
   	System.out.println("here1");
   for(Order l: p){
 	  System.out.println("here");
   		System.out.println(l);
   	}
-  ModelAndView model = new ModelAndView("OrderBlotter1");
+  ModelAndView model = new ModelAndView("OrderBlotter1.jsp");
 	model.addObject("Orders",p);
-
+container.close();
 	return model;
   	
 }

@@ -7,10 +7,10 @@ import com.mock.project.model.Order;
 
 
 public interface GenericDAO<T,ID> {
-//
-//	T add(T entity);
-//
-//	void delete(T entity);
+
+	T add(T entity);
+
+	void delete(T entity);
 
 	//List<T> findAll(int id);
 
