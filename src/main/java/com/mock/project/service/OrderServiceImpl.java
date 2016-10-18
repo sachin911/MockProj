@@ -79,6 +79,11 @@ public class OrderServiceImpl implements OrderService{
 		return dao.findAllBlocks(traderId);
 	}
 	
-
+	@Override
+	public Block findBlockByBlockId(int blockId)
+	{
+		Block block=dao.findBlock(blockId);
+		return block;
+	}
 
 }

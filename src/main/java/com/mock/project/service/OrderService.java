@@ -12,6 +12,8 @@ public interface OrderService {
 	List<Order> displaylist(int traderId);
 
 	List<Order> displaylist();
+	
+	List<Block> displayBlock(int i);
 
 	
 
@@ -25,7 +27,8 @@ public interface OrderService {
 
 	Order findOrderByOrderId(int orderId);
 
-	List<Block> displayBlock(int traderId);
+
+	Block findBlockByBlockId(int blockId);
 
 
 }

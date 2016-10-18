@@ -27,7 +27,7 @@ public class SpringIntegrationJms {
 	@SuppressWarnings("resource")
 	public void sendEmployee() throws JAXBException {
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext("dispatcher-servlet.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationcontext.xml");
 		SpringIntegrationJms springIntExample = (SpringIntegrationJms) context
 				.getBean("springIntExample");
 

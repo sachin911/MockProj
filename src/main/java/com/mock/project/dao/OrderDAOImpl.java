@@ -39,8 +39,8 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	List<Order> l=new ArrayList<Order>();
 
 	
-	Query query=em.createQuery("from Order where block_id is null");
-	
+	Query query=em.createQuery("from Order where block_id is null and status=:stat");
+	query.setParameter("stat", "Open");
 	List<Order>l1=query.getResultList();
 	
 	
@@ -85,7 +85,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		for (int i = 0; i < block_id.size(); i++) {
 
 			long b_id = (Long) block_id.get(i);
-			Query query = em.createQuery("update order set status =:status" + "where block_id = :b_id");
+			Query query = em.createQuery("update Order set status =:status" + "where block_id = :b_id");
 			query.setParameter("status", changeStatus);
 			query.setParameter("b_id", b_id);
 		}
@@ -192,11 +192,24 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	}
 
 	@Override
+
+	public Block findBlock(int blockId) {
+		List<Block> blocks=new ArrayList<Block>();
+		Query query=em.createQuery("from Block where block_Id=:blockId");
+	query.setParameter("blockId",blockId);
+		//System.out.println(query);
+	blocks=query.getResultList();
+	//System.out.println(orders.get(0));
+	Block block = blocks.get(0);
+	return block;
+	}
+
 	public List<Block> findAllBlocks(int traderId) {
-		Query query = em.createQuery("from Block");
-		//query.setParameter("traderId", traderId);
+		Query query = em.createQuery("from Block where status=:stat");
+		query.setParameter("stat", "New");
 
 		return query.getResultList();
+
 	}
 
 
