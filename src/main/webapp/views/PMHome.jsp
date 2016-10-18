@@ -134,6 +134,10 @@
     </nav>
      -->
     <!-- Menu Items -->
+	<form action="logout" method="post" id="form1">
+	</form>
+	<center><span class="glyphicon glyphicon-log-in"><button type="submit" form="form1" value="Logout">Logout</button></span></center>
+	
 	<div class="container">
         <div id="menu-item-row" class="row">
                 
@@ -151,6 +155,9 @@
                 </div> 
             </a>
             
+            
+            
+                  
             <!-- thumb -->
             <a href="ViewOrderBlotter"> 
                 <div id="thumb-order-blotter" class="thumb-pm-home col col-sm-3">
