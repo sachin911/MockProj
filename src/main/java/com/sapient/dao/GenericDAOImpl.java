@@ -16,51 +16,68 @@ import org.springframework.transaction.annotation.Propagation;
 //@Repository
 //@org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
 
-public abstract class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T, ID> {
+public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T, ID> {
 
 	private Class<T> type;
-	
+
 	@PersistenceContext
 	protected EntityManager em;
-	
+
 	@SuppressWarnings("unchecked")
 	public GenericDAOImpl() {
 		// TODO Auto-generated constructor stub
-		this.type = (Class<T>)((ParameterizedType)this.getClass()
-				.getGenericSuperclass())
-				.getActualTypeArguments()[1];
-				
+		this.type = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+
 	}
-	
+
 	public GenericDAOImpl(Class<T> type, EntityManager em) {
 		this.type = type;
 		this.em = em;
 	}
 
 	@Override
-	//@org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
+	@org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRES_NEW)
 	public T save(T entity) {
 		System.out.println("should be saving now");
 		em.persist(em.contains(entity) ? entity : em.merge(entity));
-		//em.persist(entity);
-		
+		System.out.println("done savinh");
+		return entity;
+	}
+
+	@Override
+	public T saveService(T entity) {
+		EntityTransaction trxn = em.getTransaction();
+
+		try {
+			System.out.println("saved");
+			trxn.begin();
+			em.persist(em.contains(entity) ? entity : em.merge(entity));
+			trxn.commit();
+
+		} catch (Exception e) {
+			System.out.println("not saved");
+			trxn.rollback();
+			e.printStackTrace();
+
+		}
+
 		return entity;
 	}
 
 	@Override
 	public void delete(T entity) {
 
-//		EntityTransaction trxn = em.getTransaction();
-//		try {
-//			trxn.begin();
+		// EntityTransaction trxn = em.getTransaction();
+		// try {
+		// trxn.begin();
 		em.remove(em.contains(entity) ? entity : em.merge(entity));
-			//em.remove(entity);
-//			trxn.commit();
-//
-//		} catch (Exception e) {
-//			trxn.rollback();
-//
-//		}
+		// em.remove(entity);
+		// trxn.commit();
+		//
+		// } catch (Exception e) {
+		// trxn.rollback();
+		//
+		// }
 
 	}
 
@@ -70,14 +87,18 @@ public abstract class GenericDAOImpl<T, ID extends Serializable> implements Gene
 		return em.find(type, id);
 	}
 
-	/*@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	return em.createQuery("from ShoppingCart").getResultList();
-	}*/
-	
-	
-	
-	
+	/*
+	 * @SuppressWarnings("unchecked")
+	 * 
+	 * @Override public List<T> findAll() {
+	 * 
+	 * return em.createQuery("from ShoppingCart").getResultList(); }
+	 */
+
 }

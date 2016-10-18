@@ -6,9 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sapient.model.Block;
 @Repository
+@Transactional
 public class BlockDAOImpl extends GenericDAOImpl<Block, Long> implements BlockDAO {
 	@PersistenceContext
 	private EntityManager em;

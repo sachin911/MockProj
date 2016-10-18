@@ -2,21 +2,15 @@ package com.sapient.jms;
 
 import java.io.ByteArrayInputStream;
 
+import javax.persistence.Persistence;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
-import com.sapient.config.AppConfig;
 import com.sapient.model.Block;
-import com.sapient.service.BrokerService;
-import com.sapient.service.BrokerServiceImpl;
 
 /*
  * This is the service that listens to the processBlockChannel and activates whenever there is an item in it.
@@ -28,11 +22,12 @@ public class UnmarshallAndSave {
 	private Marshaller jaxbMarshaller;
 	private Unmarshaller jaxbUnmarshaller = null;
 
-	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-//		ServiceActivator springIntExample = (ServiceActivator) context.getBean("springIntExample");
-
-	}
+//	public static void main(String[] args) {
+//		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		// ServiceActivator springIntExample = (ServiceActivator)
+//		// context.getBean("springIntExample");
+//
+//	}
 
 	public JmsTemplate getJmsTemplate() {
 		return jmsTemplate;
@@ -42,42 +37,20 @@ public class UnmarshallAndSave {
 		this.jmsTemplate = jmsTemplate;
 	}
 
+	public void processBlocksFromQueue(String blockAsString) throws JAXBException {
 
-	public void processBlocksFromQueue(String blockAsString) {
-
-		
-//		ApplicationContext ac = new AnnotationConfigApplicationContext();
-//		BrokerService brokerService = ac.getBean(BrokerService.class);
-		try {
-			System.out.println(unmarshal(blockAsString));
-			
-			Block blockToSave = unmarshal(blockAsString);
-			saveTheBlocks(blockToSave);
-			// save the unmarshalled block object to the database
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			//container.close();
-		}
-		
-		
 		System.out.println(blockAsString);
+		System.out.println("reached unmarshal");
+
+		Block blockToSave = unmarshal(blockAsString);
+
+		com.sapient.dao.GenericDAO<Block, Long> blockdao = new com.sapient.dao.GenericDAOImpl<>(Block.class,
+				Persistence.createEntityManagerFactory("hibernate").createEntityManager());
+		System.out.println("before save");
+		blockdao.saveService(blockToSave);
+
 	}
-	
-	public void saveTheBlocks(Block block){
-		
-		AbstractApplicationContext container = new AnnotationConfigApplicationContext(com.sapient.config.AppConfig.class);
-		container.registerShutdownHook();
-		//BrokerService brokerService = container.getBean(BrokerService.class);
-		
-		BrokerService brokerService  = (BrokerService) container.getBean("brokerService");
-		System.out.println("reached here before the service");
-		brokerService.saveblock(block);
-	
-		container.close();
-	}
-	
+
 	public Block unmarshal(String objectAsString) throws JAXBException {
 		jaxbContext = JAXBContext.newInstance(Block.class);
 		jaxbMarshaller = jaxbContext.createMarshaller();
@@ -92,7 +65,5 @@ public class UnmarshallAndSave {
 		}
 		return null;
 	}
-	
-	
-	
+
 }

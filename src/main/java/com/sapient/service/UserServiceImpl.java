@@ -40,12 +40,12 @@ public class UserServiceImpl implements UserService{
 	 * It will be updated in db once transaction ends. 
 	 */
 		
-	@PostConstruct
-	public void initialize()//life cycle methods which are called implicitly
-	{
-		System.out.println("inside init");
-	}
-	
+//	@PostConstruct
+//	public void initialize()//life cycle methods which are called implicitly
+//	{
+//		System.out.println("inside init");
+//	}
+//	
 	
 	
 	/*@Override

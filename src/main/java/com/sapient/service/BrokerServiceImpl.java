@@ -4,27 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.xml.bind.JAXBException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.sapient.dao.BlockDAO;
 import com.sapient.dao.SecuritiesDAO;
+import com.sapient.jms.MarshallAndSend;
 import com.sapient.model.Block;
 import com.sapient.model.Securities;
 
 @Service("brokerService")
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class BrokerServiceImpl implements BrokerService {
-	public BrokerServiceImpl() {
+	
+//	public BrokerServiceImpl() {
+//
+//	}
 
-	}
-@Autowired
+	@Autowired
 	BlockDAO blockDAO;
 	SecuritiesDAO securitiesDAO;
 
@@ -33,6 +39,7 @@ public class BrokerServiceImpl implements BrokerService {
 
 		List<Block> blockList = new ArrayList<>();
 		blockList = blockDAO.findAll();
+		MarshallAndSend send = new MarshallAndSend();
 		for (Block blocks : blockList) {
 			if (!blocks.getStatus().equalsIgnoreCase("Completed")) {
 				Securities securities = new Securities();
@@ -66,6 +73,12 @@ public class BrokerServiceImpl implements BrokerService {
 					// int
 					// minQty=TotalQtyToExecute-(TotalQtyToExecute*MaxOrderPerOrder);
 					QtyExecuted = RandomQty(1L, Math.min(TotalQtyToExecute, MaxOrderPerOrder));
+					try {
+						send.marshallAndSendBlock(blocks);
+					} catch (JAXBException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					System.out.println(QtyExecuted);
 				}
 				if (type.equalsIgnoreCase("stop")) {
@@ -95,16 +108,19 @@ public class BrokerServiceImpl implements BrokerService {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void saveblock(Block block) {
-		
-		System.out.println("reached the service");
-		blockDAO.save(block);
-		
+		boolean transactionActive = TransactionSynchronizationManager.isActualTransactionActive();
+		if(transactionActive){
+			System.out.println("reached the service");
+			System.out.println(blockDAO.save(block));
+		}
+
 	}
 
 	@Override
 	public List<Block> findALL() {
 		return blockDAO.findAll();
-		
+
 	}
 }
