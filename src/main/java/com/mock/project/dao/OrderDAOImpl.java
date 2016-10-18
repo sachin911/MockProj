@@ -212,5 +212,56 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 	}
 
+	@Override
+	public void allocateorder(Block block) {
+		// TODO Auto-generated method stub
+		int executedQty=(int) block.getQtyExecuted();
+		List<Order> list = new ArrayList<Order>();
+		Query query = em.createQuery("from Order where blockId = :id order by orderDate");
+		query.setParameter("id", block.getBlockId());
+		list = query.getResultList();
+		for (Order order1 : list) {
+		int q=order1.getQtyPlaced();
+		Status status = null;
+			if((q<= executedQty) && (executedQty>0))
+			{
+				System.out.println(em);
+				System.out.println("Inside first loop");
+				System.out.println(q);
+				executedQty=executedQty-q;
+				
+				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty1, status=:status1 where orderId=:oid");
+				query1.setParameter("qty1",q);
+				query1.setParameter("status1",status.Completed.toString());
+				query1.setParameter("oid",order1.getOrderId());
+				System.out.println(query1.executeUpdate());
+				System.out.println(executedQty + q);
+				//query1.executeUpdate();
+
+			}
+			else if(q>=executedQty && executedQty>0){
+				executedQty=q-executedQty;
+				System.out.println("Inside second loop");
+				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty2, status=:status2 where orderId=:oid");
+				query1.setParameter("qty2",executedQty);
+				query1.setParameter("status2", status.PartiallyAllocated.toString());
+				query1.setParameter("oid",order1.getOrderId());
+				System.out.println(query1.executeUpdate());
+				//query1.executeUpdate();
+				executedQty=0;
+				System.out.println(executedQty);
+			}
+			else{
+				Query query2 = em.createQuery("update Order set status=:status3 where orderId=:oid");
+				query2.setParameter("status3", status.UnAllocated.toString());
+				query2.setParameter("oid",order1.getOrderId());
+				System.out.println(query2.executeUpdate());
+				//query2.executeUpdate();
+			}}
+		System.out.println("Inside OrderDAO");
+
+		
+	}
+
 
 }

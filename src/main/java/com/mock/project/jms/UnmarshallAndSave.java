@@ -14,6 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
 import com.mock.project.config.AppConfig;
+import com.mock.project.main.AllocatedOrder;
 import com.mock.project.model.*;
 import com.mock.project.service.BrokerService;
 import com.mock.project.service.BrokerServiceImpl;
@@ -80,6 +81,8 @@ public class UnmarshallAndSave {
 		//BrokerService brokerService  = (BrokerService) container.getBean("brokerService");
 		System.out.println("reached here before the service");
 		brokerService.saveblock(block);
+		AllocatedOrder ao=new AllocatedOrder();
+		ao.allocate(block);
 	
 		container.close();
 	}

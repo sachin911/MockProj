@@ -85,5 +85,13 @@ public class OrderServiceImpl implements OrderService{
 		Block block=dao.findBlock(blockId);
 		return block;
 	}
+	@Override
+	public void allocateorder(Block block) {
+		System.out.println("inside order service");
+		dao.allocateorder(block);
+
+		// TODO Auto-generated method stub
+
+	}
 
 }
