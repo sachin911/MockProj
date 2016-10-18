@@ -56,6 +56,7 @@ public class Block {
 	@Column(name="EXECUTED_DATE") 
 	private Date executedDate;
 
+
 	
 	public Block() {
 		// TODO Auto-generated constructor stub
@@ -75,6 +76,7 @@ public class Block {
 		this.orderDate = orderDate;
 		this.executedDate = executedDate;
 	}
+
 
 
 
@@ -166,6 +168,8 @@ public class Block {
 		this.executedDate = executedDate;
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -184,6 +188,7 @@ public class Block {
 		temp = Double.doubleToLongBits(stopPrice);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
+		
 		return result;
 	}
 
@@ -193,7 +198,7 @@ public class Block {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Block))
 			return false;
 		Block other = (Block) obj;
 		if (blockId == null) {
@@ -239,6 +244,7 @@ public class Block {
 				return false;
 		} else if (!symbol.equals(other.symbol))
 			return false;
+		
 		return true;
 	}
 

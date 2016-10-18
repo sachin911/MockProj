@@ -1,4 +1,3 @@
-<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,11 +33,12 @@ td {
       <a class="navbar-brand" href="#">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
-
       <li class="active"><a href="PopulateBB">View Blocks</a></li>
+
       <li><a href="updateTable">Pending Orders</a></li>
 
       <li><a href="PopulateTraderHistory">History</a></li> 
+
     </ul>
   </div>
     <div class="container">
@@ -60,66 +60,87 @@ td {
                  <th>ID</th>
                  <th>Symbol</th>
                  <th>Side</th>
-                 <th>Timestamp</th>
+                 <th>Time stamp</th>
                  
              </thead>  
-
+             </table>
+ <table class="Ordertable">
      <%int j=0;%>
-           <c:forEach items='${Orders}' var="Orders">  
-           <%List<Order> l =(List<Order>) request.getAttribute("Orders"); %>
-               <div class="panel panel-default">
-      <div class="panel-heading">
-      <table class="table" id="sendBlockTable"> 
+
+           <c:forEach items='${Blocks}' var="Orders" varStatus="Loop">   
+           <%List<Order> l =(List<Order>) request.getAttribute("Blocks"); %>
+      <!--          <div class="panel panel-default">
+      <div class="panel-heading">  -->
+      
              <tr id = "getId();">
-                 <td><input type="checkbox" id="check" name="check" class="checkboxClick"/></td>
-                  <td class="blockId"><c:out  value='${Orders.orderId}'/></td>
+                 <td><input type="checkbox"/></td>
+                  <td class="orderId"><c:out  value='${Orders.orderId}'/></td>
+
                 <td><c:out  value='${Orders.symbol}'/></td>
                <td><c:out  value='${Orders.side}'/></td>
                 <td><c:out  value='${Orders.orderDate}'/></td>
-                 <td>
+                 
                
-                 <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href = "'#a'+j"><button type="button" class="btn btn-default">Details</button></a>
-                 </h4></td>
-                 <td>
-                 <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1-edit"><button type="button" class="btn btn-default">Edit</button></a>
-                 </h4></td>
-             </tr>  
-          
-      </div>
-        <div id="collapse1-edit" class="panel-collapse collapse">
-        <div class="panel-body">Orders present in block</div>
-      </div>
-
-      <div id= "'a'+j" class="panel-collapse collapse-in ">
-        <div class="panel-body"><table class="table"> 
-
-             
-            <thead>
+                 <td><button id ="detailsButton" class="btn btn-default" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
+                  <td><button id ="editButton" class="btn btn-default" onclick="toggleEdit('${Loop.index +1}')">Edit</button></td></tr>
+                
+                 
+                 <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
+                
               
+              <th></th>
                  <th>Status</th>
                  <th>Limit Price</th>
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
                  
-             </thead> 
-             <%System.out.println(l.get(j).getQtyPlaced()); %>
-             <tr>
+          </tr>
+          
+             <tr  id="hideDetailsD${Loop.index +1}" style="display:none;">
+             <th></th>
               <td><%= l.get(j).getStatus() %></td>
                 <td><%= l.get(j).getLimitPrice() %></td>
                <td><%= l.get(j).getStopPrice() %></td>
                 <td><%= l.get(j).getQtyPlaced() %></td>
-                </tr>
-                 </table> </div>
+               </tr>
+
+     
+              <tr id="hideEditH${Loop.index +1}" style="display:none;">
+                
+              
+              <th></th>
+                 <th>Order ID</th>
+                 <th>Limit Price</th>
+                 <th>Stop Price</th>
+                 <th>Total Quantity</th>
+                 <th>PM ID</th>
+                 
+          </tr>
+          
+             <tr  id="hideEditD${Loop.index +1}" style="display:none;">
+             <th></th>
+              <td><%= l.get(j).getOrderId() %></td>
+                <td><%= l.get(j).getLimitPrice() %></td>
+               <td><%= l.get(j).getStopPrice() %></td>
+                <td><%= l.get(j).getQtyPlaced() %></td>
+                <td><%= l.get(j).getPmId() %></td>
+               </tr>
+                 
+         
+               
+           
       </div>
+
     </div>
- </table>
+ 
  <%j++; %>
       </c:forEach>
+        </table> 
    
 </div>
+
    <button type="button" class="btn btn-default" id="sendBlock">SEND</button>
+
      <button type="button" class="btn btn-default">CANCEL</button>
 
 </div>
@@ -172,5 +193,72 @@ function getId(){
 	return i++;
 }
 
+function toggleDetails(i) {
+	if( document.getElementById("hideDetailsH"+i).style.display=='none' ){
+	       document.getElementById("hideDetailsH"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+	    }else{
+	       document.getElementById("hideDetailsH"+i).style.display = 'none';
+	    }
+    
+    if( document.getElementById("hideDetailsD"+i).style.display=='none' ){
+       document.getElementById("hideDetailsD"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+    }else{
+       document.getElementById("hideDetailsD"+i).style.display = 'none';
+    }
+    }
+
+function toggleEdit(i) {
+	if( document.getElementById("hideEditH"+i).style.display=='none' ){
+	       document.getElementById("hideEditH"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+	    }else{
+	       document.getElementById("hideEditH"+i).style.display = 'none';
+	    }
+    
+    if( document.getElementById("hideEditD"+i).style.display=='none' ){
+       document.getElementById("hideEditD"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+    }else{
+       document.getElementById("hideEditD"+i).style.display = 'none';
+    }
+    }
+
 </script>
+ <script>
+    
+    
+ $(document).ready(function(){
+ 	$('#createBlock').click(function() {
+ 		var data=[];
+ 	$('#PendingOrderTable tr').each(function()
+ 	{
+ 	if($(this).find("input[type=checkbox]").prop("checked")===true)
+ 	{
+ 		
+ 		
+		console.log("sakjs");
+ 	var out=$(this).find('.orderId').html();
+ 	console.log(out);
+ 	data.push(out);
+ 	}
+ 	 
+ 	}
+ 	);	
+ 	  console.log(data);  
+ 	  
+ 	  $.ajax({
+ 		  type: "POST",
+ 		  url: "fetchOrder2",
+ 		  dataType: 'json',
+ 		  data:"data="+data,
+ 		  success: function(data) {
+ 		    console.log("data is sent");
+ 		  }
+ 		});
+ 	  
+ 	  
+ 	});
+ 	});
+ 
+ 
+    
+    </script>
 </html>

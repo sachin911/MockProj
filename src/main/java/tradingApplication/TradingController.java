@@ -207,22 +207,44 @@ public class TradingController {
 	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
     public ModelAndView populateBlockBlotter(HttpServletResponse httpServletResponse) 
     {
-      	//System.out.println("Comes here");
+
+      
       	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
         container.registerShutdownHook();
-      //  System.out.println("Comes here too");
-        OrderService orderService = container.getBean(OrderService.class);
-      //  System.out.println("Maybe comes here too");
-      	List<Order> O=new ArrayList<Order>();
-      	O = orderService.displaylist(5);
       
+        OrderService orderService = container.getBean(OrderService.class);
+      
+      	List<Order> block=new ArrayList<Order>();
+      	block = orderService.displaylist(5);
+
       	ModelAndView model = new ModelAndView("BlockBlotter");
-		model.addObject("Orders",O);
+		model.addObject("Blocks",block);
 		
 
-		return model;
-      // httpServletResponse.setHeader("Location", "www.google.com");
+		return model;	
+    }
+	
+	
+	@RequestMapping(value = "/views/PopulateOrders", method = RequestMethod.POST)
+    public ModelAndView populateOrders(HttpServletRequest req,HttpServletResponse httpServletResponse) 
+    {
+      
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+      
+        OrderService orderService = container.getBean(OrderService.class);
+        
+        String arr[] = req.getParameterValues("data");
+        System.out.println(arr[0]);
+        System.out.println("inPopulatesadplpasdlpasd");
+      /*	List<Order> O=new ArrayList<Order>();
+      	O = orderService.displaylist(blockId);*/
+      
+      	ModelAndView model = new ModelAndView("BlockBlotter");
+		//model.addObject("Orders",O);
 		
+
+		return model;	
     }
 	
 	@RequestMapping(value = "/views/PopulateTraderHistory", method = RequestMethod.GET)
