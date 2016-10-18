@@ -107,4 +107,13 @@ public class BrokerServiceImpl implements BrokerService {
 		return blockDAO.findAll();
 		
 	}
+
+	@Override
+	public void expireblocks() {
+		// TODO Auto-generated method stub
+		
+		blockDAO.expire();
+		
+		
+	}
 }
