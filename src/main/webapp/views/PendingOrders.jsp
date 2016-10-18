@@ -23,14 +23,14 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+      <a class="navbar-brand" href="#">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
      
-      <li ><a href="BlockBlotter.jsp">View Blocks</a></li>
-      <li class="active"><a href="PendingOrders.jsp" id="pending_orders" value="pending_orders">Pending Orders</a></li>
+      <li ><a href="PopulateBB">View Blocks</a></li>
+      <li class="active"><a href="updateTable" id="pending_orders" value="pending_orders">Pending Orders</a></li>
       
-      <li><a href="TraderHistory.jsp">History</a></li>
+      <li><a href="PopulateTraderHistory">History</a></li>
     </ul>
   </div>
 

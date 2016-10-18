@@ -55,7 +55,7 @@ width=100px
 	<div class="login">
 	<img src="img/logo.png">
 		<h1><b>Login</b></h1>
-		<h2>Login failed,  this username does not exist. Please try again.</h2>
+		<h2>Login failed, you have entered the wrong password. Please try again.</h2>
 		<form method="post" class="login" action="handleLogin">			
 				<label for="password">Password:</label> <input type="password"
 					name="password" placeholder="Enter password" required>

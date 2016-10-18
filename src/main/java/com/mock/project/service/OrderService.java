@@ -12,8 +12,14 @@ import com.mock.project.model.*;
 
 
 public interface OrderService {
+
+	
+	List<Order> displaylist(int traderId);
+
 	List<Order> displaylist();
-	List<Order> display(int traderId);
+	
+	List<Block> displayBlock(int i);
+
 	
 
 	void updateStatusInOrder(long block_id,List order_id);
