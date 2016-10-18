@@ -91,7 +91,7 @@ scroll bar cutomization .
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="./PMHome.jsp">Home</a></li>
-				<li><a href="./CreateTrade.jsp">Create Trade</a></li>
+				<li><a href="./CreateTrade.jsp">Create Order</a></li>
 				<li><a href="./OrderBlotter.jsp">Order Blotter</a></li>
 				<li class="active"><a href="./PendingOrder.jsp">Pending
 						Orders</a></li>
