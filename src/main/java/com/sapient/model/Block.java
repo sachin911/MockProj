@@ -1,7 +1,9 @@
 package com.sapient.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import javax.annotation.Resource;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,54 +22,53 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 
 @Entity
-@Table(name="BLOCK")
+@Table(name = "BLOCK")
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SelectBeforeUpdate
 @XmlRootElement
-public class Block {
+public class Block implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="BLOCK_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "BLOCK_ID")
 	private Long id;
-	//private Securities secConfig;
+	// private Securities secConfig;
 
-
-
-	@Column(name="SIDE",nullable=false,length=40)
+	@Column(name = "SIDE", nullable = false, length = 40)
 	private String side;
-	
-	@Column(name="SYMBOL",nullable=false,length=5)
+
+	@Column(name = "SYMBOL", nullable = false, length = 5)
 	private String symbol;
-	
-	@Column(name="TOTAL_QUANTITY",nullable=false)
+
+	@Column(name = "TOTAL_QUANTITY", nullable = false)
 	private Long total_quantity;
-	
-	@Column(name="TYPE",nullable=false,length=40)
+
+	@Column(name = "TYPE", nullable = false, length = 40)
 	private String type;
-	
-	@Column(name="STATUS",nullable=false,length=40)
+
+	@Column(name = "STATUS", nullable = false, length = 40)
 	private String status;
-	
-	@Column(name="LIMIT_PRICE",nullable=true)
+
+	@Column(name = "LIMIT_PRICE", nullable = true)
 	private double limit_price;
-	
-	@Column(name="STOP_PRICE",nullable=true)
+
+	@Column(name = "STOP_PRICE", nullable = true)
 	private double stop_price;
-	
-	@Column(name="EXECUTED_QUANTITY",nullable=true)
+
+	@Column(name = "EXECUTED_QUANTITY", nullable = true)
 	private Long executed_quantity;
-	
-	@Column(name="EXECUTED_DATE",nullable=true)
+
+	@Column(name = "EXECUTED_DATE", nullable = true)
 	private Date executed_date;
-	
 
-	@Column(name="EXECUTED_PRICE",nullable=true)
+	@Column(name = "EXECUTED_PRICE", nullable = true)
 	private double executed_price;
-
-	
-	
 
 	public String getSide() {
 		return side;
@@ -153,22 +154,26 @@ public class Block {
 		return id;
 	}
 
-	/*@OneToOne(cascade = CascadeType.ALL)
-	@JoinTable(name="BLOCK_SECURITIES", joinColumns = @JoinColumn(name="SYMBOL"),
-	inverseJoinColumns = @JoinColumn(name="SECURITY_SYMBOL"))
-	public Securities getSecConfig() {
-		return secConfig;
+	/*
+	 * @OneToOne(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinTable(name="BLOCK_SECURITIES", joinColumns
+	 * = @JoinColumn(name="SYMBOL"), inverseJoinColumns
+	 * = @JoinColumn(name="SECURITY_SYMBOL")) public Securities getSecConfig() {
+	 * return secConfig; }
+	 * 
+	 * public void setSecConfig(Securities secConfig) { this.secConfig =
+	 * secConfig; }
+	 */
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setSecConfig(Securities secConfig) {
-		this.secConfig = secConfig;
-	}*/
-	
-	
 	public Block() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Block(String side, String symbol, Long total_quantity, String type, String status, double limit_price,
 			double stop_price, Long executed_quantity, Date executed_date, double executed_price) {
 		super();
@@ -181,7 +186,7 @@ public class Block {
 		this.stop_price = stop_price;
 		this.executed_quantity = executed_quantity;
 		this.executed_date = executed_date;
-		this.executed_price=executed_price;
+		this.executed_price = executed_price;
 	}
 
 	@Override
@@ -210,8 +215,5 @@ public class Block {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
-	
+
 }

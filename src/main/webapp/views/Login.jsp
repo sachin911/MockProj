@@ -344,6 +344,9 @@ FOOTER
 	-webkit-box-shadow: inset 0 1px 6px rgba(256, 256, 256, 0.75);
 }
 </style>
+ <body>
+ <form name="login-form" class="login-form" action="hello" method="post">
+	
 <body>
 	<form name="login-form" class="login-form" action="hello" method="post">
 
@@ -362,9 +365,16 @@ FOOTER
 		</div>
 
 		<div class="footer">
-			<input type="submit" value="login" class ="button" />
+		<a href="ForgetPassword.jsp">Forgot Password</a>
+			<input type="submit" value="Login" class="button" name="submit"/>
+	
+		<!-- <a href="BrokerMainScreen.jsp" class="button">Login</a> -->
+	
 		</div>
 
 	</form>
+	<%if(request.getSession().getAttribute("message")!=null) %>
+	<p><%=request.getSession().getAttribute("message") %></p>
+	</body>
 
 </body>

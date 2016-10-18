@@ -51,4 +51,14 @@ public class UserDAOImpl extends GenericDAOImpl<User, Long> implements UserDAO {
 		return em.createQuery("from User").getResultList();
 	}
 
+	@Override
+	public void changepass(User user) {
+		// TODO Auto-generated method stub
+		Query query = em.createQuery("update User set password=:pass where user_name=:uname");
+
+		query.setParameter("uname", user.getUser_name());
+		query.setParameter("pass", user.getPassword());
+		query.executeUpdate();
+	}
+
 }

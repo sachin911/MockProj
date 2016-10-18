@@ -5,28 +5,38 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.xml.bind.JAXBException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.sapient.dao.BlockDAO;
 import com.sapient.dao.BlockDAOImpl;
 import com.sapient.dao.SecuritiesDAO;
+import com.sapient.jms.MarshallAndSend;
 import com.sapient.dao.ViewFillsDAO;
 import com.sapient.model.Block;
 import com.sapient.model.Securities;
 import com.sapient.model.ViewFills;
 
 @Service("brokerService")
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class BrokerServiceImpl implements BrokerService {
-	public BrokerServiceImpl() {
 
-	}
+	// public BrokerServiceImpl() {
+	//
+	// }
+
 
 	@Autowired
 	BlockDAO blockDAO;
@@ -41,6 +51,8 @@ public class BrokerServiceImpl implements BrokerService {
 
 		List<Block> blockList = new ArrayList<>();
 		blockList = blockDAO.findAll();
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		MarshallAndSend send = (MarshallAndSend) context.getBean("MessageProducer");
 		for (Block blocks : blockList) {
 			System.out.println(blocks);
 			if (!blocks.getStatus().equalsIgnoreCase("Completed")) {
@@ -120,6 +132,12 @@ public class BrokerServiceImpl implements BrokerService {
 					blocks.setTotal_quantity(TotalQtyToExecute);
 
 					blockDAO.save(blocks);
+					try {
+						send.marshallAndSendBlock(blocks);
+					} catch (JAXBException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					/*
 					 * viewFills.setExecutedDate(new Date());
 					 * viewFills.setExecutedPrice(priceExecuted);
@@ -149,10 +167,16 @@ public class BrokerServiceImpl implements BrokerService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void saveblock(Block block) {
 
 		System.out.println("reached the service");
 		blockDAO.save(block);
+		boolean transactionActive = TransactionSynchronizationManager.isActualTransactionActive();
+		if (transactionActive) {
+			System.out.println("reached the service");
+			System.out.println(blockDAO.save(block));
+		}
 
 	}
 
@@ -160,5 +184,14 @@ public class BrokerServiceImpl implements BrokerService {
 	public List<Block> findALL() {
 		return blockDAO.findAll();
 
+	}
+
+	@Override
+	public void expireblocks() {
+		// TODO Auto-generated method stub
+		
+		blockDAO.expire();
+		
+		
 	}
 }
