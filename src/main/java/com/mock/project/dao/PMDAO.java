@@ -12,7 +12,7 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 
 
 	List<Order> findAll(Long pmid);
-	//public void updateStatus(String status,List order_id);
+	public void updateStatus(Status status,List order_id);
 
 	Order edit(Order object);
 

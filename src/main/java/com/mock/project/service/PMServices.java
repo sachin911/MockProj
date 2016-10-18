@@ -16,4 +16,5 @@ public interface PMServices {
 //	public Order findByPrimaryKey(Long id);
 	List<Order> displayForPM(Long pmid);
 	public void addPort(Portfolio p);
+	void updateStatus(List order_id);
 }

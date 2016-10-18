@@ -28,26 +28,23 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		query.setParameter("pmid", pmid);
 
 		list = query.getResultList();
-		//System.out.println(list);
+		// System.out.println(list);
 		return list;
 
 	}
-	
-		
 
-	
-	
 	@Override
 	public Order edit(Order object) {
 		em.persist(object);
 		return object;
 	}
+
 	@Override
 	public Order ammend(Order object) {
 		em.persist(object);
 		return object;
 	}
-	
+
 	public void remove(Order object) {
 		em.remove(object);
 	}
@@ -58,14 +55,26 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		return null;
 	}
 
-
-
-
-
 	@Override
 	public List<Order> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void updateStatus(Status status, List order_id) {
+		//System.out.println("status = " + status.toString());
+		//System.out.println("orderid = " + order_id);
+		for (int i = 0; i < order_id.size(); i++) {
+			Long o_id = (Long) order_id.get(i);
+			//System.out.println("o_id" + o_id);
+			Query query = em.createQuery("update Order set status=:status where order_id=:o_id");
+			query.setParameter("status", status.toString());
+			query.setParameter("o_id", o_id);
+			//System.out.println(query);
+			System.out.println("update query" + query.executeUpdate());
+		}
+
 	}
 
 	// @Override
