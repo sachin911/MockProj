@@ -1,0 +1,5 @@
+/target/
+
+*.class
+MANIFEST.MF
+/bin/
