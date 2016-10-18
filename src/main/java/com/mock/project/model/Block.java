@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -17,7 +18,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 
 @DynamicUpdate(true)
 @SelectBeforeUpdate(true)
-
+@XmlRootElement
 public class Block {
 
 	@Id
@@ -52,8 +53,32 @@ public class Block {
 	@Column(name="BLOCK_DATE")
 	private Date orderDate;
 	
-	@Column(name="EXECUTED_DATE")
+	@Column(name="EXECUTED_DATE") 
 	private Date executedDate;
+
+
+	
+	public Block() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Block(String symbol, String side, String orderType, long qtyPlaced, long qtyExecuted, double stopPrice,
+			double limitPrice, String status, Date orderDate, Date executedDate) {
+		super();
+		this.symbol = symbol;
+		this.side = side;
+		this.orderType = orderType;
+		this.qtyPlaced = qtyPlaced;
+		this.qtyExecuted = qtyExecuted;
+		this.stopPrice = stopPrice;
+		this.limitPrice = limitPrice;
+		this.status = status;
+		this.orderDate = orderDate;
+		this.executedDate = executedDate;
+	}
+
+
+
 
 	public Long getBlockId() {
 		return blockId;
@@ -143,6 +168,8 @@ public class Block {
 		this.executedDate = executedDate;
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -161,6 +188,7 @@ public class Block {
 		temp = Double.doubleToLongBits(stopPrice);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
+		
 		return result;
 	}
 
@@ -170,7 +198,7 @@ public class Block {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Block))
 			return false;
 		Block other = (Block) obj;
 		if (blockId == null) {
@@ -216,6 +244,7 @@ public class Block {
 				return false;
 		} else if (!symbol.equals(other.symbol))
 			return false;
+		
 		return true;
 	}
 
@@ -247,10 +276,6 @@ public class Block {
 		builder.append("]");
 		return builder.toString();
 	}
-
-	
-
-	
 	
 	
 }

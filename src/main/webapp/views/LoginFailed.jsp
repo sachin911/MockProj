@@ -55,7 +55,7 @@ width=100px
 	<div class="login">
 	<img src="img/logo.png">
 		<h1><b>Login</b></h1>
-		<h2>Login failed, wrong username or password combination. Please try again.</h2>
+		<h2>Login failed,  this username does not exist. Please try again.</h2>
 		<form method="post" class="login" action="handleLogin">			
 				<label for="password">Password:</label> <input type="password"
 					name="password" placeholder="Enter password" required>
@@ -69,7 +69,6 @@ width=100px
 			<p class="login-submit">
 				<input type="submit" value="LOGIN" class="btn btn-primary btn-block"/>
 			</p>
-			<p class="forgot-password"><a href="ForgetPassword.jsp">Forgot your password?</a></p>
 		</form>
 	</div>
 </body>

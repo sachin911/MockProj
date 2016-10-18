@@ -2,18 +2,19 @@ package com.mock.project.service;
 
 import java.util.List;
 
-
-import com.mock.project.model.Order;
-
-
-
 import com.mock.project.model.*;
 
 
 
 public interface OrderService {
+
+	
+	List<Order> displaylist(int traderId);
+
 	List<Order> displaylist();
-	List<Order> display(int traderId);
+	
+	List<Block> displayBlock(int i);
+
 	
 
 	void updateStatusInOrder(long block_id,List order_id);
@@ -22,6 +23,14 @@ public interface OrderService {
 	void updateStatus(String status, List block_id);
 void allocateorder();    
 	
+
+	 public List<Block> recommend(List<Integer> selectedOrders);
+
+
+	Order findOrderByOrderId(int orderId);
+
+
+	Block findBlockByBlockId(int blockId);
 
 
 }

@@ -6,18 +6,22 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
 
+import com.mock.project.model.Block;
 import com.mock.project.model.Order;
+
 
 
 
 import com.mock.project.model.Status;
-
-
+import com.mock.project.service.TraderService;
+import com.mock.project.service.TraderServiceImpl;
 import com.mock.project.model.Order;
+
 
 
 
@@ -31,55 +35,205 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	 @SuppressWarnings("unchecked")
 	 @Override 
 	 public List<Order> findAll() {
-		 System.out.println("hey");
+	//	 System.out.println("hey");
 	List<Order> l=new ArrayList<Order>();
-	System.out.println("malvika");
-	Query query=em.createQuery("from Order where block_id is null");
-	System.out.println("mm");
+
+	
+	Query query=em.createQuery("from Order where block_id is null and status=:stat");
+	query.setParameter("stat", "Open");
 	List<Order>l1=query.getResultList();
-	System.out.println("mmee");
-	System.out.println("oshin");
+	
+	
 	for(Order i:l1){
-		System.out.println("aish");
+		
 		System.out.println(i);
 	}
-	System.out.println("madie");
+	
+
 	return query.getResultList(); 
 	 }
 
+	 /*
 	@SuppressWarnings("unchecked")
 	@Override 
+	public List<Order> findAll() {
+		//	 System.out.println("hey");
+		List<Order> l=new ArrayList<Order>();
+		//System.out.println("malvika");
+		Query query=em.createQuery("from Order where block_id is null");
+		//System.out.println("mm");
+		List<Order>l1=query.getResultList();
+		//System.out.println("mmee");
+		//System.out.println("oshin");
+		for(Order i:l1){
+			//System.out.println("aish");
+			//System.out.println(i);
+		}
+		//	System.out.println("madie");
+		return query.getResultList(); 
+	}
+ 
+ */
+ 
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Order> findAll(int traderId) {
 
-		Query query = em.createQuery("from order where traderId = :traderId");
+
+		Query query = em.createQuery("from Order where trader_id =:traderId");
+
 		query.setParameter("traderId", traderId);
+
 		return query.getResultList();
 	}
 
 
-	@Override
-	public void updateStatus(long block_id,List order_id) {
-		for(int i=0; i<order_id.size();i++){
 
-			long o_id=(Long) order_id.get(i);
-			Query query =  em.createQuery("update order set block_id =:block_id" + " where order_id = :o_id");
+	@Override
+	public void updateStatus(long block_id, List order_id) {
+		for (int i = 0; i < order_id.size(); i++) {
+			System.out.println("dask");
+			long o_id = (Long) order_id.get(i);
+			Query query = em.createQuery("update Order set block_id =:block_id" + " where order_id = :o_id");
 			query.setParameter("block_id", block_id);
 			query.setParameter("o_id", o_id);
+			query.executeUpdate();
 		}
-
 
 	}
 
 	@Override
 	public void updateBlock(Status changeStatus, List block_id) {
-		for(int i=0; i<block_id.size();i++){
+		for (int i = 0; i < block_id.size(); i++) {
 
-			long b_id=(Long) block_id.get(i);
-			Query query = em.createQuery("update order set status =:status" + "where block_id = :b_id");
+			long b_id = (Long) block_id.get(i);
+			Query query = em.createQuery("update Order set status =:status" + "where block_id = :b_id");
 			query.setParameter("status", changeStatus);
 			query.setParameter("b_id", b_id);
 		}
+		
+
+
+
 	}
+	@Override
+    public void addToThisBlock(Order order, Integer selectedBlock) {
+		System.out.println("updatingblockid");
+           Query query = em.createQuery("update Order set block_id =:block_id" + " where order_id = :o_id" );
+           query.setParameter("o_id", order.getOrderId());
+           query.setParameter("block_id", selectedBlock);
+           query.executeUpdate();
+           System.out.println("updated");
+    }
+
+
+
+	@Override
+
+    public List<Block> recommend(List<Integer> selectedOrders) 
+    {
+           List<Order> checkedOrdersList=new ArrayList<Order>();
+           List<Order> checkedOrders=new ArrayList<Order>();
+           String symbol = null,side = null,status = null;
+           int i,c=0;
+           for(Integer order_id:selectedOrders)
+           {
+           
+           TypedQuery<Order> query1=em.createQuery("from Order where order_id=:order_id",Order.class);
+           query1.setParameter("order_id", order_id);
+           checkedOrders=(List<Order>)query1.getResultList();
+           Order order=checkedOrders.get(0);
+           symbol=order.getSymbol();
+           side=order.getSide();
+           status=order.getStatus();
+           checkedOrdersList.add(order);
+           }
+           System.out.println("here");
+           for(Order c1: checkedOrders){
+                  System.out.println(c1);
+           }
+           System.out.println("OrderDAOImpl"+side);
+           TypedQuery<Block> query=em.createQuery("from Block where symbol=:symbol" + " and side=:side"+ " and status=:status",Block.class);
+           query.setParameter("status", status);
+           query.setParameter("symbol", symbol);
+           query.setParameter("side", side);
+           
+           List<Block> blocks=query.getResultList();
+           System.out.println("hey");
+           
+           Order check=checkedOrdersList.get(0);
+           System.out.println("check" + check);
+    
+           for(i=0;i<checkedOrdersList.size();i++)
+           {
+                  if(check.getStatus()==(checkedOrdersList.get(i)).getStatus()&&check.getSide()==(checkedOrdersList.get(i)).getSide()&&check.getSymbol()==(checkedOrdersList.get(i)).getSymbol())
+                  { c=0;
+                  System.out.println("not break");
+                 
+                  TraderService object=new TraderServiceImpl();
+                  for(Order o:checkedOrdersList){
+                	  System.out.println(o);
+                  }
+                  object.addToBlock(checkedOrdersList);
+
+}
+                  
+                  else
+                  {c=1;
+                  System.out.println("break");
+                  break;}
+           }
+           if(c==1)      
+           return null;
+           else{
+                  System.out.println("Else");
+           return  blocks;}
+    }
+
+
+
+
+	public List<Order> findOrder(int orderId) {
+		// TODO Auto-generated method stub
+		//System.out.println("asdjdsak: "+orderId);
+		List<Order> orders=new ArrayList<Order>();
+		Query query=em.createQuery("from Order where order_Id=:orderId"+" and block_id is null");
+		query.setParameter("orderId",orderId);
+		//System.out.println(query);
+		orders=query.getResultList();
+		//System.out.println(orders.get(0));
+
+		return orders;
+
+	}
+
+	@Override
+	public void addBlock(Block block) {
+		// TODO Auto-generated method stub
+		em.persist(block);
+	}
+
+	@Override
+
+	public Block findBlock(int blockId) {
+		List<Block> blocks=new ArrayList<Block>();
+		Query query=em.createQuery("from Block where block_Id=:blockId");
+	query.setParameter("blockId",blockId);
+		//System.out.println(query);
+	blocks=query.getResultList();
+	//System.out.println(orders.get(0));
+	Block block = blocks.get(0);
+	return block;
+	}
+
+	public List<Block> findAllBlocks(int traderId) {
+		Query query = em.createQuery("from Block where status=:stat");
+		query.setParameter("stat", "New");
+
+		return query.getResultList();
+
+	}
+
 
 	
 

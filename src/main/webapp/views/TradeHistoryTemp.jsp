@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
+	 <%@ page import="java.util.List" %>
+    <%@ page import="com.mock.project.model.Block"%>
+	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<%@ page isELIgnored="false" %>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,20 +15,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
+  <!-- <script type="text/javascript" src="js/currency-autocomplete.js"></script> -->
+   
     <!-- hello -->
     <title>Test Page</title>
 </head>
 <body>
- .td { width = "10%" }
+
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="BlockBlotter.jsp">View Blocks</a></li>
-      <li><a href="PendingOrders.jsp">Pending Orders</a></li>
-      <li class="active"><a href="#">History</a></li> 
+      <li><a href="PopulateBB">View Blocks</a></li>
+      <li><a href="updateTable">Pending Orders</a></li>
+      <li class="active"><a href="PopulateTraderHistory">History</a></li>  
     </ul>
   </div>
     <div class="container">
@@ -53,24 +60,26 @@
        </div>
              </div>
       </div>
-           <%for(int i = 0;i<5;i++) { %>
            
+           </td>
         <div class="panel-group" style = "width: 1060px"> 
     <div class="panel panel-default">
       <div class="panel-heading">
            <table class="table">
-           <div>    <tr>
-                 <td>data</td>
-               <td><a data-toggle="collapse" data-toggle = "#i" href ="#">Alpha</a></td>
-                 <td>data</td>
-                 <td>data</td>
-                 <td>data</td>
-                 <td>data</td>
-                 <td>data</td>
-                 <td>data</td>
-                 <td>data</td>
+           <div>   
+           <c:forEach items='${Blocks}' var="Blocks">   
+            <tr>
+                 <td><c:out value='${Blocks.symbol}'/></td>
+                 <td><a data-toggle="collapse" data-toggle = "#i" href ="#"><c:out value='${Blocks.side}'/></a></td>
+                 <td><c:out value='${Blocks.qtyPlaced}'/></td>
+                 <td><c:out value='${Blocks.qtyExecuted}'/></td>
+                 <td><c:out value='${Blocks.stopPrice}'/></td>
+                 <td><c:out value='${Blocks.limitPrice}'/></td>
+                 <td></td>
+                 <td><c:out value='${Blocks.status}'/></td>
+                 <td><c:out value='${Blocks.executedDate}'/></td>
                 </tr>
-            
+            </c:forEach>
          		</table>
                <div id="i" class="collapse">
             
@@ -83,10 +92,8 @@
     
          
         
-	<% }%>
 	
-         
-
+	
         </div>
         
         

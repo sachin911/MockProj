@@ -10,13 +10,6 @@ import org.springframework.stereotype.Service;
 import com.mock.project.dao.OrderDAO;
 
 import com.mock.project.dao.OrderDAOImpl;
-import com.mock.project.model.Order;
-
-
-import com.mock.project.model.Status;
-
-
-
 import com.mock.project.model.*;
 
 
@@ -32,13 +25,13 @@ public class OrderServiceImpl implements OrderService{
 	private OrderDAO dao=new OrderDAOImpl();
 	@Override
 	public List<Order> displaylist() {
-		System.out.println("hello");
+		//System.out.println("hello");
 		return dao.findAll();
 	}
 
 	@Override
-	public List<Order> display(int traderId) {
-		
+	public List<Order> displaylist(int traderId) {
+		//System.out.println("inside Service");
 		return dao.findAll(traderId);
 
 	}
@@ -67,13 +60,38 @@ public class OrderServiceImpl implements OrderService{
 		dao.add(d);
 
 	}
+	public List<Block> recommend(List<Integer> selectedOrders) {
+		return dao.recommend(selectedOrders);
+
+	}
+	
 
 	@Override
+
 	public void allocateorder() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
+	public Order findOrderByOrderId(int orderId)
+	{
+		Order order=dao.findOrder(orderId).get(0);
+		return order;
+	}
+
+
+	@Override
+	public List<Block> displayBlock(int traderId) {
+		// TODO Auto-generated method stub
+		return dao.findAllBlocks(traderId);
+	}
+	
+	@Override
+	public Block findBlockByBlockId(int blockId)
+	{
+		Block block=dao.findBlock(blockId);
+		return block;
+	}
 
 }
