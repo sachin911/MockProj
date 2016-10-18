@@ -25,7 +25,25 @@ public class TraderServiceImpl implements TraderService {
 	@Autowired
 
 	private OrderDAO dao=new OrderDAOImpl();
+	static private List<Order> listOforder;
 	
+    @Override
+    public void addToBlock(List<Order> listOforder) {
+    	TraderServiceImpl.listOforder=listOforder;
+          // System.out.println("addtoblock:::::"+listOforder);
+           
+    }
+   @Override
+    public void addToSelectedBlock(Integer selectedBlock) {
+	   System.out.println("selected");
+	   System.out.println("addtoselectedblock:::::"+TraderServiceImpl.listOforder);
+             for(Order order:listOforder){
+            	 System.out.println(order);
+                    dao.addToThisBlock(order,selectedBlock);
+             }
+             System.out.println("selectedblock");
+    }       
+
 	@Override
 	public void createBlock(List<Order> orders)
 	{
