@@ -25,8 +25,6 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 		// TODO delete a user from db
 		
 	}
-	
-
 
 	@Override
 	public List<User> findAll(String username, String password) {
@@ -42,6 +40,7 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 		query.setParameter("uname", username);
 		query.setParameter("pass", password);
 		System.out.println(query.toString());
+		
 		return query.getResultList();
 		
 		/*
@@ -64,6 +63,20 @@ public class UserDAOImpl extends GenericDAOImplementation<User, Long> implements
 	public User findByPrimaryKey(User id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public boolean findIfUsernameExists(String username) {
+		Query query = em.createQuery("from User where username =:uname");
+		query.setParameter("uname", username);
+		List<User> results = query.getResultList();
+		if(results.isEmpty() == true){
+			return false;
+		} else {
+			return true;
+		}	
 	}
 
 }
