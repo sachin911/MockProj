@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.sapient.dao.BlockDAO;
 import com.sapient.dao.BlockDAOImpl;
 import com.sapient.dao.SecuritiesDAO;
@@ -66,9 +65,10 @@ public class BrokerServiceImpl implements BrokerService {
 					double LastTradedPrice = securities.getLast_trade_price();
 					double LimitPrice = blocks.getLimit_price();
 					double StopPrice = blocks.getStop_price();
+					String side = blocks.getSide();
 					String type = blocks.getType();
 					long tempExecutedQty;
-					if (blocks.getExecuted_quantity().equals(null)) {
+					if (blocks.getExecuted_quantity().equals(null) || blocks.getExecuted_quantity().equals(0)) {
 						tempExecutedQty = 0;
 					} else {
 						tempExecutedQty = blocks.getExecuted_quantity();
@@ -77,9 +77,9 @@ public class BrokerServiceImpl implements BrokerService {
 
 					System.out.println("Executed Q " + tempExecutedQty);
 
-					Long TotalQtyToExecute = blocks.getTotal_quantity() - tempExecutedQty;
+					Long TotalQtyToExecute = Math.max(0, blocks.getTotal_quantity() - tempExecutedQty);
 					System.out.println("TotalQtyToExecute " + TotalQtyToExecute);
-					String side = blocks.getSide();
+
 					Long QtyExecuted = 0L;
 
 					double priceExecuted = 0.0;
@@ -88,15 +88,16 @@ public class BrokerServiceImpl implements BrokerService {
 						double minPrice = LastTradedPrice - (LastTradedPrice * MaxPriceSpread / 100);
 						double maxPrice = LastTradedPrice + (LastTradedPrice * MaxPriceSpread / 100);
 						priceExecuted = RandomPrice(minPrice, maxPrice);
-						System.out.println(priceExecuted);
+						System.out.println("priceExecuted " + priceExecuted);
 						// int
 						// minQty=TotalQtyToExecute-(TotalQtyToExecute*MaxOrderPerOrder);
 
-						if (TotalQtyToExecute <= 20) {
-							QtyExecuted = TotalQtyToExecute;
-						} else
-							QtyExecuted = RandomQty(0L, Math.min(TotalQtyToExecute, MaxOrderPerOrder));
-						System.out.println(QtyExecuted);
+						// if (TotalQtyToExecute <= 20) {
+						// QtyExecuted = TotalQtyToExecute;
+						// } else {
+						QtyExecuted = RandomQty(0L, Math.min(TotalQtyToExecute, MaxOrderPerOrder));
+						// }
+						System.out.println("QtyExecuted " + QtyExecuted);
 					}
 					if (type.equalsIgnoreCase("stop")) {
 
@@ -104,18 +105,19 @@ public class BrokerServiceImpl implements BrokerService {
 					if (type.equalsIgnoreCase("limit")) {
 
 					}
+
+					if (QtyExecuted == blocks.getTotal_quantity())
+						blocks.setStatus("Completed");
+					else if (QtyExecuted == 0 && !(blocks.getStatus().equals("Partial")))
+						blocks.setStatus("Open");
+					else
+						blocks.setStatus("Partial");
 					TotalQtyToExecute = blocks.getTotal_quantity() - QtyExecuted;
 					// Setting the Fields
 					blocks.setExecuted_date(new Date());
 					blocks.setExecuted_price(priceExecuted);
 					blocks.setExecuted_quantity(QtyExecuted);
 					blocks.setTotal_quantity(TotalQtyToExecute);
-					if (QtyExecuted == 0)
-						blocks.setStatus("Open");
-					else if (QtyExecuted == blocks.getTotal_quantity())
-						blocks.setStatus("Completed");
-					else
-						blocks.setStatus("Partial");
 
 					blockDAO.save(blocks);
 					/*
@@ -126,7 +128,6 @@ public class BrokerServiceImpl implements BrokerService {
 					 * viewFills.setRemainingQty(remainingQty);
 					 */
 				}
-
 			}
 		}
 	}
@@ -149,7 +150,7 @@ public class BrokerServiceImpl implements BrokerService {
 
 	@Override
 	public void saveblock(Block block) {
-		
+
 		System.out.println("reached the service");
 		blockDAO.save(block);
 

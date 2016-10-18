@@ -14,8 +14,8 @@ public class EditSecuritiesController {
 
 	@RequestMapping("/views/editSecurity")
 	public String executionStartStop(HttpServletRequest req) {
-		
-/*		System.out.println("executionStartStop");
+		System.out.println("executionStartStop");
+/*	System.out.println("executionStartStop");
 		String stop = req.getParameter("stop");
 		System.out.println("password: " + stop);*/
        Securities security=new Securities();
