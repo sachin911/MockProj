@@ -14,20 +14,33 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sapient.config.AppConfig;
 import com.sapient.main.Login;
 import com.sapient.model.User;
+import com.sapient.service.BrokerService;
+import com.sapient.service.BrokerServiceImpl;
 import com.sapient.service.UserService;
 
 @Controller
-public class LoginController {
+public class ExecutionController {
 
-	@RequestMapping("/views/hello")
+	@RequestMapping("/views/startStopService")
+	public String executionStartStop(HttpServletRequest req) {
+		String start = req.getParameter("start");
+		System.out.println("username: " + start);
+/*		System.out.println("executionStartStop");
+		String stop = req.getParameter("stop");
+		System.out.println("password: " + stop);*/
 
-	public ModelAndView sysLogin(HttpServletRequest req) {
-		String uname = req.getParameter("username");
-		System.out.println("username: " + uname);
-		System.out.println("Controller");
-		String pass = req.getParameter("password");
-		System.out.println("password: " + pass);
-		User user = new User();
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
+				com.sapient.config.AppConfig.class);
+		container.registerShutdownHook();
+		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
+
+		brokerService.StartExecution();
+		
+		return "redirect:BrokerMainScreen.jsp";
+		
+		
+		
+		/*User user = new User();
 		user.setUser_name(uname);
 		user.setPassword(pass);
 		Login l = new Login();
@@ -37,6 +50,6 @@ public class LoginController {
 			return new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
 		else
 			return new ModelAndView("redirect:Login.jsp", "message", vm);
-
+*/
 	}
 }

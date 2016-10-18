@@ -8,4 +8,5 @@ import com.sapient.model.Securities;
 public interface SecuritiesService {
 	List<Securities> findALL();
 	void savesecurities(Securities security);
+	public Securities findByPrimaryKey(String id);
 }
