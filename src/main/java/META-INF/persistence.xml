@@ -5,5 +5,7 @@
 		<class>com.mock.project.model.Order</class>
 		<class>com.mock.project.model.Portfolio</class>
 		<class>com.mock.project.model.User</class>
+		<class>com.mock.project.model.Order1</class>
+		<class>com.mock.project.model.Block1</class>
 	</persistence-unit>
 </persistence>

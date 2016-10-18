@@ -68,6 +68,12 @@ public class OrderServiceImpl implements OrderService{
 
 	}
 
+	@Override
+	public void allocateorder() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }
