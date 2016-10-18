@@ -21,15 +21,16 @@
 
 <script type="text/javascript">
                 function addMessage(){
+                	var isPortfolio = ${specialPortfolio}
                 	var mess = "${message}";          	
                 	var orderContainer = document.getElementById("pending-order-data");
                 	orderContainer.innerHTML = mess;
                 	//document.body.innerHTML += mess;
                 	console.log("ADDED HTML TO BODY: " + mess);
                 	
-                	if(mess == null){
-                		console.log("MESS IS NULL: " + mess);
-                		orderContainer.innerHTML = "<div class='col col-sm-1'><label> 1211</label></div><div class='col col-sm-1'>AAPL</div><div class='col col-sm-1'>BUY</div><div class='col col-sm-2 col-centered'>MARKET</div><div class='col col-sm-1'>GTC</div><div class='col col-sm-1'>T1</div><div class='col col-sm-1'>1000</div><div class='col col-sm-1'>-</div><div class='col col-sm-1'>-</div><div class='col col-sm-1'>New</div><div class='col col-sm-1'>P1</div><div class='col col-sm-1'>Cash</div><div class='col col-sm-1'>-</div>--></div><!-- order 2 --><div class='row ' id='orderid2-data'><div class='col col-sm-1'><label><label>1232</label></div><div class='col col-sm-1'>DELL</div><div class='col col-sm-1'>SELL</div><div class='col col-sm-2 col-centered'>LIMIT</div><div class='col col-sm-1'>GTC</div><div class='col col-sm-1'>T2</div><div class='col col-sm-1'>500</div><div class='col col-sm-1'>-</div><div class='col col-sm-1'>32.05</div><div class='col col-sm-1'>Open</div><div class='col col-sm-1'>P2</div><!-- <div class='col col-sm-1'> Margin </div> <div class='col col-sm-1'> - </div>--></div>"
+                	if(specialPortfolio == false){
+                		orderContainer.innerHTML = mess;
+                		//"<div class='col col-sm-1'><label> 1211</label></div><div class='col col-sm-1'>AAPL</div><div class='col col-sm-1'>BUY</div><div class='col col-sm-2 col-centered'>MARKET</div><div class='col col-sm-1'>GTC</div><div class='col col-sm-1'>T1</div><div class='col col-sm-1'>1000</div><div class='col col-sm-1'>-</div><div class='col col-sm-1'>-</div><div class='col col-sm-1'>New</div><div class='col col-sm-1'>P1</div><div class='col col-sm-1'>Cash</div><div class='col col-sm-1'>-</div>--></div><!-- order 2 --><div class='row ' id='orderid2-data'><div class='col col-sm-1'><label><label>1232</label></div><div class='col col-sm-1'>DELL</div><div class='col col-sm-1'>SELL</div><div class='col col-sm-2 col-centered'>LIMIT</div><div class='col col-sm-1'>GTC</div><div class='col col-sm-1'>T2</div><div class='col col-sm-1'>500</div><div class='col col-sm-1'>-</div><div class='col col-sm-1'>32.05</div><div class='col col-sm-1'>Open</div><div class='col col-sm-1'>P2</div><!-- <div class='col col-sm-1'> Margin </div> <div class='col col-sm-1'> - </div>--></div>"
                 	}
                 		
                 	
@@ -50,7 +51,7 @@
 				<li><a href="./CreateTrade.jsp">Create Order</a></li>
 				<li><a href="ViewOrderBlotter">Order Blotter</a></li>
 				<li><a href="./PendingOrder.jsp">Pending Orders</a></li>
-				<li class="active"><a href="./PMHistory.jsp">History</a></li>
+				<li class="active"><a href="GeneralView">History</a></li>
 			</ul>
 		</div>
 	</nav>
