@@ -27,6 +27,7 @@ import com.mock.project.dao.OrderDAOImpl;
 
 import com.mock.project.model.Block;
 import com.mock.project.model.Order;
+import com.mock.project.model.User;
 import com.mock.project.service.OrderService;
 import com.mock.project.service.OrderServiceImpl;
 import com.mock.project.service.TraderService;
@@ -237,18 +238,18 @@ public class TradingController {
         String arr[] = req.getParameterValues("data");
         System.out.println(arr[0]);
         System.out.println("inPopulatesadplpasdlpasd");
-      /*	List<Order> O=new ArrayList<Order>();
-      	O = orderService.displaylist(blockId);*/
+    	List<Order> O=new ArrayList<Order>();
+      	O = orderService.displaylist(5);
       
       	ModelAndView model = new ModelAndView("BlockBlotter");
-		//model.addObject("Orders",O);
+		model.addObject("Orders",O);
 		
 
 		return model;	
     }
 	
 	@RequestMapping(value = "/views/PopulateTraderHistory", method = RequestMethod.GET)
-    public ModelAndView PopulateTraderHistory(HttpServletResponse httpServletResponse) 
+    public ModelAndView PopulateTraderHistory( HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) 
     {
       //	System.out.println("Comes here");
       	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
@@ -256,15 +257,20 @@ public class TradingController {
       //  System.out.println("Comes here too");
         OrderService orderService = container.getBean(OrderService.class);
     //    System.out.println("Maybe comes here too");
-      	List<Block> Blocks =new ArrayList<Block>();
-      	Blocks = orderService.displayBlock(5);
+      	List<Order> Blocks =new ArrayList<Order>();
+    	
+      	
+      	// User user = (User) httpServletRequest.getSession().getAttribute("user");
+    	
+      //	Blocks = orderService.displaylist(user.getId());
+      	
+      	Blocks = orderService.displaylist(5);
       
       	ModelAndView model = new ModelAndView("TradeHistoryTemp");
 		model.addObject("Blocks",Blocks);
 		
 
 		return model;
-      // httpServletResponse.setHeader("Location", "www.google.com");
 		
     }
     

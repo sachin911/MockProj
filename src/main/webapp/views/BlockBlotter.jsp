@@ -17,10 +17,6 @@
 </head>
 <body>
 <style>
-	th {
-	
-	color: blue;
-	}
 
 td {
 	width : 218px;
@@ -125,16 +121,15 @@ td {
          
                
            
-      </div>
-
-    </div>
+ 
  
  <%j++; %>
       </c:forEach>
+      
         </table> 
    
 </div>
-   <button  id="send" type="button" class="btn btn-default">SEND</button>
+   <button  id="send" type="button" class="btn btn-default" onclick = "window.location.reload();">SEND</button>
      <button type="button" class="btn btn-default">CANCEL</button>
 
 </div>
