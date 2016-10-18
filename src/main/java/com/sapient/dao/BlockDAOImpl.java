@@ -26,7 +26,7 @@ public class BlockDAOImpl extends GenericDAOImpl<Block, Long> implements BlockDA
 	public void expire() {
 		// TODO Auto-generated method stub
 		System.out.println("Expiring open quantities");
-		Query query=em.createQuery("update Block set status='Expired' where (total_quantity-executed_quantity)>0 and status='Sent for execution'");
+		Query query=em.createQuery("update Block set status='Expired' where (total_quantity-executed_quantity)>0 and status='Open'");
 		query.executeUpdate();
 		
 	}

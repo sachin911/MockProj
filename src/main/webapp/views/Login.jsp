@@ -369,7 +369,7 @@ FOOTER
 			<input type="submit" value="Login" class="button" name="submit"/>
 	
 		<!-- <a href="BrokerMainScreen.jsp" class="button">Login</a> -->
-		<input type="submit" value="login" class ="button" />
+	
 		</div>
 
 	</form>

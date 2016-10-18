@@ -60,7 +60,7 @@ public class MarshallAndSend {
 
 	public void marshallAndSendBlock(Block block) throws JAXBException {
 		String convertedObj = marshal(block);
-		getJmsTemplate().convertAndSend("blockQueue", convertedObj);
+		getJmsTemplate().convertAndSend("sendBlockChannel", convertedObj);
 	}
 
 	public void sendExecutedBlockList(List<Block> blockList) throws JAXBException {
