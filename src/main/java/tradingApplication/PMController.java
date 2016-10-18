@@ -79,9 +79,9 @@ container.registerShutdownHook();
     PMServices pmsendtotrader = (PMServices) container.getBean("PMService");
   	List<Order> p=new ArrayList<Order>();
   	System.out.println("here2");
-  	//User user = (User) req.getSession().getAttribute("user");
-  	//Long pmId =user.getId();
-  	p=pmsendtotrader.displayForPM((long) 11);
+  	User user = (User) req.getSession().getAttribute("user");
+  	Long pmId =user.getId();
+  	p=pmsendtotrader.displayForPM(pmId);
   	System.out.println("here1");
   for(Order l: p){
 	  System.out.println("here");

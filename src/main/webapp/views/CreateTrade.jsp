@@ -82,7 +82,7 @@ function changetextbox(obj)
          <ul class="nav navbar-nav">
              <li><a href="./PMHome.jsp">Home</a></li>
             <li class="active"><a href="./CreateTrade.jsp">Create Order</a></li>
-            <li ><a href="./OrderBlotter1.jsp">Order Blotter</a></li>
+            <li ><a href="ViewOrderBlotter">Order Blotter</a></li>
             <li ><a href="./PendingOrder.jsp">Pending Orders</a></li>
             <li><a href="./PMHistory.jsp">History</a></li>
          </ul>
@@ -99,20 +99,20 @@ function changetextbox(obj)
 
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Symbol: </div>
-               <div class="form-input-fields col col-sm-8"><input type="text" id="symbol" placeholder="Enter Stock Name" required/></div>
+               <div class="form-input-fields col col-sm-8"><input type="text" name="symbol" id="symbol" placeholder="Enter Stock Name" required/></div>
                    </div>
                  
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Side: </div>
-               <div class="form-input-fields col col-sm-8"><select id="side"  required>
-                  <option> BUY</option>
-                  <option> SELL</option>
+               <div class="form-input-fields col col-sm-8"><select name="side" id="side"  required>
+                  <option value="Buy"> BUY</option>
+                  <option value="Sell"> SELL</option>
                </select>
               </div>
                     </div>
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Order Type: </div>
-               <div class="form-input-fields col col-sm-8"><select id="ordertype" onChange="changetextbox(this);" id="order-type" name="order-type" required>
+               <div class="form-input-fields col col-sm-8"><select name="orderType" id="ordertype" onChange="changetextbox(this);" id="order-type" name="order-type" required>
                   <option value="market"> Market</option>
                   <option value="limit"> Limit</option>
                   <option value="stoplimit"> Stop-Limit</option>
@@ -124,15 +124,15 @@ function changetextbox(obj)
                    <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Order Qualifier: </div>
                <div class="form-input-fields col col-sm-8"><select id="orderqual" name="qualifier" required>
-                  <option> Day Order</option>
-                  <option> GTC</option>
+                  <option value="Day Order"> Day Order</option>
+                  <option value="GTC"> GTC</option>
                </select>
                    </div>
                    </div>
 						 <div class="row">
-                <div id="" class="form-input-label col col-sm-4"> Trader: </div>
+                <div id="" class="form-input-label col col-sm-4"> Trader ID: </div>
                <div class="form-input-fields col col-sm-8">
-                   <input type="text" name="traderId" id="trader"  required>
+                   <input type="number" name="traderId" id="trader"  required>
                  
           
                    </div>
@@ -142,13 +142,13 @@ function changetextbox(obj)
                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Account Type: </div>
                <div class="form-input-fields col col-sm-8"><select id="acctype" name="accountType" style="" required>
-                  <option> Cash</option>
-                  <option> Margin</option>
+                  <option value="Cash"> Cash</option>
+                  <option value="Margin"> Margin</option>
                </select>
                    </div>
                   </div>
 							   <div class="row">
-                <div id="" class="form-input-label col col-sm-4"> Portfolio: </div>
+                <div id="" class="form-input-label col col-sm-4"> Portfolio ID: </div>
                <div class="form-input-fields col col-sm-8">
                    <input type="number" name="portfolioId" id="portfolio" required>
       
@@ -157,16 +157,16 @@ function changetextbox(obj)
 				
 						    <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Quantity: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" min="0" id="quantity" required/></div>
+               <div class="form-input-fields col col-sm-8"><input name="qtyPlaced" type="number" min="0" id="quantity" required/></div>
                     </div>   
                
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Stop Price: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" id="stop" min="0" disabled required/></div>
+               <div class="form-input-fields col col-sm-8"><input name = "stopPrice" type="number" id="stop" min="0" disabled required/></div>
                   </div>
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Limit Price: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" id="limit" min="0"  disabled required/></div>
+               <div class="form-input-fields col col-sm-8"><input  name = "limitPrice" type="number" id="limit" min="0"  disabled required/></div>
                    </div>
                  </div>
 							 <input type="submit" class="btn btn-default"  value="CREATE"/>
