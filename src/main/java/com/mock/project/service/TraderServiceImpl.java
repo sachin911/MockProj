@@ -34,7 +34,7 @@ public class TraderServiceImpl implements TraderService {
 		Boolean openStatus=false;
 		Boolean symbolStatus=false;
 		Boolean sideStatus=false;
-		
+		Boolean orderTypeStatus=false;
 		
 		//Fields of the block
 		String blockSymbol=orders.get(0).getSymbol();
@@ -62,6 +62,18 @@ public class TraderServiceImpl implements TraderService {
 			
 			//Checking whether the status of all the orders is OPEN
 			if((order.getStatus()).equals("Open"))
+			{
+				
+				openStatus=true;
+			}
+			else
+			{
+				
+				openStatus=false;
+				break;
+			}
+			
+			if((order.getOrderType()).equals(orderType))
 			{
 				
 				openStatus=true;
@@ -112,7 +124,7 @@ public class TraderServiceImpl implements TraderService {
 		
 		//System.out.println(openStatus+" "+sideStatus+ " "+ symbolStatus);
 		
-		if(openStatus && sideStatus && symbolStatus)
+		if(openStatus && sideStatus && symbolStatus && orderTypeStatus)
 		{
 			if(blockSide.equals("Buy"))
 			{
@@ -144,9 +156,9 @@ public class TraderServiceImpl implements TraderService {
 			//System.out.println(block);
 			dao.addBlock(block);
 			
+			System.out.println("asdkdasjas: "+block.getBlockId());
 			
-			
-			 
+			dao.updateStatus(block.getBlockId(),orderId);
 			//insert all the orders into block
 			//Write Code Here
 			//write the value of block_id in order Table

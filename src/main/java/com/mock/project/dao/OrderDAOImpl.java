@@ -64,11 +64,12 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	@Override
 	public void updateStatus(long block_id, List order_id) {
 		for (int i = 0; i < order_id.size(); i++) {
-
+			System.out.println("dask");
 			long o_id = (Long) order_id.get(i);
 			Query query = em.createQuery("update Order set block_id =:block_id" + " where order_id = :o_id");
 			query.setParameter("block_id", block_id);
 			query.setParameter("o_id", o_id);
+			query.executeUpdate();
 		}
 
 	}
