@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import com.sapient.dao.BlockDAO;
 import com.sapient.dao.BlockDAOImpl;
@@ -146,6 +149,8 @@ public class BrokerServiceImpl implements BrokerService {
 
 	@Override
 	public void saveblock(Block block) {
+		
+		System.out.println("reached the service");
 		blockDAO.save(block);
 
 	}

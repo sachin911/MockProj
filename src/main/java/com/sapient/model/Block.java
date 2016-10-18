@@ -67,19 +67,12 @@ public class Block {
 	private double executed_price;
 
 	
-	public Long getId() {
-		return id;
-	}
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getSide() {
 		return side;
 	}
-	
-	@XmlElement
+
 	public void setSide(String side) {
 		this.side = side;
 	}
@@ -87,8 +80,7 @@ public class Block {
 	public String getSymbol() {
 		return symbol;
 	}
-	
-	@XmlElement
+
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
@@ -96,8 +88,7 @@ public class Block {
 	public Long getTotal_quantity() {
 		return total_quantity;
 	}
-	
-	@XmlElement
+
 	public void setTotal_quantity(Long total_quantity) {
 		this.total_quantity = total_quantity;
 	}
@@ -105,8 +96,7 @@ public class Block {
 	public String getType() {
 		return type;
 	}
-	
-	@XmlElement
+
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -114,8 +104,7 @@ public class Block {
 	public String getStatus() {
 		return status;
 	}
-	
-	@XmlElement
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
@@ -123,8 +112,7 @@ public class Block {
 	public double getLimit_price() {
 		return limit_price;
 	}
-	
-	@XmlElement
+
 	public void setLimit_price(double limit_price) {
 		this.limit_price = limit_price;
 	}
@@ -132,8 +120,7 @@ public class Block {
 	public double getStop_price() {
 		return stop_price;
 	}
-	
-	@XmlElement
+
 	public void setStop_price(double stop_price) {
 		this.stop_price = stop_price;
 	}
@@ -141,8 +128,7 @@ public class Block {
 	public Long getExecuted_quantity() {
 		return executed_quantity;
 	}
-	
-	@XmlElement
+
 	public void setExecuted_quantity(Long executed_quantity) {
 		this.executed_quantity = executed_quantity;
 	}
@@ -150,27 +136,39 @@ public class Block {
 	public Date getExecuted_date() {
 		return executed_date;
 	}
-	
-	@XmlElement
+
 	public void setExecuted_date(Date executed_date) {
 		this.executed_date = executed_date;
 	}
 
-	public Block() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
 	public double getExecuted_price() {
 		return executed_price;
 	}
-
 
 	public void setExecuted_price(double executed_price) {
 		this.executed_price = executed_price;
 	}
 
+	public Long getId() {
+		return id;
+	}
 
+	/*@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name="BLOCK_SECURITIES", joinColumns = @JoinColumn(name="SYMBOL"),
+	inverseJoinColumns = @JoinColumn(name="SECURITY_SYMBOL"))
+	public Securities getSecConfig() {
+		return secConfig;
+	}
+
+	public void setSecConfig(Securities secConfig) {
+		this.secConfig = secConfig;
+	}*/
+	
+	
+	public Block() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Block(String side, String symbol, Long total_quantity, String type, String status, double limit_price,
 			double stop_price, Long executed_quantity, Date executed_date, double executed_price) {
 		super();

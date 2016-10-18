@@ -46,7 +46,7 @@
 		<property name="jmsTemplate" ref="jmsTemplate" />
 	</bean>
 
-	<bean id="BlockServiceListener" class="com.sapient.service.ServiceActivator">
+	<bean id="BlockServiceListener" class="com.sapient.jms.UnmarshallAndSave">
 		<property name="jmsTemplate" ref="jmsTemplate" />
 	</bean>
 

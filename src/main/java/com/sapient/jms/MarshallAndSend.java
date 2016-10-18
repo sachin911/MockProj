@@ -4,18 +4,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
+import com.sapient.config.LoggerConfig;
 import com.sapient.model.Block;
-import com.sapient.model.Employee;
+
 
 
 public class MarshallAndSend {
@@ -33,30 +36,38 @@ public class MarshallAndSend {
 
 		ActiveMQControl mq = new ActiveMQControl();
 		mq.startBroker();
-
-		ms.sendEmployee();
+		Date current=new Date();
+		Block obj=new Block("BUY","GOOG",300L,"MARKET","OPEN",200.0,300.0,100L,current,120.0); 
+		Block obj1=new Block("BUY1","GOOG1",300L,"MARKET1","OPEN1",200.0,300.0,100L,current,120.0);
+		List<Block> blockList = new ArrayList<Block>();
+		blockList.add(obj);
+		blockList.add(obj1);
+		
+		ms.sendExecutedBlock(blockList);
+		
+		//ms.sendEmployee();
 	}
 	
 	
 	public void marshallAndSendBlock(Block block) throws JAXBException{
 		String convertedObj = marshal(block);
-		getJmsTemplate().convertAndSend("sendBlockChannel", convertedObj);
+		getJmsTemplate().convertAndSend("blockQueue", convertedObj);
 	}
+			
 	
-	
-	//testing purpose
-	public void sendEmployee() throws JAXBException {
-		Employee emp = new Employee(1, "Joe", 37);
-		Employee emp1 = new Employee(2, "Chandler", 37);
-		List<Employee> empList = new ArrayList<Employee>();
-		empList.add(emp);
-		empList.add(emp1);
-		for (Employee iter : empList) {
-			System.out.println("Queue employee " + iter + " for processing");
-			String str = marshal(iter);
-			getJmsTemplate().convertAndSend("blockQueue", str);
+	public void sendExecutedBlock(List<Block> blockList) throws JAXBException{
+		LoggerConfig logConfig = new LoggerConfig();
+		Logger log = logConfig.getLogConfig();
+		if(blockList == null){
+			log.info("The list is empty. Please send a list of blocks------------");
+			System.exit(0);
 		}
-
+		
+		for(Block iter : blockList){
+			log.info("The Block being sent is" + iter);
+			System.out.println("The Block being sent is" + iter);
+			marshallAndSendBlock(iter);
+		}
 	}
 
 	public JmsTemplate getJmsTemplate() {
@@ -65,17 +76,6 @@ public class MarshallAndSend {
 
 	public void setJmsTemplate(JmsTemplate jmsTemplate) {
 		this.jmsTemplate = jmsTemplate;
-	}
-
-
-	//this is for testing
-	public String marshal(Employee object) throws JAXBException {
-		OutputStream stream = new ByteArrayOutputStream();
-		jaxbContext = JAXBContext.newInstance(Employee.class);
-		jaxbMarshaller = jaxbContext.createMarshaller();
-		jaxbMarshaller.marshal(object, stream);
-
-		return stream.toString();
 	}
 
 	
