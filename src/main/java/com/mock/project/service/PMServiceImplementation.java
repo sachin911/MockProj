@@ -36,10 +36,10 @@ public class PMServiceImplementation implements PMServices {
 //		dao.ammend(order);
 //	}
 //
-//	@Override
-//	public List<Order> findAllOrders() {
-//		return dao.findAll();
-//	}
+	@Override
+	public List<Order> findAllOrdersInPortfolio(String name) {
+		return dao.findAllByName(name);
+	}
 
 //	@Override
 //	public Order findByPrimaryKey(Long id) {

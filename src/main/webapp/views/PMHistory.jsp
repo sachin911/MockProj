@@ -1,7 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List,com.mock.project.model.Order" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +14,19 @@
     
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <%@ page isELIgnored="false" %>
+   
+   <script type="text/javascript">
+                function addMessage(){
+                	var mess = "${message}";          	
+					document.body.innerHTML += mess;
+                	console.log("ADDED HTML TO BODY");
+                }	
+    </script>
+   
+   
 </head>
-<body>
-    
+<body onload="addMessage()">
    <!-- Navigation Bar -->
    <nav class="navbar navbar-default">
       <div class="container-fluid">
@@ -25,7 +36,7 @@
          <ul class="nav navbar-nav">
              <li><a href="./PMHome.jsp">Home</a></li>
             <li><a href="./CreateTrade.jsp">Create Order</a></li>
-            <li ><a href="./OrderBlotter.jsp">Order Blotter</a></li>
+            <li ><a href="ViewOrderBlotter">Order Blotter</a></li>
             <li ><a href="./PendingOrder.jsp">Pending Orders</a></li>
             <li class="active"><a href="./PMHistory.jsp">History</a></li>
          </ul>
@@ -109,10 +120,8 @@
                     <div class="col col-sm-1"> P3  </div>
                       <!--<div class="col col-sm-1"> Cash  </div>
                     <div class="col col-sm-1"> -  </div>-->
-                   
-                   
                 </div>
-                
+      
             </div>
                         
         </div>        

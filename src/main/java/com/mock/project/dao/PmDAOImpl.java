@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.mock.project.model.Order;
+import com.mock.project.model.Portfolio;
 import com.mock.project.model.Status;
 
 @Repository
@@ -66,6 +67,34 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 	public List<Order> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Order> findAllByName(String name) {
+		Query query = em.createQuery("from Portfolio where portfolio_name =:pname");
+		query.setParameter("pname", name);
+		System.out.println(query.toString());
+		Portfolio p = new Portfolio();
+		Long pid = null;
+		List<Portfolio> correspondingPortfolioInList = query.getResultList();
+		if(correspondingPortfolioInList.isEmpty() == false){
+			p = correspondingPortfolioInList.get(0);
+			pid = p.getPortfolio_id();
+		} else {
+			System.out.println("ERROR! PORTFOLIO WITH THIS NAME DOES NOT EXIST IN SYSTEM. NAME = " + name);
+		}
+		
+		if(pid != null) {
+			Query query2 = em.createQuery("from Order where portfolioId =:p_id");
+			query2.setParameter("p_id", pid);
+			System.out.println(query2.toString());
+			List<Order> correspondingOrders = query2.getResultList();
+			return correspondingOrders;
+		} else {
+			System.out.println("PORTFOLIO ID IS NULL. CANNOT FETCH ORDERS");
+			return null;
+		}
+		
 	}
 
 	// @Override
