@@ -1,9 +1,10 @@
 
-<% response.addHeader("Refresh","100"); %>
+<%-- <% response.addHeader("Refresh","100"); %> --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.List" %>
     <%@ page import="com.mock.project.model.Order"%>
+    <%@ page import="com.mock.project.model.Block"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
@@ -128,7 +129,7 @@
     	  console.log(data);  
     	  
     	  $.ajax({
-    		  type: "POST",
+    		  type: "GET",
     		  url: "fetchOrder5",
     		  dataType: 'json',
     		  data:"data="+data,
@@ -156,12 +157,23 @@
       <button type="submit" class="btn btn-info" data-toggle="collapse" data-target="#demo" id="add">Add to Block
       </button>
       <%-- </form:form> --%>
-      <div id="demo" class="collapse">
+      <script>
+      
+      function LoadData() {
+    var myDataTable = $("#recommendedBlocks").jsp("<table><thead></thead><tbody></tbody></table>");
+    $("table",myDataTable).dataTable({});
+}
+$(document).ready(function() {
+    $("#recommendedBlocks").click(LoadData);
+    LoadData();
+});
+</script>
+       <div id="demo" class="collapse"> 
         
    The Recommendations for blocks should be displayed here
           <div class="Recommendations">
           <div style="height:200px;overflow-y:scroll;;">
-           <table class="table table-bordered">
+           <table class="table table-bordered" id="recommendedBlocks">
     <thead>
       <tr>
          <th></th>
@@ -177,24 +189,76 @@
       </tr>
     </thead>
           <tbody>
-      <tr>
-        <td> <label><input type="checkbox" value=""></label></td>
-        <td>234</td>
-        <td>1000</td>
-        <td>345</td>
-        <td>222</td>
-        <td>12</td>
-        <td>34</td>
-        <td>NEW</td>
-    
-      </tr>
+      <c:forEach items='${Blocks}' var="Blocks">   
+        
+			<tr>
+			
+			  <td> <label><input type="checkbox" id="checks" name="checks" class="checkboxClicks"></label></td>
+			  <td class="blockid"><c:out value='${Blocks.blockId}'/></td>
+		 <td><c:out value='${Blocks.qtyPlaced}'/></td>
+			  <td><c:out value='${Blocks.qtyExecuted}'/></td>
+			  <td><c:out value='${Blocks.qtyPlaced-blocks.qtyExecuted}'/></td>
+			  <td><c:out value='${Blocks.limitPrice}'/></td>
+			  <td><c:out value='${Blocks.stopPrice}'/></td>
+			  <td><c:out value='${Blocks.status}'/></td> 
+		
+			</tr>
+			</c:forEach> 
         </tbody></table>
                 </div></div>
-           <button type="button" class="btn btn-primary">OK</button>
+           <button type="button" id="ok" class="btn btn-primary">OK</button>
 
 </div>
+ <script>
+    
+    
+    $(document).ready(function(){
+    	$('#ok').click(function() {
+    		var data1=0;
+    	$('#recommendedBlocks tr').each(function()
+    	{
+    	if($(this).find("input[type=checkbox]").prop("checked")===true)
+    	{
+    		
+    		
+		console.log("hi");
+    	var data1=$(this).find('.blockid').html();
+    	//var out2=$(this).find('.orderSymbol').html();
+    	//var out3=$(this).find('.orderStatus').html();
+    	//var out4=$(this).find('.orderSide').html();
+    	console.log(out1);
+    	/*console.log(out2);
+    	console.log(out3);
+    	console.log(out4);*/
+    	
+    	//data.push(out2);
+    	//data.push(out3);
+    	//data.push(out4);
+    	}
+    	 
+    	}
+    	);	
+    	  console.log(data1);  
+    	  
+    	  $.ajax({
+    		  type: "GET",
+    		  url: "fetchOrder6",
+    		  dataType: 'json',
+    		  data:"data1="+data1,
+    		  success: function(data1) {
+    		    console.log("data is sent");
+    		  }
+    		});
+    	  
+    	  
+    	});
+    	});
+    
+    
+    
+    </script>
     </div>
-        </div>
+       </div> 
  </div>
  </nav>
 </body>

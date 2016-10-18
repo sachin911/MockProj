@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mock.project.config.AppConfig;
+import com.mock.project.model.Block;
 import com.mock.project.model.Order;
 import com.mock.project.service.OrderService;
 import com.mock.project.service.OrderServiceImpl;
@@ -27,12 +28,17 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TradingController {
-	TraderService traderService=new TraderService();
-	@RequestMapping(value = "/views/fetchOrder5", method = RequestMethod.POST)
+	
+	ModelAndView model = new ModelAndView("PendingOrders");
+	
+	@RequestMapping(value = "/views/fetchOrder5", method = RequestMethod.GET)
     public ModelAndView method5(HttpServletRequest req,HttpServletResponse httpServletResponse) {
 	//String []out=req.getParameter("check");	
-		
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+        OrderService orderService = container.getBean(OrderService.class);
 	 System.out.println("testasbasd");
+	 List<Block> r=new ArrayList<Block>();
 	 List<Integer> orderId=new ArrayList<Integer>();
 		String[] out=req.getParameterValues("data");
 	
@@ -48,31 +54,47 @@ public class TradingController {
 			System.out.println(order);
 			
 		}
-		return traderService.recommend(orderId); 
+		r=orderService.recommend(orderId);
+		for(Block b: r){
+			System.out.println(b);
+		}
+		 
+		
+		model.addObject("Blocks",r);
+		//container.close();
+		return model;
+
+
+} 
+	@RequestMapping(value = "/views/fetchOrder6", method = RequestMethod.GET)
+    public ModelAndView method6(HttpServletRequest req,HttpServletResponse httpServletResponse) {
+	//String []out=req.getParameter("check");	
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+        OrderService orderService = container.getBean(OrderService.class);
+	 System.out.println("mango");
+	int bid;
+	String []blockId=(req.getParameterValues("data1"));
+	String[] tokens=blockId[0].split(",");
+	
+		//String[] tokens=out[0].split(",");
+		 System.out.println("testasbasd");
+		 bid=Integer.parseInt(tokens[0]);
+		 System.out.println(bid);
+		
+		
+		orderService.recommend(orderId);
+		
+		
+		model.addObject("Blocks",r);
+		//container.close();
+		return model;
 
 
 } 
 	
 	
-		@RequestMapping(value = "/views/fetchOrder", method = RequestMethod.POST)
-		    public ModelAndView method(HttpServletRequest req,HttpServletResponse httpServletResponse) {
-			 String[] selectedUserIdParameter = req.getParameterValues("data");
-			 System.out.println("yup1"+ selectedUserIdParameter[0]);
-			for(int i=0;i<selectedUserIdParameter.length;i++){
-				 System.out.println(selectedUserIdParameter[i]);
-			}
-						
-			 System.out.println("yup");
-			// System.out.println(out);
-				
-		        //httpServletResponse.setHeader("Location", "www.google.com"); 
-			// ModelAndView model = new ModelAndView("PendingOrders");
-				
-
-				return null;
-
-
-}
+		
 		@RequestMapping(value = "/views/updateTable", method = RequestMethod.GET)
 	    public ModelAndView methodToUpdateTable(HttpServletResponse httpServletResponse) 
 	    {
@@ -88,7 +110,7 @@ public class TradingController {
 	    	  System.out.println("here");
 	      		System.out.println(l);
 	      	}
-	      ModelAndView model = new ModelAndView("PendingOrders");
+	    
 			model.addObject("Orders",p);
 
 			return model;

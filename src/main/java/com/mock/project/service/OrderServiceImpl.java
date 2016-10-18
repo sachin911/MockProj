@@ -67,6 +67,11 @@ public class OrderServiceImpl implements OrderService{
 		dao.add(d);
 
 	}
+	public List<Block> recommend(List<Integer> selectedOrders) {
+		return dao.recommend(selectedOrders);
+
+	}
+	
 
 
 
