@@ -51,16 +51,20 @@ public class GenericDAOImpl<T, ID extends Serializable> implements GenericDAO<T,
 		EntityTransaction trxn = em.getTransaction();
 
 		try {
-			System.out.println("saved");
 			trxn.begin();
 			em.persist(em.contains(entity) ? entity : em.merge(entity));
 			trxn.commit();
-
+			System.out.println("saved");
 		} catch (Exception e) {
-			System.out.println("not saved");
-			trxn.rollback();
+			try {
+				trxn.rollback();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		
 			e.printStackTrace();
-
+			System.out.println("not saved");
 		}
 
 		return entity;

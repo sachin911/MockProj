@@ -27,6 +27,25 @@ table {
 	border-collapse: separate;
 	border-spacing: 0 1em;
 }
+.led-red {
+    margin: 20px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #940;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
+}
+.led-green {
+    margin: 20px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #690;
+    border-radius: 50%;
+    box-shadow: #000 0 -1px 7px 1px, inset #460 0 -1px 9px, #7D0 0 2px 12px;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -44,7 +63,7 @@ table {
 			<li class="active"><a href="#">Home</a></li>
 			<li><a href="ConfigureSecurity.jsp">Configure</a></li>
 			<li><a href="ViewFills.jsp">View Fills</a></li>
-			<li><a href="Login.jsp">Logout</a></li>
+			<li><a href="logout">Logout</a></li>
 		</ul>
 	</div>
 	<div class="container" style="height: 300px; overflow-y: scroll;">
@@ -114,9 +133,15 @@ table {
 	</div>
 	<div class="container">
 		<form method="post" action="startStopService">
-			<input type="submit" name="start" value="start"	class="btn btn-info btn-lg"">
-			<input type="submit" name="stop" value="stop" class="btn btn-info btn-lg"">
-			
+			<input type="submit" name="start" value="start"
+				class="btn btn-info btn-lg""> <input type="submit"
+				name="stop" value="stop" class="btn btn-info btn-lg"">
+		</form>
+		<form method="post" action="checkStatus">
+			<input type="submit" name="status" value="status"
+				class="btn btn-info btn-lg"">
+			<div class="led-red" style="display:none"></div>
+			<div class="led-green"></div>
 		</form>
 	</div>
 </body>

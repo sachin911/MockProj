@@ -1,5 +1,6 @@
 package com.sapient.controller;
 
+import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -25,40 +26,57 @@ import com.sapient.service.UserService;
 
 @Controller
 public class ExecutionController {
-	
+
 	@RequestMapping("/views/startStopService")
 	public String executionStartStop(HttpServletRequest req) throws URISyntaxException, Exception {
 		String start = req.getParameter("start");
 		System.out.println("username: " + start);
-/*		System.out.println("executionStartStop");
-		String stop = req.getParameter("stop");
-		System.out.println("password: " + stop);*/
-	
-		ActiveMQControl bro = new ActiveMQControl();
-		bro.startBroker();
-		
+		/*
+		 * System.out.println("executionStartStop"); String stop =
+		 * req.getParameter("stop"); System.out.println("password: " + stop);
+		 */
+
+		// ActiveMQControl bro = new ActiveMQControl();
+		// bro.startBroker();
+
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
 				com.sapient.config.AppConfig.class);
 		container.registerShutdownHook();
-		
+
 		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
 
 		brokerService.StartExecution();
-		bro.stopBroker();
+		// bro.stopBroker();
 		return "redirect:BrokerMainScreen.jsp";
-		
-		
-		
-		/*User user = new User();
-		user.setUser_name(uname);
-		user.setPassword(pass);
-		Login l = new Login();
 
-		String vm = l.checkuser(user);
-		if (vm.equals("Valid user"))
-			return new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
-		else
-			return new ModelAndView("redirect:Login.jsp", "message", vm);
-*/
+		/*
+		 * User user = new User(); user.setUser_name(uname);
+		 * user.setPassword(pass); Login l = new Login();
+		 * 
+		 * String vm = l.checkuser(user); if (vm.equals("Valid user")) return
+		 * new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
+		 * else return new ModelAndView("redirect:Login.jsp", "message", vm);
+		 */
+	}
+
+	@RequestMapping("views/checkStatus")
+	public ModelAndView checkBrokerStatus() {
+		String hostName = "127.0.0.1";
+		int portNumber = 61616;
+		String result;
+
+		try {
+			Socket s = new Socket(hostName, portNumber);
+			s.close();
+			result = "true";
+
+		} catch (Exception e) {
+			result = "false";
+			e.printStackTrace();
+			
+		}
+		System.out.println("the broker status" + result);
+		return new ModelAndView("redirect:BrokerMainScreen.jsp", "status", result);
+
 	}
 }

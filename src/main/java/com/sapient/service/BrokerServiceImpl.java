@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.xml.bind.JAXBException;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.sapient.config.LoggerConfig;
 import com.sapient.dao.BlockDAO;
 import com.sapient.dao.BlockDAOImpl;
 import com.sapient.dao.SecuritiesDAO;
@@ -53,9 +55,11 @@ public class BrokerServiceImpl implements BrokerService {
 		blockList = blockDAO.findAll();
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		MarshallAndSend send = (MarshallAndSend) context.getBean("MessageProducer");
+		LoggerConfig logConfig = new LoggerConfig();
+		Logger log = logConfig.getLogConfig();
 		for (Block blocks : blockList) {
 			System.out.println(blocks);
-			if (!blocks.getStatus().equalsIgnoreCase("Completed")) {
+			if (!blocks.getStatus().equalsIgnoreCase("Completed") && !blocks.getStatus().equalsIgnoreCase("expired")) {
 				// System.out.println(blocks.getStatus());
 				Securities securities = new Securities();
 				// ViewFills viewFills=new ViewFills();
@@ -86,8 +90,10 @@ public class BrokerServiceImpl implements BrokerService {
 						tempExecutedQty = blocks.getExecuted_quantity();
 					}
 					System.out.println("Total Q " + blocks.getTotal_quantity());
+					log.info("Total Q " + blocks.getTotal_quantity());
 
 					System.out.println("Executed Q " + tempExecutedQty);
+					log.info("Executed Q " + tempExecutedQty);
 
 					Long TotalQtyToExecute = Math.max(0, blocks.getTotal_quantity() - tempExecutedQty);
 					System.out.println("TotalQtyToExecute " + TotalQtyToExecute);

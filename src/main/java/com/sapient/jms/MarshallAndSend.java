@@ -31,23 +31,19 @@ public class MarshallAndSend {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		MarshallAndSend ms = (MarshallAndSend) context.getBean("MessageProducer");
 
-		ActiveMQControl mq = new ActiveMQControl();
+		ActiveMQControl mq = ActiveMQControl.getInstance();
 		mq.startBroker();
 		// Date current=new Date();
-//		Block obj = new Block("BUY", "sachin", 300L, "MARKET", "OPEN", 200.0, 300.0, 100L, getCurrentDate(), 120.0);
-//		Block obj1 = new Block("BUY1", "narasimhan", 300L, "MARKET1", "OPEN1", 200.0, 300.0, 100L, getCurrentDate(),
-//				120.0);
-		
-		Date current = new Date();
-		Block obj = new Block("BUYs", "hola", 300L, "MARKET", "PENDING", 200.0, 300.0, 100L, current, 120.0);
-		
-		Block obj1 = new Block("BUYs", "senorita", 300L, "LIMIT", "CANCELED", 200.0, 300.0, 100L, current, 120.0);
-		List<Block> blockList = new ArrayList<Block>();
-		
-		obj.setId(720L);
-		obj1.setId(730L);
+		// Block obj = new Block("BUY", "sachin", 300L, "MARKET", "OPEN", 200.0,
+		// 300.0, 100L, getCurrentDate(), 120.0);
+		 Block obj1 = new Block("BUY1", "nars", 300L, "MARKET1",
+		 "OPEN1", 200.0, 300.0, 100L, getCurrentDate(),
+		 120.0);
 
-		blockList.add(obj);
+		Date current = new Date();
+		Block obj3 = new Block("SELL", "APPL", 200L, "Market", "Pending", 0.00, 0.00, 0L, current, 0.0, current, 12L);
+		
+		List<Block> blockList = new ArrayList<Block>();
 		blockList.add(obj1);
 		ms.sendExecutedBlockList(blockList);
 
@@ -60,7 +56,7 @@ public class MarshallAndSend {
 
 	public void marshallAndSendBlock(Block block) throws JAXBException {
 		String convertedObj = marshal(block);
-		getJmsTemplate().convertAndSend("sendBlockChannel", convertedObj);
+		getJmsTemplate().convertAndSend("sendBlockQueue", convertedObj);
 	}
 
 	public void sendExecutedBlockList(List<Block> blockList) throws JAXBException {
@@ -79,6 +75,7 @@ public class MarshallAndSend {
 			System.out.println("The Block being sent is" + iter);
 			ms.marshallAndSendBlock(iter);
 		}
+		
 	}
 
 	public JmsTemplate getJmsTemplate() {

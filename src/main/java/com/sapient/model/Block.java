@@ -37,7 +37,7 @@ public class Block implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "BLOCK_ID")
-	private Long id;
+	private Long block_id;
 	// private Securities secConfig;
 
 	@Column(name = "SIDE", nullable = false, length = 40)
@@ -69,6 +69,20 @@ public class Block implements Serializable {
 
 	@Column(name = "EXECUTED_PRICE", nullable = true)
 	private double executed_price;
+
+	@Column(name = "BLOCK_DATE", nullable = true)
+	private Date block_date;
+
+	@Column(name = "TRADER_ID", nullable = true)
+	private Long traderId;
+
+	public Long getId() {
+		return block_id;
+	}
+
+	public void setId(Long block_id) {
+		this.block_id = block_id;
+	}
 
 	public String getSide() {
 		return side;
@@ -150,24 +164,20 @@ public class Block implements Serializable {
 		this.executed_price = executed_price;
 	}
 
-	public Long getId() {
-		return id;
+	public Date getBlock_date() {
+		return block_date;
 	}
 
-	/*
-	 * @OneToOne(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinTable(name="BLOCK_SECURITIES", joinColumns
-	 * = @JoinColumn(name="SYMBOL"), inverseJoinColumns
-	 * = @JoinColumn(name="SECURITY_SYMBOL")) public Securities getSecConfig() {
-	 * return secConfig; }
-	 * 
-	 * public void setSecConfig(Securities secConfig) { this.secConfig =
-	 * secConfig; }
-	 */
+	public void setBlock_date(Date block_date) {
+		this.block_date = block_date;
+	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Long getTraderId() {
+		return traderId;
+	}
+
+	public void setTraderId(Long traderId) {
+		this.traderId = traderId;
 	}
 
 	public Block() {
@@ -175,7 +185,8 @@ public class Block implements Serializable {
 	}
 
 	public Block(String side, String symbol, Long total_quantity, String type, String status, double limit_price,
-			double stop_price, Long executed_quantity, Date executed_date, double executed_price) {
+			double stop_price, Long executed_quantity, Date executed_date, double executed_price, Date block_date,
+			Long traderId) {
 		super();
 		this.side = side;
 		this.symbol = symbol;
@@ -187,13 +198,15 @@ public class Block implements Serializable {
 		this.executed_quantity = executed_quantity;
 		this.executed_date = executed_date;
 		this.executed_price = executed_price;
+		this.block_date = block_date;
+		this.traderId = traderId;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Block [id=");
-		builder.append(id);
+		builder.append("Block [block_id=");
+		builder.append(block_id);
 		builder.append(", side=");
 		builder.append(side);
 		builder.append(", symbol=");
@@ -212,8 +225,29 @@ public class Block implements Serializable {
 		builder.append(executed_quantity);
 		builder.append(", executed_date=");
 		builder.append(executed_date);
+		builder.append(", executed_price=");
+		builder.append(executed_price);
+		builder.append(", block_date=");
+		builder.append(block_date);
+		builder.append(", traderId=");
+		builder.append(traderId);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public Block(String side, String symbol, Long total_quantity, String type, String status, double limit_price,
+			double stop_price, Long executed_quantity, Date executed_date, double executed_price) {
+		super();
+		this.side = side;
+		this.symbol = symbol;
+		this.total_quantity = total_quantity;
+		this.type = type;
+		this.status = status;
+		this.limit_price = limit_price;
+		this.stop_price = stop_price;
+		this.executed_quantity = executed_quantity;
+		this.executed_date = executed_date;
+		this.executed_price = executed_price;
 	}
 
 }

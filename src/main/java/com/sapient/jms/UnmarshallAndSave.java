@@ -37,15 +37,29 @@ public class UnmarshallAndSave {
 		this.jmsTemplate = jmsTemplate;
 	}
 
-	public void processBlocksFromQueue(String blockAsString) throws JAXBException {
+	public void processBlocksFromQueue(String blockAsString) {
 
 		System.out.println(blockAsString);
+		com.sapient.dao.GenericDAO<Block, Long> blockdao = null;
+		try{
+			blockdao = new com.sapient.dao.GenericDAOImpl<>(Block.class,
+					Persistence.createEntityManagerFactory("hibernate").createEntityManager());
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
 		System.out.println("reached unmarshal");
+		
+		Block blockToSave = null;
+		try {
+			blockToSave = unmarshal(blockAsString);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		Block blockToSave = unmarshal(blockAsString);
 
-		com.sapient.dao.GenericDAO<Block, Long> blockdao = new com.sapient.dao.GenericDAOImpl<>(Block.class,
-				Persistence.createEntityManagerFactory("hibernate").createEntityManager());
 		System.out.println("before save");
 		blockdao.saveService(blockToSave);
 
