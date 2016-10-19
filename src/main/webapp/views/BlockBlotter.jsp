@@ -99,9 +99,9 @@ td {
              <tr  id="hideDetailsD${Loop.index +1}" style="display:none;">
              <th></th>
               <td><%= l.get(j).getStatus() %></td>
-                <td><%= l.get(j).getLimitPrice() %></td>
-               <td><%= l.get(j).getStopPrice() %></td>
-                <td><%= l.get(j).getQtyPlaced() %></td>
+                <td><%= l.get(j).getLimit_price() %></td>
+               <td><%= l.get(j).getStop_price() %></td>
+                <td><%= l.get(j).getTotal_quantity() %></td>
                </tr>
 
      
@@ -120,9 +120,9 @@ td {
              <tr  id="hideEditD${Loop.index +1}" style="display:none;">
              <th></th>
              <td><%= l.get(j).getBlockId() %></td> 
-                <td><%= l.get(j).getLimitPrice() %></td>
-               <td><%= l.get(j).getStopPrice() %></td>
-                <td><%= l.get(j).getQtyPlaced() %></td>
+                <td><%= l.get(j).getLimit_price() %></td>
+               <td><%= l.get(j).getStop_price() %></td>
+                <td><%= l.get(j).getTotal_quantity() %></td>
               <%--   <td><%= l.get(j).getPmId() %></td> --%>
                </tr>
                  
