@@ -25,40 +25,38 @@ import com.sapient.service.UserService;
 
 @Controller
 public class ExecutionController {
-	
+
 	@RequestMapping("/views/startStopService")
 	public String executionStartStop(HttpServletRequest req) throws URISyntaxException, Exception {
 		String start = req.getParameter("start");
 		System.out.println("username: " + start);
-/*		System.out.println("executionStartStop");
-		String stop = req.getParameter("stop");
-		System.out.println("password: " + stop);*/
-	
+		/*
+		 * System.out.println("executionStartStop"); String stop =
+		 * req.getParameter("stop"); System.out.println("password: " + stop);
+		 */
+
 		ActiveMQControl bro = new ActiveMQControl();
 		bro.startBroker();
-		
+
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
 				com.sapient.config.AppConfig.class);
 		container.registerShutdownHook();
-		
+
 		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
+		
+			brokerService.StartExecution();
 
-		brokerService.StartExecution();
 		bro.stopBroker();
-		return "redirect:BrokerMainScreen.jsp";
-		
-		
-		
-		/*User user = new User();
-		user.setUser_name(uname);
-		user.setPassword(pass);
-		Login l = new Login();
 
-		String vm = l.checkuser(user);
-		if (vm.equals("Valid user"))
-			return new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
-		else
-			return new ModelAndView("redirect:Login.jsp", "message", vm);
-*/
+		return "redirect:BrokerMainScreen.jsp";
+
+		/*
+		 * User user = new User(); user.setUser_name(uname);
+		 * user.setPassword(pass); Login l = new Login();
+		 * 
+		 * String vm = l.checkuser(user); if (vm.equals("Valid user")) return
+		 * new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
+		 * else return new ModelAndView("redirect:Login.jsp", "message", vm);
+		 */
 	}
 }

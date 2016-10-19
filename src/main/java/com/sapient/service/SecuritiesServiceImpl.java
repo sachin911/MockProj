@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sapient.dao.SecuritiesDAO;
 import com.sapient.model.Securities;
-@Service("securitiesService")
+@Service("viewfillsService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class SecuritiesServiceImpl implements SecuritiesService {
 	@Autowired
