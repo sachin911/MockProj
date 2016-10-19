@@ -77,16 +77,16 @@ thead {
 			<thead>
 				<tr>
 					   
-					<th id="nm" onmouseover="this.style.background='#AAA'">Ticker</th>
+					<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Ticker</th>
 					   
-					<th id="nme" onmouseover="this.style.background='#AAA'">Name</th>
+					<th id="nme" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Name</th>
 					   
-					<th id="sl" onmouseover="this.style.background='#AAA'">Last
+					<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Last
 						Traded Price</th>
-					<th>Maximum price Spread(%)</th>
-					<th>Maximum executions</th>
-					<th>Maximum Interval</th>
-					<th>Max Probable(%)</th>  
+					<th id="sl1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum price Spread(%)</th>
+					<th id="sl2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum executions</th>
+					<th id="sl3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum Interval</th>
+					<th id="sl4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Max Probable(%)</th>  
 				</tr>
 			</thead>
 			<tbody>
@@ -538,6 +538,26 @@ thead {
 			var n = $(this).prevAll().length;
 			sortTable(f_sl, n);
 		});
+		$("#sl1").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#sl2").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#sl3").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#sl4").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
 		$("#nme").click(function() {
 			f_sl *= -1;
 			var n = $(this).prevAll().length;
@@ -562,8 +582,3 @@ thead {
 </body>
 </html>
 												
-																							
-
-
-
-

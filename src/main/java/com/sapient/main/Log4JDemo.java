@@ -21,14 +21,14 @@ public class Log4JDemo {
 	final static Logger logger = Logger.getLogger(Log4JDemo.class);
 
 	public static void main(String[] args) {
-		/*
-		 * String path = "log4j.properties";
-		 * 
-		 * PropertyConfigurator.configure(path); Log4JDemo obj = new
-		 * Log4JDemo(); obj.runMe("Logs are here");
-		 */
-		Date current = new Date();
 
+//		String path = "log4j.properties";
+//
+//		PropertyConfigurator.configure(path);
+//		Log4JDemo obj = new Log4JDemo();
+//		obj.runMe("Logs are here");
+		
+		Date current = new Date();
 		Block obj = new Block("BUY", "GOOG", 300L, "MARKET", "OPEN", 221.0, 30.0, 100L, current, 120.0);
 		Block obj1 = new Block("BUY", "APPL", 300L, "MARKET", "OPEN", 120.0, 20.0, 100L, current, 120.0);
 		Block obj2 = new Block("BUY", "MMM", 300L, "MARKET", "OPEN", 423.0, 33.0, 100L, current, 120.0);
@@ -52,20 +52,25 @@ public class Log4JDemo {
 		securityService.savesecurities(sec2);
 		securityService.savesecurities(sec3);
 		securityService.savesecurities(sec4);
+		
+
 	}
 
-	/*
-	 * private void runMe(String parameter){
-	 * 
-	 * if(logger.isDebugEnabled()){ logger.debug("This is debug : " +
-	 * parameter); }
-	 * 
-	 * if(logger.isInfoEnabled()){ logger.info("This is info : " + parameter); }
-	 * 
-	 * logger.warn("This is warn : " + parameter);
-	 * logger.error("This is error : " + parameter);
-	 * logger.fatal("This is fatal : " + parameter);
-	 * 
-	 * }
-	 */
+	private void runMe(String parameter) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("This is debug : " + parameter);
+		}
+
+		if (logger.isInfoEnabled()) {
+			logger.info("This is info : " + parameter);
+		}
+
+		logger.warn("This is warn : " + parameter);
+		logger.error("This is error : " + parameter);
+		logger.fatal("This is fatal : " + parameter);
+
+
+	}
+
 }

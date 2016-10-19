@@ -47,7 +47,7 @@ public class MessageProducer {
 	public static void main(String[] args) throws URISyntaxException, Exception {
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		ActiveMQControl mq = new ActiveMQControl();
+		ActiveMQControl mq = ActiveMQControl.getInstance();
 		mq.startBroker();
 		try {
 			MessageProducer mess = (MessageProducer) context.getBean("MessageProducer");
