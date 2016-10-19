@@ -26,10 +26,6 @@ public class PMServiceImplementation implements PMServices {
 		return dao.findAllByName(name, pmid);
 	}
 
-	public List<Order> displayForPM(Long pmid) {
-		return dao.findAll(pmid);
-	}
-
 	@Override
 	public void addPort(Portfolio p) {
 		dao.add(p);
@@ -48,6 +44,13 @@ public class PMServiceImplementation implements PMServices {
 	public List<Order> findAllOrdersInPortfolio(Long id) {
 		return dao.findAllByID(id);
 
+	}
+
+	@Override
+	public List<Order> displayForPMAfterSend(Long pmId) {
+		Status status=Status.New;
+		System.out.println(status);
+		return dao.findAllStatusNew(pmId,status);
 	}
 
 	/*

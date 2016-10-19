@@ -72,18 +72,18 @@ public ModelAndView viewspecifictrade(@ModelAttribute("order") Order d) {
 @RequestMapping(value="views/ViewOrderBlotter", method=RequestMethod.GET)
 public ModelAndView UpdateOrder(HttpServletRequest req){
 	
-	System.out.println("we r here!!");
+	
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 container.registerShutdownHook();
     PMServices pmsendtotrader = (PMServices) container.getBean("PMService");
   	List<Order> p=new ArrayList<Order>();
-  	System.out.println("here2");
+  
   	User user = (User) req.getSession().getAttribute("user");
   	Long pmId =user.getId();
-  	p=pmsendtotrader.displayForPM(pmId);
-  	System.out.println("here1");
+  	p=pmsendtotrader.displayForPMAfterSend(pmId);
+  
   for(Order l: p){
-	  System.out.println("here");
+	 
   		System.out.println(l);
   	}
   ModelAndView model = new ModelAndView("OrderBlotter");
@@ -101,13 +101,12 @@ public ModelAndView UpdateStatus(HttpServletRequest req){
 	   
 	PMServices pmservice=(PMServices) container.getBean("PMService"); 
 	
-	// System.out.println("testasbasd");
+
 	 List<Long> orderId=new ArrayList<Long>();
 	 List<String> orderStatus=new ArrayList<String>();
 		String[] out=req.getParameterValues("data");
 		String[] ids=out[0].split(",");
-	    //System.out.println("out:"  + out );
-		// System.out.println("testasbasd");
+	   
 		for(String order:ids)
 		{
 			orderId.add(Long.parseLong(order));
@@ -120,20 +119,18 @@ public ModelAndView UpdateStatus(HttpServletRequest req){
 		}
 		
 		pmservice.updateStatus(orderId);
-		/*AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
-		container.registerShutdownHook();*/
-		    PMServices pmsendtotrader = (PMServices) container.getBean("PMService");
+	
 		  	List<Order> p=new ArrayList<Order>();
-		  	//System.out.println("here2");
+		  
 		  	User user = (User) req.getSession().getAttribute("user");
 		  	Long pmId =user.getId();
-		  	p=pmsendtotrader.displayForPM(pmId);
-		  	//System.out.println("here1");
+		  	p=pmservice.displayForPMAfterSend(pmId);
+
 		 for(Order l: p){
-			 // System.out.println("here");
+	
 		  	System.out.println(l);
 		  	}
-		  ModelAndView model = new ModelAndView("OrderBlotter1");
+		  ModelAndView model = new ModelAndView("OrderBlotter");
 			model.addObject("Orders",p);
 		container.close();
 			return model;

@@ -22,17 +22,6 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 
 	@SuppressWarnings("unchecked")
 
-	@Override
-	public List<Order> findAll(Long pmid) {
-		List<Order> list = new ArrayList<>();
-		Query query = em.createQuery("from Order where pm_id= :pmid");
-		query.setParameter("pmid", pmid);
-
-		list = query.getResultList();
-		// System.out.println(list);
-		return list;
-
-	}
 
 	@Override
 	public Order edit(Order object) {
@@ -119,6 +108,21 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 			System.out.println("ERROR! no orders with this id IN SYSTEM");
 			return orders;
 		}
+	}
+
+	@Override
+	public List<Order> findAllStatusNew(Long pmId,Status status) {
+		List<Order> list = new ArrayList<>();
+		
+		Query query = em.createQuery("from Order where pm_id= :pmId and status= :status");
+		
+		query.setParameter("pmId", pmId);
+		query.setParameter("status", status.toString());
+		list = query.getResultList();
+		
+		 System.out.println(list);
+		return list;
+
 	}
 
 	// @Override
