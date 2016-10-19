@@ -18,16 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sapient.config.AppConfig;
 import com.sapient.jms.ActiveMQControl;
 import com.sapient.main.Login;
+import com.sapient.model.Securities;
 import com.sapient.model.User;
 import com.sapient.service.BrokerService;
 import com.sapient.service.BrokerServiceImpl;
+import com.sapient.service.SecuritiesService;
 import com.sapient.service.UserService;
 
 @Controller
 public class ExecutionController {
 
 	@RequestMapping("/views/startStopService")
-	public String executionStartStop(HttpServletRequest req) throws URISyntaxException, Exception {
+	public String executionStart(HttpServletRequest req) throws URISyntaxException, Exception {
 		String start = req.getParameter("start");
 		System.out.println("username: " + start);
 		/*
@@ -59,4 +61,39 @@ public class ExecutionController {
 		 * else return new ModelAndView("redirect:Login.jsp", "message", vm);
 		 */
 	}
+	/*@RequestMapping("/views/editSecurity1")
+	public String executionStartStop1(HttpServletRequest req) {
+		System.out.println("executionStartStop1");
+		
+		// * System.out.println("executionStartStop"); String stop =
+		// * req.getParameter("stop"); System.out.println("password: " + stop);
+		 
+		Securities security = new Securities();
+		String symbol = req.getParameter("ticker");
+		String symbolName = req.getParameter("Symbol name");
+		String last_trade_price = req.getParameter("Last traded Price");
+		String max_price_spread = req.getParameter("Maximum Price Spread ");
+		String max_executions = req.getParameter("Maximum Executions Per Order ");
+		String max_interval = req.getParameter("Maximum Interval ");
+		String prob_percent = req.getParameter("Maximum Probable Percentage");
+
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
+				com.sapient.config.AppConfig.class);
+		container.registerShutdownHook();
+		SecuritiesService securitiesService = (SecuritiesService) container.getBean("securitiesService");
+		System.out.println(symbol);
+		System.out.println("symbolName"+symbolName);
+		System.out.println("max_executions"+max_executions);
+		security = securitiesService.findByPrimaryKey(symbol);
+		security.setLast_trade_price(Double.parseDouble(last_trade_price));
+		security.setMax_executions(Integer.parseInt(max_executions));
+		security.setMax_interval(Integer.parseInt(max_interval));
+		security.setMax_price_spread(Double.parseDouble(max_price_spread));
+		security.setSecurity_name(symbolName);
+		security.setProb_percent(Double.parseDouble(prob_percent));
+		securitiesService.savesecurities(security);
+
+		return "redirect:ConfigureSecurity.jsp";
+
+	}*/
 }
