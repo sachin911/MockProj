@@ -41,6 +41,7 @@ public class TradingController {
 
 	
 	ModelAndView model = new ModelAndView("PendingOrders");
+	ModelAndView modelTradeHistory = new ModelAndView("TradeHistoryTemp");
 	
 	@RequestMapping(value = "/views/fetchOrder5", method = RequestMethod.GET)
     public ModelAndView method5(HttpServletRequest req,HttpServletResponse httpServletResponse) {
@@ -281,8 +282,8 @@ public class TradingController {
       	int BlockId = Integer.parseInt(out[0]);
       	Orders = orderService.findOrdersInBlock(BlockId);
       	//System.out.println(Orders);
-      	ModelAndView model = new ModelAndView("TradeHistoryTemp");
-		model.addObject("Orders",Orders);	
+      	
+      	modelTradeHistory.addObject("Orders",Orders);	
 		return model;
 		
     }
