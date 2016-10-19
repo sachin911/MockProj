@@ -57,9 +57,70 @@
 	
 	
 </script>
+
+ <script>
+
+$(document).ready(function() {
+
+    function addRemoveClass(theRows) {
+
+        theRows.removeClass("odd even");
+        theRows.filter(":odd").addClass("odd");
+        theRows.filter(":even").addClass("even");
+    }
+    var data=[];
+    var rows = $("table#orderBlotter tr:not(:first-child)");
+    var side=$(this).find('.OrderSide').html();
+    data.push(side);
+    addRemoveClass(rows);
+
+
+    $("#selectField").on("change", function() {
+
+        var selected = this.value;
+	
+        if (selected != "All") {
+
+            rows.filter("[position=" + selected + "]").show();
+            rows.not("[position=" + selected + "]").hide();
+            var visibleRows = rows.filter("[position=" + selected + "]");
+            addRemoveClass(visibleRows);
+        } else {
+
+            rows.show();
+            addRemoveClass(rows);
+
+        }
+        
+        
+         
+       
+        
+	
+
+    });
+});
+
+
+
+</script> 
+
+
 <style>
 .btn {
 	font-size: 0.9em;
+}
+
+.optionsDiv {
+padding-bottom:10px;
+font-weight:bold;
+}
+
+.odd{
+background:#CCFFEB;
+}
+.even{
+background:#99FFD6;
 }
 
 #order-blotter-headers {
@@ -148,8 +209,15 @@ scroll bar cutomization . #order-blotter-headers::-webkit-scrollbar {
                                   <div class="panel panel-default">
                                          <div class="panel-heading">
                                          
-                                         
-                                         <!--  <form action="SendToTrader" method="POST" >  -->
+                                  <div class="optionsDiv"> 
+                             
+                              
+                              </select> Filter By Side: <select id="selectField">
+                              <option>All</option>
+                              <option>Buy</option>
+                              <option>Sell</option>
+                              
+                              </select></div>      
                                          
                                                 <table class="table" id="orderBlotter">
 
@@ -172,7 +240,7 @@ scroll bar cutomization . #order-blotter-headers::-webkit-scrollbar {
                            <li>${listValue}</li>
                      </c:forEach>
 
-                     <tr>
+                     <tr position='${Orders.side}'>
                      <td> <label><input type="checkbox" id="checkbox" name="check" ></label></td>
                      <td class="OrderId"><c:out value='${Orders.orderId}'/></td> 
                       <td><c:out value='${Orders.symbol}'/></td>
