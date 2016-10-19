@@ -1,9 +1,12 @@
 package tradingApplication;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -173,7 +176,8 @@ public ModelAndView viewpendingorder(@ModelAttribute("order") Order d, HttpServl
        List<Order> p=new ArrayList<Order>();
        User user = (User) req.getSession().getAttribute("user");
        Long pmId =user.getId();
-       p=pmsendtotrader.displayForPMAfterSend(pmId);
+       p=pmsendtotrader.displayPendingForPM(pmId);
+       System.out.println("p:"+p);
        List<Order> q=new ArrayList<Order>();
        for(Order l: p){
               String stat = l.getStatus();
@@ -181,10 +185,27 @@ public ModelAndView viewpendingorder(@ModelAttribute("order") Order d, HttpServl
                      q.add(l);
              
        }
-       System.out.println("in controller" + q);
+       System.out.println("in pending controller" + q);
     ModelAndView model = new ModelAndView("PendingOrder");
        model.addObject("Orders",q);
        return model;
+}
+
+@RequestMapping(value="views/fetchTraderList", method=RequestMethod.POST)
+public void getTraderList(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+	container.registerShutdownHook();   
+	PMServices pmservice=(PMServices) container.getBean("PMService"); 
+	List<String> traderNameList = new ArrayList<String>();
+	traderNameList = pmservice.getTraderNameList();
+	String toSend = "";
+	for(String t : traderNameList) {
+		toSend += t;
+		toSend += ",";
+	}
+	PrintWriter out = response.getWriter();
+	out.print(toSend);
+	out.close();
 }
 
 

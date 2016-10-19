@@ -42,7 +42,7 @@ public class PMServiceImplementation implements PMServices {
 
 	@Override
 	public List<Order> findAllOrdersInPortfolio(Long id) {
-		return dao.findAllByID(id);
+		return dao.findAllOrdersByID(id);
 
 	}
 
@@ -55,6 +55,20 @@ public class PMServiceImplementation implements PMServices {
 	
 	public Long getTraderId(String traderName) {
 		return dao.getTraderId(traderName);
+	}
+
+	public List<String> getTraderNameList() {
+		return dao.getTraderNameList();
+	}
+
+	public String getUserName(Long id) {
+		return dao.getUserNameFromID(id);
+	}
+	
+	@Override
+	public List<Order> displayPendingForPM(Long pmId) {
+		return dao.findAllOrdersByID(pmId);
+		
 	}
 
 	/*

@@ -138,6 +138,7 @@ scroll bar cutomization . #order-blotter-headers::-webkit-scrollbar {
                            <li ><a href="PMHome.jsp">Home Page</a></li>           
                            <li><a href="CreateTrade.jsp">Create Trader</a></li>
                            <li class="active"><a href="ViewOrderBlotter">Order Blotter</a></li>
+                           <li><a href="./PendingOrder.jsp">Pending Orders</a></li>
                            <li><a href="PMHistory.jsp">History</a></li>
                      </ul>
               </div>
