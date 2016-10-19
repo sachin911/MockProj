@@ -59,7 +59,7 @@ public class PMServiceImplementation implements PMServices {
 
 	@Override
 	public List<Order> displayPendingForPM(Long pmId) {
-		return dao.findAllByID(pmId);
+		return dao.findAllOrdersByID(pmId);
 		
 	}
 
