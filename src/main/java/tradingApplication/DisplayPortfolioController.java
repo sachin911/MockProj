@@ -79,6 +79,12 @@ public class DisplayPortfolioController {
 		return mav;
 	}
 	
+	@RequestMapping("views/All")
+	public ModelAndView displayPortfolioAll(HttpServletRequest request){
+		ModelAndView mav = getPortfolioOrdersGeneral(request);
+		return mav;
+	}
+	
 	@RequestMapping("views/Transport")
 	public ModelAndView displayPortfolioTransport(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Transportation", request);
@@ -91,6 +97,11 @@ public class DisplayPortfolioController {
 		return mav;
 	}
 
+	@RequestMapping("views/Other")
+	public ModelAndView displayPortfolioOther(HttpServletRequest request){
+		ModelAndView mav = getPortfolioOrders("Other", request);
+		return mav;
+	}
 	
 	public ModelAndView getPortfolioOrders(String name, HttpServletRequest request){
 		String portfolio_name = name;

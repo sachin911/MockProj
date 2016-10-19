@@ -47,7 +47,7 @@
 				<li><a href="./PMHome.jsp">Home</a></li>
 				<li><a href="./CreateTrade.jsp">Create Order</a></li>
 				<li><a href="ViewOrderBlotter">Order Blotter</a></li>
-				<li><a href="./PendingOrder.jsp">Pending Orders</a></li>
+				<li><a href="ViewPendingOrder">Pending Orders</a></li>
 				<li class="active"><a href="GeneralView">History</a></li>
 			</ul>
 		</div>
