@@ -104,26 +104,30 @@ td {
                 <td><%= l.get(j).getQtyPlaced() %></td>
                </tr>
 
-     
+     		
               <tr id="hideEditH${Loop.index +1}" style="display:none;">
                 
-              
+             	
               <th></th>
                  <th>Order ID</th>
                  <th>Limit Price</th>
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
                  <th>PM ID</th>
+                 <th><button type="button" class="btn btn-default" id="cancelOrder">CANCEL</button></th>
                  
           </tr>
           
-             <tr  id="hideEditD${Loop.index +1}" style="display:none;">
+             <tr id="hideEditD${Loop.index +1}" style="display:none;">
              <th></th>
+             <td><input type="checkbox" class="sjahdjassads"/></td>
              <td><%= l.get(j).getBlockId() %></td> 
                 <td><%= l.get(j).getLimitPrice() %></td>
                <td><%= l.get(j).getStopPrice() %></td>
                 <td><%= l.get(j).getQtyPlaced() %></td>
+                
               <%--   <td><%= l.get(j).getPmId() %></td> --%>
+            
                </tr>
                  
          
@@ -151,6 +155,9 @@ td {
     
     $(document).ready(function(){
     	$('#sendBlock').click(function() {
+    	
+ 		
+    		location.href="PopulateBB";	
     		var data=[];
     	$('#sendBlockTable tr').each(function()
     	{
@@ -180,6 +187,17 @@ td {
     	  
     	  
     	});
+    	
+    	$(document).on("click","#cancelOrder",function(){
+    		
+    		$("tr[id^='hideEditD']").each(function() {
+    			console.log("test");
+    		});
+    		
+    	});
+    
+    	
+    	
     	});
     
     

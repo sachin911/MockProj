@@ -77,19 +77,20 @@
                  <td><c:out value='${Blocks.status}'/></td>
                  <td><c:out value='${Blocks.executedDate}'/></td>
                  <td><button id ="detailsButton${Loop.index +1}" class="btn btn-default" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
+                 </tr>
                  <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
                 
-              <table class="orderTable" id="hideDetailsD${Loop.index +1}" style="display:none;">
+             <%--  <table class="orderTable" id="hideDetailsD${Loop.index +1}" style="display:none;">
               <th></th>
                  <th>Status</th>
                  <th>Limit Price</th>
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
-                 
+                  --%>
           </tr>
           
             
-             	<c:forEach items='${Orders}' var="Orders" >   
+             	<%-- <c:forEach items='${Orders}' var="Orders" >   
             <tr>
             	 <td><c:out value='${Orders.status}'/></td>
 			  <td><c:out value='${Orders.limitPrice}'/></td>
@@ -98,7 +99,7 @@
 			      <td><c:out value='${Orders.qtyExecuted}'/></td>
 			     
                </tr>
-                 </c:forEach>
+                 </c:forEach> --%>
                 
             </c:forEach>
          		</table>
@@ -168,7 +169,7 @@
       		  }
       		});
         	 
-        	LoadData();
+        	//LoadData();
         	
             }
        

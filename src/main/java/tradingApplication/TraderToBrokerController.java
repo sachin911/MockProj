@@ -48,7 +48,7 @@ public class TraderToBrokerController {
 			blocks.add(orderService.findBlockByBlockId(block1));
 		}
 		
-		
+		orderService.updateStatus(blocks.get(0).getStatus(), blocks);
 		MarshallAndSend msobj = new MarshallAndSend();
 		msobj.sendExecutedBlock(blocks);
 		

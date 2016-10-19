@@ -257,7 +257,7 @@ public class TradingController {
         OrderService orderService = container.getBean(OrderService.class);
     //    System.out.println("Maybe comes here too");
       	List<Block> Blocks =new ArrayList<Block>();
-      	Blocks = orderService.displayBlock(5);
+      	Blocks = orderService.displayBlockHistory(5);
       
       	ModelAndView model = new ModelAndView("TradeHistoryTemp");
 		model.addObject("Blocks",Blocks);

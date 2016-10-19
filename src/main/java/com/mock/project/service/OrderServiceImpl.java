@@ -80,6 +80,12 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
+	public List<Block> displayBlockHistory(int traderId) {
+		// TODO Auto-generated method stub
+		return dao.findAllBlocksHistory(traderId);
+	}
+	
+	@Override
 	public Block findBlockByBlockId(int blockId)
 	{
 		Block block=dao.findBlock(blockId);

@@ -25,10 +25,11 @@ public interface OrderDAO extends GenericDAO<Order, Long>
 
 
 	List<Block> findAllBlocks(int traderId);
+	List<Block> findAllBlocksHistory(int traderId);
 	List<Order> findOrder(int orderId);
 
 	void updateStatus(long block_id,List order_id);
-	void updateBlock(Status changeStatus, List block_id);
+	void updateBlock(Status changeStatus, List<Block> block_id);
 	void addBlock(Block block);
 
 	Block findBlock(int blockId);

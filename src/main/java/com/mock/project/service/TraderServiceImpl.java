@@ -188,7 +188,7 @@ public class TraderServiceImpl implements TraderService {
 			//insert all the orders into block
 			//Write Code Here
 			//write the value of block_id in order Table
-		
+			
 		
 		
 		}

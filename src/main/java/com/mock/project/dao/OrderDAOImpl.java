@@ -80,20 +80,30 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 	}
 
-	@Override
-	public void updateBlock(Status changeStatus, List block_id) {
-		for (int i = 0; i < block_id.size(); i++) {
+	 
+		@Override
+		public void updateBlock(Status changeStatus, List<Block> block_id) {
 
-			long b_id = (Long) block_id.get(i);
-			Query query = em.createQuery("update Order set status =:status" + "where block_id = :b_id");
-			query.setParameter("status", changeStatus);
-			query.setParameter("b_id", b_id);
-		}
-		
+			
 
+			for (int i = 0; i < block_id.size(); i++) {
+
+				long b_id =   block_id.get(i).getBlockId();
 
 
-	}
+				Query query = em.createQuery("update Block set status =:changeStatus" + " where block_id =:b_id");
+
+				query.setParameter("changeStatus", changeStatus.toString());
+				query.setParameter("b_id", b_id);
+				query.executeUpdate();
+				
+			}
+			
+
+
+
+		} 
+
 	@Override
     public void addToThisBlock(Order order, Integer selectedBlock) {
 		System.out.println("updatingblockid");
@@ -211,6 +221,14 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		return query.getResultList();
 
 	}
+	
+	public List<Block> findAllBlocksHistory(int traderId) {
+		Query query = em.createQuery("from Block where status!=:stat");
+		query.setParameter("stat", "New");
+
+		return query.getResultList();
+
+	}
 
 	@Override
 	public void allocateorder(Block block) {
@@ -253,7 +271,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 			}
 			else{
 				Query query2 = em.createQuery("update Order set status=:status3 where orderId=:oid");
-				query2.setParameter("status3", status.UnAllocated.toString());
+				query2.setParameter("status3", status.Open.toString());
 				query2.setParameter("oid",order1.getOrderId());
 				System.out.println(query2.executeUpdate());
 				//query2.executeUpdate();

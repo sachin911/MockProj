@@ -34,5 +34,7 @@ public interface OrderService {
 
 	List<Order> findOrdersInBlock(int blockId);
 
+	List<Block> displayBlockHistory(int traderId);
+
 
 }
