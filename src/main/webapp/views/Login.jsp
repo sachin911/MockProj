@@ -366,10 +366,10 @@ FOOTER
 
 		<div class="footer">
 		<a href="ForgetPassword.jsp">Forgot Password</a>
-			<input type="submit" value="Login" class="button" name="submit"/>
+			
 	
 		<!-- <a href="BrokerMainScreen.jsp" class="button">Login</a> -->
-		<input type="submit" value="login" class ="button" />
+		<input type="submit" value="Login" class ="button" />
 		</div>
 
 	</form>

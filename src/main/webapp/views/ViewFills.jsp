@@ -20,8 +20,13 @@
 table {
     border-collapse: separate;
     border-spacing: 0 1em;
+    
 }
-</style>
+
+li:last-child {
+	float: right;
+}</style>
+
 </head>
 <body>
 
@@ -41,12 +46,13 @@ table {
     <li ><a href="ConfigureSecurity.jsp">Configure</a></li>
     <li class="active"><a href="ViewFills.jsp">View Fills</a></li>
          <li><a href="Login.jsp">Logout</a></li>
+         <li><a onclick="confirmstop()">Stop</a></li>
   </ul>
   <div style="height:300px;overflow-y:scroll;;">
   <table class="table table-striped" id="dataTable">
 			<thead class="thead-inverse">
 				<tr>
-				<th>Block Id</th>    
+				<th onmouseover="this.style.background='#AAA'" id="nm">Block Id</th>    
 				<th>Ticker</th>    
 				<!-- <th>Name</th> -->
 				<th>Side</th>
@@ -112,6 +118,61 @@ table {
 		</table>
 </div >
 </div>
+<script>
+		function sortTable(f, n) {
+			var rows = $('#mytable tbody  tr').get();
+
+			rows.sort(function(a, b) {
+
+				var A = getVal(a);
+				var B = getVal(b);
+
+				if (A < B) {
+					return -1 * f;
+				}
+				if (A > B) {
+					return 1 * f;
+				}
+				return 0;
+			});
+
+			function getVal(elm) {
+				var v = $(elm).children('td').eq(n).text().toUpperCase();
+				if ($.isNumeric(v)) {
+					v = parseInt(v, 10);
+				}
+				return v;
+			}
+
+			$.each(rows, function(index, row) {
+				$('#mytable').children('tbody').append(row);
+			});
+		}
+		var f_sl = 1;
+		var f_nm = 1;
+		$("#sl").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#nm").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		
+		
+	</script>
+	<script type="text/javascript">
+	function confirmstop()
+	{
+		
+		var answer=confirm("Do you want to stop")
+		if(answer){
+		window.location.href="Login.jsp"	
+		}
+		
+	}</script>
 
 </body>
 </html>

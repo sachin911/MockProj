@@ -1,7 +1,9 @@
 <%@page import="com.sapient.config.AppConfig"%>
 <%@page import="com.sapient.service.SecuritiesService"%>
-<%@page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
-<%@page import="org.springframework.context.support.AbstractApplicationContext"%>
+<%@page
+	import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
+<%@page
+	import="org.springframework.context.support.AbstractApplicationContext"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page
@@ -20,9 +22,19 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script  type="text/javascript"  src="/path/to/jquery-latest.js"></script>
+ 
+<script  type="text/javascript"  src="/path/to/jquery.tablesorter.js"></script>
+ 
 </head>
+
 <body>
-<!-- <style>
+<style>
+li:last-child {
+	float: right;
+}</style>
+
+	<!-- <style>
 tbody {
     height: 200px;
     display: inline-block;
@@ -40,14 +52,13 @@ thead {
 		securityList = dao.findAll();
 	%> --%>
 	<%
-	AbstractApplicationContext container=new AnnotationConfigApplicationContext(AppConfig.class);
-	container.registerShutdownHook();
- SecuritiesService securityService= (SecuritiesService)
- container.getBean("securitiesService");
-	List<Securities> securityList=new ArrayList();
-		
-	securityList=securityService.findALL();
-	%> 
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+		container.registerShutdownHook();
+		SecuritiesService securityService = (SecuritiesService) container.getBean("securitiesService");
+		List<Securities> securityList = new ArrayList();
+
+		securityList = securityService.findALL();
+	%>
 	<div class="container">
 		<h3>Broker</h3>
 		<ul class="nav nav-pills">
@@ -55,38 +66,51 @@ thead {
 			<li class="active"><a href="ConfigureSecurity.jsp">Configure</a></li>
 			<li><a href="ViewFills.jsp">View Fills</a></li>
 			<li><a href="Login.jsp">Logout</a></li>
+			<li><a onclick="confirmstop()">Stop</a></li>
 
 		</ul>
 	</div>
-	<div class="container" style="height:300px;overflow-y:scroll;;">
-		<table  id="securities" style="width: 100%"  class="table table-striped"  height: 100px;
+	<div class="container" style="height: 600px; overflow-y: scroll;">
+		<table id="securities" style="width: 100%" class="table table-striped"
+			height: 100px;
   overflow-y: scroll>
+			<thead>
+				<tr>
+					   
+					<th id="nm" onmouseover="this.style.background='#AAA'">Ticker</th>
+					   
+					<th id="nme" onmouseover="this.style.background='#AAA'">Name</th>
+					   
+					<th id="sl" onmouseover="this.style.background='#AAA'">Last
+						Traded Price</th>
+					<th>Maximum price Spread(%)</th>
+					<th>Maximum executions</th>
+					<th>Maximum Interval</th>
+					<th>Max Probable(%)</th>  
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					for (Securities security : securityList) {
+				%>
+				<tr>
+					<td><%=security.getSecurity_symbol()%></td>    
+					<td><%=security.getSecurity_name()%></td>    
+					<td><%=security.getLast_trade_price()%></td>
+					<td><%=security.getMax_price_spread()%></td>
+					<td><%=security.getMax_executions()%></td>
+					<td><%=security.getMax_interval()%></td>
+					<td><%=security.getProb_percent()%></td>
+					<td><button type="button" class="btn btn-info btn-lg"
+							data-toggle="modal" data-target="#myModal"
+							onclick=GetSecuritiesData(this) name="Editbutton">Edit</button></td>
 
-			<tr>
-				   
-				<th>Ticker</th>    
-				<th>Name</th>    
-				<th>Last Traded Price</th>
-				<th>Maximum price Spread(%)</th>
-				<th>Maximum executions</th>
-				<th>Maximum Interval</th>
-				<th>Max Probable(%)</th>  
-			</tr>
-			
-			<% for(Securities security:securityList) { %>
-  <tr>
-    <th><%=security.getSecurity_symbol()%></th>
-    <th><%=security.getSecurity_name() %></th>
-    <th><%=security.getLast_trade_price() %></th>
-    <th><%=security.getMax_price_spread() %></th>
-    <th><%=security.getMax_executions() %></th>
-    <th><%=security.getMax_interval() %></th>
-    <th><%=security.getProb_percent() %></th>
-    <td ><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick=GetSecuritiesData(this) name="Editbutton">edit</button></td>
-  </tr>
-  <% } %>
- 
- <%--  <% for(int i=1;i<=10;i++){ %>
+				</tr>
+				<%
+					}
+				%>
+
+				<%--  <% for(int i=1;i<=10;i++){ %>
 
 			<tr>
 				<td id="ticker">APPL</td>
@@ -112,8 +136,23 @@ thead {
 						data-toggle="modal" data-target="#myModal">edit</button></td>
 			</tr> -->
 			<%} %>
- --%>		</table>
+ --%>
+			</tbody>
+			
+		<!-- 	<button style="float: right" type="button"
+				class="btn btn-info btn-lg" data-toggle="modal"
+				data-target="#myModal" name="Addbutton">Add</button> -->
+		</table>
 	</div>
+	<div class="container">
+		<form method="post" action="">
+			<button type="button" class="btn btn-info btn-lg"
+							data-toggle="modal" data-target="#myModal1"
+							 name="Addbutton">Add</button></form>
+							 </div>
+							 
+							 
+							 
 	<div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 
@@ -121,7 +160,7 @@ thead {
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Edit configuration of Securities</h4>
+					<!-- <h4 class="modal-title">Edit configuration of Securities</h4> -->
 				</div>
 				<div class="modal-body">
 					<p>
@@ -130,11 +169,15 @@ thead {
 						<!-- CSS -->
 						<style>
 .myForm {
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif, cursive;
 	font-size: 0.8em;
 	width: 30em;
 	padding: 1em;
 	border: 1px solid #ccc;
+}
+
+.myForm table {
+	width: 30cm;
 }
 
 .myForm * {
@@ -143,11 +186,11 @@ thead {
 
 .myForm fieldset {
 	border: none;
-	padding: 0;
+	padding: 1;
 }
 
 .myForm legend, .myForm label {
-	padding: 0;
+	padding: 1;
 	font-weight: bold;
 }
 
@@ -169,7 +212,7 @@ thead {
 	border: 1px solid #ccc;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 0.9em;
-	padding: 0.3em;
+	padding: 5em;
 }
 
 .myForm textarea {
@@ -196,84 +239,331 @@ thead {
 }
 </style>
 
-						</head>
-						<body>
+					
+						
 							<div allign="centre">
-							<form class="myForm" method="post" action="editSecurity">
 
-								<p>
-									<label>Ticker <input type="text"  allign=right"name="ticker" id="ticker1" placeholder="Ticker";
-										disabled>
-									</label>
-								</p>
+								<form class="container" method="post" action="editSecurity">
+									<fieldset>
+										<legend>Edit Configuration of Securities</legend>
 
-								<p>
-									<label>Name <input type="text" allign=right" name="Symbol name" placeholder="Symbol Name"  id="Symbol" value="Google" disabled>
-									</label>
-								</p>
+										<table style="height: 293px;" width="401">
+											<tbody>
+												<tr>
+													<td style="text-align: center;">Ticker</td>
+													<td style="text-align: center;"><input id="ticker1"
+														disabled="disabled" type="text" placeholder="Ticker" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Name</td>
+													<td style="text-align: center;"><input id="Symbol"
+														disabled="disabled" name="Symbol name" type="text"
+														value="Google" placeholder="Symbol Name" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Last Traded Price</td>
+													<td style="text-align: center;"><input
+														id="Last traded Price" name="Last traded Price"
+														type="Number" value="120.0" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Maximum Price Spread</td>
+													<td style="text-align: center;"><input
+														id="Maximum Price Spread " name="Maximum Price Spread "
+														type="Number" value="12" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Maximum exection per
+														order</td>
+													<td style="text-align: center;"><input
+														id="Maximum Executions Per Order "
+														name="Maximum Executions Per Order " type="Number"
+														value="100" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Maximum interval</td>
+													<td style="text-align: center;"><input
+														id="Maximum Interval" name="Maximum Interval "
+														type="Number" value="100" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Maximum Probable
+														Percentage</td>
+													<td style="text-align: center;"><input
+														id="Maximum Probable Percentage"
+														name="Maximum Probable Percentage" type="Number"
+														value="10" /></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td style="text-align: center;"><input type="submit"
+														class="btn btn-primary" value="Save" /></td>
+												</tr>
+												</tbody>
+												</table>
+												</fieldset>
+												</form>
+												</div>
+												</form>
+												</div>
+												</div>
+												</div>
+												<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			
+			
+	<div id="myModal1" class="modal fade" role="dialog">
+		<div class="modal-dialog">
 
-								<p>
-									<label>Last traded Price <input type="Number" allign=right" name="Last traded Price" id="Last traded Price" value="120.0">
-									</label>
-								</p>
-								<p>
-									<label>Maximum Price Spread <input type="Number" allign=right" name="Maximum Price Spread " id="Maximum Price Spread "value="12">
-									</label>
-								</p>
-								<p>
-									<label>Maximum Executions Per Order <input type="Number" allign=right" name="Maximum Executions Per Order " id="Maximum Executions Per Order " value="100">
-									</label>
-								</p>
-								<p>
-									<label>Maximum Interval<input type="Number" allign=right" name="Maximum Interval " id="Maximum Interval" value="100">
-									</label>
-								</p>
-								<p>
-									<label>Maximum Probable Percentage<input type="Number" allign=right" name="Maximum Probable Percentage" id="Maximum Probable Percentage" value="10">
-									</label>
-								</p>
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<!-- <h4 class="modal-title">Edit configuration of Securities</h4> -->
+				</div>
+				<div class="modal-body">
+					<p>
+					<form method="post" class="container">
 
-								<p>
-									<input type="submit" class="btn btn-primary" value="Save"/></input>
-								</p>
-
-							</form>
-</div>
-						</body>
-</html>
-</form>
-</p>
-</div>
-<div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-</div>
-</div>
-
-</div>
-</div>
-<script>
-function GetSecuritiesData(button)
-{
-	var rown = button.parentNode.parentNode.rowIndex;
-	/* var u=document.getElementById("securities").rows[rown].cells[0].innerHTML; */
-	//alert(u);
-/* 	document.Removeform.action="RemoveServlet?uname="+u;
-	//alert(document.Removeform.action);
-	window.location.href="RemoveServlet?uname="+u; */
-	
-	//document.Removeform.submit();
-
-document.getElementById("ticker1").value =document.getElementById("securities").rows[rown].cells[0].innerHTML;
-document.getElementById("Symbol").value =document.getElementById("securities").rows[rown].cells[1].innerHTML;
-document.getElementById("Last traded Price").value =document.getElementById("securities").rows[rown].cells[2].innerHTML;
-document.getElementById("Maximum Price Spread ").value =document.getElementById("securities").rows[rown].cells[3].innerHTML;
-document.getElementById("Maximum Executions Per Order ").value =document.getElementById("securities").rows[rown].cells[4].innerHTML;
-document.getElementById("Maximum Interval").value =document.getElementById("securities").rows[rown].cells[5].innerHTML;
-document.getElementById("Maximum Probable Percentage").value =document.getElementById("securities").rows[rown].cells[6].innerHTML;
+						<!-- CSS -->
+						<style>
+.myForm {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif, cursive;
+	font-size: 0.8em;
+	width: 30em;
+	padding: 1em;
+	border: 1px solid #ccc;
 }
-</script>
+
+.myForm table {
+	width: 30cm;
+}
+
+.myForm * {
+	box-sizing: border-box;
+}
+
+.myForm fieldset {
+	border: none;
+	padding: 1;
+}
+
+.myForm legend, .myForm label {
+	padding: 1;
+	font-weight: bold;
+}
+
+.myForm label.choice {
+	font-size: 0.9em;
+	font-weight: normal;
+}
+
+.myForm label {
+	text-align: left;
+	display: block;
+}
+
+.myForm input[type="text"], .myForm input[type="tel"], .myForm input[type="email"],
+	.myForm input[type="datetime-local"], .myForm select, .myForm textarea
+	{
+	float: right;
+	width: 60%;
+	border: 1px solid #ccc;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 0.9em;
+	padding: 5em;
+}
+
+.myForm textarea {
+	height: 100px;
+}
+
+.myForm input[type="radio"], .myForm input[type="checkbox"] {
+	margin-left: 40%;
+}
+
+.myForm button {
+	padding: 1em;
+	border-radius: 0.5em;
+	background: #eee;
+	border: none;
+	font-weight: bold;
+	margin-left: 40%;
+	margin-top: 1.8em;
+}
+
+.myForm button:hover {
+	background: #ccc;
+	cursor: pointer;
+}
+</style>
+
+					
+						
+							<div allign="centre">
+
+								<form class="container" method="post" action="addsecurity">
+									<fieldset>
+										<legend>Edit Configuration of Securities</legend>
+
+										<table style="height: 293px;" width="401">
+											<tbody>
+												<tr>
+													<td style="text-align: center;">Ticker</td>
+													<td style="text-align: center;"><input id="ticker1"
+														type="text" placeholder="Ticker" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Name</td>
+													<td style="text-align: center;"><input id="Symbol"
+														name="Symbol name" type="text"
+														value="Google" placeholder="Symbol Name" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Last Traded Price</td>
+													<td style="text-align: center;"><input
+														id="Last traded Price" name="Last traded Price"
+														type="Number" value="120.0" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Maximum Price Spread</td>
+													<td style="text-align: center;"><input
+														id="Maximum Price Spread " name="Maximum Price Spread "
+														type="Number" value="12" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Maximum exection per
+														order</td>
+													<td style="text-align: center;"><input
+														id="Maximum Executions Per Order "
+														name="Maximum Executions Per Order " type="Number"
+														value="100" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Maximum interval</td>
+													<td style="text-align: center;"><input
+														id="Maximum Interval" name="Maximum Interval "
+														type="Number" value="100" /></td>
+												</tr>
+												<tr>
+													<td style="text-align: center;">Maximum Probable
+														Percentage</td>
+													<td style="text-align: center;"><input
+														id="Maximum Probable Percentage"
+														name="Maximum Probable Percentage" type="Number"
+														value="10" /></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td style="text-align: center;"><input type="submit"
+														class="btn btn-primary" value="Save" /></td>
+												</tr>
+												</tbody>
+												</table>
+												</fieldset>
+												</form>
+												</div>
+												</form>
+												</div>
+												</div>
+												</div>
+												<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>		
+				
+	
+	<script>
+		function GetSecuritiesData(button) {
+			var rown = button.parentNode.parentNode.rowIndex;
+			/* var u=document.getElementById("securities").rows[rown].cells[0].innerHTML; */
+			//alert(u);
+			/* 	document.Removeform.action="RemoveServlet?uname="+u;
+			 //alert(document.Removeform.action);
+			 window.location.href="RemoveServlet?uname="+u; */
+
+			//document.Removeform.submit();
+			document.getElementById("ticker1").value = document
+					.getElementById("securities").rows[rown].cells[0].innerHTML;
+			document.getElementById("Symbol").value = document
+					.getElementById("securities").rows[rown].cells[1].innerHTML;
+			document.getElementById("Last traded Price").value = document
+					.getElementById("securities").rows[rown].cells[2].innerHTML;
+			document.getElementById("Maximum Price Spread ").value = document
+					.getElementById("securities").rows[rown].cells[3].innerHTML;
+			document.getElementById("Maximum Executions Per Order ").value = document
+					.getElementById("securities").rows[rown].cells[4].innerHTML;
+			document.getElementById("Maximum Interval").value = document
+					.getElementById("securities").rows[rown].cells[5].innerHTML;
+			document.getElementById("Maximum Probable Percentage").value = document
+					.getElementById("securities").rows[rown].cells[6].innerHTML;
+		}
+	</script>
+	<script>
+		function sortTable(f, n) {
+			var rows = $('#securities tbody  tr').get();
+
+			rows.sort(function(a, b) {
+
+				var A = getVal(a);
+				var B = getVal(b);
+
+				if (A < B) {
+					return -1 * f;
+				}
+				if (A > B) {
+					return 1 * f;
+				}
+				return 0;
+			});
+
+			function getVal(elm) {
+				var v = $(elm).children('td').eq(n).text().toUpperCase();
+				if ($.isNumeric(v)) {
+					v = parseInt(v, 10);
+				}
+				return v;
+			}
+
+			$.each(rows, function(index, row) {
+				$('#securities').children('tbody').append(row);
+			});
+		}
+		var f_sl = 1;
+		var f_nm = 1;
+		$("#sl").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#nme").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#nm").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+	</script>
+	<script type="text/javascript">
+		function confirmstop() {
+
+			var answer = confirm("Do you want to stop")
+			if (answer) {
+				window.location.href = "Login.jsp"
+			}
+
+		}
+	</script>
 </body>
 </html>
+												
+																							
+
 
 
 

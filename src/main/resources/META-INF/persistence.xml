@@ -29,9 +29,9 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
     <properties>
       
        
-      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@BLRVIKR29:1521:xe" />
-      <property name="javax.persistence.jdbc.user" value="testdb" />
-      <property name="javax.persistence.jdbc.password" value="testdb" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@BLRVIKR30:1521:xe" />
+      <property name="javax.persistence.jdbc.user" value="hw1" />
+      <property name="javax.persistence.jdbc.password" value="hw1" />
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
 
                 <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
