@@ -52,6 +52,10 @@ public class PMServiceImplementation implements PMServices {
 		System.out.println(status);
 		return dao.findAllStatusNew(pmId,status);
 	}
+	
+	public Long getTraderId(String traderName) {
+		return dao.getTraderId(traderName);
+	}
 
 	/*
 

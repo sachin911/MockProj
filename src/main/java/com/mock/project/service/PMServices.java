@@ -19,7 +19,7 @@ public interface PMServices {
 	public void addPort(Portfolio p);
 	public List<Order> findAllOrdersInPortfolio(String name, Long pmid);
 	public List<Order> findAllOrdersInPortfolio(Long id);
-
+	public Long getTraderId(String traderName);
 	void updateStatus(List order_id);
 	List<Order> displayForPMAfterSend(Long pmId);
 }
