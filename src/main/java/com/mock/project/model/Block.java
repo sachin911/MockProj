@@ -26,57 +26,67 @@ public class Block {
 	@Column(name="BLOCK_ID")
 	private Long blockId;
 	
-	@Column(name="SYMBOL", nullable=false, length=40)
-	private String symbol;
-	
 	@Column(name="SIDE", nullable=false, length=40)
 	private String side;
 	
-	@Column(name="ORDER_TYPE", nullable=false, length=40)
-	private String orderType;
+	@Column(name="SYMBOL", nullable=false, length=40)
+	private String symbol;
 	
-	@Column(name="QTY_PLACED", nullable=false)
-	private long qtyPlaced;
+	@Column(name="TOTAL_QUANTITY", nullable=false)
+	private long total_quantity;
 	
-	@Column(name="QTY_EXECUTED")
-	private long qtyExecuted;
-	
-	@Column(name="STOP_PRICE")
-	private double stopPrice;
-	
-	@Column(name="LIMIT_PRICE")
-	private double limitPrice;
+	@Column(name="TYPE", nullable=false, length=40)
+	private String type;
 	
 	@Column(name="STATUS",nullable=false)
 	private String status;
 	
-	@Column(name="BLOCK_DATE")
-	private Date orderDate;
+	@Column(name="LIMIT_PRICE")
+	private double limit_price;
+	
+	@Column(name="STOP_PRICE")
+	private double stop_price;
+	
+	@Column(name="EXECUTED_QUANTITY")
+	private long executed_quantity;
 	
 	@Column(name="EXECUTED_DATE") 
-	private Date executedDate;
+	private Date executed_date;
+	
+	@Column(name="EXECUTED_PRICE") 
+	private double executed_price;
+	
+	@Column(name="BLOCK_DATE")
+	private Date block_date;
+	
+	@Column(name="TRADER_ID")
+	private Long traderId;
 
 
 	
 	public Block() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Block(String symbol, String side, String orderType, long qtyPlaced, long qtyExecuted, double stopPrice,
-			double limitPrice, String status, Date orderDate, Date executedDate) {
-		super();
-		this.symbol = symbol;
-		this.side = side;
-		this.orderType = orderType;
-		this.qtyPlaced = qtyPlaced;
-		this.qtyExecuted = qtyExecuted;
-		this.stopPrice = stopPrice;
-		this.limitPrice = limitPrice;
-		this.status = status;
-		this.orderDate = orderDate;
-		this.executedDate = executedDate;
-	}
 
+
+
+	public Block(String side, String symbol, long total_quantity, String type, String status, double limit_price,
+			double stop_price, long executed_quantity, Date executed_date, double executed_price, Date block_date,
+			Long traderId) {
+		super();
+		this.side = side;
+		this.symbol = symbol;
+		this.total_quantity = total_quantity;
+		this.type = type;
+		this.status = status;
+		this.limit_price = limit_price;
+		this.stop_price = stop_price;
+		this.executed_quantity = executed_quantity;
+		this.executed_date = executed_date;
+		this.executed_price = executed_price;
+		this.block_date = block_date;
+		this.traderId = traderId;
+	}
 
 
 
@@ -84,113 +94,183 @@ public class Block {
 		return blockId;
 	}
 
+
+
 	public void setBlockId(Long blockId) {
 		this.blockId = blockId;
 	}
 
-	public String getSymbol() {
-		return symbol;
-	}
 
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
 
 	public String getSide() {
 		return side;
 	}
 
+
+
 	public void setSide(String side) {
 		this.side = side;
 	}
 
-	public String getOrderType() {
-		return orderType;
+
+
+	public String getSymbol() {
+		return symbol;
 	}
 
-	public void setOrderType(String orderType) {
-		this.orderType = orderType;
+
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
-	public long getQtyPlaced() {
-		return qtyPlaced;
+
+
+	public long getTotal_quantity() {
+		return total_quantity;
 	}
 
-	public void setQtyPlaced(long qtyPlaced) {
-		this.qtyPlaced = qtyPlaced;
+
+
+	public void setTotal_quantity(long total_quantity) {
+		this.total_quantity = total_quantity;
 	}
 
-	public long getQtyExecuted() {
-		return qtyExecuted;
+
+
+	public String getType() {
+		return type;
 	}
 
-	public void setQtyExecuted(long qtyExecuted) {
-		this.qtyExecuted = qtyExecuted;
+
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public double getStopPrice() {
-		return stopPrice;
-	}
 
-	public void setStopPrice(double stopPrice) {
-		this.stopPrice = stopPrice;
-	}
-
-	public double getLimitPrice() {
-		return limitPrice;
-	}
-
-	public void setLimitPrice(double limitPrice) {
-		this.limitPrice = limitPrice;
-	}
 
 	public String getStatus() {
 		return status;
 	}
 
+
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public Date getOrderDate() {
-		return orderDate;
+
+
+	public double getLimit_price() {
+		return limit_price;
 	}
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
+
+
+	public void setLimit_price(double limit_price) {
+		this.limit_price = limit_price;
 	}
 
-	public Date getExecutedDate() {
-		return executedDate;
+
+
+	public double getStop_price() {
+		return stop_price;
 	}
 
-	public void setExecutedDate(Date executedDate) {
-		this.executedDate = executedDate;
+
+
+	public void setStop_price(double stop_price) {
+		this.stop_price = stop_price;
 	}
 
-	
-	
+
+
+	public long getExecuted_quantity() {
+		return executed_quantity;
+	}
+
+
+
+	public void setExecuted_quantity(long executed_quantity) {
+		this.executed_quantity = executed_quantity;
+	}
+
+
+
+	public Date getExecuted_date() {
+		return executed_date;
+	}
+
+
+
+	public void setExecuted_date(Date executed_date) {
+		this.executed_date = executed_date;
+	}
+
+
+
+	public double getExecuted_price() {
+		return executed_price;
+	}
+
+
+
+	public void setExecuted_price(double executed_price) {
+		this.executed_price = executed_price;
+	}
+
+
+
+	public Date getBlock_date() {
+		return block_date;
+	}
+
+
+
+	public void setBlock_date(Date block_date) {
+		this.block_date = block_date;
+	}
+
+
+
+	public Long getTraderId() {
+		return traderId;
+	}
+
+
+
+	public void setTraderId(Long traderId) {
+		this.traderId = traderId;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((blockId == null) ? 0 : blockId.hashCode());
-		result = prime * result + ((executedDate == null) ? 0 : executedDate.hashCode());
+		result = prime * result + ((block_date == null) ? 0 : block_date.hashCode());
+		result = prime * result + ((executed_date == null) ? 0 : executed_date.hashCode());
 		long temp;
-		temp = Double.doubleToLongBits(limitPrice);
+		temp = Double.doubleToLongBits(executed_price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
-		result = prime * result + ((orderType == null) ? 0 : orderType.hashCode());
-		result = prime * result + (int) (qtyExecuted ^ (qtyExecuted >>> 32));
-		result = prime * result + (int) (qtyPlaced ^ (qtyPlaced >>> 32));
+		result = prime * result + (int) (executed_quantity ^ (executed_quantity >>> 32));
+		temp = Double.doubleToLongBits(limit_price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((side == null) ? 0 : side.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		temp = Double.doubleToLongBits(stopPrice);
+		temp = Double.doubleToLongBits(stop_price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
-		
+		result = prime * result + (int) (total_quantity ^ (total_quantity >>> 32));
+		result = prime * result + ((traderId == null) ? 0 : traderId.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -198,7 +278,7 @@ public class Block {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Block))
+		if (getClass() != obj.getClass())
 			return false;
 		Block other = (Block) obj;
 		if (blockId == null) {
@@ -206,26 +286,21 @@ public class Block {
 				return false;
 		} else if (!blockId.equals(other.blockId))
 			return false;
-		if (executedDate == null) {
-			if (other.executedDate != null)
+		if (block_date == null) {
+			if (other.block_date != null)
 				return false;
-		} else if (!executedDate.equals(other.executedDate))
+		} else if (!block_date.equals(other.block_date))
 			return false;
-		if (Double.doubleToLongBits(limitPrice) != Double.doubleToLongBits(other.limitPrice))
-			return false;
-		if (orderDate == null) {
-			if (other.orderDate != null)
+		if (executed_date == null) {
+			if (other.executed_date != null)
 				return false;
-		} else if (!orderDate.equals(other.orderDate))
+		} else if (!executed_date.equals(other.executed_date))
 			return false;
-		if (orderType == null) {
-			if (other.orderType != null)
-				return false;
-		} else if (!orderType.equals(other.orderType))
+		if (Double.doubleToLongBits(executed_price) != Double.doubleToLongBits(other.executed_price))
 			return false;
-		if (qtyExecuted != other.qtyExecuted)
+		if (executed_quantity != other.executed_quantity)
 			return false;
-		if (qtyPlaced != other.qtyPlaced)
+		if (Double.doubleToLongBits(limit_price) != Double.doubleToLongBits(other.limit_price))
 			return false;
 		if (side == null) {
 			if (other.side != null)
@@ -237,45 +312,65 @@ public class Block {
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
-		if (Double.doubleToLongBits(stopPrice) != Double.doubleToLongBits(other.stopPrice))
+		if (Double.doubleToLongBits(stop_price) != Double.doubleToLongBits(other.stop_price))
 			return false;
 		if (symbol == null) {
 			if (other.symbol != null)
 				return false;
 		} else if (!symbol.equals(other.symbol))
 			return false;
-		
+		if (total_quantity != other.total_quantity)
+			return false;
+		if (traderId == null) {
+			if (other.traderId != null)
+				return false;
+		} else if (!traderId.equals(other.traderId))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
 		return true;
 	}
+
+
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Block [blockId=");
 		builder.append(blockId);
-		builder.append(", symbol=");
-		builder.append(symbol);
 		builder.append(", side=");
 		builder.append(side);
-		builder.append(", orderType=");
-		builder.append(orderType);
-		builder.append(", qtyPlaced=");
-		builder.append(qtyPlaced);
-		builder.append(", qtyExecuted=");
-		builder.append(qtyExecuted);
-		builder.append(", stopPrice=");
-		builder.append(stopPrice);
-		builder.append(", limitPrice=");
-		builder.append(limitPrice);
+		builder.append(", symbol=");
+		builder.append(symbol);
+		builder.append(", total_quantity=");
+		builder.append(total_quantity);
+		builder.append(", type=");
+		builder.append(type);
 		builder.append(", status=");
 		builder.append(status);
-		builder.append(", orderDate=");
-		builder.append(orderDate);
-		builder.append(", executedDate=");
-		builder.append(executedDate);
+		builder.append(", limit_price=");
+		builder.append(limit_price);
+		builder.append(", stop_price=");
+		builder.append(stop_price);
+		builder.append(", executed_quantity=");
+		builder.append(executed_quantity);
+		builder.append(", executed_date=");
+		builder.append(executed_date);
+		builder.append(", executed_price=");
+		builder.append(executed_price);
+		builder.append(", block_date=");
+		builder.append(block_date);
+		builder.append(", traderId=");
+		builder.append(traderId);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 	
 }
+
+
+   

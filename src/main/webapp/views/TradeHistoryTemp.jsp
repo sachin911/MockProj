@@ -68,13 +68,13 @@
             <tr>
                  <td><c:out value='${Blocks.symbol}'/></td>
                  <td><a data-toggle="collapse" data-toggle = "#i" href ="#"><c:out value='${Blocks.side}'/></a></td>
-                 <td><c:out value='${Blocks.qtyPlaced}'/></td>
-                 <td><c:out value='${Blocks.qtyExecuted}'/></td>
-                 <td><c:out value='${Blocks.stopPrice}'/></td>
-                 <td><c:out value='${Blocks.limitPrice}'/></td>
+                 <td><c:out value='${Blocks.total_quantity}'/></td>
+                 <td><c:out value='${Blocks.executed_quantity}'/></td>
+                 <td><c:out value='${Blocks.stop_price}'/></td>
+                 <td><c:out value='${Blocks.limit_price}'/></td>
                  <td></td>
                  <td><c:out value='${Blocks.status}'/></td>
-                 <td><c:out value='${Blocks.executedDate}'/></td>
+                 <td><c:out value='${Blocks.executed_date}'/></td>
                 </tr>
             </c:forEach>
          		</table>
@@ -87,12 +87,6 @@
             </div>
       </div>
     
-         
-        
-	
-	
-         
-
         </div>
         
         

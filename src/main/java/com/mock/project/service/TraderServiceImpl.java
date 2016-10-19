@@ -159,16 +159,16 @@ public class TraderServiceImpl implements TraderService {
 			}
 			
 			Block block =new Block();
-			block.setOrderDate(blockCreationDate);
-			block.setExecutedDate(blockExecutionDate);
+			block.setBlock_date(blockCreationDate);
+			block.setExecuted_date(blockExecutionDate);
 			block.setSymbol(blockSymbol);
 			block.setSide(blockSide);
-			block.setOrderType(orderType);
+			block.setType(orderType);
 			block.setStatus(blockStatus);
-			block.setQtyPlaced(quantityPlaced);
-			block.setQtyExecuted(quantityExecuted);
-			block.setStopPrice(blockStopPrice);
-			block.setLimitPrice(blockLimitPrice);
+			block.setTotal_quantity(quantityPlaced);
+			block.setExecuted_quantity(quantityExecuted);
+			block.setStop_price(blockStopPrice);
+			block.setLimit_price(blockLimitPrice);
 			
 		
 			//System.out.println(block);
@@ -189,15 +189,7 @@ public class TraderServiceImpl implements TraderService {
 		{
 			System.out.println("Block Creation Failed");
 			
-		}
-		
-		
-		
-		
-	
-	
-		
-		
+		}												
 		
 	}
 

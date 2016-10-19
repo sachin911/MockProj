@@ -1,7 +1,3 @@
-
-
-<%-- <% response.addHeader("Refresh","100"); %> --%>
-
 <% response.addHeader("Refresh","100"); %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -277,11 +273,11 @@ $(document).ready(function() {
 			
 			  <td> <label><input type="checkbox" id="checks" name="checks" class="checkboxClicks"></label></td>
 			  <td class="blockid"><c:out value='${Blocks.blockId}'/></td>
-		 <td><c:out value='${Blocks.qtyPlaced}'/></td>
-			  <td><c:out value='${Blocks.qtyExecuted}'/></td>
-			  <td><c:out value='${Blocks.qtyPlaced-blocks.qtyExecuted}'/></td>
-			  <td><c:out value='${Blocks.limitPrice}'/></td>
-			  <td><c:out value='${Blocks.stopPrice}'/></td>
+		 <td><c:out value='${Blocks.total_quantity}'/></td>
+			  <td><c:out value='${Blocks.executed_quantity}'/></td>
+			  <td><c:out value='${Blocks.total_quantity-blocks.executed_quantity}'/></td>
+			  <td><c:out value='${Blocks.limit_price}'/></td>
+			  <td><c:out value='${Blocks.stop_price}'/></td>
 			  <td><c:out value='${Blocks.status}'/></td> 
 		
 			</tr>

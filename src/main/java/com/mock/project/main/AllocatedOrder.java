@@ -34,8 +34,8 @@ public class AllocatedOrder {
 		// order1service.save(order);
 		Block block = new Block();
 		block.setBlockId(11440L);
-		block.setQtyExecuted(220);
-		block.setExecutedDate(new Date("10/18/2016"));
+		block.setExecuted_quantity(220);
+		block.setExecuted_date(new Date("10/18/2016"));
 		block.setStatus("PartiallyAllocated");
 		bs.saveblock(block);
 		order1service.allocateorder(block);
