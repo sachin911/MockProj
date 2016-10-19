@@ -117,7 +117,7 @@ public class DisplayPortfolioController {
 		//CONSTRUCT HTML MESSAGE HERE
 		for(int i=0; i < ordersInPortfolio.size(); i++) {
 			//GET TRADER'S NAME INSTEAD OF ID TO DISPLAY
-			String traderIDtoDisplay = pmService.getUserName(ordersInPortfolio.get(i).getTraderId());
+			String traderNametoDisplay = pmService.getUserName(ordersInPortfolio.get(i).getTraderId());
 
 			messageToSend += "<div class='row'>";
 			//messageToSend += "<div class='col col-sm-1'> <label>" + ordersInPortfolio.get(i).getOrderId() + "</label> </div>";
@@ -125,7 +125,7 @@ public class DisplayPortfolioController {
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getSide() + "</div>";
 			messageToSend += "<div class='col col-sm-2 col-centered'>" + ordersInPortfolio.get(i).getOrderType() + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getQualifier() + "</div>";
-			messageToSend += "<div class='col col-sm-1'>" + traderIDtoDisplay + "</div>";
+			messageToSend += "<div class='col col-sm-1'>" + traderNametoDisplay + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getQtyPlaced() + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getStopPrice() + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getLimitPrice() + "</div>";
@@ -154,13 +154,14 @@ public class DisplayPortfolioController {
 		String messageToSend = "";
 		//CONSTRUCT HTML MESSAGE HERE
 		for(int i=0; i < ordersInPortfolio.size(); i++) {
+			String tradeNametoDisplay = pmService.getUserName(ordersInPortfolio.get(i).getTraderId());
 			messageToSend += "<div class='row'>";
 			//messageToSend += "<div class='col col-sm-1'> <label>" + ordersInPortfolio.get(i).getOrderId() + "</label> </div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getSymbol() + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getSide() + "</div>";
 			messageToSend += "<div class='col col-sm-2 col-centered'>" + ordersInPortfolio.get(i).getOrderType() + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getQualifier() + "</div>";
-			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getTraderId() + "</div>";
+			messageToSend += "<div class='col col-sm-1'>" + tradeNametoDisplay + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getQtyPlaced() + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getStopPrice() + "</div>";
 			messageToSend += "<div class='col col-sm-1'>" + ordersInPortfolio.get(i).getLimitPrice() + "</div>";

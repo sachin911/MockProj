@@ -21,7 +21,7 @@
 
 <script type="text/javascript">
                 function addMessage(){
-                	var isPortfolio = ${specialPortfolio}
+                	var isPortfolio = ${specialPortfolio};
                 	var mess = "${message}";          	
                 	var orderContainer = document.getElementById("pending-order-data");
                 	orderContainer.innerHTML = mess;
