@@ -170,7 +170,7 @@ scroll bar cutomization .
 				<li><a href="ViewOrderBlotter">Order Blotter</a></li>
 				<li class="active"><a href="ViewPendingOrder">Pending
 						Orders</a></li>
-				<li><a href="./PMHistory.jsp">History</a></li>
+				<li><a href="GeneralView">History</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -213,7 +213,7 @@ scroll bar cutomization .
 					<div class="col col-sm-1"><c:out value='${Orders.stopPrice}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.limitPrice}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.status}'/></div>
-					<div class="col col-sm-1"><button id ="amend${loop.index +1}" onClick="test(${loop.index +1})" name="<c:out value='${Orders.orderId}'/>" type="button" class="btn btn-warning" onclick="window.location='ammendTable'">Ammend</button></div>
+					<div class="col col-sm-1"><button id ="amend${loop.index +1}" onClick="test(${loop.index +1})" name="<c:out value='${Orders.orderId}'/>" type="button" class="btn btn-warning" onclick="window.location='ammendTable'">Amend</button></div>
 					<div class="col col-sm-1"><button id="orderId1-cancel${loop.index +1}" type="button" class="btn btn-danger" onclick="cancel(${loop.index +1})">Cancel</button></div>
 				</div>
 			

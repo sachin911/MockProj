@@ -109,8 +109,8 @@ $time: 0.15s;
              <li><a href="./PMHome.jsp">Home</a></li>
             <li class="active"><a href="./CreateTrade.jsp">Create Order</a></li>
             <li ><a href="ViewOrderBlotter">Order Blotter</a></li>
-            <li ><a href="./PendingOrder.jsp">Pending Orders</a></li>
-            <li><a href="./PMHistory.jsp">History</a></li>
+            <li ><a href="ViewPendingOrder">Pending Orders</a></li>
+            <li><a href="GeneralView">History</a></li>
          </ul>
       </div>
     </nav>

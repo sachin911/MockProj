@@ -79,7 +79,8 @@
             </a>
             
             <!-- thumb -->
-            <a href="./PendingOrder.jsp"> 
+            
+            <a href="ViewPendingOrder"> 
                 <div id="thumb-pending-order" class="thumb-pm-home col col-sm-3">
                 <div class="thumb-pm-home-container">
                     <center>
