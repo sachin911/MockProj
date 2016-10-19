@@ -37,6 +37,16 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TradingController {
+	
+	
+	
+	
+	
+		public TradingController() {
+		super();
+		}
+
+
 		@RequestMapping(value = "/views/fetchOrder", method = RequestMethod.POST)
 		    public ModelAndView method(HttpServletRequest req,HttpServletResponse httpServletResponse) {
 			//String []out=req.getParameter("check");				
@@ -133,7 +143,7 @@ public class TradingController {
 	
 	
 	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
-    public ModelAndView populateBlockBlotter(HttpServletResponse httpServletResponse) 
+    public ModelAndView populateBlockBlotter() 
     {
       	//System.out.println("Comes here");
       	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
