@@ -93,7 +93,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 	}
 
 	@Override
-	public List<Order> findAllByID(Long id) {
+	public List<Order> findAllOrdersByID(Long id) {
 		Query query = em.createQuery("from Order where pm_id =:pid");
 		query.setParameter("pid", id);
 		List<Order> orders = new ArrayList<Order>();
@@ -134,6 +134,17 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		return u.getId();
 	}
 
+	
+	public String getUserNameFromID(Long id) {
+		Query query = em.createQuery("from User where user_id =:uid");
+		query.setParameter("uid", id);
+		List<User> userList = new ArrayList<User>();
+		userList = query.getResultList();
+		User u = userList.get(0);
+		return u.getName();
+	}
+	
+	
 	// @Override
 	// public void updateStatus(Status status,List orderid) {
 	// List<Order> getOrders=new ArrayList();

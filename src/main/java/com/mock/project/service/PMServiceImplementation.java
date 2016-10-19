@@ -42,7 +42,7 @@ public class PMServiceImplementation implements PMServices {
 
 	@Override
 	public List<Order> findAllOrdersInPortfolio(Long id) {
-		return dao.findAllByID(id);
+		return dao.findAllOrdersByID(id);
 
 	}
 
