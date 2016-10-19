@@ -39,30 +39,36 @@ public class BrokerServiceImpl implements BrokerService {
 	//
 	// }
 
-
 	@Autowired
 	BlockDAO blockDAO;
 	@Autowired
 	SecuritiesDAO securitiesDAO;
+	@Autowired
+	ViewFillsDAO viewFillsDAO;
 
-	/*
-	 * @Autowired ViewFillsDAO viewFillsDAO;
-	 */
 	@Override
 	public void StartExecution() {
 
 		List<Block> blockList = new ArrayList<>();
-		blockList = blockDAO.findAll();
+		//blockList = blockDAO.findAll();
+		blockList = blockDAO.findOpenPartial();
+		System.out.println(blockList);
+
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		MarshallAndSend send = (MarshallAndSend) context.getBean("MessageProducer");
 		LoggerConfig logConfig = new LoggerConfig();
 		Logger log = logConfig.getLogConfig();
 		for (Block blocks : blockList) {
 			System.out.println(blocks);
-			if (!blocks.getStatus().equalsIgnoreCase("Completed") && !blocks.getStatus().equalsIgnoreCase("expired")) {
+			// delete this condition
+			if (!blocks.getStatus().equalsIgnoreCase("Completed") && !blocks.getStatus().equalsIgnoreCase("Expired")) {
 				// System.out.println(blocks.getStatus());
 				Securities securities = new Securities();
-				// ViewFills viewFills=new ViewFills();
+				ViewFills viewFills = new ViewFills();
+
+				// get similar block_id and set remaining quantity
+				Long remainingQty = blocks.getTotal_quantity() - blocks.getExecuted_quantity();
+
 				/*
 				 * securities.setSecurity_symbol("GOOG");
 				 * securities.setLast_trade_price(12.0);
@@ -70,9 +76,8 @@ public class BrokerServiceImpl implements BrokerService {
 				 * securities.setMax_executions(100);
 				 */
 				// System.out.println(securitiesDAO.toString());
+
 				securities = securitiesDAO.findByPrimaryKey(blocks.getSymbol());
-				/* viewFills.setRemainingQty(blocks.getTotal_quantity()); */
-				// if null then alert
 				if (securities == null) {
 					System.out.println("securities not present");
 				} else {
@@ -83,7 +88,7 @@ public class BrokerServiceImpl implements BrokerService {
 					double StopPrice = blocks.getStop_price();
 					String side = blocks.getSide();
 					String type = blocks.getType();
-					long tempExecutedQty;
+					long tempExecutedQty = 0L;
 					if (blocks.getExecuted_quantity().equals(null) || blocks.getExecuted_quantity().equals(0)) {
 						tempExecutedQty = 0;
 					} else {
@@ -95,48 +100,49 @@ public class BrokerServiceImpl implements BrokerService {
 					System.out.println("Executed Q " + tempExecutedQty);
 					log.info("Executed Q " + tempExecutedQty);
 
-					Long TotalQtyToExecute = Math.max(0, blocks.getTotal_quantity() - tempExecutedQty);
-					System.out.println("TotalQtyToExecute " + TotalQtyToExecute);
+					System.out.println("TotalQtyToExecute " + remainingQty);
 
 					Long QtyExecuted = 0L;
 
 					double priceExecuted = 0.0;
-
+					double priceSpred = RandomPrice(0.0, MaxPriceSpread);
+					double minPrice = LastTradedPrice - (LastTradedPrice * priceSpred / 100);
+					double maxPrice = LastTradedPrice + (LastTradedPrice * priceSpred / 100);
 					if (type.equalsIgnoreCase("market")) {
-						double minPrice = LastTradedPrice - (LastTradedPrice * MaxPriceSpread / 100);
-						double maxPrice = LastTradedPrice + (LastTradedPrice * MaxPriceSpread / 100);
+
 						priceExecuted = RandomPrice(minPrice, maxPrice);
 						System.out.println("priceExecuted " + priceExecuted);
-						// int
-						// minQty=TotalQtyToExecute-(TotalQtyToExecute*MaxOrderPerOrder);
 
-						// if (TotalQtyToExecute <= 20) {
-						// QtyExecuted = TotalQtyToExecute;
-						// } else {
-						QtyExecuted = RandomQty(0L, Math.min(TotalQtyToExecute, MaxOrderPerOrder));
-						// }
-						System.out.println("QtyExecuted " + QtyExecuted);
+						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
+
 					}
 					if (type.equalsIgnoreCase("stop")) {
 
 					}
-					if (type.equalsIgnoreCase("limit")) {
-
+					if (type.equalsIgnoreCase("limit") && type.equalsIgnoreCase("buy")) {
+						priceExecuted = RandomPrice(Math.min(LimitPrice, minPrice), Math.max(LimitPrice, minPrice));
+						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
+					}
+					if (type.equalsIgnoreCase("limit") && type.equalsIgnoreCase("sell")) {
+						priceExecuted = RandomPrice(Math.min(LimitPrice, maxPrice), Math.max(LimitPrice, maxPrice));
+						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
 					}
 
-					if (QtyExecuted == blocks.getTotal_quantity())
+					// Setting the Fields
+					
+					if (QtyExecuted != 0) {
+						blocks.setExecuted_price(priceExecuted);
+					}
+					blocks.setExecuted_quantity(QtyExecuted + blocks.getExecuted_quantity());
+					blocks.setExecuted_date(new Date());
+					if (blocks.getExecuted_quantity() == blocks.getTotal_quantity())
 						blocks.setStatus("Completed");
 					else if (QtyExecuted == 0 && !(blocks.getStatus().equals("Partial")))
 						blocks.setStatus("Open");
 					else
 						blocks.setStatus("Partial");
-					TotalQtyToExecute = blocks.getTotal_quantity() - QtyExecuted;
-					// Setting the Fields
-					blocks.setExecuted_date(new Date());
-					blocks.setExecuted_price(priceExecuted);
-					blocks.setExecuted_quantity(QtyExecuted);
-					blocks.setTotal_quantity(TotalQtyToExecute);
 
+					// blocks.setTotal_quantity(TotalQtyToExecute);
 					blockDAO.save(blocks);
 					try {
 						send.marshallAndSendBlock(blocks);
@@ -144,17 +150,31 @@ public class BrokerServiceImpl implements BrokerService {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					/*
-					 * viewFills.setExecutedDate(new Date());
-					 * viewFills.setExecutedPrice(priceExecuted);
-					 * viewFills.setQtyExecuted(QtyExecuted);
-					 * viewFills.setBlock_Id(blocks.getId());
-					 * viewFills.setRemainingQty(remainingQty);
-					 */
+
+					viewFills.setExecutedDate(new Date());
+					if (QtyExecuted == 0) {
+						viewFills.setExecutedPrice(priceExecuted);
+					} else {
+						viewFills.setExecutedPrice(0);
+					}
+					viewFills.setQtyExecuted(QtyExecuted);
+					viewFills.setBlock_Id(blocks.getId());
+					viewFills.setRemainingQty(blocks.getTotal_quantity() - blocks.getExecuted_quantity());
+					viewFillsDAO.save(viewFills);
+
+					securities.setLast_trade_price(priceExecuted);
+					securitiesDAO.save(securities);
+
 				}
 			}
 		}
 	}
+
+	// private Long getFinalRemainingQty(Long id) {
+	// Long reminingQty = 0L;
+	//
+	// return reminingQty;
+	// }
 
 	/*
 	 * private int min(int totalQtyToExecute, int maxOrderPerOrder) { if
@@ -195,9 +215,14 @@ public class BrokerServiceImpl implements BrokerService {
 	@Override
 	public void expireblocks() {
 		// TODO Auto-generated method stub
-		
+
 		blockDAO.expire();
-		
-		
+
+	}
+
+	@Override
+	public Block findByPrimaryKey(long id) {
+		return blockDAO.findByPrimaryKey(id);
+
 	}
 }

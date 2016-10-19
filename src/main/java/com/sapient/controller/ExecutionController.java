@@ -36,17 +36,21 @@ public class ExecutionController {
 		 * req.getParameter("stop"); System.out.println("password: " + stop);
 		 */
 
-		// ActiveMQControl bro = new ActiveMQControl();
-		// bro.startBroker();
+
+		ActiveMQControl bro = ActiveMQControl.getInstance();
+		bro.startBroker();
 
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
 				com.sapient.config.AppConfig.class);
 		container.registerShutdownHook();
 
 		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
+		
+			brokerService.StartExecution();
 
-		brokerService.StartExecution();
-		// bro.stopBroker();
+
+		bro.stopBroker();
+
 		return "redirect:BrokerMainScreen.jsp";
 
 		/*
@@ -73,7 +77,7 @@ public class ExecutionController {
 		} catch (Exception e) {
 			result = "false";
 			e.printStackTrace();
-			
+
 		}
 		System.out.println("the broker status" + result);
 		return new ModelAndView("redirect:BrokerMainScreen.jsp", "status", result);

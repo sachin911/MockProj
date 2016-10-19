@@ -27,6 +27,7 @@ public class ViewFills implements Serializable {
 	private long remainingQty;
 	@Column(name="EXECUTED_DATE")
 	private Date executedDate;
+	
 	private static final long serialVersionUID = 1L;
 
 	public ViewFills() {

@@ -347,37 +347,32 @@ FOOTER
 <body>
 	<form name="login-form" class="login-form" action="hello" method="post">
 
-		<body>
-			<form name="login-form" class="login-form" action="hello"
-				method="post">
+		<div class="header">
+			<h1>Welcome to broker Site</h1>
+			<span>Please, login to continue</span>
+		</div>
 
-				<div class="header">
-					<h1>Welcome to broker Site</h1>
-					<span>Please, login to continue</span>
-				</div>
+		<div class="content">
+			<input name="username" id="username" type="text"
+				class="input username" placeholder="Username" required />
+			<div class="user-icon"></div>
+			<input name="password" id="password" type="password"
+				class="input password" placeholder="Password" required />
+			<div class="pass-icon"></div>
+		</div>
 
-				<div class="content">
-					<input name="username" id="username" type="text"
-						class="input username" placeholder="Username" required />
-					<div class="user-icon"></div>
-					<input name="password" id="password" type="password"
-						class="input password" placeholder="Password" required />
-					<div class="pass-icon"></div>
-				</div>
-
-				<div class="footer">
-					<a href="ForgetPassword.jsp">Forgot Password</a> <input
-						type="submit" value="Login" class="button" name="submit" />
-					<%
+		<div class="footer">
+			<a href="ForgetPassword.jsp">Forgot Password</a> <input type="submit"
+				value="Login" class="button" name="submit" />
+			<%
 						if (request.getSession().getAttribute("message") != null){
 					%>
 
-					<span id="error-message" style="font-family:HelveticaNeue-Light; color: #f676b2;">
-						<%=request.getSession().getAttribute("message")%></span>
-					<% } %>
-				</div>
+			<span id="error-message"
+				style="font-family: HelveticaNeue-Light; color: #f676b2;"> <%=request.getSession().getAttribute("message")%></span>
+			<% } %>
+		</div>
 
-			</form>
+	</form>
 
-		</body>
 </body>
