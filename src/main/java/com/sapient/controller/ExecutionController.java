@@ -25,7 +25,19 @@ import com.sapient.service.BrokerServiceImpl;
 import com.sapient.service.UserService;
 
 @Controller
-public class ExecutionController {
+public class ExecutionController implements Runnable {
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@RequestMapping("/views/startStopService")
+	public String startThreadExecution(HttpServletRequest req) throws URISyntaxException, Exception {
+		ExecutionController ec = new ExecutionController();
+		return "hello";
+	}
 
 	@RequestMapping("/views/startStopService")
 	public String executionStartStop(HttpServletRequest req) throws URISyntaxException, Exception {
@@ -37,8 +49,8 @@ public class ExecutionController {
 		 */
 
 
-		ActiveMQControl bro = ActiveMQControl.getInstance();
-		bro.startBroker();
+//		ActiveMQControl bro = ActiveMQControl.getInstance();
+//		bro.startBroker();
 
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
 				com.sapient.config.AppConfig.class);
@@ -49,7 +61,7 @@ public class ExecutionController {
 			brokerService.StartExecution();
 
 
-		bro.stopBroker();
+//		bro.stopBroker();
 
 		return "redirect:BrokerMainScreen.jsp";
 
@@ -64,7 +76,7 @@ public class ExecutionController {
 	}
 
 	@RequestMapping("views/checkStatus")
-	public ModelAndView checkBrokerStatus() {
+	public ModelAndView checkBrokerStatus(HttpServletRequest req) {
 		String hostName = "127.0.0.1";
 		int portNumber = 61616;
 		String result;
@@ -79,8 +91,11 @@ public class ExecutionController {
 			e.printStackTrace();
 
 		}
+		req.getSession().setAttribute("status", result);
 		System.out.println("the broker status" + result);
 		return new ModelAndView("redirect:BrokerMainScreen.jsp", "status", result);
 
 	}
+
+
 }
