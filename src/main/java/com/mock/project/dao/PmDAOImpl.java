@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.mock.project.model.Order;
 import com.mock.project.model.Portfolio;
 import com.mock.project.model.Status;
+import com.mock.project.model.User;
 
 @Repository
 public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements PMDAO<Order> {
@@ -22,17 +23,6 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 
 	@SuppressWarnings("unchecked")
 
-	@Override
-	public List<Order> findAll(Long pmid) {
-		List<Order> list = new ArrayList<>();
-		Query query = em.createQuery("from Order where pm_id= :pmid");
-		query.setParameter("pmid", pmid);
-
-		list = query.getResultList();
-		// System.out.println(list);
-		return list;
-
-	}
 
 	@Override
 	public Order edit(Order object) {
@@ -64,7 +54,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 
 	@Override
 	public List<Order> findAllByName(String name, Long id) {
-		
+
 		Query query = em.createQuery("from Portfolio where portfolio_name =:pname");
 		query.setParameter("pname", name);
 		System.out.println(query.toString());
@@ -77,7 +67,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		} else {
 			System.out.println("ERROR! PORTFOLIO WITH THIS NAME DOES NOT EXIST IN SYSTEM. NAME = " + name);
 		}
-		
+
 		if(pid != null) {
 			Query query2 = em.createQuery("from Order where portfolioId =:p_id" + " and PM_ID =:pm_id");
 			query2.setParameter("p_id", pid);
@@ -91,17 +81,13 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 			return null;
 		}
 	}
-		
+
 	public void updateStatus(Status status, List order_id) {
-		//System.out.println("status = " + status.toString());
-		//System.out.println("orderid = " + order_id);
 		for (int i = 0; i < order_id.size(); i++) {
 			Long o_id = (Long) order_id.get(i);
-			//System.out.println("o_id" + o_id);
 			Query query = em.createQuery("update Order set status=:status where order_id=:o_id");
 			query.setParameter("status", status.toString());
 			query.setParameter("o_id", o_id);
-			//System.out.println(query);
 			System.out.println("update query" + query.executeUpdate());
 		}
 	}
@@ -119,6 +105,33 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 			System.out.println("ERROR! no orders with this id IN SYSTEM");
 			return orders;
 		}
+	}
+
+	@Override
+	public List<Order> findAllStatusNew(Long pmId,Status status) {
+		List<Order> list = new ArrayList<>();
+
+		Query query = em.createQuery("from Order where pm_id= :pmId and status= :status");
+
+		query.setParameter("pmId", pmId);
+		query.setParameter("status", status.toString());
+		list = query.getResultList();
+
+		System.out.println(list);
+		return list;
+
+	}
+
+	public Long getTraderId(String username) {
+		//System.out.println("Trader name in pm dao = " + username);
+		Query query = em.createQuery("from User where username =:username");
+		query.setParameter("username", username);
+		List<User> userList = new ArrayList<User>();
+		userList = query.getResultList();
+		//System.out.println("User list = " + userList.size());
+		User u = userList.get(0);
+		//System.out.println("User object = " + u.toString());
+		return u.getId();
 	}
 
 	// @Override
