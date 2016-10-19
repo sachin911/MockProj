@@ -22,32 +22,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-<script>
-    function send(){
-    	var data=[];
- 		var status=[];	 
-    	 $('#orderBlotter tr').each(function(){
-    		    	if($(this).find("input[type=checkbox]").prop("checked")===true)
-    		    	{
-    		    		var out1=$(this).find('.OrderId').html();
-    		    		var out3=$(this).find('.OrderStatus').html();data.push(out1);status.push(out3);
-    		    	}});
-    	 console.log(data);
-    	 $.ajax({
-   		  type: "POST",
-   		  url: "SendToTrader",
-   		  data: "data="+data ,
-   		  success: function(data) {
-   		    console.log("data is sent");
-   		  },
-   	  		error:function(jqXHR, textStatus, errorThrown) {
-   	  		  console.log(textStatus, errorThrown);
-   	  		
-     		  }
-   		});
-     }
-    
-    </script>
 <title>Order Blotter</title>
 </head>
 <body>
@@ -82,9 +56,9 @@
 						<div class="panel-heading">
 						
 						
-						<!--  <form action="SendToTrader" method="POST" >  -->
+						<!-- <form action="PmSend" method="POST" modelAttribute="functionList" > -->
 						
-							<table class="table" id="orderBlotter">
+							<table class="table">
 
 								<tr>
 									<th></th>
@@ -106,11 +80,11 @@
 			</c:forEach>
 
 			<tr>
-			 <td> <label><input type="checkbox" id="checkbox" name="check" ></label></td>
-			 <td class="OrderId"><c:out value='${Orders.orderId}'/></td> 
+			 <td> <label><input type="checkbox" id="check" name="check" ></label></td>
+			 <td><c:out value='${Orders.orderId}'/></td> 
 			 <td><c:out value='${Orders.symbol}'/></td>
 			  <td><c:out value='${Orders.side}'/></td>
-			  <td class="OrderStatus"><c:out value='${Orders.status}'/></td>
+			  <td><c:out value='${Orders.status}'/></td>
 			  <td><c:out value='${Orders.qtyPlaced}'/></td>
 			   <td><c:out value='${Orders.orderType}'/></td>
 			   <td><c:out value='${Orders.accountType}'/></td>
@@ -121,17 +95,27 @@
 			
 			
 			
-				</table>
-						 <!-- <input type="submit" class="btn btn-default" value="Send to Trader" id="check"/>	
-					</form>		 -->		 
-							 
-							  <button type="submit" class="btn btn-info" data-toggle="collapse" id="check" onclick="send()">Send to Trader
-      </button>
-							  
+			<%-- <%
+					for(Order orders:orderList) {
+				%>
+				<tr>
+				<td><%=orders.getOrderId() %></td>
+				<td><%=orders.getSymbol() %></td>
+				<td><%=blocks.get %></td>
+				<td><%=orders.getSide() %></td>
+				<td><%=orders.getStatus() %></td>
+				<td><%=orders.getQtyPlaced() %></td>
+				<td><%=orders.getOrderType() %></td>
+				
+				
+			</tr>
+				<%
+					}
+				%> --%>
+							</table>
 							
 							
-
-					
+							<input type="submit" class="btn btn-default" value="Send to Trader"/>
 							
 						<!-- 	</form> -->
 							

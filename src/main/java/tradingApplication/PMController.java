@@ -99,7 +99,6 @@ public ModelAndView viewspecifictrade(@ModelAttribute("order") Order d) {
 
 
 @RequestMapping(value="views/ViewOrderBlotter", method=RequestMethod.GET)
-
 public ModelAndView UpdateOrder(HttpServletRequest req){
 	
 	/*System.out.println("we r here!!");*/
@@ -116,12 +115,13 @@ container.registerShutdownHook();
 	  //System.out.println("here");
   		//System.out.println(l);
   	}
-  ModelAndView model = new ModelAndView("OrderBlotter1");
+  ModelAndView model = new ModelAndView("OrderBlotter");
 	model.addObject("Orders",p);
 container.close();
 	return model;
   	
 }
+
 
 @RequestMapping(value="views/SendToTrader", method=RequestMethod.POST)
 public ModelAndView UpdateStatus(HttpServletRequest req){

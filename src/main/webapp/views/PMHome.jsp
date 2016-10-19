@@ -187,7 +187,7 @@
             </a>
             
             <!-- thumb -->
-            <a href="./PMHistory.jsp"> 
+            <a href="GeneralView"> 
                 <div id="thumb-history" class="thumb-pm-home col col-sm-3">
                 <div class="thumb-pm-home-container">
                     <center>

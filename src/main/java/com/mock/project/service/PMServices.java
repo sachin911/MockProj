@@ -17,6 +17,8 @@ public interface PMServices {
 	
 	List<Order> displayForPM(Long pmid);
 	public void addPort(Portfolio p);
-	public List<Order> findAllOrdersInPortfolio(String name);
+	public List<Order> findAllOrdersInPortfolio(String name, Long pmid);
+	public List<Order> findAllOrdersInPortfolio(Long id);
+
 	void updateStatus(List order_id);
 }
