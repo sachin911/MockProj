@@ -263,5 +263,13 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		
 	}
 
+	@Override
+	public List<Order> findOrdersInBlock(int blockId) {
+		Query query = em.createQuery("from Order where block_id=:bid");
+		query.setParameter("bid", blockId);
+
+		return query.getResultList();
+	}
+
 
 }

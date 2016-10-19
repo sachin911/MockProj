@@ -267,6 +267,26 @@ public class TradingController {
       // httpServletResponse.setHeader("Location", "www.google.com");
 		
     }
+	
+	@RequestMapping(value = "/views/fetchOrderInBlock", method = RequestMethod.GET)
+    public ModelAndView fetchOrderInBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) 
+    {
+     
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();   
+        OrderService orderService = container.getBean(OrderService.class); 
+      	List<Order> Orders =new ArrayList<Order>();
+      	String[] out=req.getParameterValues("data");
+      	//System.out.println(out[0]);
+      	int BlockId = Integer.parseInt(out[0]);
+      	Orders = orderService.findOrdersInBlock(BlockId);
+      	//System.out.println(Orders);
+      	ModelAndView model = new ModelAndView("TradeHistoryTemp");
+		model.addObject("Orders",Orders);	
+		return model;
+		
+    }
+	
     
 }
 	
