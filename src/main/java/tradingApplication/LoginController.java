@@ -44,12 +44,16 @@ public class LoginController {
 		System.out.println("LoginController:  completeUser: " + completeUser.toString());
 		
 		if(ourType.equals("PM")){
+			request.getSession().setAttribute("currentType", "PM");
 			return new ModelAndView("PMHome");
 		} else if (ourType.equals("TRADER")){
+			request.getSession().setAttribute("currentType", "Trader");
 			return new ModelAndView("BlockBlotter");
 		} else if (ourType.equals("PMTRADER")) {
-			return new ModelAndView("PMTraderSelector");
+			request.getSession().setAttribute("currentType", "PM");
+			return new ModelAndView("PMHome");
 		} else {
+			request.getSession().setAttribute("currentType", "TYPENOTFOUNDERROR");
 			return new ModelAndView("type_not_found");
 		}
 	}
