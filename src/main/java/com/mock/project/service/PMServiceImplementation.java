@@ -57,6 +57,11 @@ public class PMServiceImplementation implements PMServices {
 		return dao.getTraderId(traderName);
 	}
 
+	@Override
+	public List<String> getTraderNameList() {
+		return dao.getTraderNameList();
+	}
+
 	/*
 
 	@Override

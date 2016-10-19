@@ -22,4 +22,5 @@ public interface PMServices {
 	public Long getTraderId(String traderName);
 	void updateStatus(List order_id);
 	List<Order> displayForPMAfterSend(Long pmId);
+	List<String> getTraderNameList();
 }

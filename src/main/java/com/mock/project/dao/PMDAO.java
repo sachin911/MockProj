@@ -27,5 +27,5 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 	List<Order> findAllStatusNew(Long pmId,Status status);
 	
 	public Long getTraderId(String traderName);
-
+	public List<String> getTraderNameList();
 }

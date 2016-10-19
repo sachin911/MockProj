@@ -134,6 +134,19 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		return u.getId();
 	}
 
+	public List<String> getTraderNameList() {
+		Query query = em.createQuery("from User where user_type = 'TRADER' or user_type = 'PMTRADER'");
+		List<User> userList = new ArrayList<User>();
+		userList = query.getResultList();
+		System.out.println("User list = " + userList.size());
+		List<String> traderNameList = new ArrayList<String>();
+		for(User u: userList){
+			traderNameList.add(u.getName());
+		}
+		System.out.println("trader name list = " + traderNameList);
+		return traderNameList;
+	}
+
 	// @Override
 	// public void updateStatus(Status status,List orderid) {
 	// List<Order> getOrders=new ArrayList();

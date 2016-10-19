@@ -1,14 +1,17 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1"%>
+	<%@ page import="java.util.*"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
     <html>
    <head>
+   	<%@ page isELIgnored="false"%>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
       <title>Create Order</title>
 <!--       <script type="text/javascript" src="pm-createorder-script.js"></script>
      <link rel="stylesheet" href="pm-createorder-style.css" /> -->
@@ -68,6 +71,30 @@ $time: 0.15s;
         		stop.disabled =(obj.value == "limit" || obj.value == "market");
        			limit.disabled =(obj.value == "stop" || obj.value == "market");
     		}
+			
+			$( document ).ready(function() {
+				$.ajax({
+	                type: "POST",
+	                url: "fetchTraderList",
+	                success: function(data) {
+						console.log(data);
+	                	createTraderNameList(data);
+	                },
+	                error:function(jqXHR, textStatus, errorThrown) {
+	                  console.log(textStatus, errorThrown);      
+	                }
+	              });
+			});
+			
+			function createTraderNameList(data){
+				var a = data.split(',');
+				for(i=0;i<a.length-1;i++){
+					var option=document.createElement("option");
+					option.value=a[i];
+					option.text=a[i];
+					document.getElementById("traderList").appendChild(option);
+				}
+			}
      </script>
    </head>
 
@@ -131,9 +158,7 @@ $time: 0.15s;
 						 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Trader Name: </div>
                <div class="form-input-fields col col-sm-8">
-                   <input type="text" name="traderName" id="trader"  required>
-                 
-          
+                   <select id="traderList" name="traderName" required></select>
                    </div>
                    </div>
 				

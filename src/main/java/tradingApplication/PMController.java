@@ -1,9 +1,12 @@
 package tradingApplication;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -185,6 +188,23 @@ public ModelAndView viewpendingorder(@ModelAttribute("order") Order d, HttpServl
     ModelAndView model = new ModelAndView("PendingOrder");
        model.addObject("Orders",q);
        return model;
+}
+
+@RequestMapping(value="views/fetchTraderList", method=RequestMethod.POST)
+public void getTraderList(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+	container.registerShutdownHook();   
+	PMServices pmservice=(PMServices) container.getBean("PMService"); 
+	List<String> traderNameList = new ArrayList<String>();
+	traderNameList = pmservice.getTraderNameList();
+	String toSend = "";
+	for(String t : traderNameList) {
+		toSend += t;
+		toSend += ",";
+	}
+	PrintWriter out = response.getWriter();
+	out.print(toSend);
+	out.close();
 }
 
 
