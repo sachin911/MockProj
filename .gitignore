@@ -2,3 +2,4 @@
 
 *.class
 MANIFEST.MF
+/bin/
