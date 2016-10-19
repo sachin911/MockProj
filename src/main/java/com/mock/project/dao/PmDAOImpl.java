@@ -102,7 +102,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		if(orders.isEmpty() == false){
 			return orders;
 		} else {
-			System.out.println("ERROR! no orders with this id IN SYSTEM");
+			
 			return orders;
 		}
 	}
@@ -117,20 +117,20 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		query.setParameter("status", status.toString());
 		list = query.getResultList();
 
-		System.out.println(list);
+		
 		return list;
 
 	}
 
 	public Long getTraderId(String username) {
-		//System.out.println("Trader name in pm dao = " + username);
+	
 		Query query = em.createQuery("from User where username =:username");
 		query.setParameter("username", username);
 		List<User> userList = new ArrayList<User>();
 		userList = query.getResultList();
-		//System.out.println("User list = " + userList.size());
+		
 		User u = userList.get(0);
-		//System.out.println("User object = " + u.toString());
+		
 		return u.getId();
 	}
 
@@ -142,6 +142,15 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		userList = query.getResultList();
 		User u = userList.get(0);
 		return u.getName();
+	}
+
+	@Override
+	public void findOrderForUpdate(Long id) {
+		
+		Query query = em.createQuery("update Order set status=:status where order_id=:o_id");
+		query.setParameter("o_id", id);
+		query.setParameter("status", "Drop");
+		System.out.println("update query" + query.executeUpdate());
 	}
 	
 	

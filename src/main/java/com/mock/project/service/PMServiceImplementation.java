@@ -63,6 +63,11 @@ public class PMServiceImplementation implements PMServices {
 		
 	}
 
+	@Override
+	public void findOrderForUpdate(Long id) {
+		dao.findOrderForUpdate(id);
+	}
+
 	/*
 
 	@Override
@@ -80,11 +85,7 @@ public class PMServiceImplementation implements PMServices {
 		dao.ammend(order);
 	}
 
-	@Override
-	public Order findByPrimaryKey(Long id) {
-		return (Order) dao.findByPrimaryKey(id);
-	}
-
+	
 	@Override
 	public List<Order> findAllOrders() {
 		return dao.findAll();

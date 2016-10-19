@@ -10,10 +10,10 @@ import com.mock.project.model.Status;
 
 public interface PMServices {
 
-//	public void saveOrder(Order order);
+
 //	public void editOrder(Order order);
 //	public void ammendOrder(Order order);
-//	public Order findByPrimaryKey(Long id);
+	public void findOrderForUpdate(Long id);
 	
 
 	public void addPort(Portfolio p);
@@ -23,4 +23,5 @@ public interface PMServices {
 	void updateStatus(List order_id);
 	List<Order> displayForPMAfterSend(Long pmId);
 	public List<Order> displayPendingForPM(Long pmId);
+	
 }

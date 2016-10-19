@@ -181,7 +181,7 @@ scroll bar cutomization . #order-blotter-headers::-webkit-scrollbar {
                        <td><c:out value='${Orders.qtyPlaced}'/></td>
                         <td><c:out value='${Orders.orderType}'/></td>
                         <td><c:out value='${Orders.accountType}'/></td>
-                        <td> <button id="orderId-edit" type="button" class="btn btn-warning">Edit</button></td>
+                        <td> <button id="orderId-edit" type="button" class="btn btn-warning" onclick="window.location='EditOrderPM'">Edit</button></td>
                         <td> <button id="orderId-cancel" type="button" class="btn btn-danger">Cancel</button></td>
 
                      </tr> 

@@ -31,4 +31,6 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 	//Fetch a user's name based on ID
 	public String getUserNameFromID(Long id);
 
+	public void findOrderForUpdate(Long id);
+
 }

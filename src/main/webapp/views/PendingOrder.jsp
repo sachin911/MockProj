@@ -1,6 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.springframework.context.support.AbstractApplicationContext"%>
-<%-- <% response.addHeader("Refresh","10"); %> --%>
+<% response.addHeader("Refresh","10"); %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 	<%@page import="com.mock.project.config.AppConfig"%>
@@ -22,31 +22,68 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <script type="text/javascript">
+function cancel(i){
+	
+	var out=document.getElementById('order_id'+i);
+
+	var message=out.innerHTML;
+	console.log(message);
+ $.ajax({
+	                type: "POST",
+	                url: "DeleteOrder",
+	                data: "message=" + message ,
+	                success: function(data) {
+	                  console.log("data is sent");
+	                },
+	                     error:function(jqXHR, textStatus, errorThrown) {
+	                       console.log(textStatus, errorThrown);
+	                     
+	                }
+	              }); 
+
+}
+</script>
+ <!-- <script type="text/javascript">
  function divClicked(i) {
-	 
+	 alert(i);
     var divHtml = $("."+i).html();
    
     var editableText = $("<textarea />");
+    var x = 10;
     editableText.val(divHtml);
+  //  alert(editableText.val);
     $("."+i).replaceWith(editableText);
     editableText.focus();
+  
    
-    // setup the blur event for this new textarea
-    editableText.blur(editableTextBlurred(i));
+    editableText.blur(function(i) {var html = $(this).val();
+  //  alert("message");
+ var x = parseInt(i);
+  var name = "<p class='test";
+  var n2 = i;
+  alert(x);
+  var n3="'>'";
+  var str = name.concat(n2);
+  var str2 = str.concat(n3);
+ // alert(str2);
+  //alert(name);
+    var viewableText =$("<p class='1'>");
+    viewableText.html(html);
+    $(this).replaceWith(viewableText);});
+  
 }
 function test(i){
 	divClicked(i);
 }
-function editableTextBlurred(i) {
+function editableTextBlurred() {
     var html = $(this).val();
-    alert(this);
-    var viewableText = $("<p>");
+   // alert("message");
+    var viewableText =$("<p>");
     viewableText.html(html);
     $(this).replaceWith(viewableText);
     // setup the click event for this new div
-   // viewableText.click(divClicked);
+   //viewableText.click(test);
 }
 
 //function ammend(){
@@ -54,7 +91,7 @@ $(document).ready(function() {
     $("#amend").click(divClicked);
 });
 </script>
-
+ -->
 <style>
 .btn {
 	font-size: 0.9em;
@@ -146,12 +183,13 @@ scroll bar cutomization .
 				<div class="col col-sm-1">Order ID</div>
 				<div class="col col-sm-1">Symbol</div>
 				<div class="col col-sm-1">Side</div>
-				<div class="col col-sm-2 col-centered">Type</div>
+				<div class="col col-sm-1">Type</div>
 				<div class="col col-sm-1">Qualifier</div>
 				<div class="col col-sm-1">Trader</div>
 				<div class="col col-sm-1">Quantiy</div>
 				<div class="col col-sm-1">Stop</div>
 				<div class="col col-sm-1">Limit</div>
+				<div class="col col-sm-1">Status</div>
 				<div class="col col-sm-1">Ammend</div>
 				<div class="col col-sm-1">Cancel</div>
 			</div>
@@ -165,17 +203,18 @@ scroll bar cutomization .
 			
 				<!-- order 1 -->
 				<div class="row " id="orderid1-data">
-					<div class="col col-sm-1"><c:out value='${Orders.orderId}'/></div>
+					<div class="col col-sm-1" id ="order_id${loop.index +1}"><c:out value='${Orders.orderId}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.symbol}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.side}'/></div>
-					<div class="col col-sm-2 col-centered"><c:out value='${Orders.orderType}'/></div>
+					<div class="col col-sm-1"><c:out value='${Orders.orderType}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.qualifier}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.traderId}'/></div>
-					<div class="col col-sm-1"><p class="test${loop.index +1}"><c:out value='${Orders.qtyPlaced}'/></p></div>
+					<div class="col col-sm-1"><p class="${loop.index +1}"><c:out value='${Orders.qtyPlaced}'/></p></div>
 					<div class="col col-sm-1"><c:out value='${Orders.stopPrice}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.limitPrice}'/></div>
-					<div class="col col-sm-1"><button id ="amend${loop.index +1}" onClick="test('test${loop.index +1}')" name="<c:out value='${Orders.orderId}'/>" type="button" class="btn btn-warning" onclick="window.location='ammendTable'">Ammend</button></div>
-					<div class="col col-sm-1"><button id="orderId1-cancel" type="button" class="btn btn-danger">Cancel</button></div>
+					<div class="col col-sm-1"><c:out value='${Orders.status}'/></div>
+					<div class="col col-sm-1"><button id ="amend${loop.index +1}" onClick="test(${loop.index +1})" name="<c:out value='${Orders.orderId}'/>" type="button" class="btn btn-warning" onclick="window.location='ammendTable'">Ammend</button></div>
+					<div class="col col-sm-1"><button id="orderId1-cancel${loop.index +1}" type="button" class="btn btn-danger" onclick="cancel(${loop.index +1})">Cancel</button></div>
 				</div>
 			
 				</c:forEach>

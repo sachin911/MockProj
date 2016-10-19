@@ -49,7 +49,7 @@ public class PMController {
 	}
 	
 	
-@RequestMapping(value = "/editOrder", method = RequestMethod.POST)
+@RequestMapping(value = "/EditOrderPM", method = RequestMethod.POST)
 public ModelAndView editorder(@ModelAttribute("order") Order d) {
 	    
 	//Edit order code
@@ -79,13 +79,23 @@ public ModelAndView methodToAmmendTable(HttpServletRequest req)
 }  */
 
 
-@RequestMapping(value = "/DeleteOrder", method = RequestMethod.POST)
-public ModelAndView deleteorder(@ModelAttribute("order") Order d) {
-
-	//Delete order code
+@RequestMapping(value = "views/DeleteOrder", method = RequestMethod.POST)
+public ModelAndView deleteorder(HttpServletRequest req) {
 	
-   return new ModelAndView("Error");
-}
+	       AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+	       container.registerShutdownHook();
+	       PMServices pmservice = container.getBean(PMServices.class);
+	       String out=req.getParameter("message");
+	       System.out.println("out:"+out);
+			Long idl = Long.parseLong(out);
+			System.out.println("controller"+idl);
+	    pmservice.findOrderForUpdate(idl);
+	    ModelAndView view = new ModelAndView("PendingOrder");
+	    container.close();
+	    return view;
+	}
+
+
 
 @RequestMapping(value = "/ViewHistory", method = RequestMethod.POST)
 public ModelAndView viewhistory(@ModelAttribute("order") Order d) {
@@ -182,8 +192,7 @@ public ModelAndView viewpendingorder(@ModelAttribute("order") Order d, HttpServl
                      q.add(l);
              
        }
-       System.out.println("in pending controller" + q);
-    ModelAndView model = new ModelAndView("PendingOrder");
+       ModelAndView model = new ModelAndView("PendingOrder");
        model.addObject("Orders",q);
        return model;
 }
