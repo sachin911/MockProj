@@ -28,17 +28,12 @@ public class Log4JDemo {
 		 * Log4JDemo(); obj.runMe("Logs are here");
 		 */
 		Date current = new Date();
-<<<<<<< HEAD
-		Block obj = new Block("BUY", "GOOG", 300L, "MARKET", "OPEN", 200.0, 300.0, 100L, current, 120.0);
-		Block obj1 = new Block("BUY", "APPL", 300L, "MARKET", "OPEN", 200.0, 300.0, 100L, current, 120.0);
-		Block obj2 = new Block("BUY", "MMM", 300L, "MARKET", "OPEN", 200.0, 300.0, 100L, current, 120.0);
-		Block obj3 = new Block("BUY", "3M", 300L, "MARKET", "OPEN", 200.0, 300.0, 100L, current, 120.0);
-=======
+
 		Block obj = new Block("BUY", "GOOG", 300L, "MARKET", "OPEN", 221.0, 30.0, 100L, current, 120.0);
 		Block obj1 = new Block("BUY", "APPL", 300L, "MARKET", "OPEN", 120.0, 20.0, 100L, current, 120.0);
 		Block obj2 = new Block("BUY", "MMM", 300L, "MARKET", "OPEN", 423.0, 33.0, 100L, current, 120.0);
 		Block obj3 = new Block("BUY", "3M", 300L, "MARKET", "OPEN", 20.0, 56.0, 100L, current, 120.0);
->>>>>>> 23a22c3a0d6999b8adb9f82448c76b4d9564d0af
+
 		Securities sec1 = new Securities("APPL", "Apple", 200.2, 20.0, 100, 60, 20.0);
 		Securities sec2 = new Securities("GOOG", "google", 200.2, 20.0, 100, 60, 20.0);
 		Securities sec3 = new Securities("MMM", "manage", 200.2, 20.0, 100, 60, 20.0);

@@ -56,12 +56,12 @@ li:last-child {
 		<ul class="nav nav-pills">
 			<li class="active"><a href="#">Home</a></li>
 			<li><a href="ConfigureSecurity.jsp">Configure</a></li>
-			<li><a href="ViewFills.jsp">View Fills</a></li>
-
-			<li><a href="Login.jsp">Logout</a></li>
+			<li><a href="ViewFills.jsp">View Fills</a></li>\
+			<li><a href="logout">Logout</a></li>
+			
 			<li><a onclick="confirmstop()">Stop</a></li>
 
-			<li><a href="logout">Logout</a></li>
+
 
 		</ul>
 	</div>
@@ -146,7 +146,10 @@ li:last-child {
 
 			<input type="submit" name="start" value="start"	class="btn btn-info btn-lg"">
 			<input type="submit" name="stop" value="stop" class="btn btn-info btn-lg"">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 23a22c3a0d6999b8adb9f82448c76b4d9564d0af
 		</form>
 	</div>
 	<script>
