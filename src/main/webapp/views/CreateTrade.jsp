@@ -60,15 +60,14 @@ $time: 0.15s;
       
       
        <script>   
-function changetextbox(obj)
-{  
-      var limit = document.getElementById("limit");
-     var stop = document.getElementById("stop");
+			function changetextbox(obj)
+			{  
+    			var limit = document.getElementById("limit");
+     			var stop = document.getElementById("stop");
     	
-        stop.disabled =(obj.value == "limit" || obj.value == "market");
-        limit.disabled =(obj.value == "stop" || obj.value == "market");
-    
-}
+        		stop.disabled =(obj.value == "limit" || obj.value == "market");
+       			limit.disabled =(obj.value == "stop" || obj.value == "market");
+    		}
      </script>
    </head>
 
@@ -124,15 +123,15 @@ function changetextbox(obj)
                    <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Order Qualifier: </div>
                <div class="form-input-fields col col-sm-8"><select id="orderqual" name="qualifier" required>
-                  <option value="Day Order"> Day Order</option>
+                  <option value="GTD"> GTD</option>
                   <option value="GTC"> GTC</option>
                </select>
                    </div>
                    </div>
 						 <div class="row">
-                <div id="" class="form-input-label col col-sm-4"> Trader ID: </div>
+                <div id="" class="form-input-label col col-sm-4"> Trader Name: </div>
                <div class="form-input-fields col col-sm-8">
-                   <input type="number" name="traderId" id="trader"  required>
+                   <input type="text" name="traderName" id="trader"  required>
                  
           
                    </div>

@@ -173,7 +173,7 @@
             </a>
             
             <!-- thumb -->
-            <a href="./PendingOrder.jsp"> 
+            <a href="ViewPendingOrder"> 
                 <div id="thumb-pending-order" class="thumb-pm-home col col-sm-3">
                 <div class="thumb-pm-home-container">
                     <center>
@@ -187,7 +187,7 @@
             </a>
             
             <!-- thumb -->
-            <a href="./PMHistory.jsp"> 
+            <a href="GeneralView"> 
                 <div id="thumb-history" class="thumb-pm-home col col-sm-3">
                 <div class="thumb-pm-home-container">
                     <center>
@@ -221,23 +221,6 @@
             </center>
         </div>
     </div>
-	
-	<script>
-	
-	function displayPortfolioVar(String var) {
-		$.ajax({
-	        type: "GET",
-	        url: /displayPortfolio,
-	        data: {portfolioId = var},
-	        dataType: "html",
-	        success : function (data) {
-	           console.log("You got the data there");
-	        }
-	    });
-	}
-	
-	</script>
-	
-	
+		
 </body>
 </html>

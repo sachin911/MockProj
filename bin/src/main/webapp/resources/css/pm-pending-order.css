@@ -1,0 +1,63 @@
+.btn{
+    font-size: 0.9em;
+}
+
+
+#pending-order-headers{
+    margin-bottom: 2px;
+    font-weight:bolder;
+    overflow-y: scroll;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#pending-order-headers div{
+    margin:auto;
+}
+
+#pending-order-data{
+    height: 70vh;
+    overflow-y: scroll;
+    font-size: 0.85em;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+#pending-order-data div{
+    margin:auto;
+    margin-bottom: 8px;
+    height:35px;
+    font-weight: 600;
+    line-height: 35px;
+    vertical-align: middle;    
+}
+
+ 
+// scroll bar cutomization.
+
+#pending-order-headers::-webkit-scrollbar {
+    width: 1em;
+}
+
+#pending-order-headers::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px transparent;
+}
+
+ 
+#pending-order-headers::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  outline: 1px solid slategrey;
+}
+
+#pending-order-data::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+#pending-order-data::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+#pending-order-data::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}

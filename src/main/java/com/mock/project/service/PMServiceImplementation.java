@@ -22,12 +22,8 @@ public class PMServiceImplementation implements PMServices {
 	private PMDAO dao;
 
 	@Override
-	public List<Order> findAllOrdersInPortfolio(String name) {
-		return dao.findAllByName(name);
-	}
-
-	public List<Order> displayForPM(Long pmid) {
-		return dao.findAll(pmid);
+	public List<Order> findAllOrdersInPortfolio(String name, Long pmid) {
+		return dao.findAllByName(name, pmid);
 	}
 
 	@Override
@@ -42,6 +38,23 @@ public class PMServiceImplementation implements PMServices {
 		Status changeStatus;
 		changeStatus=Status.Open;
 		dao.updateStatus(changeStatus, order_id);
+	}
+
+	@Override
+	public List<Order> findAllOrdersInPortfolio(Long id) {
+		return dao.findAllByID(id);
+
+	}
+
+	@Override
+	public List<Order> displayForPMAfterSend(Long pmId) {
+		Status status=Status.New;
+		System.out.println(status);
+		return dao.findAllStatusNew(pmId,status);
+	}
+	
+	public Long getTraderId(String traderName) {
+		return dao.getTraderId(traderName);
 	}
 
 	/*
