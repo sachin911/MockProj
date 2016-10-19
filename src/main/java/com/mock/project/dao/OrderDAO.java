@@ -30,4 +30,10 @@ public interface OrderDAO extends GenericDAO<Order, Long>
 	void updateStatus(long block_id,List order_id);
 	void updateBlock(Status changeStatus, List block_id);
 	void addBlock(Block block);
+
+	Block findBlock(int blockId);
+
+	void allocateorder(Block block);
+
+	List<Order> findOrdersInBlock(int blockId);
 }

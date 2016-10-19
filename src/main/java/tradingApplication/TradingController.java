@@ -207,22 +207,44 @@ public class TradingController {
 	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
     public ModelAndView populateBlockBlotter(HttpServletResponse httpServletResponse) 
     {
-      	//System.out.println("Comes here");
+
+      
       	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
         container.registerShutdownHook();
-      //  System.out.println("Comes here too");
-        OrderService orderService = container.getBean(OrderService.class);
-      //  System.out.println("Maybe comes here too");
-      	List<Order> O=new ArrayList<Order>();
-      	O = orderService.displaylist(5);
       
+        OrderService orderService = container.getBean(OrderService.class);
+      
+        List<Block> Blocks =new ArrayList<Block>();
+      	Blocks = orderService.displayBlock(5);
+
       	ModelAndView model = new ModelAndView("BlockBlotter");
-		model.addObject("Orders",O);
+		model.addObject("Blocks",Blocks);
 		
 
-		return model;
-      // httpServletResponse.setHeader("Location", "www.google.com");
+		return model;	
+    }
+	
+	
+	@RequestMapping(value = "/views/PopulateOrders", method = RequestMethod.POST)
+    public ModelAndView populateOrders(HttpServletRequest req,HttpServletResponse httpServletResponse) 
+    {
+      
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+      
+        OrderService orderService = container.getBean(OrderService.class);
+        
+        String arr[] = req.getParameterValues("data");
+       // System.out.println(arr[0]);
+      //  System.out.println("inPopulatesadplpasdlpasd");
+      /*	List<Order> O=new ArrayList<Order>();
+      	O = orderService.displaylist(blockId);*/
+      
+      	ModelAndView model = new ModelAndView("BlockBlotter");
+		//model.addObject("Orders",O);
 		
+
+		return model;	
     }
 	
 	@RequestMapping(value = "/views/PopulateTraderHistory", method = RequestMethod.GET)
@@ -245,11 +267,30 @@ public class TradingController {
       // httpServletResponse.setHeader("Location", "www.google.com");
 		
     }
+	
+	@RequestMapping(value = "/views/fetchOrderInBlock", method = RequestMethod.GET)
+    public ModelAndView fetchOrderInBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) 
+    {
+     
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();   
+        OrderService orderService = container.getBean(OrderService.class); 
+      	List<Order> Orders =new ArrayList<Order>();
+      	String[] out=req.getParameterValues("data");
+      	//System.out.println(out[0]);
+      	int BlockId = Integer.parseInt(out[0]);
+      	Orders = orderService.findOrdersInBlock(BlockId);
+      	//System.out.println(Orders);
+      	ModelAndView model = new ModelAndView("TradeHistoryTemp");
+		model.addObject("Orders",Orders);	
+		return model;
+		
+    }
+	
     
 }
 	
 	
-
 
 
 

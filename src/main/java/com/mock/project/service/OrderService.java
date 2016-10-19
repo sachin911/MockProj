@@ -28,4 +28,11 @@ public interface OrderService {
 	Order findOrderByOrderId(int orderId);
 
 
+	Block findBlockByBlockId(int blockId);
+
+	void allocateorder(Block block);
+
+	List<Order> findOrdersInBlock(int blockId);
+
+
 }

@@ -79,6 +79,25 @@ public class OrderServiceImpl implements OrderService{
 		return dao.findAllBlocks(traderId);
 	}
 	
+	@Override
+	public Block findBlockByBlockId(int blockId)
+	{
+		Block block=dao.findBlock(blockId);
+		return block;
+	}
+	@Override
+	public void allocateorder(Block block) {
+		System.out.println("inside order service");
+		dao.allocateorder(block);
 
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Order> findOrdersInBlock(int blockId) {
+		return dao.findOrdersInBlock(blockId);
+		
+	}
 
 }

@@ -62,12 +62,13 @@
         <div class="panel-group" style = "width: 1060px"> 
     <div class="panel panel-default">
       <div class="panel-heading">
-           <table class="table">
+           <table class="table" id="blockHistoryTable">
            <div>   
-           <c:forEach items='${Blocks}' var="Blocks">   
+           <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">   
             <tr>
+            	<td class="blockId"><c:out value='${Blocks.blockId}'/></td>
                  <td><c:out value='${Blocks.symbol}'/></td>
-                 <td><a data-toggle="collapse" data-toggle = "#i" href ="#"><c:out value='${Blocks.side}'/></a></td>
+                 <td><c:out value='${Blocks.side}'/></a></td>
                  <td><c:out value='${Blocks.qtyPlaced}'/></td>
                  <td><c:out value='${Blocks.qtyExecuted}'/></td>
                  <td><c:out value='${Blocks.stopPrice}'/></td>
@@ -75,12 +76,33 @@
                  <td></td>
                  <td><c:out value='${Blocks.status}'/></td>
                  <td><c:out value='${Blocks.executedDate}'/></td>
-                </tr>
+                 <td><button id ="detailsButton${Loop.index +1}" class="btn btn-default" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
+                 <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
+                
+              <table class="orderTable" id="hideDetailsD${Loop.index +1}" style="display:none;">
+              <th></th>
+                 <th>Status</th>
+                 <th>Limit Price</th>
+                 <th>Stop Price</th>
+                 <th>Total Quantity</th>
+                 
+          </tr>
+          
+            
+             	<c:forEach items='${Orders}' var="Orders" >   
+            <tr>
+            	 <td><c:out value='${Orders.status}'/></td>
+			  <td><c:out value='${Orders.limitPrice}'/></td>
+			  <td><c:out value='${Orders.stopPrice}'/></td>
+			  
+			      <td><c:out value='${Orders.qtyExecuted}'/></td>
+			     
+               </tr>
+                 </c:forEach>
+                
             </c:forEach>
          		</table>
-               <div id="i" class="collapse">
-            
-        <div class="panel-body">Orders present in block</div>
+              </table>
       </div>
       </div>
 
@@ -104,7 +126,51 @@
         
         </div>
         <script>
-        function generateId () {return "id" + Math.random().toString(16).slice(2)};
         
+       
+        	
+        </script>
+        <script>
+        
+        function LoadData() {
+            var myDataTable = $(".orderTable").jsp("<table><thead></thead><tbody></tbody></table>");
+            $("table",myDataTable).dataTable({});
+        }
+        
+        function toggleDetails(i) {
+        	if( document.getElementById("hideDetailsH"+i).style.display=='none' ){
+        	       document.getElementById("hideDetailsH"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+        	    }else{
+        	       document.getElementById("hideDetailsH"+i).style.display = 'none';
+        	    }
+            
+            if( document.getElementById("hideDetailsD"+i).style.display=='none' ){
+               document.getElementById("hideDetailsD"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+            }else{
+               document.getElementById("hideDetailsD"+i).style.display = 'none';
+            }
+            var data=[];
+        	
+        		
+        		
+    		
+        	var out1=$("#blockHistoryTable tr").find('.blockId').html();
+        	console.log(out1);
+        	data.push(out1);
+        	
+        	$.ajax({
+      		  type: "GET",
+      		  url: "fetchOrderInBlock",
+      		  dataType: 'json',
+      		  data:"data="+data,
+      		  success: function(data) {
+      		    console.log("data is sent");
+      		  }
+      		});
+        	 
+        	LoadData();
+        	
+            }
+       
         </script>
      </html>
