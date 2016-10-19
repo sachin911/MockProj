@@ -1,6 +1,7 @@
 package tradingApplication;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -43,13 +44,27 @@ public class LoginController {
 		String ourType = completeUser.getUsertype();
 		System.out.println("LoginController:  completeUser: " + completeUser.toString());
 		
+		
+		// gg & devil starts
+		
+					HttpSession session = request.getSession();
+				    session.setAttribute("UserType", ourType);
+				
+		// gg completes here
+
+		
+		
 		if(ourType.equals("PM")){
+			request.getSession().setAttribute("currentType", "PM");
 			return new ModelAndView("PMHome");
 		} else if (ourType.equals("TRADER")){
+			request.getSession().setAttribute("currentType", "Trader");
 			return new ModelAndView("BlockBlotter");
 		} else if (ourType.equals("PMTRADER")) {
-			return new ModelAndView("PMTraderSelector");
+			request.getSession().setAttribute("currentType", "PM");
+			return new ModelAndView("PMHome");
 		} else {
+			request.getSession().setAttribute("currentType", "TYPENOTFOUNDERROR");
 			return new ModelAndView("type_not_found");
 		}
 	}
