@@ -30,6 +30,7 @@ public class LoginController {
 		Login l = new Login();
 
 		String vm = l.checkuser(user);
+
 		req.getSession().setAttribute("message", vm);
 		if (vm.equals("Valid user"))
 			return new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);

@@ -264,13 +264,13 @@ thead {
 													<td style="text-align: center;">Last Traded Price</td>
 													<td style="text-align: center;"><input
 														id="Last traded Price" name="Last traded Price"
-														type="Number" value="120.0" /></td>
+														type="Number" step="any" value="120.0" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Price Spread</td>
 													<td style="text-align: center;"><input
 														id="Maximum Price Spread " name="Maximum Price Spread "
-														type="Number" value="12" /></td>
+														type="Number" step="any" value="12" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum exection per
@@ -292,7 +292,7 @@ thead {
 													<td style="text-align: center;"><input
 														id="Maximum Probable Percentage"
 														name="Maximum Probable Percentage" type="Number"
-														value="10" /></td>
+														step="any" value="10" /></td>
 												</tr>
 												<tr>
 													<td></td>
@@ -425,13 +425,13 @@ thead {
 													<td style="text-align: center;">Last Traded Price</td>
 													<td style="text-align: center;"><input
 														id="Last traded Price" name="Last traded Price"
-														type="Number" value="120.0" /></td>
+														type="Number" step="any" value="120.0" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Price Spread</td>
 													<td style="text-align: center;"><input
 														id="Maximum Price Spread " name="Maximum Price Spread "
-														type="Number" value="12" /></td>
+														type="Number" step="any" value="12" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum exection per
@@ -453,7 +453,7 @@ thead {
 													<td style="text-align: center;"><input
 														id="Maximum Probable Percentage"
 														name="Maximum Probable Percentage" type="Number"
-														value="10" /></td>
+														step="any" value="10" /></td>
 												</tr>
 												<tr>
 													<td></td>

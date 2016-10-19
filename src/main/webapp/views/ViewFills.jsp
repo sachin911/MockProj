@@ -1,3 +1,5 @@
+<%@page import="com.sapient.model.ViewFills"%>
+<%@page import="com.sapient.service.ViewFillsService"%>
 <%@page import="com.sapient.config.AppConfig"%>
 <%@page import="com.sapient.service.BrokerService"%>
 <%@page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
@@ -33,11 +35,13 @@ li:last-child {
 	<%
 	AbstractApplicationContext container=new AnnotationConfigApplicationContext(AppConfig.class);
 	container.registerShutdownHook();
- BrokerService brokerService= (BrokerService)
- container.getBean("brokerService");
-	List<Block> blockList=new ArrayList();
+ 		BrokerService brokerService= (BrokerService)
+ 		container.getBean("brokerService");
+	
+		ViewFillsService viewFillsService=(ViewFillsService)container.getBean("viewfillsservice");
+		List<ViewFills> viewFillsList=new ArrayList();
+		viewFillsList=viewFillsService.findALL();
 		
-		blockList=brokerService.findALL();
 	%> 
 <div class="container">
   <h3>Broker</h3>
@@ -61,6 +65,7 @@ li:last-child {
 				<th>Limit Price</th>
 				<th>Executed Price</th>
 				<th>Total Quantity</th>
+				<th>Remaining Quantity</th>
 				<th>Executed Quantity</th>
 				<th>Executed Date</th>
 				<th>Status</th>  
@@ -68,21 +73,24 @@ li:last-child {
 			</thead>
 			<tbody>
 				<%
-					for(Block blocks:blockList) {
+					for(ViewFills views:viewFillsList) {
+						Block block=brokerService.findByPrimaryKey(views.getBlock_Id());
+						System.out.println(block);
 				%>
 				<tr>
-				<td><%=blocks.getId() %></td>
-				<td><%=blocks.getSymbol() %></td>
+				<td><%=views.getBlock_Id() %></td>
+				<td><%=block.getSymbol() %></td>
 				<%-- <td><%=blocks.get %></td> --%>
-				<td><%=blocks.getSide() %></td>
-				<td><%=blocks.getType() %></td>
-				<td><%=blocks.getStop_price() %></td>
-				<td><%=blocks.getLimit_price() %></td>
-				<td><%=blocks.getExecuted_price()%></td>
-				<td><%=blocks.getTotal_quantity()%></td>
-				<td><%=blocks.getExecuted_quantity() %></td>
-				<td><%=blocks.getExecuted_date() %></td>
-				<td><%=blocks.getStatus()%></td>				
+				<td><%=block.getSide() %></td>
+				<td><%=block.getType() %></td>
+				<td><%=block.getStop_price() %></td>
+				<td><%=block.getLimit_price() %></td>
+				<td><%=views.getExecutedPrice()%></td>
+				<td><%=block.getTotal_quantity()%></td>
+				<td><%=views.getRemainingQty()%></td>
+				<td><%=views.getQtyExecuted() %></td>
+				<td><%=views.getExecutedDate() %></td>
+				<td><%=block.getStatus()%></td>				
 			</tr>
 				<%
 					}
