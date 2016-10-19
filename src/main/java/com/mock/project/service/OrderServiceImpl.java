@@ -94,4 +94,10 @@ public class OrderServiceImpl implements OrderService{
 
 	}
 
+	@Override
+	public List<Order> findOrdersInBlock(int blockId) {
+		return dao.findOrdersInBlock(blockId);
+		
+	}
+
 }

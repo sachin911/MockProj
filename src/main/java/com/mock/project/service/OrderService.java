@@ -32,5 +32,7 @@ public interface OrderService {
 
 	void allocateorder(Block block);
 
+	List<Order> findOrdersInBlock(int blockId);
+
 
 }
