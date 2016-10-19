@@ -56,7 +56,7 @@ li:last-child {
 		<ul class="nav nav-pills">
 			<li class="active"><a href="#">Home</a></li>
 			<li><a href="ConfigureSecurity.jsp">Configure</a></li>
-			<li><a href="ViewFills.jsp">View Fills</a></li>\
+			<li><a href="ViewFills.jsp">View Fills</a></li>
 			<li><a href="logout">Logout</a></li>
 			
 			<li><a onclick="confirmstop()">Stop</a></li>
@@ -71,20 +71,19 @@ li:last-child {
 			id="mytable">
 			<thead>
 				<tr>
-					<th>Block Id</th>    
-					<th onmouseover="this.style.background='#AAA'" id="nm">Ticker</th>    
+					<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Block Id</th>    
+					<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Ticker</th>    
 					<!-- <th>Name</th> -->
-					<th>Side</th>
-					<th>Type</th>
-					<th>Stop Price</th>
-					<th>Limit Price</th>
-					<th>Executed Price</th>
-					<th>Total Quantity</th>
-					<th>Executed Quantity</th>
-					<th onmouseover="this.style.background='#AAA'"
-    								id="sl">Executed Date
+					<th id="nm1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Side</th>
+					<th id="nm2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Type</th>
+					<th id="nm3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Stop Price</th>
+					<th id="nm4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Limit Price</th>
+					<th id="nm5" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Price</th>
+					<th id="nm6" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Total Quantity</th>
+					<th id="nm7" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Quantity</th>
+					<th id="nm8" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Date
 						</th>
-					<th>Status</th>  
+					<th id="nm9" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Status</th>  
 				</tr>
 			</thead>
 			<tbody>
@@ -144,12 +143,9 @@ li:last-child {
 				class="btn btn-info btn-lg"">
 			<!-- <input type="submit" name="stop" value="stop" class="btn btn-info btn-lg""> -->
 
-			<input type="submit" name="start" value="start"	class="btn btn-info btn-lg"">
-			<input type="submit" name="stop" value="stop" class="btn btn-info btn-lg"">
-<<<<<<< HEAD
+			<!-- <input type="submit" name="start" value="start"	class="btn btn-info btn-lg"">
+			<input type="submit" name="stop" value="stop" class="btn btn-info btn-lg""> -->
 
-=======
->>>>>>> 23a22c3a0d6999b8adb9f82448c76b4d9564d0af
 		</form>
 	</div>
 	<script>
@@ -190,12 +186,55 @@ li:last-child {
 			sortTable(f_sl, n);
 		});
 		$("#nm").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#nm1").click(function() {
 			f_nm *= -1;
 			var n = $(this).prevAll().length;
 			sortTable(f_nm, n);
 		});
-		
-		
+		$("#nm2").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm3").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm4").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm5").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm6").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm7").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm8").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm9").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
 	</script>
 	<script type="text/javascript">
 	function confirmstop()
