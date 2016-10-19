@@ -37,4 +37,7 @@ public interface OrderDAO extends GenericDAO<Order, Long>
 	void allocateorder(Block block);
 
 	List<Order> findOrdersInBlock(int blockId);
+
+	List<Order> findAll();
 }
+

@@ -30,6 +30,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 	@PersistenceContext
 	private EntityManager em;
+
 	
 
 	 @SuppressWarnings("unchecked")
@@ -65,7 +66,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		return query.getResultList();
 	}
 
-	
+
 
 	@Override
 	public void updateStatus(long block_id, List order_id) {
@@ -185,14 +186,14 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		// TODO Auto-generated method stub
 		//System.out.println("asdjdsak: "+orderId);
 		List<Order> orders=new ArrayList<Order>();
-			Query query=em.createQuery("from Order where order_Id=:orderId"+" and block_id is null");
+		Query query=em.createQuery("from Order where order_Id=:orderId"+" and block_id is null");
 		query.setParameter("orderId",orderId);
-			//System.out.println(query);
+		//System.out.println(query);
 		orders=query.getResultList();
 		//System.out.println(orders.get(0));
-		
+
 		return orders;
-		
+
 	}
 
 	@Override

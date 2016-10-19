@@ -1,6 +1,7 @@
 package tradingApplication;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -16,7 +17,6 @@ import com.mock.project.model.User;
 import com.mock.project.service.LoginService;
 import com.mock.project.service.LoginServiceImpl;
 import com.mock.project.service.OrderService;
-
 
 
 @Controller
@@ -44,13 +44,27 @@ public class LoginController {
 		String ourType = completeUser.getUsertype();
 		System.out.println("LoginController:  completeUser: " + completeUser.toString());
 		
+		
+		// gg & devil starts
+		
+					HttpSession session = request.getSession();
+				    session.setAttribute("UserType", ourType);
+				
+		// gg completes here
+
+		
+		
 		if(ourType.equals("PM")){
+			request.getSession().setAttribute("currentType", "PM");
 			return new ModelAndView("PMHome");
 		} else if (ourType.equals("TRADER")){
+			request.getSession().setAttribute("currentType", "Trader");
 			return new ModelAndView("BlockBlotter");
 		} else if (ourType.equals("PMTRADER")) {
-			return new ModelAndView("PMTraderSelector");
+			request.getSession().setAttribute("currentType", "PM");
+			return new ModelAndView("PMHome");
 		} else {
+			request.getSession().setAttribute("currentType", "TYPENOTFOUNDERROR");
 			return new ModelAndView("type_not_found");
 		}
 	}
@@ -73,6 +87,12 @@ public class LoginController {
 		LoginService loginService = container.getBean(LoginService.class);
 		loginService.addUser(u);
 	}
-
-
+	
+	@RequestMapping("views/logout")
+	public ModelAndView handleLogout(HttpServletRequest request) {
+		//GET USERNAME FROM SESSION
+		System.out.println("Attempted logout");
+		request.getSession().setAttribute("user", null);
+		return new ModelAndView("Login");
+	}	
 }

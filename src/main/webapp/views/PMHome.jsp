@@ -1,95 +1,135 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.mock.project.model.User"%>
 <!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href=" https://rawgit.com/Govind-jha/online-resources/master/pm-home.css">
+
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 <title>PM Home</title>
 </head>
 <body>
-	<nav class="navbar navbar-default">
+
+     <nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Portfolio Manager</a>
+				<a class="navbar-brand" href="./PMHome.jsp">Portfolio Manager</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="PMHome.jsp">Home Page</a></li>		
-				<li><a href="CreateTrade.jsp">Create Order</a></li>
-				<li><a href="OrderBlotter.jsp">Order Blotter</a></li>
-				<li><a href="PMHistory.jsp">History</a></li>
+			<ul class="nav navbar-nav" style="float:right;">
+				
+				<%	
+					String userType = (String) session.getAttribute("UserType");
+					String PMToTraderSwitch ="<li><a href=\"selectTrader\"><span class=\"glyphicon glyphicon-user\"></span> Trader Portal</a></li>";				
 
-
+					if( userType.equalsIgnoreCase("PMTRADER")){
+						out.print(PMToTraderSwitch);
+					}
+				%>	
+				
+				 <li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>				 
 			</ul>
 		</div>
-		<div class="container">
+    </nav>
 
-			<div class="well">
-				<h2>Portfolio</h2>
-
-				<div class="container">
-
-					<div class="panel-group" id="accordion">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-
-								<table class="table">
-
-									<tr>
-										<td>ID: 123</td>
-										<td>IT Industry</td>
-										<td>Profit/Loss</td>
-										<td>
-											<h4 class="panel-title">
-												<a data-toggle="collapse" data-parent="#accordion"
-													href="#collapse1"><button type="button"
-														class="btn btn-default">+</button></a>
-											</h4>
-										</td>
-									</tr>
-								</table>
-							</div>
-							<div id="collapse1-edit" class="panel-collapse collapse">
-								<div class="panel-body">Positions in portfolio</div>
-							</div>
-							<div id="collapse1" class="panel-collapse collapse ">
-								<div class="panel-body">See Positions</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<table class="table">
-
-									<tr>
-										<td>ID: 1234</td>
-										<td>Pharma Industry</td>
-										<td>Profit/Loss</td>
-
-										<td>
-											<h4 class="panel-title">
-												<a data-toggle="collapse" data-parent="#accordion"
-													href="#collapse2"><button type="button"
-														class="btn btn-default">+</button></a>
-											</h4>
-										</td>
-
-									</tr>
-								</table>
-							</div>
-							<div id="collapse2-edit" class="panel-collapse collapse">
-								<div class="panel-body">Positions in portfolio</div>
-							</div>
-							<div id="collapse2" class="panel-collapse collapse">
-								<div class="panel-body">See positions</div>
-							</div>
-
-						</div>
-					</div>
-	</nav>
+	<div class="container">
+        <div id="menu-item-row" class="row">
+                
+            <!-- thumb -->
+            <a href="./CreateTrade.jsp"> 
+                <div id="thumb-create-order" class="thumb-pm-home col col-sm-3">
+                <div class="thumb-pm-home-container">
+                    <center>
+                        <div class="glyph-thumb-item">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </div>
+                        <div class="thumb-text"> Create Order </div>
+                    </center>
+                </div>
+                </div> 
+            </a>
+            
+            
+            
+                  
+            <!-- thumb -->
+            <a href="ViewOrderBlotter"> 
+                <div id="thumb-order-blotter" class="thumb-pm-home col col-sm-3">
+                <div class="thumb-pm-home-container">
+                    <center>
+                        <div class="glyph-thumb-item">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </div>
+                        <div class="thumb-text"> Order Blotter </div>
+                    </center>
+                </div>
+                </div> 
+            </a>
+            
+            <!-- thumb -->
+            
+            <a href="ViewPendingOrder"> 
+                <div id="thumb-pending-order" class="thumb-pm-home col col-sm-3">
+                <div class="thumb-pm-home-container">
+                    <center>
+                        <div class="glyph-thumb-item">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                        </div>
+                        <div class="thumb-text"> Pending Orders </div>
+                    </center>
+                </div>
+                </div> 
+            </a>
+            
+            <!-- thumb -->
+            <a href="GeneralView"> 
+                <div id="thumb-history" class="thumb-pm-home col col-sm-3">
+                <div class="thumb-pm-home-container">
+                    <center>
+                        <div class="glyph-thumb-item">
+                            <span class="glyphicon glyphicon-th-list"></span>
+                        </div>
+                        <div class="thumb-text"> History </div>
+                    </center>
+                </div>
+                </div> 
+            </a>
+            
+        </div>        		
+    </div>
+    
+        <!-- Portfolio Listing -->
+    <div class="container">
+        <center><h2 id="portfolio-list-title"> PORTFOLIOS </h2></center>
+        <div id="portfolio-list-row" class="row">
+            <center>
+                <a href="GeneralView" target="_blank"> <div id="portfolio-list-All" class="portfolio-list-thumb col col-sm-3"> All Portfolios </div></a>
+                <a href="Mining" target="_blank"> <div id="portfolio-list-mining" class="portfolio-list-thumb col col-sm-3"> Mining </div></a>
+                <a href="Banking" target="_blank"> <div id="portfolio-list-Banking" class="portfolio-list-thumb col col-sm-3"> Banking </div></a>
+                <a href="Automobile" target="_blank"> <div id="portfolio-list-Automobile" class="portfolio-list-thumb col col-sm-3"> Automobile </div></a>
+                <a href="Energy" target="_blank"> <div id="portfolio-list-Energy" class="portfolio-list-thumb col col-sm-3"> Energy </div></a>
+                <a href="Textile" target="_blank"> <div id="portfolio-list-Textile" value="Textile" class="portfolio-list-thumb col col-sm-3"> Textile </div></a>
+                <a href="Pharma" target="_blank"> <div id="portfolio-list-Pharma" class="portfolio-list-thumb col col-sm-3"> Pharma </div></a>
+                <a href="FMCG" target="_blank"> <div id="portfolio-list-FMCG" class="portfolio-list-thumb col col-sm-3"> FMCG </div></a>
+                <a href="Cement" target="_blank"> <div id="portfolio-list-Cement" class="portfolio-list-thumb col col-sm-3"> Cement </div></a>
+                <a href="Aluminium" target="_blank"> <div id="portfolio-list-Aluminium" class="portfolio-list-thumb col col-sm-3"> Aluminium </div></a>
+                <a href="Transport" target="_blank"> <div id="portfolio-list-Transport" class="portfolio-list-thumb col col-sm-3"> Transportation </div></a>
+                <a href="Other" target="_blank"> <div id="portfolio-list-Transport" class="portfolio-list-thumb col col-sm-3"> Other </div></a>
+            </center>
+        </div>
+    </div>
+		
 </body>
 </html>
