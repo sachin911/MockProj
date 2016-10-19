@@ -23,4 +23,5 @@ public interface PMServices {
 	void updateStatus(List order_id);
 	List<Order> displayForPMAfterSend(Long pmId);
 	public String getUserName(Long id);
+	public List<Order> displayPendingForPM(Long pmId);
 }

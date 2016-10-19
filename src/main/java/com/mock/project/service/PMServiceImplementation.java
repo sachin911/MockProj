@@ -61,6 +61,12 @@ public class PMServiceImplementation implements PMServices {
 		return dao.getUserNameFromID(id);
 	}
 	
+	@Override
+	public List<Order> displayPendingForPM(Long pmId) {
+		return dao.findAllOrdersByID(pmId);
+		
+	}
+
 	/*
 
 	@Override

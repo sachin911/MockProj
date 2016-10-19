@@ -24,18 +24,24 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
- function divClicked() {
-    var divHtml = $("p").html();
+ function divClicked(i) {
+	 
+    var divHtml = $("."+i).html();
+   
     var editableText = $("<textarea />");
     editableText.val(divHtml);
-    $("p").replaceWith(editableText);
+    $("."+i).replaceWith(editableText);
     editableText.focus();
+   
     // setup the blur event for this new textarea
-    editableText.blur(editableTextBlurred);
+    editableText.blur(editableTextBlurred(i));
 }
-
-function editableTextBlurred() {
+function test(i){
+	divClicked(i);
+}
+function editableTextBlurred(i) {
     var html = $(this).val();
+    alert(this);
     var viewableText = $("<p>");
     viewableText.html(html);
     $(this).replaceWith(viewableText);
@@ -165,10 +171,10 @@ scroll bar cutomization .
 					<div class="col col-sm-2 col-centered"><c:out value='${Orders.orderType}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.qualifier}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.traderId}'/></div>
-					<div class="col col-sm-1"><p class="test{$loop.index +1}"><c:out value='${Orders.qtyPlaced}'/></p></div>
+					<div class="col col-sm-1"><p class="test${loop.index +1}"><c:out value='${Orders.qtyPlaced}'/></p></div>
 					<div class="col col-sm-1"><c:out value='${Orders.stopPrice}'/></div>
 					<div class="col col-sm-1"><c:out value='${Orders.limitPrice}'/></div>
-					<div class="col col-sm-1"><button id ="amend" onClick="test()" name="<c:out value='${Orders.orderId}'/>" type="button" class="btn btn-warning" onclick="window.location='ammendTable'">Ammend</button></div>
+					<div class="col col-sm-1"><button id ="amend${loop.index +1}" onClick="test('test${loop.index +1}')" name="<c:out value='${Orders.orderId}'/>" type="button" class="btn btn-warning" onclick="window.location='ammendTable'">Ammend</button></div>
 					<div class="col col-sm-1"><button id="orderId1-cancel" type="button" class="btn btn-danger">Cancel</button></div>
 				</div>
 			
