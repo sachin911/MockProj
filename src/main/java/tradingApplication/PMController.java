@@ -26,21 +26,24 @@ public class PMController {
 	@RequestMapping("/views/CreateOrder")
 	public ModelAndView addCreateOrder(@ModelAttribute("order") Order d, HttpServletRequest request){
 
-
 		User u = (User)request.getSession().getAttribute("user");
 		System.out.println("ADD CREATE ORDER, I AM CHECKING SESSIONS USER PERSISTENCE: " + u.toString());
-
+		String traderName = null;
+		traderName = request.getParameter("traderName");
 		d.setStatus("New");
-
 		System.out.println(d);
+		System.out.println("TraderName = " + traderName );
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
-		OrderService orderService = container.getBean(OrderService.class);
+		PMServices pmservice=(PMServices) container.getBean("PMService");
+		Long traderId;
+		traderId = pmservice.getTraderId(traderName);
+		d.setTraderId(traderId);
+		System.out.println("Trader Id = " + traderId);
+		OrderService orderService = container.getBean(OrderService.class);		
 		d.setPmId(u.getId());
 		orderService.addOrder(d);
-
 		container.close();
-
 		ModelAndView view = new ModelAndView("redirect:CreateTrade.jsp");
 		return view;
 	}

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.mock.project.model.Order;
 import com.mock.project.model.Portfolio;
 import com.mock.project.model.Status;
+import com.mock.project.model.User;
 
 @Repository
 public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements PMDAO<Order> {
@@ -93,15 +94,11 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 	}
 		
 	public void updateStatus(Status status, List order_id) {
-		//System.out.println("status = " + status.toString());
-		//System.out.println("orderid = " + order_id);
 		for (int i = 0; i < order_id.size(); i++) {
 			Long o_id = (Long) order_id.get(i);
-			//System.out.println("o_id" + o_id);
 			Query query = em.createQuery("update Order set status=:status where order_id=:o_id");
 			query.setParameter("status", status.toString());
 			query.setParameter("o_id", o_id);
-			//System.out.println(query);
 			System.out.println("update query" + query.executeUpdate());
 		}
 	}
@@ -119,6 +116,18 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 			System.out.println("ERROR! no orders with this id IN SYSTEM");
 			return orders;
 		}
+	}
+
+	public Long getTraderId(String username) {
+		//System.out.println("Trader name in pm dao = " + username);
+		Query query = em.createQuery("from User where username =:username");
+		query.setParameter("username", username);
+		List<User> userList = new ArrayList<User>();
+		userList = query.getResultList();
+		//System.out.println("User list = " + userList.size());
+		User u = userList.get(0);
+		//System.out.println("User object = " + u.toString());
+		return u.getId();
 	}
 
 	// @Override

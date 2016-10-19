@@ -23,5 +23,7 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 	List<Order> findAllByName(String name, Long id);
 	
 	List<Order> findAllByID(Long id);
+	
+	public Long getTraderId(String traderName);
 
 }

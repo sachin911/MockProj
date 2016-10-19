@@ -50,6 +50,11 @@ public class PMServiceImplementation implements PMServices {
 
 	}
 
+	@Override
+	public Long getTraderId(String traderName) {
+		return dao.getTraderId(traderName);
+	}
+
 	/*
 
 	@Override
