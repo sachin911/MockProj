@@ -76,7 +76,7 @@ public class TraderServiceImpl implements TraderService {
 		for(Order order: orders)
 		{
 			//System.out.println("here"+ order);
-			orderId.add(orders.get(0).getOrderId());
+			orderId.add(order.getOrderId());
 			
 			//Checking whether the status of all the orders is OPEN
 			if((order.getStatus()).equals("Open"))
@@ -93,13 +93,13 @@ public class TraderServiceImpl implements TraderService {
 			
 			if((order.getOrderType()).equals(orderType))
 			{
-				
-				openStatus=true;
+				System.out.println(order.getOrderType()+" "+orderType);
+				orderTypeStatus=true;
 			}
 			else
 			{
-				
-				openStatus=false;
+				System.out.println("False: " +order.getOrderType()+" "+orderType);
+				orderTypeStatus=false;
 				break;
 			}
 			
@@ -140,7 +140,7 @@ public class TraderServiceImpl implements TraderService {
 			stopPrice.add(order.getStopPrice());
 		}
 		
-		//System.out.println(openStatus+" "+sideStatus+ " "+ symbolStatus);
+		System.out.println(openStatus+" "+sideStatus+ " "+ symbolStatus+" "+orderTypeStatus);
 		
 		if(openStatus && sideStatus && symbolStatus && orderTypeStatus)
 		{
