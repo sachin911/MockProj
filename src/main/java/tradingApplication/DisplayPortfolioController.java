@@ -111,8 +111,7 @@ public class DisplayPortfolioController {
 		container.registerShutdownHook();
 		PMServices pmService = container.getBean(PMServices.class);
 		List<Order> ordersInPortfolio = pmService.findAllOrdersInPortfolio(portfolio_name, pmID);
-				container.close();
-
+		
 		String messageToSend = "";
 		//CONSTRUCT HTML MESSAGE HERE
 		for(int i=0; i < ordersInPortfolio.size(); i++) {
@@ -136,6 +135,7 @@ public class DisplayPortfolioController {
 			messageToSend += "</div>";			
 		}
 
+		container.close();
 		System.out.println("IN DISPLAY PORTFOLIO, HERE'S THE HTML MESSAGE:  " + messageToSend);
 		ModelAndView view = new ModelAndView("PMHistory", "message", messageToSend);
 		view.addObject("specialPortfolio", true);
@@ -149,7 +149,6 @@ public class DisplayPortfolioController {
 		container.registerShutdownHook();
 		PMServices pmService = container.getBean(PMServices.class);
 		List<Order> ordersInPortfolio = pmService.findAllOrdersInPortfolio(pmID);
-		container.close();
 
 		String messageToSend = "";
 		//CONSTRUCT HTML MESSAGE HERE
@@ -172,8 +171,7 @@ public class DisplayPortfolioController {
 			messageToSend += "</div>";			
 		}
 
-		
-		
+		container.close();	
 		System.out.println("IN DISPLAY PORTFOLIO, HERE'S THE HTML MESSAGE:  " + messageToSend);
 		ModelAndView view = new ModelAndView("PMHistory", "message", messageToSend);
 		view.addObject("specialPortfolio", false);
