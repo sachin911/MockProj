@@ -76,6 +76,11 @@ public class PMServiceImplementation implements PMServices {
 		dao.findOrderForUpdate(id);
 	}
 
+	@Override
+	public Long getPortfolioId(String portfolioName) {
+		return dao.getPortfolioId(portfolioName);
+	}
+
 	/*
 
 	@Override

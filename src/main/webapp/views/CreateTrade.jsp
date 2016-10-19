@@ -172,10 +172,21 @@ $time: 0.15s;
                    </div>
                   </div>
 							   <div class="row">
-                <div id="" class="form-input-label col col-sm-4"> Portfolio ID: </div>
+                <div id="" class="form-input-label col col-sm-4"> Portfolio Name: </div>
                <div class="form-input-fields col col-sm-8">
-                   <input type="number" name="portfolioId" id="portfolio" required>
-      
+      				<select id="portfolioName" name="portfolioName" required>
+      					<option value="Mining">Mining</option>
+      					<option value="Banking">Banking</option>
+      					<option value="Automobile">Automobile</option>
+      					<option value="Energy">Energy</option>
+      					<option value="Textile">Textile</option>
+      					<option value="Pharma">Pharma</option>
+      					<option value="FMCG">FMCG</option>
+      					<option value="Cement">Cement</option>
+      					<option value="Aluminium">Aluminium</option>
+      					<option value="Transportation">Transportation</option>
+      					<option value="Other">Other</option>
+      				</select>
                    </div>
                    </div>
 				

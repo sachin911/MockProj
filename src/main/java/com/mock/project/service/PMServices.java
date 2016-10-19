@@ -20,9 +20,10 @@ public interface PMServices {
 	public List<Order> findAllOrdersInPortfolio(String name, Long pmid);
 	public List<Order> findAllOrdersInPortfolio(Long id);
 	public Long getTraderId(String traderName);
+	public Long getPortfolioId(String portfolioName);
 	void updateStatus(List order_id);
 	List<Order> displayForPMAfterSend(Long pmId);
-
+	
 	List<String> getTraderNameList();
 	public String getUserName(Long id);
 	public List<Order> displayPendingForPM(Long pmId);

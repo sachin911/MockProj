@@ -133,6 +133,16 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		
 		return u.getId();
 	}
+	
+	public Long getPortfolioId(String portfolio_name) {
+		
+		Query query = em.createQuery("from Portfolio where portfolio_name =:portfolio_name");
+		query.setParameter("portfolio_name", portfolio_name);
+		List<Portfolio> portfolioList = new ArrayList<Portfolio>();
+		portfolioList = query.getResultList();
+		Portfolio p = portfolioList.get(0);
+		return p.getPortfolio_id();
+	}
 
 	public List<String> getTraderNameList() {
 		Query query = em.createQuery("from User where user_type = 'TRADER' or user_type = 'PMTRADER'");
