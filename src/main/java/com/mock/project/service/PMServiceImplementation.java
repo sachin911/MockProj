@@ -57,6 +57,14 @@ public class PMServiceImplementation implements PMServices {
 		return dao.getTraderId(traderName);
 	}
 
+	public List<String> getTraderNameList() {
+		return dao.getTraderNameList();
+	}
+
+	public String getUserName(Long id) {
+		return dao.getUserNameFromID(id);
+	}
+	
 	@Override
 	public List<Order> displayPendingForPM(Long pmId) {
 		return dao.findAllOrdersByID(pmId);
