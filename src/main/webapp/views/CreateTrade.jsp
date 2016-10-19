@@ -124,7 +124,7 @@ function changetextbox(obj)
                    <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Order Qualifier: </div>
                <div class="form-input-fields col col-sm-8"><select id="orderqual" name="qualifier" required>
-                  <option value="Day Order"> Day Order</option>
+                  <option value="GTD"> GTD</option>
                   <option value="GTC"> GTC</option>
                </select>
                    </div>

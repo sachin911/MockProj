@@ -20,6 +20,8 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 
 	List<Order> findAll();
 	
-	List<Order> findAllByName(String name);
+	List<Order> findAllByName(String name, Long id);
+	
+	List<Order> findAllByID(Long id);
 
 }
