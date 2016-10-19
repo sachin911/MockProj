@@ -1,6 +1,7 @@
 package tradingApplication;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -42,6 +43,16 @@ public class LoginController {
 		request.getSession().setAttribute("user", completeUser);
 		String ourType = completeUser.getUsertype();
 		System.out.println("LoginController:  completeUser: " + completeUser.toString());
+		
+		
+		// gg & devil starts
+		
+					HttpSession session = request.getSession();
+				    session.setAttribute("UserType", ourType);
+				
+		// gg completes here
+
+		
 		
 		if(ourType.equals("PM")){
 			request.getSession().setAttribute("currentType", "PM");

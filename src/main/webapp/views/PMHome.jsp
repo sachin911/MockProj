@@ -1,7 +1,7 @@
 
     <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ page import="com.mock.project.model.User"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,105 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- 
-<style>
-
-#portfolio-list-row{
-    width:80%;
-    height: 450px;
-    overflow-y:scroll;
-    margin:0 auto;   
-    margin-top: 20px;
-}
-
-.portfolio-list-thumb:hover{
-    background: #F1F1F1;
-     text-shadow: 2px 2px 4px #000000;
-    -moz-box-shadow:    inset 0 0 10px #000000;
-    -webkit-box-shadow: inset 0 0 10px #000000;
-    box-shadow:         inset 0 0 10px #000000;
-}
-
-#portfolio-list-title{
-    margin-top: 30px;
-    text-shadow: 2px 2px 2px #000000;
-}
-
-.portfolio-list-thumb{
-    width: 20%;
-    height:120px;
-    color:black;
-    font-weight: bold;
-    
-    border: 2px solid black;
-    border-radius: 20px;
-    
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    
-    text-align: center;
-    vertical-align: middle;
-    line-height: 120px;
-}
+	<link rel="stylesheet"
+	href=" https://rawgit.com/Govind-jha/online-resources/master/pm-home.css">
 
 
-#menu-item-row{
-    width: 100%;
-}
-
-.thumb-pm-home{
-    background: #e7e7e7;
-    width: 20%;
-    height:160px;
-    border: 3px solid black;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    border-radius: 15px 50px 30px
-}
-
-.thumb-pm-home:hover{
-    background:#f1f1f1;
-    box-shadow: 10px 10px grey;
-}
-
-.thumb-pm-home:hover .glyph-thumb-item{
-    color: #F50;
-}
-
-.thumb-pm-home:hover .thumb-text{
-    color: black;
-}
-
-.glyph-thumb-item{
-    height:60%;
-    margin: 5px;
-    font-size:50px;
-    padding: 18px;
-}
-
-.thumb-text{
-    color: grey;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-
-#portfolio-list-row::-webkit-scrollbar {
-    width: 1em;
-}
- 
-#portfolio-list-row::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
- 
-#portfolio-list-row::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
-}
-
-</style>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -118,26 +23,27 @@
 </head>
 <body>
 
-   <!--  <nav class="navbar navbar-default">
+     <nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="./PMHome.jsp">Portfolio Manager</a>
 			</div>
 			<ul class="nav navbar-nav" style="float:right;">
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-				<li class="active"><a href="PMHome.jsp">Home Page</a></li>		
-				<li><a href="CreateTrade.jsp">Create Order</a></li>
-				<li><a href="ViewOrderBlotter">Order Blotter</a></li>
-				<li><a href="PMHistory.jsp">History</a></li>
+				
+				<%	
+					String userType = (String) session.getAttribute("UserType");
+					String PMToTraderSwitch ="<li><a href=\"selectTrader\"><span class=\"glyphicon glyphicon-user\"></span> Trader Portal</a></li>";				
+
+					if( userType.equalsIgnoreCase("PMTRADER")){
+						out.print(PMToTraderSwitch);
+					}
+				%>	
+				
+				 <li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>				 
 			</ul>
 		</div>
     </nav>
-     -->
-    <!-- Menu Items -->
-	<form action="logout" method="post" id="form1">
-	</form>
-	<center><span class="glyphicon glyphicon-log-in"><button type="submit" form="form1" value="Logout">Logout</button></span></center>
-	
+
 	<div class="container">
         <div id="menu-item-row" class="row">
                 
@@ -173,7 +79,7 @@
             </a>
             
             <!-- thumb -->
-            <a href="ViewPendingOrder"> 
+            <a href="./PendingOrder.jsp"> 
                 <div id="thumb-pending-order" class="thumb-pm-home col col-sm-3">
                 <div class="thumb-pm-home-container">
                     <center>
