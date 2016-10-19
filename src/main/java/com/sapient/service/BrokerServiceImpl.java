@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.xml.bind.JAXBException;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import com.sapient.config.LoggerConfig;
 import com.sapient.dao.BlockDAO;
 import com.sapient.dao.BlockDAOImpl;
 import com.sapient.dao.SecuritiesDAO;
@@ -54,6 +56,8 @@ public class BrokerServiceImpl implements BrokerService {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		MarshallAndSend send = (MarshallAndSend) context.getBean("MessageProducer");
+		LoggerConfig logConfig = new LoggerConfig();
+		Logger log = logConfig.getLogConfig();
 		for (Block blocks : blockList) {
 			System.out.println(blocks);
 			// delete this condition
@@ -90,6 +94,11 @@ public class BrokerServiceImpl implements BrokerService {
 					} else {
 						tempExecutedQty = blocks.getExecuted_quantity();
 					}
+					System.out.println("Total Q " + blocks.getTotal_quantity());
+					log.info("Total Q " + blocks.getTotal_quantity());
+
+					System.out.println("Executed Q " + tempExecutedQty);
+					log.info("Executed Q " + tempExecutedQty);
 
 					System.out.println("TotalQtyToExecute " + remainingQty);
 

@@ -1,5 +1,7 @@
 package com.sapient.controller;
 
+import java.net.URISyntaxException;
+
 import javax.persistence.Persistence;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,15 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sapient.jms.ActiveMQControl;
 import com.sapient.main.Login;
 import com.sapient.model.User;
 
 @Controller
 public class LoginController {
-
+	
+	
 	@RequestMapping("/views/hello")
 
-	public ModelAndView sysLogin(HttpServletRequest req) {
+	public ModelAndView sysLogin(HttpServletRequest req) throws URISyntaxException, Exception {
+		ActiveMQControl bro = ActiveMQControl.getInstance();
 		String uname = req.getParameter("username");
 		System.out.println("username: " + uname);
 		System.out.println("Controller");
@@ -32,10 +37,13 @@ public class LoginController {
 		String vm = l.checkuser(user);
 
 		req.getSession().setAttribute("message", vm);
-		if (vm.equals("Valid user"))
+		if (vm.equals("Valid user")) {
+			bro.startBroker();
 			return new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
-		else
+		} else {
 			return new ModelAndView("redirect:Login.jsp", "message", vm);
+
+		}
 
 	}
 
@@ -46,19 +54,26 @@ public class LoginController {
 		String npass = req.getParameter("newpass");
 		String cpass = req.getParameter("confirmpass");
 		User user = new User();
-		user.setUser_name(uname);
-		user.setSecret_key(skey);
-		user.setPassword(npass);
 		Login l = new Login();
+		if (npass.equalsIgnoreCase(cpass)) {
+			user.setUser_name(uname);
+			user.setSecret_key(skey);
+			user.setPassword(npass);
+			l.updatepass(user);
+			String vm = "updated";
+			return new ModelAndView("redirect:Login.jsp", "message", vm);
+		} else {
+			String message = "password dont match";
+			return new ModelAndView("redirect:ForgetPassword.jsp", "message", message);
+		}
 
-		l.updatepass(user);
-		String vm = "updated";
-
-		return new ModelAndView("redirect:Login.jsp", "message", vm);
 	}
 
 	@RequestMapping("/views/logout")
-	public String logout(HttpServletRequest req) {
+	public String logout(HttpServletRequest req) throws Exception {
+		System.out.println("logging out");
+		ActiveMQControl bro = ActiveMQControl.getInstance();
+		bro.stopBroker();
 		req.getSession().invalidate();
 		return "redirect:Login.jsp";
 	}

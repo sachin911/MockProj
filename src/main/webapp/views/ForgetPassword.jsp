@@ -255,7 +255,7 @@ table {
 		function check_Password() {
             var str = document.getElementById("password").value;
             var uName = document.getElementById("username").value;
-alert("hello");
+
             if (str.length < 8) {
                   alert("Password too short : Enter 8 or more character");
                   //return ("too_short");

@@ -1,5 +1,6 @@
 package com.sapient.controller;
 
+import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -35,7 +36,8 @@ public class ExecutionController {
 		 * req.getParameter("stop"); System.out.println("password: " + stop);
 		 */
 
-		ActiveMQControl bro = new ActiveMQControl();
+
+		ActiveMQControl bro = ActiveMQControl.getInstance();
 		bro.startBroker();
 
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
@@ -45,6 +47,7 @@ public class ExecutionController {
 		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
 		
 			brokerService.StartExecution();
+
 
 		bro.stopBroker();
 
@@ -58,5 +61,26 @@ public class ExecutionController {
 		 * new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
 		 * else return new ModelAndView("redirect:Login.jsp", "message", vm);
 		 */
+	}
+
+	@RequestMapping("views/checkStatus")
+	public ModelAndView checkBrokerStatus() {
+		String hostName = "127.0.0.1";
+		int portNumber = 61616;
+		String result;
+
+		try {
+			Socket s = new Socket(hostName, portNumber);
+			s.close();
+			result = "true";
+
+		} catch (Exception e) {
+			result = "false";
+			e.printStackTrace();
+
+		}
+		System.out.println("the broker status" + result);
+		return new ModelAndView("redirect:BrokerMainScreen.jsp", "status", result);
+
 	}
 }
