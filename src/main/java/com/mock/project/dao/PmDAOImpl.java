@@ -136,6 +136,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 
 	
 	public String getUserNameFromID(Long id) {
+		System.out.println("In getUserNameFromID about to create query");
 		Query query = em.createQuery("from User where user_id =:uid");
 		query.setParameter("uid", id);
 		List<User> userList = new ArrayList<User>();

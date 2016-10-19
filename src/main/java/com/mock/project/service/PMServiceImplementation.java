@@ -57,6 +57,10 @@ public class PMServiceImplementation implements PMServices {
 		return dao.getTraderId(traderName);
 	}
 
+	public String getUserName(Long id) {
+		return dao.getUserNameFromID(id);
+	}
+	
 	/*
 
 	@Override
