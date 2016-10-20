@@ -39,6 +39,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class TradingController {
 
+	public TradingController() {
+	super();
+	} 
 	
 	ModelAndView model = new ModelAndView("PendingOrders1");
 	
@@ -205,7 +208,7 @@ public class TradingController {
 	
 	
 	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
-    public ModelAndView populateBlockBlotter(HttpServletResponse httpServletResponse) 
+    public ModelAndView populateBlockBlotter() 
     {
 
       

@@ -16,6 +16,7 @@
     <title>Test Page</title>
 </head>
 <body>
+
 <!-- <style>
 	th {
 	
@@ -77,8 +78,8 @@ td {
                 <td><c:out  value='${Orders.orderDate}'/></td>
                  
                
-                 <td><button id ="detailsButton" class="btn btn-default" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
-                  <td><button id ="editButton" class="btn btn-default" onclick="toggleEdit('${Loop.index +1}')">Edit</button></td></tr>
+                 <td><button id ="detailsButton" class="btn btn-sm btn-info" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
+                  <td><button id ="editButton" class="btn btn-sm btn-info" onclick="toggleEdit('${Loop.index +1}')">Edit</button></td></tr>
                 
                  
                  <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
@@ -110,7 +111,7 @@ td {
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
                  <th>PM ID</th>
-                 <th><button type="button" class="btn btn-default" id="cancelOrder">CANCEL</button></th>
+                 <th><button type="button" class="btn btn-info" id="cancelOrder">CANCEL</button></th>
                  
           </tr>
           
@@ -136,12 +137,13 @@ td {
  <%j++; %>
       </c:forEach>
         </table> 
+      <button type="button" class="btn btn-sm btn-success" id="sendBlock">SEND</button>
+
+     <button type="button" class="btn btn-sm btn-danger" id="removeBlock">REMOVE BLOCK</button>
    
 </div>
 
-   <button type="button" class="btn btn-default" id="sendBlock">SEND</button>
 
-     <button type="button" class="btn btn-default" id="removeBlock">REMOVE BLOCK</button>
 
 </div>
     </div>
@@ -232,7 +234,6 @@ td {
     	
     	
     	});
-    
     
     
     </script>
