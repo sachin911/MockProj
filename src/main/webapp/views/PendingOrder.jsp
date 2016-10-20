@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page
 	import="org.springframework.context.support.AbstractApplicationContext"%>
-<% response.addHeader("Refresh","10"); %>
+<% response.addHeader("Refresh","4"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.mock.project.config.AppConfig"%>
@@ -162,11 +162,11 @@ scroll bar cutomization . #pending-order-headers::-webkit-scrollbar {
 				<div class="col col-sm-1">Type</div>
 				<div class="col col-sm-1">Qualifier</div>
 				<div class="col col-sm-1">Trader</div>
-				<div class="col col-sm-1">Quantiy</div>
+				<div class="col col-sm-1">Quantity</div>
 				<div class="col col-sm-1">Stop</div>
 				<div class="col col-sm-1">Limit</div>
 				<div class="col col-sm-1">Status</div>
-				<div class="col col-sm-1">Ammend</div>
+				<div class="col col-sm-1">Amend</div>
 				<div class="col col-sm-1">Cancel</div>
 			</div>
 

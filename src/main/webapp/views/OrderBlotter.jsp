@@ -4,7 +4,7 @@
 <%@page
 	import="org.springframework.context.support.AbstractApplicationContext"%>
 <%
-	response.addHeader("Refresh", "10");
+	response.addHeader("Refresh", "4");
 %>
 <%@page import="com.mock.project.config.AppConfig"%>
 <%@page
