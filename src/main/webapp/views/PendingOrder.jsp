@@ -1,35 +1,59 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="org.springframework.context.support.AbstractApplicationContext"%>
-<% response.addHeader("Refresh","10"); %> 
+<%@page
+	import="org.springframework.context.support.AbstractApplicationContext"%>
+<%-- <% response.addHeader("Refresh","10"); %>  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
-	<%@page import="com.mock.project.config.AppConfig"%>
-	<%@page import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
-	
-	<%@ page import="java.util.List" %>
-    <%@ page import="com.mock.project.model.Order"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.mock.project.config.AppConfig"%>
+<%@page
+	import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
+
+<%@ page import="java.util.List"%>
+<%@ page import="com.mock.project.model.Order"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <title>Pending Order</title>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
+function amend(i){
+	
+	var out=document.getElementById('order_id'+i);
+	console.log(i)
+	var message=out.innerHTML;
+	console.log(message);
+ 	$.ajax({
+		type: "POST",
+		url: "AmendOrderPMc",
+		data: "message=" + message ,
+		success: function(data) {
+	    		window.location.href="AmendOrder.jsp";    
+					},
+		error:function(jqXHR, textStatus, errorThrown) {
+	          	console.log(textStatus, errorThrown);
+				}
+	}); 
+}
+
 function cancel(i){
 	
 	var out=document.getElementById('order_id'+i);
-
 	var message=out.innerHTML;
 	console.log(message);
- $.ajax({
+ 	$.ajax({
 	                type: "POST",
 	                url: "DeleteOrder",
 	                data: "message=" + message ,
@@ -40,58 +64,10 @@ function cancel(i){
 	                       console.log(textStatus, errorThrown);
 	                     
 	                }
-	              }); 
-
-}
-</script>
- <!-- <script type="text/javascript">
- function divClicked(i) {
-	 alert(i);
-    var divHtml = $("."+i).html();
-   
-    var editableText = $("<textarea />");
-    var x = 10;
-    editableText.val(divHtml);
-  //  alert(editableText.val);
-    $("."+i).replaceWith(editableText);
-    editableText.focus();
-  
-   
-    editableText.blur(function(i) {var html = $(this).val();
-  //  alert("message");
- var x = parseInt(i);
-  var name = "<p class='test";
-  var n2 = i;
-  alert(x);
-  var n3="'>'";
-  var str = name.concat(n2);
-  var str2 = str.concat(n3);
- // alert(str2);
-  //alert(name);
-    var viewableText =$("<p class='1'>");
-    viewableText.html(html);
-    $(this).replaceWith(viewableText);});
-  
-}
-function test(i){
-	divClicked(i);
-}
-function editableTextBlurred() {
-    var html = $(this).val();
-   // alert("message");
-    var viewableText =$("<p>");
-    viewableText.html(html);
-    $(this).replaceWith(viewableText);
-    // setup the click event for this new div
-   //viewableText.click(test);
+	              });
 }
 
-//function ammend(){
-$(document).ready(function() {
-    $("#amend").click(divClicked);
-});
 </script>
- -->
 <style>
 .btn {
 	font-size: 0.9em;
@@ -127,9 +103,7 @@ $(document).ready(function() {
 }
 
 //
-scroll bar cutomization .
-
-#pending-order-headers::-webkit-scrollbar {
+scroll bar cutomization . #pending-order-headers::-webkit-scrollbar {
 	width: 1em;
 }
 
@@ -193,85 +167,54 @@ scroll bar cutomization .
 				<div class="col col-sm-1">Ammend</div>
 				<div class="col col-sm-1">Cancel</div>
 			</div>
-			
+
 			<div class="row well" id="pending-order-data">
-			<c:forEach items='${Orders}'  var="Orders" varStatus="loop">     
-    		
-			
-			
-			
-			
-				<!-- order 1 -->
-				<div class="row " id="orderid1-data">
-					<div class="col col-sm-1" id ="order_id${loop.index +1}"><c:out value='${Orders.orderId}'/></div>
-					<div class="col col-sm-1"><c:out value='${Orders.symbol}'/></div>
-					<div class="col col-sm-1"><c:out value='${Orders.side}'/></div>
-					<div class="col col-sm-1"><c:out value='${Orders.orderType}'/></div>
-					<div class="col col-sm-1"><c:out value='${Orders.qualifier}'/></div>
-					<div class="col col-sm-1"><c:out value='${Orders.traderId}'/></div>
-					<div class="col col-sm-1"><p class="${loop.index +1}"><c:out value='${Orders.qtyPlaced}'/></p></div>
-					<div class="col col-sm-1"><c:out value='${Orders.stopPrice}'/></div>
-					<div class="col col-sm-1"><c:out value='${Orders.limitPrice}'/></div>
-					<div class="col col-sm-1"><c:out value='${Orders.status}'/></div>
-					<div class="col col-sm-1"><button id ="amend${loop.index +1}" onClick="test(${loop.index +1})" name="<c:out value='${Orders.orderId}'/>" type="button" class="btn btn-warning" onclick="window.location='ammendTable'">Amend</button></div>
-					<div class="col col-sm-1"><button id="orderId1-cancel${loop.index +1}" type="button" class="btn btn-danger" onclick="cancel(${loop.index +1})">Cancel</button></div>
-				</div>
-			
+				<c:forEach items='${Orders}' var="Orders" varStatus="loop">
+					<div class="row " id="orderid1-data">
+						<div class="col col-sm-1" id="order_id${loop.index +1}">
+							<c:out value='${Orders.orderId}' />
+						</div>
+						<div class="col col-sm-1">
+							<c:out value='${Orders.symbol}' />
+						</div>
+						<div class="col col-sm-1">
+							<c:out value='${Orders.side}' />
+						</div>
+						<div class="col col-sm-1">
+							<c:out value='${Orders.orderType}' />
+						</div>
+						<div class="col col-sm-1">
+							<c:out value='${Orders.qualifier}' />
+						</div>
+						<div class="col col-sm-1">
+							<c:out value='${Orders.traderId}' />
+						</div>
+						<div class="col col-sm-1">
+							<p class="${loop.index +1}">
+								<c:out value='${Orders.qtyPlaced}' />
+							</p>
+						</div>
+						<div class="col col-sm-1">
+							<c:out value='${Orders.stopPrice}' />
+						</div>
+						<div class="col col-sm-1">
+							<c:out value='${Orders.limitPrice}' />
+						</div>
+						<div class="col col-sm-1">
+							<c:out value='${Orders.status}' />
+						</div>
+						<div class="col col-sm-1">
+							<button id="orderId1-cancel${loop.index +1}" type="button"
+								class="btn btn-danger" onclick="amend(${loop.index +1})">Amend</button>
+						</div>
+						<div class="col col-sm-1">
+							<button id="orderId1-cancel${loop.index +1}" type="button"
+								class="btn btn-danger" onclick="cancel(${loop.index +1})">Cancel</button>
+						</div>
+					</div>
 				</c:forEach>
-				</div>
-				
-				
-				 <!-- order 2 -->
-				<!-- <div class="row " id="orderid2-data">
-					<div class="col col-sm-1">
-						<label>1232</label>
-					</div>
-					<div class="col col-sm-1">DELL</div>
-					<div class="col col-sm-1">SELL</div>
-					<div class="col col-sm-2 col-centered">LIMIT</div>
-					<div class="col col-sm-1">GTC</div>
-					<div class="col col-sm-1">T2</div>
-					<div class="col col-sm-1">500</div>
-					<div class="col col-sm-1">-</div>
-					<div class="col col-sm-1">32.05</div>
-					<div class="col col-sm-1">
-						<button id="orderId2-ammend" type="button" class="btn btn-warning">Ammend</button>
-					</div>
-					<div class="col col-sm-1">
-						<button id="orderId2-cancel" type="button" class="btn btn-danger">Cancel</button>
-					</div>
-				</div>
-
-				order 3
-				<div class="row " id="orderid3-data">
-					<div class="col col-sm-1">
-						<label>1542</label>
-					</div>
-					<div class="col col-sm-1">SKODA</div>
-					<div class="col col-sm-1">BUY</div>
-					<div class="col col-sm-2 col-centered">STOP-LIMIT</div>
-					<div class="col col-sm-1">GTC</div>
-					<div class="col col-sm-1">T1</div>
-					<div class="col col-sm-1">1200</div>
-					<div class="col col-sm-1">25.02</div>
-					<div class="col col-sm-1">32.65</div>
-					<div class="col col-sm-1">
-						<button id="orderId3-ammend" type="button" class="btn btn-warning">Ammend</button>
-					</div>
-					<div class="col col-sm-1">
-						<button id="orderId3-cancel" type="button" class="btn btn-danger">Cancel</button>
-					</div>
-				</div>-->
-
-			</div> 
-
-
-			<!-- pop up form -->
-
-			<!-- pop up form ends here -->
-
+			</div>
 		</div>
-	
-
+	</div>
 </body>
 </html>

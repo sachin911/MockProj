@@ -25,9 +25,20 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 
 
 	@Override
-	public Order edit(Order object) {
-		em.persist(object);
-		return object;
+	public void edit(Order order) {
+		Long o_id = (Long) order.getOrderId();
+		Query query = em.createQuery("update Order set order_type=:orderType, qualifier=:orderqual, account_type=:acctype, qty_placed=:qtyPlaced, trader_id=:trader, portfolio_id=:portfolio, stop_price=:stop, limit_price=:limit where order_id=:orderId");
+		query.setParameter("orderId", o_id);
+		query.setParameter("orderType", order.getOrderType());
+		query.setParameter("orderqual", order.getQualifier());
+		query.setParameter("acctype", order.getAccountType());
+		query.setParameter("qtyPlaced", order.getQtyPlaced());
+		query.setParameter("trader", order.getTraderId());
+		query.setParameter("portfolio", order.getPortfolioId());
+		query.setParameter("stop", order.getStopPrice());
+		query.setParameter("limit", order.getLimitPrice());
+		
+		System.out.println("update query" + query.executeUpdate());
 	}
 
 	@Override
@@ -160,7 +171,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 	}
 
 	@Override
-	public void findOrderForUpdate(Long id) {
+	public void findOrderForDrop(Long id) {
 		
 		Query query = em.createQuery("update Order set status=:status where order_id=:o_id");
 		query.setParameter("o_id", id);
@@ -168,7 +179,16 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		System.out.println("update query" + query.executeUpdate());
 	}
 	
-	
+	@Override
+	public Order findOrderForEdit(Long id) {
+		Query query = em.createQuery("from Order where order_id =:oid");
+		query.setParameter("oid", id);
+	      Order orders = new Order();
+		orders = (Order) query.getSingleResult();
+		System.out.println(orders);
+		return orders;
+		
+	}
 	// @Override
 	// public void updateStatus(Status status,List orderid) {
 	// List<Order> getOrders=new ArrayList();

@@ -70,6 +70,8 @@ $time: 0.15s;
     	
         		stop.disabled =(obj.value == "limit" || obj.value == "market");
        			limit.disabled =(obj.value == "stop" || obj.value == "market");
+       			limit.value="";
+       			stop.value="";
     		}
 			
 			$( document ).ready(function() {

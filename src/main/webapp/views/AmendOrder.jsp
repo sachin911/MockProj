@@ -3,9 +3,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page
 	import="org.springframework.context.support.AbstractApplicationContext"%>
-<%-- <%
+<%
 	response.addHeader("Refresh", "10");
-%> --%>
+%> 
 <%@page import="com.mock.project.config.AppConfig"%>
 <%@page
 	import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
@@ -53,25 +53,6 @@ $outcolor: #fff;
 $bdrwidth: 10px;
 $time: 0.15s;
    </style>
-   <script>
-   function changetextbox(obj)
-   {  
-        var limit = document.getElementById("limit");
-        var stop = document.getElementById("stop");
-       	stop.disabled =(obj.value == "limit" || obj.value == "market");
-		limit.disabled =(obj.value == "stop" || obj.value == "market");
-		limit.value="";
-		stop.value="";
-   }
-   
-   
-   $( document ).ready(function() {
-	   var i = document.getElementById("hidden").value;
-	   var id = document.getElementById(i);
-	   id.selected=true;
-	});
- 
-</script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -93,11 +74,11 @@ $time: 0.15s;
       </div>
     </nav>
        <div id="creat-order-form" class="container well">
-         <h2 id="eqorder" >Edit Equity Order</h2>       
-           <%Order o=(Order)request.getSession().getAttribute("Orders");%>
+         <h2 id="eqorder" >Edit Equity Order</h2>        
+            <%Order o=(Order)request.getSession().getAttribute("Orders");%>
 	       <% System.out.println(request.getSession().getAttribute("Orders"));
 	       System.out.println(o.getOrderId());%>
-            <form action="EditOrder" method="post" >
+            <form action="AmendOrder" method="post" >
                
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Order Id: </div>
@@ -108,44 +89,34 @@ $time: 0.15s;
                   
                 <div id="" class="form-input-label col col-sm-4"> Side: </div>
                <div class="form-input-fields col col-sm-8"><input type = "text" id="side" name="side1" value='<%=o.getSide() %>' readonly>
-              </div>
-                
+              </div>               
                 <div id="" class="form-input-label col col-sm-4"> Order Type: </div>
                <div class="form-input-fields col col-sm-8">
-               <select id="orderType" name="orderType1">
-               	<option value="market" id="market"> Market</option>
-                  <option value="limit" id="limit"> Limit</option>
-                  <option value="stoplimit" id="stoplimit"> Stop-Limit</option>
-                  <option value="stop" id="stop"> Stop </option>
-               </select>
-               </div>
-                
+                <input type = "text" id="ordertype" name="orderType1" value='<%=o.getOrderType() %>' readonly> 
+               </div>       
                 <div id="" class="form-input-label col col-sm-4"> Order Qualifier: </div>
-               <div class="form-input-fields col col-sm-8"><input type="text" id="orderqual" name="orderqual1" value='<%=o.getQualifier() %>'>
+               <div class="form-input-fields col col-sm-8"><input type="text" id="orderqual" name="orderqual1" readonly value='<%=o.getQualifier() %>'>
                   </div>
-                 <input type="hidden" id="hidden" value='<%=o.getOrderType()%>'/> 
+                <%--  <input type="hidden" id="hidden" value="'<%=o.getOrderType()%>'"/>  --%>
                 <div id="" class="form-input-label col col-sm-4"> Account Type: </div>
-               <div class="form-input-fields col col-sm-8"><input type="text" id="acctype" name="acctype1" value='<%=o.getAccountType() %>'>
+               <div class="form-input-fields col col-sm-8"><input type="text" id="acctype" name="acctype1" readonly value='<%=o.getAccountType() %>'>
                   </div>
                 <div id="" class="form-input-label col col-sm-4"> Quantity: </div>
                <div class="form-input-fields col col-sm-8"><input type="number" id="qtyPlaced" name="qtyPlaced1" value='<%=o.getQtyPlaced() %>'>
                   </div>
                 <div id="" class="form-input-label col col-sm-4"> Trader: </div>
-               <div class="form-input-fields col col-sm-8"><input type="text" id="trader" name="trader1" value='<%=o.getTraderId() %>'>
+               <div class="form-input-fields col col-sm-8"><input type="text" id="trader" name="trader1" readonly value='<%=o.getTraderId() %>'>
                  </div>
                 <div id="" class="form-input-label col col-sm-4"> Portfolio: </div>
-               <div class="form-input-fields col col-sm-8"><input type = "text" id="portfolio" name="portfolio1" value='<%=o.getPortfolioId() %>'>
+               <div class="form-input-fields col col-sm-8"><input type = "text" id="portfolio" name="portfolio1" readonly value='<%=o.getPortfolioId() %>'>
                    </div>
                 <div id="stop" class="form-input-label col col-sm-4"> Stop Price: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" id="stop" name="stop1" value='<%=o.getStopPrice() %>'></div>
+               <div class="form-input-fields col col-sm-8"><input type="number" id="stop" name="stop1" readonly value='<%=o.getStopPrice() %>'></div>
                  <div id="limit" class="form-input-label col col-sm-4"> Limit Price: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" id="limit" name="limit1" value='<%=o.getLimitPrice() %>'></div>
+               <div class="form-input-fields col col-sm-8"><input type="number" id="limit" name="limit1" readonly value='<%=o.getLimitPrice() %>'></div>
                    </div>
-             <input type="submit" class="btn btn-default"  value="Save"/>
-             
-             
-            </form>
-        
+             <input type="submit" class="btn btn-default"  value="Save"/>    
+            </form>   
          </div>
  </body>
 </html>

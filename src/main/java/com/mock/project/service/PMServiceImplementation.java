@@ -73,7 +73,19 @@ public class PMServiceImplementation implements PMServices {
 
 	@Override
 	public void findOrderForUpdate(Long id) {
-		dao.findOrderForUpdate(id);
+		dao.findOrderForDrop(id);
+	}
+
+	@Override
+	public Order getOrderById(Long id) {
+		return (Order) dao.findOrderForEdit(id);
+		
+	}
+
+	@Override
+	public void UpdateOrderById(Order order) {
+		dao.edit(order);
+		
 	}
 
 	/*
