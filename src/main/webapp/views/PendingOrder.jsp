@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page
 	import="org.springframework.context.support.AbstractApplicationContext"%>
-<%-- <% response.addHeader("Refresh","10"); %>  --%>
+<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.mock.project.config.AppConfig"%>

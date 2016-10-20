@@ -206,7 +206,7 @@ $time: 0.15s;
                <div class="form-input-fields col col-sm-8"><input  name = "limitPrice" type="number" step="any" id="limit" min="0"  disabled required/></div>
                    </div>
                  </div>
-							 <input type="submit" class="btn btn-default"  value="CREATE"/>
+							 <input type="submit" class="btn btn-default" value="CREATE"/>
             </form>
            
          </div>
