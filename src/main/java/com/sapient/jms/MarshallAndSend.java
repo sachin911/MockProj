@@ -1,6 +1,8 @@
 package com.sapient.jms;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -55,11 +57,16 @@ public class MarshallAndSend {
 	}
 
 	public void marshallAndSendBlock(Block block) throws JAXBException {
+		LoggerConfig logConfig = new LoggerConfig();
+		Logger log = logConfig.getLogConfig();
+		
+		log.info("Entered the Marshalling block.");
 		String convertedObj = marshal(block);
+		log.info("Marshalling Done----------" + convertedObj);
 		getJmsTemplate().convertAndSend("sendBlockQueue", convertedObj);
 	}
 
-	public void sendExecutedBlockList(List<Block> blockList) throws JAXBException {
+	public void sendExecutedBlockList(List<Block> blockList) throws JAXBException, FileNotFoundException, IOException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		MarshallAndSend ms = (MarshallAndSend) context.getBean("MessageProducer");
 

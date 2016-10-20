@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.activemq.broker.BrokerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,55 +28,66 @@ import com.sapient.service.BrokerService;
 import com.sapient.service.BrokerServiceImpl;
 import com.sapient.service.UserService;
 
+@Service("execution")
 @Controller
 public class ExecutionController implements Runnable {
-	
+
+	HttpServletRequest req;
+
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@RequestMapping("/views/startStopService")
-	public String startThreadExecution(HttpServletRequest req) throws URISyntaxException, Exception {
-		ExecutionController ec = new ExecutionController();
-		return "hello";
-	}
-
-	@RequestMapping("/views/startStopService")
-	public String executionStartStop(HttpServletRequest req) throws URISyntaxException, Exception {
 		String start = req.getParameter("start");
 		System.out.println("username: " + start);
-		/*
-		 * System.out.println("executionStartStop"); String stop =
-		 * req.getParameter("stop"); System.out.println("password: " + stop);
-		 */
 
-
-//		ActiveMQControl bro = ActiveMQControl.getInstance();
-//		bro.startBroker();
+		// ActiveMQControl bro = ActiveMQControl.getInstance();
+		// bro.startBroker();
 
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
 				com.sapient.config.AppConfig.class);
 		container.registerShutdownHook();
 
 		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
+
+		brokerService.StartExecution();
+		brokerService.StartExecution();
+		brokerService.StartExecution();
+
+	}
+
+	@RequestMapping("/views/startStopService")
+	public String startThreadExecution(HttpServletRequest req) throws URISyntaxException, Exception {
+//		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+//
+//		ctx.register(AppConfig.class);
+//		ctx.refresh();
+//
+//		ExecutionController task = ctx.getBean(ExecutionController.class);
 		
-			brokerService.StartExecution();
-
-
-//		bro.stopBroker();
-
+		ExecutionController task = new ExecutionController();
+		
+		task.executionStartStop(req);
+		task.executionStartStop(req);
+		task.executionStartStop(req);
 		return "redirect:BrokerMainScreen.jsp";
+	}
 
-		/*
-		 * User user = new User(); user.setUser_name(uname);
-		 * user.setPassword(pass); Login l = new Login();
-		 * 
-		 * String vm = l.checkuser(user); if (vm.equals("Valid user")) return
-		 * new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
-		 * else return new ModelAndView("redirect:Login.jsp", "message", vm);
-		 */
+	@Async
+	// @RequestMapping("/views/startStopService")
+	public void executionStartStop(HttpServletRequest req) throws URISyntaxException, Exception {
+		String start = req.getParameter("start");
+		System.out.println("username: " + start);
+
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(
+				com.sapient.config.AppConfig.class);
+		container.registerShutdownHook();
+
+		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
+
+		brokerService.StartExecution();
+
+//		return "redirect:BrokerMainScreen.jsp";
+
+
 	}
 
 	@RequestMapping("views/checkStatus")
@@ -96,6 +111,5 @@ public class ExecutionController implements Runnable {
 		return new ModelAndView("redirect:BrokerMainScreen.jsp", "status", result);
 
 	}
-
 
 }
