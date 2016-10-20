@@ -123,7 +123,8 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
     {
            List<Order> checkedOrdersList=new ArrayList<Order>();
            List<Order> checkedOrders=new ArrayList<Order>();
-           String symbol = null,side = null,status = null;
+           String symbol = null,side = null;
+	
            int i,c=0;
            for(Integer order_id:selectedOrders)
            {
@@ -134,7 +135,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
            Order order=checkedOrders.get(0);
            symbol=order.getSymbol();
            side=order.getSide();
-           status=order.getStatus();
+
            checkedOrdersList.add(order);
            }
            System.out.println("here");
@@ -143,7 +144,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
            }
            System.out.println("OrderDAOImpl"+side);
            TypedQuery<Block> query=em.createQuery("from Block where symbol=:symbol" + " and side=:side"+ " and status=:status",Block.class);
-           query.setParameter("status", status);
+           query.setParameter("status", "New");
            query.setParameter("symbol", symbol);
            query.setParameter("side", side);
            

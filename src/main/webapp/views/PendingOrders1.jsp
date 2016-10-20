@@ -1,4 +1,4 @@
-<% response.addHeader("Refresh","100"); %>
+<% response.addHeader("Refresh","60"); %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -103,60 +103,14 @@
 
 		
         </tbody></table></div></div></div>
+       
         <script>
     
     
-    $(document).ready(function(){
-    	$('#add').click(function() {
-    		var data=[];
-    	$('#PendingOrderTable tr').each(function()
-    	{
-    	if($(this).find("input[type=checkbox]").prop("checked")===true)
-    	{
-    		
-    		
-		console.log("sakjs");
-    	var out1=$(this).find('.orderId').html();
-    	//var out2=$(this).find('.orderSymbol').html();
-    	//var out3=$(this).find('.orderStatus').html();
-    	//var out4=$(this).find('.orderSide').html();
-    	console.log(out1);
-    	/*console.log(out2);
-    	console.log(out3);
-    	console.log(out4);*/
-    	data.push(out1);
-    	//data.push(out2);
-    	//data.push(out3);
-    	//data.push(out4);
-    	}
-    	 
-    	}
-    	);	
-    	  console.log(data);  
-    	  
-    	  $.ajax({
-    		  type: "GET",
-    		  url: "fetchOrder5",
-    		  dataType: 'json',
-    		  data:"data="+data,
-    		  success: function(data) {
-    		    console.log("data is sent");
-    		  }
-    		});
-    	  
-    	  
-    	});
-    	});
     
-    
-    
-    </script>
-
-		        </tbody></table></div></div></div>
-        
 
 
-    <script>
+   
     
     
     $(document).ready(function(){
@@ -190,51 +144,129 @@
     	  
     	  
     	});
-    	
-    	
-    	
-    	$('#sub').click(function() {
-    		console.log("teststs");
-    		var data=[];
-    	$('#recommendedBlocks tr').each(function()
-    	{
-    	if($(this).find("input[type=checkbox]").prop("checked")===true)
-    	{
-    		
-    		
-    	console.log("sakjdsaass");
-    	var out=$(this).find('.blockid').html();
-    	console.log(out);
-    	data.push(out);
-    	}
-    	 
-    	}
-    	);	
-    	  console.log(data);  
-    	  
-    	  $.ajax({
-    		  type: "GET",
-    		  url: "fetchOrder6",
-    		  dataType: 'json',
-    		  data:"data="+data,
-    		  success: function(data) {
-    		    console.log("data is sent");
-    		  }
-    		});
-    	  
-    	  
-    	});
+ 	});
+    	</script>
+    	 <script>
+    	$(document).ready(function(){
+        	$('#add').click(function() {
+        		var data1=[];
+        		var data2=[];
+        		var data3=[];
+        		var random=false;
+        		var replace = true;
+        	    $('#PendingOrderTable tr').each(function()
+        	    {
+        	          if($(this).find("input[type=checkbox]").prop("checked")===true)
+        	          {
+        		
+        		random=true;
+    		console.log("sakjs");
+        	var out1=$(this).find('.orderId').html();
+        	var out2=$(this).find('.orderSymbol').html();
+        	var out3=$(this).find('.orderSide').html();
+        	
+        	data1.push(out1);
+        	data2.push(out2);
+        	data3.push(out3);
+        	
+        	var firstelement1=data1[0];
+        	var firstelement2=data2[0];
+        	var firstelement3=data3[0];
+        	
+        	for(var i = 1; i < data1.length; i++)
+        	{
+        	    if(data2[i] != firstelement2 || data3[i] != firstelement3)
+        	    {
+        	        replace = false;
+        	        break;
+        	    }
+        	}
+        	          }
+        	    });
 
-    	});
-    
-    
+        	if(replace)
+        	{
+        		$.ajax({
+          		  type: "GET",
+          		  url: "fetchOrder5",
+          		  dataType: 'json',
+          		  data:"data="+data1,
+          		  success: function(data1) {
+          		    console.log("data is sent");
+          		  }
+          		});
+        	}
+        	else
+        	{
+        		alert("please select order of same side and symbol");
+        	}
+        	
+        	
+        	    if(random==false){
+            		alert("please select some order");
+        	    }
+        	});
+        	});
+        
+        
+        
+        </script>
+
+    		       <!--   </tbody></table></div></div> -->
+            
+    	
+    	  <script>
+    	
+    	  $(document).ready(function(){
+      	$('#sub').click(function() {
+      		console.log("teststs");
+      		var data=[];
+      		var test=false;
+      	$('#recommendedBlocks tr').each(function()
+      	{
+      	if($(this).find("input[type=checkbox]").prop("checked")===true)
+      	{
+      		
+      		
+      	console.log("sakjdsaass");
+      	var out=$(this).find('.blockid').html();
+      	console.log(out);
+      	data.push(out);
+      	test=true;
+      	}
+      	 
+      	}
+      	);	
+      	  console.log(data);  
+      	  if(test){
+      		alert("The order has been successfully added");
+      	
+      	  $.ajax({
+      		  type: "GET",
+      		  url: "fetchOrder6",
+      		  dataType: 'json',
+      		  data:"data="+data,
+      		  success: function(data) {
+      		    console.log("data is sent");
+      		  
+      		  }
+      		});
+      	  }
+      	  else
+      		  {
+      		  alert("Please select some block");
+      		  }
+      	  
+      	});
+        	});
+
     
     </script>
       <button type="button" class="btn btn-primary" id="createBlock">Create Block</button>
 
       <button type="submit" class="btn btn-info" data-toggle="collapse" data-target="#demo" id="add">Add to Block
       </button>
-      <%-- </form:form> --%>
+     
       <script>
       
       function LoadData() {
@@ -244,7 +276,7 @@
 $(document).ready(function() {
     $("#recommendedBlocks").click(LoadData);
     LoadData();
-});
+})
 </script>
        <div id="demo" class="collapse"> 
         
@@ -273,11 +305,11 @@ $(document).ready(function() {
 			
 			  <td> <label><input type="checkbox" id="checks" name="checks" class="checkboxClicks"></label></td>
 			  <td class="blockid"><c:out value='${Blocks.blockId}'/></td>
-		 <td><c:out value='${Blocks.total_quantity}'/></td>
-			  <td><c:out value='${Blocks.executed_quantity}'/></td>
-			  <td><c:out value='${Blocks.total_quantity-blocks.executed_quantity}'/></td>
-			  <td><c:out value='${Blocks.limit_price}'/></td>
-			  <td><c:out value='${Blocks.stop_price}'/></td>
+		 <td><c:out value='${Blocks.qtyPlaced}'/></td>
+			  <td><c:out value='${Blocks.qtyExecuted}'/></td>
+			  <td><c:out value='${Blocks.qtyPlaced-Blocks.qtyExecuted}'/></td>
+			  <td><c:out value='${Blocks.limitPrice}'/></td>
+			  <td><c:out value='${Blocks.stopPrice}'/></td>
 			  <td><c:out value='${Blocks.status}'/></td> 
 		
 			</tr>
