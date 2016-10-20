@@ -115,18 +115,18 @@
         <center><h2 id="portfolio-list-title"> PORTFOLIOS </h2></center>
         <div id="portfolio-list-row" class="row">
             <center>
-                <a href="GeneralView" target="_blank"> <div id="portfolio-list-All" class="portfolio-list-thumb col col-sm-3"> All Portfolios </div></a>
-                <a href="Mining" target="_blank"> <div id="portfolio-list-mining" class="portfolio-list-thumb col col-sm-3"> Mining </div></a>
-                <a href="Banking" target="_blank"> <div id="portfolio-list-Banking" class="portfolio-list-thumb col col-sm-3"> Banking </div></a>
-                <a href="Automobile" target="_blank"> <div id="portfolio-list-Automobile" class="portfolio-list-thumb col col-sm-3"> Automobile </div></a>
-                <a href="Energy" target="_blank"> <div id="portfolio-list-Energy" class="portfolio-list-thumb col col-sm-3"> Energy </div></a>
-                <a href="Textile" target="_blank"> <div id="portfolio-list-Textile" value="Textile" class="portfolio-list-thumb col col-sm-3"> Textile </div></a>
-                <a href="Pharma" target="_blank"> <div id="portfolio-list-Pharma" class="portfolio-list-thumb col col-sm-3"> Pharma </div></a>
-                <a href="FMCG" target="_blank"> <div id="portfolio-list-FMCG" class="portfolio-list-thumb col col-sm-3"> FMCG </div></a>
-                <a href="Cement" target="_blank"> <div id="portfolio-list-Cement" class="portfolio-list-thumb col col-sm-3"> Cement </div></a>
-                <a href="Aluminium" target="_blank"> <div id="portfolio-list-Aluminium" class="portfolio-list-thumb col col-sm-3"> Aluminium </div></a>
-                <a href="Transport" target="_blank"> <div id="portfolio-list-Transport" class="portfolio-list-thumb col col-sm-3"> Transportation </div></a>
-                <a href="Other" target="_blank"> <div id="portfolio-list-Transport" class="portfolio-list-thumb col col-sm-3"> Other </div></a>
+                <a href="GeneralView"> <div id="portfolio-list-All" class="portfolio-list-thumb col col-sm-3"> All Portfolios </div></a>
+                <a href="Mining"> <div id="portfolio-list-mining" class="portfolio-list-thumb col col-sm-3"> Mining </div></a>
+                <a href="Banking"> <div id="portfolio-list-Banking" class="portfolio-list-thumb col col-sm-3"> Banking </div></a>
+                <a href="Automobile"> <div id="portfolio-list-Automobile" class="portfolio-list-thumb col col-sm-3"> Automobile </div></a>
+                <a href="Energy"> <div id="portfolio-list-Energy" class="portfolio-list-thumb col col-sm-3"> Energy </div></a>
+                <a href="Textile"> <div id="portfolio-list-Textile" value="Textile" class="portfolio-list-thumb col col-sm-3"> Textile </div></a>
+                <a href="Pharma"> <div id="portfolio-list-Pharma" class="portfolio-list-thumb col col-sm-3"> Pharma </div></a>
+                <a href="FMCG"> <div id="portfolio-list-FMCG" class="portfolio-list-thumb col col-sm-3"> FMCG </div></a>
+                <a href="Cement"> <div id="portfolio-list-Cement" class="portfolio-list-thumb col col-sm-3"> Cement </div></a>
+                <a href="Aluminium"> <div id="portfolio-list-Aluminium" class="portfolio-list-thumb col col-sm-3"> Aluminium </div></a>
+                <a href="Transport"> <div id="portfolio-list-Transport" class="portfolio-list-thumb col col-sm-3"> Transportation </div></a>
+                <a href="Other"> <div id="portfolio-list-Transport" class="portfolio-list-thumb col col-sm-3"> Other </div></a>
             </center>
         </div>
     </div>

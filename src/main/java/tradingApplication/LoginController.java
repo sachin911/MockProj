@@ -34,9 +34,9 @@ public class LoginController {
 		container.close();
 		
 		if(completeUser == null){
-			return new ModelAndView("LoginFailed", "message", "Login failed,  this username does not exist. Please try again.");
+			return new ModelAndView("Login", "message", "Login failed,  this username does not exist. Please try again.");
 		} else if(completeUser.getName() == null && completeUser.getPassword() == null) {
-			return new ModelAndView("LoginWrongPassword", "message", "Login failed, you have entered the wrong password. Please try again.");
+			return new ModelAndView("Login", "message", "Login failed, you have entered the wrong password. Please try again.");
 		}
 
 		System.out.println("just got user in logincontroller");
@@ -79,7 +79,7 @@ public class LoginController {
 	@RequestMapping("views/selectTrader")
 	public ModelAndView selectTrader(HttpServletRequest request) {
 		request.getSession().setAttribute("currentType", "Trader");
-		return new ModelAndView("BlockBlotter");	
+		return new ModelAndView("PopulateBB");	
 	}
 		
 	public void manualAddUser(User u){

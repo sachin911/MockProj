@@ -73,7 +73,7 @@
 				<div class="col col-sm-1">Order Date</div>
 			</div>
 
-			<div class="row well" id="pending-order-data">
+			<div class="row well" id="pending-order-data" overflow-y="scrollable">
 			</div>
 
 		</div>
