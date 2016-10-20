@@ -150,7 +150,7 @@ public class BrokerServiceImpl implements BrokerService {
 					}
 
 					viewFills.setExecutedDate(new Date());
-					if (QtyExecuted == 0) {
+					if (QtyExecuted != 0) {
 						viewFills.setExecutedPrice(priceExecuted);
 					} else {
 						viewFills.setExecutedPrice(0);
