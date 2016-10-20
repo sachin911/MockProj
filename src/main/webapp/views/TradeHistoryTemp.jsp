@@ -16,9 +16,24 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- hello -->
-    <title>Test Page</title>
+    <title>Trader History</title>
 </head>
 <body>
+
+ <style>
+.optionsDiv {
+padding-bottom:10px;
+font-weight:bold;
+}
+
+.odd{
+
+}
+.even{
+
+}
+</style> 
+
 <!--  .td { width = "10%" } -->
     <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -34,7 +49,13 @@
     <div class="container">
         
     <div class="well">
-      <h2>Trader History</h2>
+      <h2>Trader History</h2><br/>
+        <div class="optionsDiv"> Filter By Side: <select id="selectField">
+                              <option>All</option>
+                              <option>Buy</option>
+                              <option>Sell</option>
+                              
+                              </select></div> 
  
 
   <div class="panel-group" style = "width: 1060px">
@@ -62,7 +83,7 @@
             <th>Date</th>
            
            <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">   
-            <tr>
+            <tr position='${Blocks.side }' >
             	<td class="blockId"><c:out value='${Blocks.blockId}'/></td>
                  <td><c:out value='${Blocks.symbol}'/></td>
                  <td><c:out value='${Blocks.side}'/></a></td>
@@ -117,11 +138,7 @@
         </div>
         
         
-        <div class="query">
-          <input id="q" placeholder="Search" autocomplete="off">
-          <a class="submit"><span class="header-sprite icon-search"></span></a>
-        </div>
-        <button type="button" class="btn btn-info btn-sm">Filter</button>
+        
         
         </div>
         <script>
@@ -170,6 +187,48 @@
         	LoadData();
         	
             }
+        </script>
+        <script>
+        $(document).ready(function() {
+
+            function addRemoveClass(theRows) {
+
+                theRows.removeClass("odd even");
+                theRows.filter(":odd").addClass("odd");
+                theRows.filter(":even").addClass("even");
+            }
+            var data=[];
+            var rows = $("table#blockHistoryTable tr");
+            var side=$(this).find('.orderSide').html();
+            data.push(side);
+            addRemoveClass(rows);
+
+
+            $("#selectField").on("change", function() {
+
+                var selected = this.value;
+               
+                if (selected != "All") {
+
+                    rows.filter("[position=" + selected + "]").show();
+                    rows.not("[position=" + selected + "]").hide();
+                    var visibleRows = rows.filter("[position=" + selected + "]");
+                    addRemoveClass(visibleRows);
+                } else {
+
+                    rows.show();
+                    addRemoveClass(rows);
+
+                }
+                
+                
+                 
+               
+                
+               
+
+            });
+        }); 
        
         </script>
      </html>

@@ -13,21 +13,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Test Page</title>
+    <title>Home</title>
 </head>
 <body>
+<style>
+.optionsDiv {
+padding-bottom:10px;
+font-weight:bold;
+}
+.odd{}
+.even{}
 
-<!-- <style>
-	th {
-	
-	color: blue;
-	}
-
-td {
-	width : 218px;
-	}
-
-</style> -->
+</style>
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -45,7 +42,13 @@ td {
     <div class="container">
  
   <div class="well">
-      <h2>Block Blotter</h2>
+      <h2>Block Blotter</h2><br/>
+       <div class="optionsDiv"> Filter By Side: <select id="selectField">
+                              <option>All</option>
+                              <option>Buy</option>
+                              <option>Sell</option>
+                              
+                              </select></div>    
  
  
 <%int i=0; %>
@@ -69,7 +72,7 @@ td {
       <!--          <div class="panel panel-default">
       <div class="panel-heading">  -->
       
-             <tr id = "getId();">
+             <tr id = "getId();" position='${Blocks.side }'>
                  <td><input type="checkbox"/></td>
                   <td class="blockId"><c:out  value='${Blocks.blockId}'/></td>
 
@@ -105,12 +108,12 @@ td {
               <tr id="hideEditH${Loop.index +1}" style="display:none;">
                 
              	
-              <th></th>
+              <th></th><th></th>
                  <th>Order ID</th>
                  <th>Limit Price</th>
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
-                 <th>PM ID</th>
+                 
                  <th><button type="button" class="btn btn-info btn-sm" id="cancelOrder">CANCEL</button></th>
                  
           </tr>
@@ -187,7 +190,7 @@ td {
      });
      
      function ref(){
-    	 window.location="http://localhost:9080/tradingApplication/views/PopulateBB";
+    	 window.location="PopulateBB";
      }
      
      </script>
@@ -281,7 +284,48 @@ function toggleEdit(i) {
 </script>
  <script>
     
-    
+
+	 $(document).ready(function() {
+
+	     function addRemoveClass(theRows) {
+
+	         theRows.removeClass("odd even");
+	         theRows.filter(":odd").addClass("odd");
+	         theRows.filter(":even").addClass("even");
+	     }
+	     var data=[];
+	     var rows = $("table#sendBlockTable tr");
+	     var side=$(this).find('.orderSide').html();
+	     data.push(side);
+	     addRemoveClass(rows);
+
+
+	     $("#selectField").on("change", function() {
+
+	         var selected = this.value;
+	        
+	         if (selected != "All") {
+
+	             rows.filter("[position=" + selected + "]").show();
+	             rows.not("[position=" + selected + "]").hide();
+	             var visibleRows = rows.filter("[position=" + selected + "]");
+	             addRemoveClass(visibleRows);
+	         } else {
+
+	             rows.show();
+	             addRemoveClass(rows);
+
+	         }
+	         
+	         
+	          
+	        
+	         
+	        
+
+	     });
+	 }); 
+
  
  
     

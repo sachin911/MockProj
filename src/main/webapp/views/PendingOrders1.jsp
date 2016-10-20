@@ -21,19 +21,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!-- <style>
+  <style>
 .optionsDiv {
 padding-bottom:10px;
 font-weight:bold;
 }
 
-.odd{
-background:#CCFFEB;
-}
-.even{
-background:#99FFD6;
-}
-</style>  -->
+.odd{}
+.even{}
+
+</style>
 <title>Pending Orders</title>
   
 </head>
@@ -58,9 +55,9 @@ background:#99FFD6;
 
 <div class="container">
 <div class="well">
-  <h2>Pending Orders</h2>
+  <h2>Pending Orders</h2><br/>
   
-  <div class="optionsDiv"> Filter By Side: <select id="selectField">
+  <div class="optionsDiv"><strong> Filter By Side: </strong><select id="selectField">
                               <option>All</option>
                               <option>Buy</option>
                               <option>Sell</option>
@@ -102,7 +99,7 @@ background:#99FFD6;
                                                                      <c:forEach items='${Orders}' var="Orders">
 
 
-                                                                            <tr>
+                                                                            <tr position='${Orders.side }' >
 
                                                                                     <td><label><input type="checkbox" id="check"
                                                                                                     name="check" class="checkboxClick"></label></td>
@@ -204,7 +201,7 @@ background:#99FFD6;
        });
     
     function ref() {
-    	window.location="http://localhost:9080/tradingApplication/views/updateTable";
+    	window.location="updateTable";
     }
         </script>
        
@@ -305,6 +302,8 @@ $(document).ready(function() {
                            console.log("data is sent");
                          }
                        });
+                       alert("Order Added to Block");
+                       ref();
                }
                else
                {
