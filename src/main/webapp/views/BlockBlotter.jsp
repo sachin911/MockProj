@@ -111,7 +111,7 @@ td {
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
                  <th>PM ID</th>
-                 <th><button type="button" class="btn btn-info" id="cancelOrder">CANCEL</button></th>
+                 <th><button type="button" class="btn btn-info btn-sm" id="cancelOrder">CANCEL</button></th>
                  
           </tr>
           
