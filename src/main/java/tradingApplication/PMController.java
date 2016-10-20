@@ -108,12 +108,25 @@ public class PMController {
 		String qtyPlaced = req.getParameter("qtyPlaced1");
 		String trader = req.getParameter("trader1");
 		String portfolio = req.getParameter("portfolio1");
-		String stop = req.getParameter("stop1");
-		String limit = req.getParameter("limit1");
+		/*String stop = req.getParameter("stop1");
+		String limit = req.getParameter("limit1");*/
 		int qty = Integer.parseInt(qtyPlaced);
-		Long idl = Long.parseLong(orderId);		
-		double stopd = Double.parseDouble(stop);
-		double limitd = Double.parseDouble(limit);
+		Long idl = Long.parseLong(orderId);	
+
+		double stopd = 0.0, limitd=0.0;
+		if(req.getParameter("stop1") != null){
+			stopd = Double.parseDouble(req.getParameter("stop1"));
+		}
+		if(req.getParameter("limit1") != null){
+			limitd = Double.parseDouble(req.getParameter("limit1"));
+		}
+		
+		System.out.println("checking stop" + stopd);
+		System.out.println("checking limit" + limitd); 
+
+	/*	double stopd = Double.parseDouble(stop);
+		double limitd = Double.parseDouble(limit);*/
+
 		Long port = Long.parseLong(portfolio);
 		Long tradeId = Long.parseLong(trader);		
 		Order o = new Order(idl,symbol,side,orderType,orderqual,acctype,qty,tradeId,port,stopd,limitd);		
