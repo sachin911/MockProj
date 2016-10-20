@@ -74,7 +74,7 @@ $time: 0.15s;
       </div>
     </nav>
        <div id="creat-order-form" class="container well">
-         <h2 id="eqorder" >Edit Equity Order</h2>        
+         <h2 id="eqorder" >Amend Equity Order</h2>        
             <%Order o=(Order)request.getSession().getAttribute("Orders");%>
 	       <% System.out.println(request.getSession().getAttribute("Orders"));
 	       System.out.println(o.getOrderId());%>

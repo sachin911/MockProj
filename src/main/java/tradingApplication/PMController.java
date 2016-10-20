@@ -106,30 +106,22 @@ public class PMController {
 		String orderqual = req.getParameter("orderqual1");
 		String acctype = req.getParameter("acctype1");
 		String qtyPlaced = req.getParameter("qtyPlaced1");
-		String trader = req.getParameter("trader1");
-		String portfolio = req.getParameter("portfolio1");
-		/*String stop = req.getParameter("stop1");
-		String limit = req.getParameter("limit1");*/
+		String traderName = req.getParameter("trader1");
+		String portfolioName = req.getParameter("portfolio1");
 		int qty = Integer.parseInt(qtyPlaced);
 		Long idl = Long.parseLong(orderId);	
-
 		double stopd = 0.0, limitd=0.0;
 		if(req.getParameter("stop1") != null){
 			stopd = Double.parseDouble(req.getParameter("stop1"));
 		}
 		if(req.getParameter("limit1") != null){
 			limitd = Double.parseDouble(req.getParameter("limit1"));
-		}
-		
-		System.out.println("checking stop" + stopd);
-		System.out.println("checking limit" + limitd); 
-
-	/*	double stopd = Double.parseDouble(stop);
-		double limitd = Double.parseDouble(limit);*/
-
-		Long port = Long.parseLong(portfolio);
-		Long tradeId = Long.parseLong(trader);		
-		Order o = new Order(idl,symbol,side,orderType,orderqual,acctype,qty,tradeId,port,stopd,limitd);		
+		}		
+		Long traderId;
+		Long portfolioId;
+		traderId = pmservice.getTraderId(traderName);
+		portfolioId = pmservice.getPortfolioId(portfolioName);	
+		Order o = new Order(idl,symbol,side,orderType,orderqual,acctype,qty,traderId,portfolioId,stopd,limitd);		
 		pmservice.UpdateOrderById(o);
 		ModelAndView view = new ModelAndView("PMHome");
 		container.close();
@@ -156,6 +148,8 @@ public class PMController {
 		Long idl = Long.parseLong(orderId);		
 		double stopd = Double.parseDouble(stop);
 		double limitd = Double.parseDouble(limit);
+		System.out.println(stopd);
+		System.out.println(limitd);
 		Long port = Long.parseLong(portfolio);
 		Long tradeId = Long.parseLong(trader);		
 		Order o = new Order(idl,symbol,side,orderType,orderqual,acctype,qty,tradeId,port,stopd,limitd);

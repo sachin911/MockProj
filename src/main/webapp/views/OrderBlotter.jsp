@@ -90,6 +90,7 @@ $.ajax({
                        data: "data="+data ,
                        success: function(data) {
                          console.log("data is sent");
+                         	alert("Trade Sent successfully");
                        },
                             error:function(jqXHR, textStatus, errorThrown) {
                               console.log(textStatus, errorThrown);

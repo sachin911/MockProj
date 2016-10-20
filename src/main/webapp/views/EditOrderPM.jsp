@@ -61,39 +61,11 @@ input[type="number"]:disabled {
 textarea:focus, select:focus, input:focus {
 	outline: none;
 }
-$
-dia
-:
- 
-6
-em
-;
+$dia: 6em;
+$outcolor: #fff;
+$bdrwidth: 10px;
+$time: 0.15s;
 
-                                                
-$
-outcolor
-:
- 
-#fff
-;
-
-                                                
-$
-bdrwidth
-:
- 
-10
-px
-;
-
-                                                
-$
-time
-:
- 
-0
-.15s
-;
 </style>
 
 <script>
@@ -122,15 +94,47 @@ time
 	}
 
 	$(document).ready(function() {
-		var i = document.getElementById("hidden").value;
-		var id = document.getElementById(i);
-		id.selected = true;
+		var hiddenOrderType = document.getElementById("hiddenOrderType").value;
+		var hiddenQualifier = document.getElementById("hiddenQualifier").value;
+		var hiddenAccountType = document.getElementById("hiddenAccountType").value;
+		
+		var OrderTypeId = document.getElementById(hiddenOrderType);
+		OrderTypeId.selected = true;
+		
+		var QualifierId = document.getElementById(hiddenQualifier);
+		QualifierId.selected = true;
+		
+		var AccountTypeId = document.getElementById(hiddenAccountType);
+		AccountTypeId.selected = true;
+		
 		stopPrice = document.getElementById("stop1").value;
 		limitPrice = document.getElementById("limit1").value;
-		console.log(stopPrice);
-		console.log(limitPrice);
 		var select = document.getElementById("orderType");
 		changetextbox(select);
+		
+		
+		$.ajax({
+            type: "POST",
+            url: "fetchTraderList",
+            success: function(data) {
+				console.log(data);
+            	createTraderNameList(data);
+            },
+            error:function(jqXHR, textStatus, errorThrown) {
+              console.log(textStatus, errorThrown);      
+            }
+       	});
+		
+		function createTraderNameList(data){
+			var a = data.split(',');
+			for(i=0;i<a.length-1;i++){
+				var option=document.createElement("option");
+				option.value=a[i];
+				option.text=a[i];
+				document.getElementById("trader").appendChild(option);
+			}
+		}
+		
 	});
 </script>
 
@@ -157,10 +161,6 @@ time
 		<%
 			Order o = (Order) request.getSession().getAttribute("Orders");
 		%>
-		<%
-			System.out.println(request.getSession().getAttribute("Orders"));
-			System.out.println(o.getOrderId());
-		%>
 		<form action="EditOrder" method="post">
 			<div class="well">
 
@@ -183,7 +183,7 @@ time
 					<div id="" class="form-input-label col col-sm-4">Side:</div>
 					<div class="form-input-fields col col-sm-8">
 						<input type="text" id="side" name="side1"
-							value='<%=o.getSide()%>' readonly>
+							value='<%=o.getSide()%>' readonly/>
 					</div>
 				</div>
 
@@ -205,24 +205,34 @@ time
 					<div id="" class="form-input-label col col-sm-4">Order
 						Qualifier:</div>
 					<div class="form-input-fields col col-sm-8">
-						<input type="text" id="orderqual" name="orderqual1"
-							value='<%=o.getQualifier()%>'>
+						<%-- <input type="text" id="orderqual" name="orderqual1"
+							value='<%=o.getQualifier()%>'> --%>
+						<select name="orderqual1" id="orderqual">
+							<option value="GTD" id="GTD"> GTD</option>
+                  			<option value="GTC" id="GTC"> GTC</option>
+						</select>
 					</div>
-					<input type="hidden" id="hidden" value='<%=o.getOrderType()%>' />
+					<input type="hidden" id="hiddenOrderType" value='<%=o.getOrderType()%>'/>
+					<input type="hidden" id="hiddenQualifier" value='<%=o.getQualifier()%>'/>
+					<input type="hidden" id="hiddenAccountType" value='<%=o.getAccountType()%>'/>
 				</div>
 				<div class="row">
 					<div id="" class="form-input-label col col-sm-4">Account
 						Type:</div>
 					<div class="form-input-fields col col-sm-8">
-						<input type="text" id="acctype" name="acctype1"
-							value='<%=o.getAccountType()%>'>
+						<%-- <input type="text" id="acctype" name="acctype1"
+							value='<%=o.getAccountType()%>'> --%>
+						<select id="acctype" name="acctype1">
+							<option value="Cash" id="Cash"> Cash</option>
+                  			<option value="Margin" id="Margin"> Margin</option>
+						</select>
 					</div>
 				</div>
 
 				<div class="row">
 					<div id="" class="form-input-label col col-sm-4">Quantity:</div>
 					<div class="form-input-fields col col-sm-8">
-						<input type="number" id="qtyPlaced" name="qtyPlaced1"
+						<input type="number" id="qtyPlaced" name="qtyPlaced1" min="0"
 							value='<%=o.getQtyPlaced()%>'>
 					</div>
 				</div>
@@ -230,16 +240,30 @@ time
 				<div class="row">
 					<div id="" class="form-input-label col col-sm-4">Trader:</div>
 					<div class="form-input-fields col col-sm-8">
-						<input type="text" id="trader" name="trader1"
-							value='<%=o.getTraderId()%>'>
+						<%-- <input type="text" id="trader" name="trader1"
+							value='<%=o.getTraderId()%>'> --%>
+						<select id="trader" name="trader1"></select>
 					</div>
 				</div>
 
 				<div class="row">
 					<div id="" class="form-input-label col col-sm-4">Portfolio:</div>
 					<div class="form-input-fields col col-sm-8">
-						<input type="text" id="portfolio" name="portfolio1"
-							value='<%=o.getPortfolioId()%>'>
+						<%-- <input type="text" id="portfolio" name="portfolio1"
+							value='<%=o.getPortfolioId()%>'> --%>
+						<select id="portfolio" name="portfolio1">
+							<option value="Mining">Mining</option>
+      						<option value="Banking">Banking</option>
+      						<option value="Automobile">Automobile</option>
+      						<option value="Energy">Energy</option>
+      						<option value="Textile">Textile</option>
+      						<option value="Pharma">Pharma</option>
+      						<option value="FMCG">FMCG</option>
+      						<option value="Cement">Cement</option>
+      						<option value="Aluminium">Aluminium</option>
+      						<option value="Transportation">Transportation</option>
+      						<option value="Other">Other</option>
+						</select>
 					</div>
 				</div>
 
