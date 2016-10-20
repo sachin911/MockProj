@@ -10,4 +10,5 @@ void saveblock(Block block);
 List<Block> findALL();
 void expireblocks();
 public Block findByPrimaryKey(long id);
+List<Block>  openPartialView();
 }

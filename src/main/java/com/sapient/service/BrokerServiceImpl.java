@@ -100,30 +100,32 @@ public class BrokerServiceImpl implements BrokerService {
 
 					System.out.println("TotalQtyToExecute " + remainingQty);
 
-					Long QtyExecuted = 0L;
+					long QtyExecuted = 0L;
+					long maxQtyExecuted = 0L;
 
 					double priceExecuted = 0.0;
 					double priceSpred = RandomPrice(0.0, MaxPriceSpread);
 					double minPrice = LastTradedPrice - (LastTradedPrice * priceSpred / 100);
 					double maxPrice = LastTradedPrice + (LastTradedPrice * priceSpred / 100);
+					maxQtyExecuted = RandomQty(0, (long)MaxOrderPerOrder);
 					if (type.equalsIgnoreCase("market")) {
 
 						priceExecuted = RandomPrice(minPrice, maxPrice);
 						System.out.println("priceExecuted " + priceExecuted);
 
-						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
-
+						
+						QtyExecuted=Math.min(maxQtyExecuted, remainingQty);
 					}
 					if (type.equalsIgnoreCase("stop")) {
 
 					}
 					if (type.equalsIgnoreCase("limit") && type.equalsIgnoreCase("buy")) {
 						priceExecuted = RandomPrice(Math.min(LimitPrice, minPrice), Math.max(LimitPrice, minPrice));
-						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
+						QtyExecuted=Math.min(maxQtyExecuted, remainingQty);
 					}
 					if (type.equalsIgnoreCase("limit") && type.equalsIgnoreCase("sell")) {
 						priceExecuted = RandomPrice(Math.min(LimitPrice, maxPrice), Math.max(LimitPrice, maxPrice));
-						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
+						QtyExecuted=Math.min(maxQtyExecuted, remainingQty);
 					}
 
 					// Setting the Fields
@@ -186,10 +188,11 @@ public class BrokerServiceImpl implements BrokerService {
 		return (r.nextInt((int) ((max - min) * 100 + 1)) + min * 100) / 100.0;
 	}
 
-	Long RandomQty(Long i, Long max) {
+	long RandomQty(long i, long max) {
 		Random r = new Random();
 		return (long) (r.nextInt((int) (max - i + 1)) + i);
 	}
+
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -223,5 +226,11 @@ public class BrokerServiceImpl implements BrokerService {
 	public Block findByPrimaryKey(long id) {
 		return blockDAO.findByPrimaryKey(id);
 
+	}
+
+	@Override
+	public List<Block> openPartialView() {
+		return blockDAO.findOpenPartial();
+		 
 	}
 }

@@ -73,7 +73,7 @@ li:last-child {
 		BrokerService brokerService = (BrokerService) container.getBean("brokerService");
 		List<Block> blockList = new ArrayList();
 
-		blockList = brokerService.findALL();
+		blockList = brokerService.openPartialView();
 	%>
 	<div class="container">
 		<h3>Broker</h3>
