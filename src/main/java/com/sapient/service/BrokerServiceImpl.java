@@ -47,6 +47,8 @@ public class BrokerServiceImpl implements BrokerService {
 	@Autowired
 	ViewFillsDAO viewFillsDAO;
 	
+	private static final Logger logger = Logger.getLogger(BrokerServiceImpl.class);
+
 	
 	@Async
 	@Override
@@ -59,8 +61,7 @@ public class BrokerServiceImpl implements BrokerService {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		MarshallAndSend send = (MarshallAndSend) context.getBean("MessageProducer");
-		LoggerConfig logConfig = new LoggerConfig();
-		Logger log = logConfig.getLogConfig();
+
 		for (Block blocks : blockList) {
 			System.out.println(blocks);
 			// delete this condition
@@ -92,10 +93,10 @@ public class BrokerServiceImpl implements BrokerService {
 						tempExecutedQty = blocks.getExecuted_quantity();
 					}
 					System.out.println("Total Q " + blocks.getTotal_quantity());
-					log.info("Total Q " + blocks.getTotal_quantity());
+					logger.info("Total Q " + blocks.getTotal_quantity());
 
 					System.out.println("Executed Q " + tempExecutedQty);
-					log.info("Executed Q " + tempExecutedQty);
+					logger.info("Executed Q " + tempExecutedQty);
 
 					System.out.println("TotalQtyToExecute " + remainingQty);
 

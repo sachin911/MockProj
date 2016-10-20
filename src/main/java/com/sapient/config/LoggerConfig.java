@@ -16,7 +16,7 @@ public class LoggerConfig {
 		
 		Properties props = new Properties();
 		try {
-			props.load(new FileInputStream("log4j.properties"));
+			props.load(new FileInputStream("/log4j.properties"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
