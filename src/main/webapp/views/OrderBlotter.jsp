@@ -236,6 +236,7 @@ scroll bar cutomization . #order-blotter-headers::-webkit-scrollbar {
 				<li><a href="GeneralView">History</a></li>
 			</ul>
 		</div>
+	</nav>
 		<div class="container">
 			<div class="well">
 				<h2>Order Blotter</h2>
@@ -298,6 +299,6 @@ scroll bar cutomization . #order-blotter-headers::-webkit-scrollbar {
 				</div>
 			</div>
 		</div>
-	</nav>
+	
 </body>
 </html>

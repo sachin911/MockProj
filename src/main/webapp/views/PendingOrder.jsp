@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page
 	import="org.springframework.context.support.AbstractApplicationContext"%>
-<%-- <% response.addHeader("Refresh","10"); %>  --%>
+<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.mock.project.config.AppConfig"%>
@@ -51,9 +51,10 @@ function amend(i){
 function cancel(i){
 	
 	var out=document.getElementById('order_id'+i);
+
 	var message=out.innerHTML;
 	console.log(message);
- 	$.ajax({
+ $.ajax({
 	                type: "POST",
 	                url: "DeleteOrder",
 	                data: "message=" + message ,
@@ -64,7 +65,8 @@ function cancel(i){
 	                       console.log(textStatus, errorThrown);
 	                     
 	                }
-	              });
+	              }); 
+
 }
 
 </script>
@@ -208,8 +210,9 @@ scroll bar cutomization . #pending-order-headers::-webkit-scrollbar {
 								class="btn btn-danger" onclick="amend(${loop.index +1})">Amend</button>
 						</div>
 						<div class="col col-sm-1">
-							<button id="orderId1-cancel${loop.index +1}" type="button"
-								class="btn btn-danger" onclick="cancel(${loop.index +1})">Cancel</button>
+							<button id="orderId1-cancel${loop.index +1}"
+												type="button" class="btn btn-danger"
+												onclick="cancel(${loop.index +1})">Cancel</button>
 						</div>
 					</div>
 				</c:forEach>
