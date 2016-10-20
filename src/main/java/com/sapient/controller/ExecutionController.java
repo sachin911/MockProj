@@ -44,11 +44,21 @@ public class ExecutionController {
 		// ExecutionController task = ctx.getBean(ExecutionController.class);
 
 		ExecutionController task = new ExecutionController();
+		if (checkBroker()) {
+			task.executionStartStop(req);
+			task.executionStartStop(req);
+			task.executionStartStop(req);
+			return "redirect:BrokerMainScreen.jsp";
+		}
+		return "redirect:ErrorPage.jsp";
+		/*
+		 * StopController stopController=new StopController();
+		 * 
+		 * while(stopController.getFlag()) {
+		 */
 
-		task.executionStartStop(req);
-		task.executionStartStop(req);
-		task.executionStartStop(req);
-		return "redirect:BrokerMainScreen.jsp";
+		// }
+
 	}
 
 	@Async
@@ -126,6 +136,26 @@ public class ExecutionController {
 		System.out.println("the broker status" + result);
 		return new ModelAndView("redirect:BrokerMainScreen.jsp", "status", result);
 
+	}
+
+	public boolean checkBroker() {
+		String hostName = "127.0.0.1";
+		int portNumber = 61616;
+		boolean result;
+
+		try {
+			Socket s = new Socket(hostName, portNumber);
+			s.close();
+			result = true;
+
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+
+		}
+		// req.getSession().setAttribute("status", result);
+		System.out.println("the broker status" + result);
+		return result;
 	}
 
 }

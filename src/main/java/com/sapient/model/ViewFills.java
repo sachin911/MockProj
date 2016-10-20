@@ -27,7 +27,8 @@ public class ViewFills implements Serializable {
 	private long remainingQty;
 	@Column(name="EXECUTED_DATE")
 	private Date executedDate;
-	
+	@Column(name="STATUS")
+	private String status;
 	private static final long serialVersionUID = 1L;
 
 	public ViewFills() {
@@ -36,7 +37,14 @@ public class ViewFills implements Serializable {
 	public Integer getId() {
 		return this.Id;
 	}
-  
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public long getRemainingQty() {
 		return remainingQty;
 	}

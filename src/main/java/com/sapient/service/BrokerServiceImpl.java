@@ -157,6 +157,7 @@ public class BrokerServiceImpl implements BrokerService {
 					viewFills.setQtyExecuted(QtyExecuted);
 					viewFills.setBlock_Id(blocks.getId());
 					viewFills.setRemainingQty(blocks.getTotal_quantity() - blocks.getExecuted_quantity());
+					viewFills.setStatus(blocks.getStatus());
 					viewFillsDAO.save(viewFills);
 
 					securities.setLast_trade_price(priceExecuted);
