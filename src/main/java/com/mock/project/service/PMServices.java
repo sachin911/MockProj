@@ -29,4 +29,6 @@ public interface PMServices {
 	public List<Order> displayPendingForPM(Long pmId);
 	public Order getOrderById(Long id);
 	public void UpdateOrderById(Order order);
+	public List<Order> findAllHoldingsInPortfolio(String name, Long pmid);
+	public List<Order> findAllHoldings(Long id);
 }
