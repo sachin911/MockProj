@@ -64,18 +64,18 @@ td {
                  <th>Time stamp</th>
                  
              </thead>  
-           <c:forEach items='${Blocks}' var="Orders" varStatus="Loop">   
+           <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">   
            <%List<Block> l =(List<Block>) request.getAttribute("Blocks"); %>
       <!--          <div class="panel panel-default">
       <div class="panel-heading">  -->
       
              <tr id = "getId();">
                  <td><input type="checkbox"/></td>
-                  <td class="blockId"><c:out  value='${Orders.blockId}'/></td>
+                  <td class="blockId"><c:out  value='${Blocks.blockId}'/></td>
 
-                <td><c:out  value='${Orders.symbol}'/></td>
-               <td><c:out  value='${Orders.side}'/></td>
-                <td><c:out  value='${Orders.orderDate}'/></td>
+                <td><c:out  value='${Blocks.symbol}'/></td>
+               <td><c:out  value='${Blocks.side}'/></td>
+                <td><c:out  value='${Blocks.orderDate}'/></td>
                  
                
                  <td><button id ="detailsButton" class="btn btn-sm btn-info" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>

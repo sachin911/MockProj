@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
+  <!-- <style>
 .optionsDiv {
 padding-bottom:10px;
 font-weight:bold;
@@ -33,7 +33,7 @@ background:#CCFFEB;
 .even{
 background:#99FFD6;
 }
-</style>
+</style>  -->
 
   
 </head>
@@ -74,7 +74,7 @@ background:#99FFD6;
       <div style="height:300px;overflow-y:scroll;;">
     <div class="checkbox">
         
-    <table class="table table-bordered" id="PendingOrderTable">
+    <table class="table" id="PendingOrderTable">
     <thead>
       <tr>
          <th></th>
@@ -389,7 +389,7 @@ $(document).ready(function() {
         
           <div class="Recommendations">
           <div style="height:200px;overflow-y:scroll;;">
-           <table class="table table-bordered" id="recommendedBlocks">
+           <table class="table" id="recommendedBlocks">
     <thead>
       <tr>
          <th></th>
