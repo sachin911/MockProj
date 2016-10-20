@@ -292,6 +292,17 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 	@Override
 	public void deleteBlock(Block b) {
+		List<Order> list = new ArrayList<Order>();
+		Query query1 = em.createQuery("from Order where blockId = :id");
+		query1.setParameter("id", b.getBlockId());
+		list = query1.getResultList();
+		for(Order o:list){
+			Query query2 = em.createQuery("update Order set block_id = null" + " where order_id = :o_id" );
+	        query2.setParameter("o_id", o.getOrderId());
+	       
+	        query2.executeUpdate();
+		}
+		
 		b = em.merge(b);  
 		em.remove(b); 
 		
