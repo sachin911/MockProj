@@ -73,7 +73,7 @@ public class PMController {
 		req.getSession().setAttribute("Orders", order);
 		return "redirect:EditOrderPM.jsp";
 	}
-	
+
 	@RequestMapping(value = "views/AmendOrderPMc", method = RequestMethod.POST)
 	public String amendorder(HttpServletRequest req) {
 
@@ -81,7 +81,10 @@ public class PMController {
 		container.registerShutdownHook();
 		PMServices pmservice = container.getBean(PMServices.class);
 		String out = req.getParameter("message");
+		System.out.println("Inside AmendOrderPMc, GOT THIS MESSAGE FROM REQUEST: " + out);
+		out = out.trim();
 		Long idl = Long.parseLong(out);
+		System.out.println("Parsed string to long: " + idl);
 		Order order = pmservice.getOrderById(idl);
 		ModelAndView view = new ModelAndView("redirect:AmendOrder.jsp");
 		view.addObject("Orders", order);
