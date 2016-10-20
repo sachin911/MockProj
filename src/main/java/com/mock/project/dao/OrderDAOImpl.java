@@ -227,7 +227,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	}
 	
 	public List<Block> findAllBlocksHistory(int traderId) {
-		Query query = em.createQuery("from Block where status!=:stat and tader_id=:tid");
+		Query query = em.createQuery("from Block where status!=:stat and trader_id=:tid");
 		query.setParameter("stat", "New");
 		query.setParameter("tid", (long)traderId);
 		return query.getResultList();
@@ -309,6 +309,16 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		b = em.merge(b);  
 		em.remove(b); 
 		
+	}
+
+	@Override
+	public List<Order> getOrdersInBlock(Long block_id) {
+		System.out.println(block_id);
+		long b_id = block_id;
+		System.out.println(b_id);
+		Query query=em.createQuery("from Order where block_id =:blockId");
+		query.setParameter("blockId",block_id);
+		return query.getResultList();
 	}
 
 	

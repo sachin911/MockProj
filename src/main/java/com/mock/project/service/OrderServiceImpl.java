@@ -113,6 +113,13 @@ public class OrderServiceImpl implements OrderService{
 		
 	}
 
+	@Override
+	public List<Order> findOrders(Long block_id) {
+		System.out.println("Method call works");
+	return	dao.getOrdersInBlock(block_id);
+		
+	}
+
 	
 
 }

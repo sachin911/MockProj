@@ -68,9 +68,20 @@ public class Block {
                 
                 @Column(name = "EXECUTED_PRICE", nullable = true)
                 private double executed_price;
+                
+                @Column(name="TRADER_ID")
+                private Long traderId;
 
                 
-                public Block() {
+                public long getTraderId() {
+					return traderId;
+				}
+
+				public void setTraderId(long traderId) {
+					this.traderId = traderId;
+				}
+
+				public Block() {
                                 // TODO Auto-generated constructor stub
                 }
                 

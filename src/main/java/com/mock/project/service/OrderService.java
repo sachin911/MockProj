@@ -15,6 +15,7 @@ public interface OrderService {
 	
 	List<Block> displayBlock(int i);
 
+	List<Order> findOrders(Long block_id);
 	
 
 	void updateStatusInOrder(long block_id,List order_id);
