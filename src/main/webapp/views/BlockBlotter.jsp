@@ -151,7 +151,7 @@ td {
      $(document).ready(function(){
      	$('#removeBlock').click(function() {
      	
-  		
+  			
      			
      		var data=[];
      	$('#sendBlockTable tr').each(function()
@@ -171,7 +171,7 @@ td {
      	  console.log(data);  
      	  
      	  $.ajax({
-     		  type: "POST",
+     		  type: "GET",
      		  url: "removeBlock",
      		  dataType: 'json',
      		  data:"data="+data,
@@ -179,10 +179,12 @@ td {
      		    console.log("data is sent");
      		  }
      		});
-     	 location.href="PopulateBB";
+     	 
      	  
      	});
-     
+     });
+     </script>
+     <script>
     
     $(document).ready(function(){
     	$('#sendBlock').click(function() {

@@ -235,7 +235,7 @@ public class TradingController {
         OrderService orderService = container.getBean(OrderService.class);
         List<Integer> blockId=new ArrayList<Integer>();
         List<Block> blocks=new ArrayList<Block>();
-        
+        System.out.println("remove block");
         String[] out=req.getParameterValues("data");
 		String[] tokens=out[0].split(",");
 		for(String blockIdString:tokens){

@@ -292,9 +292,8 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 	@Override
 	public void deleteBlock(Block b) {
-		System.out.println(b);
-		System.out.println("being removed");
-		em.remove(b);
+		b = em.merge(b);  
+		em.remove(b); 
 		
 	}
 
