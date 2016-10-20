@@ -434,7 +434,7 @@ thead {
 														type="Number" step="any"  /></td>
 												</tr>
 												<tr>
-													<td style="text-align: center;">Maximum exection per
+													<td style="text-align: center;">Maximum Exection per
 														order</td>
 													<td style="text-align: center;"><input
 														id="MaximumExecutionsPerOrder "
