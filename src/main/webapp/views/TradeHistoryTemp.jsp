@@ -47,6 +47,7 @@
         <div class="panel-group" style = "width: 1060px"> 
     <div class="panel panel-default">
       <div class="panel-heading">
+      <div style="height:500px;overflow:auto;">
            <table class="table" id="blockHistoryTable">
            <div>   
            <th>Block ID</th>
@@ -100,6 +101,7 @@
            
          		</table> </tr>
               </table>
+              </div>
       </div>
       </div>
 
