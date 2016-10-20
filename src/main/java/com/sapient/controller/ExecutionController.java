@@ -45,8 +45,8 @@ public class ExecutionController {
 
 		ExecutionController task = new ExecutionController();
 		if (checkBroker()) {
-			task.executionStartStop(req);
-			task.executionStartStop(req);
+			//task.executionStartStop(req);
+			//task.executionStartStop(req);
 			task.executionStartStop(req);
 			return "redirect:BrokerMainScreen.jsp";
 		}
