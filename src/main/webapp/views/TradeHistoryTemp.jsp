@@ -47,6 +47,7 @@
         <div class="panel-group" style = "width: 1060px"> 
     <div class="panel panel-default">
       <div class="panel-heading">
+      <div style="height:500px;overflow:auto;">
            <table class="table" id="blockHistoryTable">
            <div>   
            <th>Block ID</th>
@@ -72,7 +73,7 @@
                  <td>To be added</td>
                  <td><c:out value='${Blocks.status}'/></td>
                  <td><c:out value='${Blocks.executedDate}'/></td>
-                 <td><button id ="detailsButton${Loop.index +1}" class="btn btn-default" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
+                 <td><button id ="detailsButton${Loop.index +1}" class="btn btn-info btn-sm" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
                  </tr>  </c:forEach>
                  <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
                 
@@ -100,6 +101,7 @@
            
          		</table> </tr>
               </table>
+              </div>
       </div>
       </div>
 
@@ -119,7 +121,7 @@
           <input id="q" placeholder="Search" autocomplete="off">
           <a class="submit"><span class="header-sprite icon-search"></span></a>
         </div>
-        <button type="button" class="btn btn-info">Filter</button>
+        <button type="button" class="btn btn-info btn-sm">Filter</button>
         
         </div>
         <script>

@@ -39,9 +39,19 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class TradingController {
 
-	private OrderService orderService;
-	ModelAndView model = new ModelAndView("PendingOrders1");
 
+	public TradingController() {
+	super();
+	} 
+	
+
+	private OrderService orderService;
+
+	ModelAndView model = new ModelAndView("PendingOrders1");
+	
+	
+	
+	
 	@RequestMapping(value = "/views/recommendBlock", method = RequestMethod.GET)
 	public ModelAndView recommendBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) {
 		//String []out=req.getParameter("check");	
@@ -104,7 +114,8 @@ public class TradingController {
 
 	@RequestMapping(value = "/views/createBlock", method = RequestMethod.POST)
 	public ModelAndView createBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) {
-
+		
+		
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
 		OrderService orderService = container.getBean(OrderService.class);
@@ -159,19 +170,21 @@ public class TradingController {
 
 
 	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
-	public ModelAndView populateBlockBlotter(HttpServletResponse httpServletResponse) 
-	{
 
+    public ModelAndView populateBlockBlotter() 
+    {
 
-		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
-		container.registerShutdownHook();
+      
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();
+      
+        OrderService orderService = container.getBean(OrderService.class);
+      
+        List<Block> Blocks =new ArrayList<Block>();
+      	Blocks = orderService.displayBlock(5);
 
-		OrderService orderService = container.getBean(OrderService.class);
+      	ModelAndView model = new ModelAndView("BlockBlotter");
 
-		List<Block> Blocks =new ArrayList<Block>();
-		Blocks = orderService.displayBlock(5);
-
-		ModelAndView model = new ModelAndView("BlockBlotter");
 		model.addObject("Blocks",Blocks);
 
 

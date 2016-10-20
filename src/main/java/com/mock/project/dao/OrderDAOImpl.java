@@ -1,6 +1,7 @@
 package com.mock.project.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -43,6 +44,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	Query query=em.createQuery("from Order where block_id is null and status=:stat");
 	query.setParameter("stat", "Open");
 	List<Order>l1=query.getResultList();
+	Collections.sort(l1);
 	
 	
 	for(Order i:l1){
@@ -51,7 +53,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	}
 	
 
-	return query.getResultList(); 
+	return l1; 
 	 }
 
 	@SuppressWarnings("unchecked")
@@ -123,7 +125,8 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
     {
            List<Order> checkedOrdersList=new ArrayList<Order>();
            List<Order> checkedOrders=new ArrayList<Order>();
-           String symbol = null,side = null,status = null;
+           String symbol = null,side = null;
+	
            int i,c=0;
            for(Integer order_id:selectedOrders)
            {
@@ -134,7 +137,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
            Order order=checkedOrders.get(0);
            symbol=order.getSymbol();
            side=order.getSide();
-           status=order.getStatus();
+
            checkedOrdersList.add(order);
            }
            System.out.println("here");
@@ -143,7 +146,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
            }
            System.out.println("OrderDAOImpl"+side);
            TypedQuery<Block> query=em.createQuery("from Block where symbol=:symbol" + " and side=:side"+ " and status=:status",Block.class);
-           query.setParameter("status", status);
+           query.setParameter("status", "New");
            query.setParameter("symbol", symbol);
            query.setParameter("side", side);
            

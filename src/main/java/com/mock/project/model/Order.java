@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 @DynamicUpdate(true)
 @DynamicInsert(true)
 @SelectBeforeUpdate(true)
-public class Order {
+public class Order implements Comparable<Order> {
 
                 @Id
                 @GeneratedValue(strategy=GenerationType.AUTO)
@@ -463,6 +463,17 @@ public class Order {
                 public void setPortfolioId(Long portfolioId) {
                                 this.portfolioId = portfolioId;
                 }
+
+
+
+
+
+
+				@Override
+				public int compareTo(Order o) {
+					String symbol = o.symbol;
+					return this.symbol.compareTo(o.getSymbol());
+				}
                 
                 
 

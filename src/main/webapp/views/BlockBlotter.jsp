@@ -16,6 +16,7 @@
     <title>Test Page</title>
 </head>
 <body>
+
 <!-- <style>
 	th {
 	
@@ -63,22 +64,22 @@ td {
                  <th>Time stamp</th>
                  
              </thead>  
-           <c:forEach items='${Blocks}' var="Orders" varStatus="Loop">   
+           <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">   
            <%List<Block> l =(List<Block>) request.getAttribute("Blocks"); %>
       <!--          <div class="panel panel-default">
       <div class="panel-heading">  -->
       
              <tr id = "getId();">
                  <td><input type="checkbox"/></td>
-                  <td class="blockId"><c:out  value='${Orders.blockId}'/></td>
+                  <td class="blockId"><c:out  value='${Blocks.blockId}'/></td>
 
-                <td><c:out  value='${Orders.symbol}'/></td>
-               <td><c:out  value='${Orders.side}'/></td>
-                <td><c:out  value='${Orders.orderDate}'/></td>
+                <td><c:out  value='${Blocks.symbol}'/></td>
+               <td><c:out  value='${Blocks.side}'/></td>
+                <td><c:out  value='${Blocks.orderDate}'/></td>
                  
                
-                 <td><button id ="detailsButton" class="btn btn-default" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
-                  <td><button id ="editButton" class="btn btn-default" onclick="toggleEdit('${Loop.index +1}')">Edit</button></td></tr>
+                 <td><button id ="detailsButton" class="btn btn-sm btn-info" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
+                  <td><button id ="editButton" class="btn btn-sm btn-info" onclick="toggleEdit('${Loop.index +1}')">Edit</button></td></tr>
                 
                  
                  <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
@@ -110,7 +111,7 @@ td {
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
                  <th>PM ID</th>
-                 <th><button type="button" class="btn btn-default" id="cancelOrder">CANCEL</button></th>
+                 <th><button type="button" class="btn btn-info btn-sm" id="cancelOrder">CANCEL</button></th>
                  
           </tr>
           
@@ -136,12 +137,13 @@ td {
  <%j++; %>
       </c:forEach>
         </table> 
+      <button type="button" class="btn btn-sm btn-success" id="sendBlock">SEND</button>
+
+     <button type="button" class="btn btn-sm btn-danger" id="removeBlock">REMOVE BLOCK</button>
    
 </div>
 
-   <button type="button" class="btn btn-default" id="sendBlock">SEND</button>
 
-     <button type="button" class="btn btn-default" id="removeBlock">REMOVE BLOCK</button>
 
 </div>
     </div>
@@ -179,10 +181,15 @@ td {
      		    console.log("data is sent");
      		  }
      		});
-     	 
-     	  
+     	 alert("Block removed")
+     	  ref();
      	});
      });
+     
+     function ref(){
+    	 window.location="http://localhost:9080/tradingApplication/views/PopulateBB";
+     }
+     
      </script>
      <script>
     
@@ -217,8 +224,8 @@ td {
     		    console.log("data is sent");
     		  }
     		});
-    	  
-    	  
+    	  alert("Blocks sent successfully");
+    	  ref();
     	});
     	
     	$(document).on("click","#cancelOrder",function(){
@@ -232,7 +239,6 @@ td {
     	
     	
     	});
-    
     
     
     </script>
