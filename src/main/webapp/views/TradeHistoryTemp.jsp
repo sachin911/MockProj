@@ -198,7 +198,7 @@ font-weight:bold;
                 theRows.filter(":even").addClass("even");
             }
             var data=[];
-            var rows = $("table#blockHistoryTable tr");
+            var rows = $("table#blockHistoryTable tr:not(:first-child)");
             var side=$(this).find('.orderSide').html();
             data.push(side);
             addRemoveClass(rows);
