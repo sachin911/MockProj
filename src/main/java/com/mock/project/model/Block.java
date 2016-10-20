@@ -33,13 +33,13 @@ public class Block {
 	private String side;
 	
 	@Column(name="ORDER_TYPE", nullable=false, length=40)
-	private String orderType;
+	private String type;
 	
 	@Column(name="QTY_PLACED", nullable=false)
-	private long qtyPlaced;
+	private long total_quantity;
 	
 	@Column(name="QTY_EXECUTED")
-	private long qtyExecuted;
+	private long executed_quantity;
 	
 	@Column(name="STOP_PRICE")
 	private double stopPrice;
@@ -67,9 +67,9 @@ public class Block {
 		super();
 		this.symbol = symbol;
 		this.side = side;
-		this.orderType = orderType;
-		this.qtyPlaced = qtyPlaced;
-		this.qtyExecuted = qtyExecuted;
+		this.type = orderType;
+		this.total_quantity = qtyPlaced;
+		this.executed_quantity = qtyExecuted;
 		this.stopPrice = stopPrice;
 		this.limitPrice = limitPrice;
 		this.status = status;
@@ -105,27 +105,27 @@ public class Block {
 	}
 
 	public String getOrderType() {
-		return orderType;
+		return type;
 	}
 
 	public void setOrderType(String orderType) {
-		this.orderType = orderType;
+		this.type = orderType;
 	}
 
 	public long getQtyPlaced() {
-		return qtyPlaced;
+		return total_quantity;
 	}
 
 	public void setQtyPlaced(long qtyPlaced) {
-		this.qtyPlaced = qtyPlaced;
+		this.total_quantity = qtyPlaced;
 	}
 
 	public long getQtyExecuted() {
-		return qtyExecuted;
+		return executed_quantity;
 	}
 
 	public void setQtyExecuted(long qtyExecuted) {
-		this.qtyExecuted = qtyExecuted;
+		this.executed_quantity = qtyExecuted;
 	}
 
 	public double getStopPrice() {
@@ -180,9 +180,9 @@ public class Block {
 		temp = Double.doubleToLongBits(limitPrice);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
-		result = prime * result + ((orderType == null) ? 0 : orderType.hashCode());
-		result = prime * result + (int) (qtyExecuted ^ (qtyExecuted >>> 32));
-		result = prime * result + (int) (qtyPlaced ^ (qtyPlaced >>> 32));
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + (int) (executed_quantity ^ (executed_quantity >>> 32));
+		result = prime * result + (int) (total_quantity ^ (total_quantity >>> 32));
 		result = prime * result + ((side == null) ? 0 : side.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		temp = Double.doubleToLongBits(stopPrice);
@@ -218,14 +218,14 @@ public class Block {
 				return false;
 		} else if (!orderDate.equals(other.orderDate))
 			return false;
-		if (orderType == null) {
-			if (other.orderType != null)
+		if (type == null) {
+			if (other.type != null)
 				return false;
-		} else if (!orderType.equals(other.orderType))
+		} else if (!type.equals(other.type))
 			return false;
-		if (qtyExecuted != other.qtyExecuted)
+		if (executed_quantity != other.executed_quantity)
 			return false;
-		if (qtyPlaced != other.qtyPlaced)
+		if (total_quantity != other.total_quantity)
 			return false;
 		if (side == null) {
 			if (other.side != null)
@@ -258,11 +258,11 @@ public class Block {
 		builder.append(", side=");
 		builder.append(side);
 		builder.append(", orderType=");
-		builder.append(orderType);
+		builder.append(type);
 		builder.append(", qtyPlaced=");
-		builder.append(qtyPlaced);
+		builder.append(total_quantity);
 		builder.append(", qtyExecuted=");
-		builder.append(qtyExecuted);
+		builder.append(executed_quantity);
 		builder.append(", stopPrice=");
 		builder.append(stopPrice);
 		builder.append(", limitPrice=");
