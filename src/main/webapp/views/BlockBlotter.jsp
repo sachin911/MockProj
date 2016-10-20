@@ -181,10 +181,15 @@ td {
      		    console.log("data is sent");
      		  }
      		});
-     	 
-     	  
+     	 alert("Block removed")
+     	  ref();
      	});
      });
+     
+     function ref(){
+    	 window.location="http://localhost:9080/tradingApplication/views/PopulateBB";
+     }
+     
      </script>
      <script>
     
@@ -219,8 +224,8 @@ td {
     		    console.log("data is sent");
     		  }
     		});
-    	  
-    	  
+    	  alert("Blocks sent successfully");
+    	  ref();
     	});
     	
     	$(document).on("click","#cancelOrder",function(){

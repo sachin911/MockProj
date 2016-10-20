@@ -34,7 +34,7 @@ background:#CCFFEB;
 background:#99FFD6;
 }
 </style>  -->
-
+<title>Pending Orders</title>
   
 </head>
 <body>
@@ -190,7 +190,7 @@ background:#99FFD6;
           
           $.ajax({
                  type: "POST",
-                 url: "fetchOrder2",
+                 url: "createBlock",
                  dataType: 'json',
                  data:"data="+data,
                  success: function(data) {
@@ -198,9 +198,14 @@ background:#99FFD6;
                  }
                });
           
-          
+          alert("Order Added to Block");
+          ref();
         });
        });
+    
+    function ref() {
+    	window.location="http://localhost:9080/tradingApplication/views/updateTable";
+    }
         </script>
        
         

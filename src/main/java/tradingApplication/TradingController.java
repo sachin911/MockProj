@@ -48,7 +48,10 @@ public class TradingController {
 	private OrderService orderService;
 
 	ModelAndView model = new ModelAndView("PendingOrders1");
-
+	
+	
+	
+	
 	@RequestMapping(value = "/views/recommendBlock", method = RequestMethod.GET)
 	public ModelAndView recommendBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) {
 		//String []out=req.getParameter("check");	
@@ -111,7 +114,8 @@ public class TradingController {
 
 	@RequestMapping(value = "/views/createBlock", method = RequestMethod.POST)
 	public ModelAndView createBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) {
-
+		
+		
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
 		OrderService orderService = container.getBean(OrderService.class);
