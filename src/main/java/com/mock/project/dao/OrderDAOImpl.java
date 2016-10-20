@@ -266,7 +266,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 				System.out.println("Inside second loop");
 				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty2, status=:status2 where orderId=:oid");
 				query1.setParameter("qty2",executedQty);
-				query1.setParameter("status2", status.PartiallyAllocated.toString());
+				query1.setParameter("status2", status.Partial.toString());
 				query1.setParameter("oid",order1.getOrderId());
 				System.out.println(query1.executeUpdate());
 				//query1.executeUpdate();
