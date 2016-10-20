@@ -27,6 +27,7 @@ import com.mock.project.dao.OrderDAOImpl;
 
 import com.mock.project.model.Block;
 import com.mock.project.model.Order;
+import com.mock.project.model.User;
 import com.mock.project.service.OrderService;
 import com.mock.project.service.OrderServiceImpl;
 import com.mock.project.service.TraderService;
@@ -171,7 +172,7 @@ public class TradingController {
 
 	@RequestMapping(value = "/views/PopulateBB", method = RequestMethod.GET)
 
-    public ModelAndView populateBlockBlotter() 
+    public ModelAndView populateBlockBlotter(HttpServletRequest req) 
     {
 
       
@@ -180,8 +181,12 @@ public class TradingController {
       
         OrderService orderService = container.getBean(OrderService.class);
       
+      	User user = (User) req.getSession().getAttribute("user");
+      	int trader_id = (int) user.getId();
+
+        
         List<Block> Blocks =new ArrayList<Block>();
-      	Blocks = orderService.displayBlock(5);
+      	Blocks = orderService.displayBlock(12);
 
       	ModelAndView model = new ModelAndView("BlockBlotter");
 
