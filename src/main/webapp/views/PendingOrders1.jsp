@@ -19,6 +19,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+.optionsDiv {
+padding-bottom:10px;
+font-weight:bold;
+}
+
+.odd{
+background:#CCFFEB;
+}
+.even{
+background:#99FFD6;
+}
+</style>
+
+  
 </head>
 <body>
 
@@ -41,6 +56,15 @@
 <div class="container">
  <div class="well">
   <h2>Pending Orders</h2>
+  
+  <div class="optionsDiv"> Filter By Side: <select id="selectField">
+                              <option>All</option>
+                              <option>Buy</option>
+                              <option>Sell</option>
+                              
+                              </select></div>      
+
+  
   <p>You can select multiple orders to create a block</p>
   
  
@@ -74,7 +98,7 @@
 			<c:forEach items='${Orders}' var="Orders">     
    
 
-			<tr>
+			<tr position='${Orders.side}'>
 
 			<td> <label><input type="checkbox" id="check" name="check" class="checkboxClick"></label></td>
 			 <td ><c:out value='${Orders.symbol}'/></td> -
@@ -146,6 +170,55 @@
     	});
  	});
     	</script>
+    	
+    	
+    	
+    	<script>
+
+$(document).ready(function() {
+
+    function addRemoveClass(theRows) {
+
+        theRows.removeClass("odd even");
+        theRows.filter(":odd").addClass("odd");
+        theRows.filter(":even").addClass("even");
+    }
+    var data=[];
+    var rows = $("table#PendingOrderTable tr");
+    var side=$(this).find('.orderSide').html();
+    data.push(side);
+    addRemoveClass(rows);
+
+
+    $("#selectField").on("change", function() {
+
+        var selected = this.value;
+       
+        if (selected != "All") {
+
+            rows.filter("[position=" + selected + "]").show();
+            rows.not("[position=" + selected + "]").hide();
+            var visibleRows = rows.filter("[position=" + selected + "]");
+            addRemoveClass(visibleRows);
+        } else {
+
+            rows.show();
+            addRemoveClass(rows);
+
+        }
+        
+        
+         
+       
+        
+       
+
+    });
+});
+
+</script>
+
+    	
     	 <script>
     	$(document).ready(function(){
         	$('#add').click(function() {
