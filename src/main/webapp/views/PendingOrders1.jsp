@@ -1,5 +1,5 @@
 
-<% response.addHeader("Refresh","15"); %>
+<% response.addHeader("Refresh","30"); %>
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -72,7 +72,7 @@ font-weight:bold;
     <div class="checkbox">
         
     <table class="table" id="PendingOrderTable">
-    <thead>
+    <tbody>
       <tr>
          <th></th>
         
@@ -91,8 +91,8 @@ font-weight:bold;
         <th>PORT ID</th>
         <th>ORDER ID</th>
       </tr>
-    </thead>
-        <tbody>
+ 
+        
 
                        
 
@@ -104,7 +104,7 @@ font-weight:bold;
                                                                                     <td><label><input type="checkbox" id="check"
                                                                                                     name="check" class="checkboxClick"></label></td>
                                                                                     <td><c:out value='${Orders.symbol}' /></td> 
-                                                                                    <td class="orderSide"><c:out value='${Orders.side}' /></td>
+                                                                                    <td ><c:out value='${Orders.side}' /></td>
 
                                                                                     <td><c:out value='${Orders.qtyPlaced}' /></td>
                                                                                     <td><c:out value='${Orders.limitPrice}' /></td>
@@ -209,47 +209,46 @@ font-weight:bold;
         
         <script>
 
-$(document).ready(function() {
+        $(document).ready(function() {
 
-    function addRemoveClass(theRows) {
+            function addRemoveClass(theRows) {
 
-        theRows.removeClass("odd even");
-        theRows.filter(":odd").addClass("odd");
-        theRows.filter(":even").addClass("even");
-    }
-    var data=[];
-    var rows = $("table#PendingOrderTable tr");
-    var side=$(this).find('.orderSide').html();
-    data.push(side);
-    addRemoveClass(rows);
-
-
-    $("#selectField").on("change", function() {
-
-        var selected = this.value;
-       
-        if (selected != "All") {
-
-            rows.filter("[position=" + selected + "]").show();
-            rows.not("[position=" + selected + "]").hide();
-            var visibleRows = rows.filter("[position=" + selected + "]");
-            addRemoveClass(visibleRows);
-        } else {
-
-            rows.show();
+                theRows.removeClass("odd even");
+                theRows.filter(":odd").addClass("odd");
+                theRows.filter(":even").addClass("even");
+            }
+            var data=[];
+            var rows = $("table#PendingOrderTable tr:not(:first-child)");
+            var side=$(this).find('.orderSide').html();
+            data.push(side);
             addRemoveClass(rows);
 
-        }
-        
-        
-         
-       
-        
-       
 
-    });
-});
+            $("#selectField").on("change", function() {
 
+                var selected = this.value;
+               
+                if (selected != "All") {
+
+                    rows.filter("[position=" + selected + "]").show();
+                    rows.not("[position=" + selected + "]").hide();
+                    var visibleRows = rows.filter("[position=" + selected + "]");
+                    addRemoveClass(visibleRows);
+                } else {
+
+                    rows.show();
+                    addRemoveClass(rows);
+
+                }
+                
+                
+                 
+               
+                
+               
+
+            });
+        }); 
 </script>
 
         

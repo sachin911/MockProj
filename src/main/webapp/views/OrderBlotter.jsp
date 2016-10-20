@@ -28,78 +28,78 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	
+       
 function edit(i){
-	
-	var out=document.getElementById('order_id'+i);
+       
+       var out=document.getElementById('order_id'+i);
 console.log(i)
-	var message=out.innerHTML;
-	console.log(message);
- $.ajax({
-	                type: "POST",
-	                url: "EditOrderPMc",
-	                data: "message=" + message ,
-	                success: function(data) {
-	                 window.location.href="EditOrderPM.jsp";
-	                  
-	                },
-	                     error:function(jqXHR, textStatus, errorThrown) {
-	                       console.log(textStatus, errorThrown);
-	                     
-	                }
-	              }); 
+       var message=out.innerHTML;
+       console.log(message);
+$.ajax({
+                       type: "POST",
+                       url: "EditOrderPMc",
+                       data: "message=" + message ,
+                       success: function(data) {
+                        window.location.href="EditOrderPM.jsp";
+                         
+                       },
+                            error:function(jqXHR, textStatus, errorThrown) {
+                              console.log(textStatus, errorThrown);
+                            
+                       }
+                     }); 
 
 }
 
 function cancel(i){
-	
-	var out=document.getElementById('order_id'+i);
+       
+       var out=document.getElementById('order_id'+i);
 
-	var message=out.innerHTML;
-	console.log(message);
- $.ajax({
-	                type: "POST",
-	                url: "DeleteOrder",
-	                data: "message=" + message ,
-	                success: function(data) {
-	                  console.log("data is sent");
-	                },
-	                     error:function(jqXHR, textStatus, errorThrown) {
-	                       console.log(textStatus, errorThrown);
-	                     
-	                }
-	              }); 
+       var message=out.innerHTML;
+       console.log(message);
+$.ajax({
+                       type: "POST",
+                       url: "DeleteOrder",
+                       data: "message=" + message ,
+                       success: function(data) {
+                         console.log("data is sent");
+                       },
+                            error:function(jqXHR, textStatus, errorThrown) {
+                              console.log(textStatus, errorThrown);
+                            
+                       }
+                     }); 
 
 }
 </script>
 <script>
-	
-	function send(){
-	       var data=[];
-	             var status=[];       
-	        $('#orderBlotter tr').each(function(){
-	                     if($(this).find("input[type=checkbox]").prop("checked")===true)
-	                     {
-	                            var out1=$(this).find('.OrderId').html();
-	                            var out3=$(this).find('.OrderStatus').html();data.push(out1);status.push(out3);
-	                     }});
-	        console.log(data);
-	        $.ajax({
-	                type: "POST",
-	                url: "SendToTrader",
-	                data: "data="+data ,
-	                success: function(data) {
-	                  console.log("data is sent");
-	                },
-	                     error:function(jqXHR, textStatus, errorThrown) {
-	                       console.log(textStatus, errorThrown);
-	                     
-	                }
-	              });
-	     }
+       
+       function send(){
+              var data=[];
+                    var status=[];       
+               $('#orderBlotter tr').each(function(){
+                            if($(this).find("input[type=checkbox]").prop("checked")===true)
+                            {
+                                   var out1=$(this).find('.OrderId').html();
+                                   var out3=$(this).find('.OrderStatus').html();data.push(out1);status.push(out3);
+                            }});
+               console.log(data);
+               $.ajax({
+                       type: "POST",
+                       url: "SendToTrader",
+                       data: "data="+data ,
+                       success: function(data) {
+                         console.log("data is sent");
+                       },
+                            error:function(jqXHR, textStatus, errorThrown) {
+                              console.log(textStatus, errorThrown);
+                            
+                       }
+                     });
+            }
 
-	
-	
+       
+       
 </script>
 
 <script>
@@ -122,7 +122,7 @@ $(document).ready(function() {
     $("#selectField").on("change", function() {
 
         var selected = this.value;
-	
+       
         if (selected != "All") {
 
             rows.filter("[position=" + selected + "]").show();
@@ -223,82 +223,80 @@ scroll bar cutomization . #order-blotter-headers::-webkit-scrollbar {
 
 <body>
 
+
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Portfolio Manager</a>
+				<a class="navbar-brand" href="./PMHome.jsp">Portfolio Manager</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="PMHome.jsp">Home Page</a></li>
-				<li><a href="CreateTrade.jsp">Create Order</a></li>
+				<li><a href="./PMHome.jsp">Home</a></li>
+				<li><a href="./CreateTrade.jsp">Create Order</a></li>
 				<li class="active"><a href="ViewOrderBlotter">Order Blotter</a></li>
 				<li><a href="ViewPendingOrder">Pending Orders</a></li>
 				<li><a href="GeneralView">History</a></li>
 			</ul>
 		</div>
 	</nav>
-		<div class="container">
-			<div class="well">
-				<h2>Order Blotter</h2>
-				<div class="panel-group" id="accordion">
-					<div class="panel panel-default">
-						<div class="panel-heading">
 
-							<div class="optionsDiv">
+	<div class="container">
+		<div class="well">
+			<h2>Order Blotter</h2>
+			<div class="panel-group" id="accordion">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="optionsDiv">
+							</select> Filter By Side: <select id="selectField">
+								<option>All</option>
+								<option>Buy</option>
+								<option>Sell</option>
 
-
-								</select> Filter By Side: <select id="selectField">
-									<option>All</option>
-									<option>Buy</option>
-									<option>Sell</option>
-
-								</select>
-							</div>
-
-							<table class="table" id="orderBlotter">
-
-								<tr>
-									<th></th>
-									<th>Order ID</th>
-									<th>Symbol</th>
-									<th>Side</th>
-									<th>Status</th>
-									<th>Quantity</th>
-									<th>Order Type</th>
-									<th>Account Type</th>
-									<th></th>
-									<th></th>
-								</tr>
-								<c:forEach items='${Orders}' var="Orders" varStatus="loop">
-									<tr position='${Orders.side}'>
-										<td><label><input type="checkbox" id="checkbox"
-												name="check"></label></td>
-										<td class="OrderId" id="order_id${loop.index +1}"><c:out
-												value='${Orders.orderId}' /></td>
-										<td><c:out value='${Orders.symbol}' /></td>
-										<td><c:out value='${Orders.side}' /></td>
-										<td class="OrderStatus"><c:out value='${Orders.status}' /></td>
-										<td><c:out value='${Orders.qtyPlaced}' /></td>
-										<td><c:out value='${Orders.orderType}' /></td>
-										<td><c:out value='${Orders.accountType}' /></td>
-										<td>
-											<button id="edit${loop.index +1}" type="button"
-												class="btn btn-warning" onclick="edit(${loop.index +1})">Edit</button>
-										</td>
-										<td><button id="orderId1-cancel${loop.index +1}"
-												type="button" class="btn btn-danger"
-												onclick="cancel(${loop.index +1})">Cancel</button></td>
-									</tr>
-								</c:forEach>
-							</table>
-							<button type="submit" class="btn btn-info" data-toggle="collapse"
-								id="check" onclick="send()">Send to Trader</button>
-
+							</select>
 						</div>
+
+						<table class="table" id="orderBlotter">
+
+							<tr>
+								<th></th>
+								<th>Order ID</th>
+								<th>Symbol</th>
+								<th>Side</th>
+								<th>Status</th>
+								<th>Quantity</th>
+								<th>Order Type</th>
+								<th>Account Type</th>
+								<th></th>
+								<th></th>
+							</tr>
+							<c:forEach items='${Orders}' var="Orders" varStatus="loop">
+								<tr position='${Orders.side}'>
+									<td><label><input type="checkbox" id="checkbox"
+											name="check"></label></td>
+									<td class="OrderId" id="order_id${loop.index +1}"><c:out
+											value='${Orders.orderId}' /></td>
+									<td><c:out value='${Orders.symbol}' /></td>
+									<td><c:out value='${Orders.side}' /></td>
+									<td class="OrderStatus"><c:out value='${Orders.status}' /></td>
+									<td><c:out value='${Orders.qtyPlaced}' /></td>
+									<td><c:out value='${Orders.orderType}' /></td>
+									<td><c:out value='${Orders.accountType}' /></td>
+									<td>
+										<button id="edit${loop.index +1}" type="button"
+											class="btn btn-warning" onclick="edit(${loop.index +1})">Edit</button>
+									</td>
+									<td><button id="orderId1-cancel${loop.index +1}"
+											type="button" class="btn btn-danger"
+											onclick="cancel(${loop.index +1})">Cancel</button></td>
+								</tr>
+							</c:forEach>
+						</table>
+						<button type="submit" class="btn btn-info" data-toggle="collapse"
+							id="check" onclick="send()">Send to Trader</button>
+
 					</div>
 				</div>
 			</div>
 		</div>
-	
+	</div>
 </body>
 </html>

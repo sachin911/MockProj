@@ -59,14 +59,14 @@ font-weight:bold;
         
  <table class="table" id="sendBlockTable">
      <%int j=0;%>
- <thead>
+
               <th></th>
                  <th>ID</th>
                  <th>Symbol</th>
                  <th>Side</th>
                  <th>Time stamp</th>
                  
-             </thead>  
+          
            <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">   
            <%List<Block> l =(List<Block>) request.getAttribute("Blocks"); %>
       <!--          <div class="panel panel-default">
@@ -294,7 +294,7 @@ function toggleEdit(i) {
 	         theRows.filter(":even").addClass("even");
 	     }
 	     var data=[];
-	     var rows = $("table#sendBlockTable tr");
+	     var rows = $("table#sendBlockTable tr:not(:first-child)");
 	     var side=$(this).find('.orderSide').html();
 	     data.push(side);
 	     addRemoveClass(rows);
