@@ -21,12 +21,10 @@
 
 <script type="text/javascript">
 	function addMessage() {
-
 		var mess = "${message}";
+		console.log("ADDED HTML TO BODY: " + mess);
 		var orderContainer = document.getElementById("pending-order-data");
 		orderContainer.innerHTML = mess;
-		//document.body.innerHTML += mess;
-		console.log("ADDED HTML TO BODY: " + mess);
 		orderContainer.innerHTML = mess;
 	}
 </script>
@@ -65,19 +63,9 @@
 			<div class="row well" id="pending-order-headers">
 				<!--<div class="col col-sm-1"> Order ID </div>-->
 				<div class="col col-sm-1">Symbol</div>
-				<div class="col col-sm-1">Side</div>
-				<div class="col col-sm-2 col-centered">Type</div>
-				<div class="col col-sm-1">Qualifier</div>
-				<div class="col col-sm-1">Trader</div>
 				<div class="col col-sm-1">Quantity</div>
-				<div class="col col-sm-1">Stop</div>
-				<div class="col col-sm-1">Limit</div>
-				<div class="col col-sm-1">Status</div>
-				<!--<div class="col col-sm-1">Portfolio </div>-->
-				<div class="col col-sm-1">Account Type</div>
-				<div class="col col-sm-1">Order Date</div>
 			</div>
-			<div class="row well" id="pending-order-data" overflow-y="scrollable">
+			<div class="row well" id="pending-order-data">
 		</div>
 	</div>
 

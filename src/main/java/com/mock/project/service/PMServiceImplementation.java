@@ -93,6 +93,16 @@ public class PMServiceImplementation implements PMServices {
 		return dao.getPortfolioId(portfolioName);
 	}
 
+	@Override
+	public List<Order> findAllHoldingsInPortfolio(String name, Long pmid) {
+		return dao.findAllHoldingsInPortfolio(name, pmid);
+	}
+
+	@Override
+	public List<Order> findAllHoldings(Long id) {
+		return dao.findAllHoldings(id);
+	}
+
 	/*
 
 	@Override

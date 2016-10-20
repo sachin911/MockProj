@@ -199,61 +199,55 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		return orders;
 		
 	}
-	// @Override
-	// public void updateStatus(Status status,List orderid) {
-	// List<Order> getOrders=new ArrayList();
-	// getOrders=findAll(orderid);
-	// for(int i=0; i<orderid.size();i++){
-	//
-	// Long o_id= (Long) orderid.get(i);
-	// Query query=em.createQuery("update Order set status =:status" + " where
-	// orderid = :o_id");
-	//
-	//
-	// query.setParameter("status", status);
-	// query.setParameter("o_id", o_id);
-	//
-	// }
 
-	// @Override
-	// public void updateStatus(String status, List order_id) {
-	// // TODO Auto-generated method stub
-	// for(int i=0; i<order_id.size();i++){
-	//
-	// Long o_id= (Long) order_id.get(i);
-	// Query query=em.createQuery("update Order set status =:status" + " where
-	// orderid = :o_id");
-	//
-	//
-	// query.setParameter("status", status);
-	// query.setParameter("o_id", o_id);
-	//
-	// }
-	//
 
+	@Override
+	public List<Order> findAllHoldingsInPortfolio(String name, Long id) {
+		Query query = em.createQuery("from Portfolio where portfolio_name =:pname");
+		query.setParameter("pname", name);
+		System.out.println(query.toString());
+		Portfolio p = new Portfolio();
+		Long pid = null;
+		List<Portfolio> correspondingPortfolioInList = query.getResultList();
+		if(correspondingPortfolioInList.isEmpty() == false){
+			p = correspondingPortfolioInList.get(0);
+			pid = p.getPortfolio_id();
+		} else {
+			System.out.println("ERROR! PORTFOLIO WITH THIS NAME DOES NOT EXIST IN SYSTEM. NAME = " + name);
+		}
+
+		if(pid != null) {
+			Query query2 = em.createQuery("from Order where portfolioId =:p_id" + " and PM_ID =:pm_id" + " and (status=:thisstat" + " or status=:thatstat" + ")" );
+			query2.setParameter("p_id", pid);
+			query2.setParameter("pm_id", id);
+			query2.setParameter("thisstat", "Partial");
+			query2.setParameter("thatstat", "Completed");
+			System.out.println(query2.toString());
+			List<Order> correspondingOrders = query2.getResultList();
+			System.out.println("IN PMDAOIMPL: FOUND THESE ORDERS FOR THIS PM ID WITH STATUS EXECUTED OR PARTIALLY EXECUTED: " + id + "    " + correspondingOrders.toString());
+			return correspondingOrders;
+		} else {
+			System.out.println("PORTFOLIO ID IS NULL. CANNOT FETCH ORDERS");
+			return null;
+		}
+	}
+
+	@Override
+	public List<Order> findAllHoldings(Long id) {
+		Query query = em.createQuery("from Order where pm_id =:pid" + " and (status=:thisstat" + " or status=:thatstat" + ")");
+		query.setParameter("pid", id);
+		query.setParameter("thisstat", "Partial");
+		query.setParameter("thatstat", "Completed");
+		
+		List<Order> orders = new ArrayList<Order>();
+
+		orders = query.getResultList();
+		if(orders.isEmpty() == false){
+			return orders;
+		} else {	
+			System.out.println("FOUND NO ORDERS THAT HAVE EXECUTED AS STATUS");
+			return orders;
+		}
+	}
 }
 
-// @Override
-// public Object add(Object entity) {
-// // TODO Auto-generated method stub
-// return null;
-// }
-
-// @Override
-// public void delete(Object object) {
-// // TODO Auto-generated method stub
-//
-// }
-//
-// @Override
-// public Object edit(Object object) {
-// // TODO Auto-generated method stub
-// return null;
-// }
-//
-// @Override
-// public Object ammend(Object object) {
-//// // TODO Auto-generated method stub
-// return null;
-// }
-////

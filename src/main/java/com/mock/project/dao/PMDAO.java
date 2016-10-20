@@ -34,4 +34,7 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 
 	public void findOrderForDrop(Long id);
 	public Order findOrderForEdit(Long id);
+	
+	public List<Order> findAllHoldingsInPortfolio(String name, Long id);
+	public List<Order> findAllHoldings(Long id);
 }
