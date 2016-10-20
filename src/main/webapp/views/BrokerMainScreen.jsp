@@ -264,7 +264,7 @@ li:last-child {
 
 			var answer = confirm("Do you want to stop")
 			if (answer) {
-				window.location.href = "Login.jsp"
+				window.location.href = "stopexecution"
 			}
 
 		}

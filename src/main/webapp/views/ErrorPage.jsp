@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Error!</title>
 </head>
 <body>
 <H1 style="color=red">Error occured please go back</H1>

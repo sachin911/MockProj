@@ -98,7 +98,7 @@ li:last-child {
 				<td><%=views.getRemainingQty()%></td>
 				<td><%=views.getQtyExecuted() %></td>
 				<td><%=views.getExecutedDate() %></td>
-				<td><%=block.getStatus()%></td>				
+				<td><%=views.getStatus()%></td>				
 			</tr>
 				<%
 					}
