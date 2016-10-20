@@ -237,7 +237,7 @@ public class TradingController {
 	}
 
 	@RequestMapping(value = "/views/PopulateTraderHistory", method = RequestMethod.GET)
-	public ModelAndView PopulateTraderHistory(HttpServletResponse httpServletResponse) 
+	public ModelAndView populateTraderHistory(HttpServletResponse httpServletResponse) 
 	{
 		//	System.out.println("Comes here");
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
