@@ -39,6 +39,7 @@ public class LoginController {
 		req.getSession().setAttribute("message", vm);
 		if (vm.equals("Valid user")) {
 			bro.startBroker();
+			req.getSession().setAttribute("message", null);
 			return new ModelAndView("redirect:BrokerMainScreen.jsp", "message", vm);
 		} else {
 			return new ModelAndView("redirect:Login.jsp", "message", vm);
@@ -59,11 +60,24 @@ public class LoginController {
 			user.setUser_name(uname);
 			user.setSecret_key(skey);
 			user.setPassword(npass);
-			l.updatepass(user);
+			boolean val=l.updatepass(user);
+			if(val)
+			{
 			String vm = "updated";
+			req.getSession().setAttribute("message", vm);
 			return new ModelAndView("redirect:Login.jsp", "message", vm);
+			}
+			else {
+				
+				String message = "Secret key/Username does not match";
+				req.getSession().setAttribute("message", message);
+				return new ModelAndView("redirect:ForgetPassword.jsp", "message", message);
+			}
+				
+				
 		} else {
-			String message = "password dont match";
+			String message = "Passwords do not match";
+			req.getSession().setAttribute("message", message);
 			return new ModelAndView("redirect:ForgetPassword.jsp", "message", message);
 		}
 

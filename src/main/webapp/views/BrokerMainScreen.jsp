@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Case</title>
+<title>Home Screen</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -60,6 +60,13 @@ li:last-child {
 </style>
 </head>
 <body>
+<div class="pen-title" >
+	
+	<img src="http://www.aiiria.com/wp-content/uploads/2015/11/Aiiria-original-logos_2015.png" height="90px" width="130px" style="float:left; margin-left:20px">
+	
+		
+		
+	</div>
 	<%
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();

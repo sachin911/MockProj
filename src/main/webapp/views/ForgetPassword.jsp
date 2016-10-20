@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Forgot password</title>
 
 <link rel='stylesheet prefetch'
 	href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
@@ -13,8 +13,8 @@
 
 <style>
 body {
-	background: #e9e9e9;
-	color: #666666;
+	background: #98AFC7;
+	color: #3090C7;
 	font-family: 'RobotoDraft', 'Roboto', sans-serif;
 	font-size: 14px;
 	-webkit-font-smoothing: antialiased;
@@ -227,16 +227,26 @@ table {
 <tr><td>ConfirmPassword</td></tr><tr><td><input type="password" name="confirmpass" required /></td></tr>
 <tr><td></td></tr><tr><td><input type="submit" name="submit" value="submit"/></td></tr>
 </form>
+
 </div>
 		
 		
 	</div>
+	<%
+    if (request.getSession().getAttribute("message") == null) {
+       
+    } else {
+        out.println(request.getSession().getAttribute("message"));
+        request.getSession().setAttribute("message",null);
+    }
+%>
 	<script
 		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<!-- <script src='http://codepen.io/andytran/pen/vLmRVp.js'></script> -->
 
 
 </table>
+
 <script>
 		// Toggle Function
 		$('.toggle').click(function() {

@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Case</title>
+  <title>View fills</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -31,7 +31,13 @@ li:last-child {
 
 </head>
 <body>
-
+<div class="pen-title" >
+	
+	<img src="http://www.aiiria.com/wp-content/uploads/2015/11/Aiiria-original-logos_2015.png" height="90px" width="130px" style="float:left; margin-left:20px">
+	
+		
+		
+	</div>
 	<%
 	AbstractApplicationContext container=new AnnotationConfigApplicationContext(AppConfig.class);
 	container.registerShutdownHook();
@@ -52,7 +58,7 @@ li:last-child {
          <li><a href="Login.jsp">Logout</a></li>
          <li><a onclick="confirmstop()">Stop</a></li>
   </ul>
-  <div style="height:700px;overflow-y:scroll;;">
+  <div style="height:600px;overflow-y:scroll;;">
   <table class="table table-striped" id="dataTable">
 			<thead >
 				<tr>
