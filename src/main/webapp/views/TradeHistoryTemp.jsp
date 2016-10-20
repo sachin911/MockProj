@@ -39,22 +39,7 @@
 
   <div class="panel-group" style = "width: 1060px">
     <div class="panel panel-default">
-      <div class="panel-heading">
-          
-        <table class="table">
-           
-            <th>Symbol</th>
-            <th>Side</th>
-            <th>Total Quantity</th>
-            <th>Allocated Quantity</th>
-            <th>Stop Price</th>
-            <th>Limit Price</th>
-            <th>Executed Price</th>
-            <th>Status</th>
-            <th>Date</th>
-           
-       </table>
-       </div>
+      
              </div>
       </div>
            
@@ -64,6 +49,17 @@
       <div class="panel-heading">
            <table class="table" id="blockHistoryTable">
            <div>   
+           <th>Block ID</th>
+           <th>Symbol</th>
+            <th>Side</th>
+            <th>Total Quantity</th>
+            <th>Allocated Quantity</th>
+            <th>Stop Price</th>
+            <th>Limit Price</th>
+            <th>Executed Price</th>
+            <th>Status</th>
+            <th>Date</th>
+           
            <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">   
             <tr>
             	<td class="blockId"><c:out value='${Blocks.blockId}'/></td>
@@ -73,24 +69,24 @@
                  <td><c:out value='${Blocks.qtyExecuted}'/></td>
                  <td><c:out value='${Blocks.stopPrice}'/></td>
                  <td><c:out value='${Blocks.limitPrice}'/></td>
-                 <td></td>
+                 <td>To be added</td>
                  <td><c:out value='${Blocks.status}'/></td>
                  <td><c:out value='${Blocks.executedDate}'/></td>
                  <td><button id ="detailsButton${Loop.index +1}" class="btn btn-default" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
-                 </tr>
+                 </tr>  </c:forEach>
                  <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
                 
-             <%--  <table class="orderTable" id="hideDetailsD${Loop.index +1}" style="display:none;">
-              <th></th>
+              <table class="orderTable" id="hideDetailsD${Loop.index +1}" style="display:none;">
+            <thead>
                  <th>Status</th>
                  <th>Limit Price</th>
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
-                  --%>
-          </tr>
+            </thead>     
+         
           
             
-             	<%-- <c:forEach items='${Orders}' var="Orders" >   
+             	<c:forEach items='${Orders}' var="Orders" >   
             <tr>
             	 <td><c:out value='${Orders.status}'/></td>
 			  <td><c:out value='${Orders.limitPrice}'/></td>
@@ -99,10 +95,10 @@
 			      <td><c:out value='${Orders.qtyExecuted}'/></td>
 			     
                </tr>
-                 </c:forEach> --%>
-                
-            </c:forEach>
-         		</table>
+                 </c:forEach>
+               
+           
+         		</table> </tr>
               </table>
       </div>
       </div>
@@ -146,7 +142,7 @@
         	    }
             
             if( document.getElementById("hideDetailsD"+i).style.display=='none' ){
-               document.getElementById("hideDetailsD"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+               document.getElementById("hideDetailsD"+i).style.display = 'table'; // set to table-row instead of an empty string
             }else{
                document.getElementById("hideDetailsD"+i).style.display = 'none';
             }
@@ -169,7 +165,7 @@
       		  }
       		});
         	 
-        	//LoadData();
+        	LoadData();
         	
             }
        

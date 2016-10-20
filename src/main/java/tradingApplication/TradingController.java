@@ -40,7 +40,7 @@ import javax.servlet.http.HttpServletRequest;
 public class TradingController {
 
 	
-	ModelAndView model = new ModelAndView("PendingOrders");
+	ModelAndView model = new ModelAndView("PendingOrders1");
 	
 	@RequestMapping(value = "/views/fetchOrder5", method = RequestMethod.GET)
     public ModelAndView method5(HttpServletRequest req,HttpServletResponse httpServletResponse) {
@@ -222,6 +222,32 @@ public class TradingController {
 		
 
 		return model;	
+    }
+	
+	
+	@RequestMapping(value = "/views/removeBlock", method = RequestMethod.GET)
+    public ModelAndView removeBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) 
+    {
+
+      
+      	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+        container.registerShutdownHook();  
+        OrderService orderService = container.getBean(OrderService.class);
+        List<Integer> blockId=new ArrayList<Integer>();
+        List<Block> blocks=new ArrayList<Block>();
+        
+        String[] out=req.getParameterValues("data");
+		String[] tokens=out[0].split(",");
+		for(String blockIdString:tokens){
+			blockId.add(Integer.parseInt(blockIdString));	
+		}
+      	for(int block1:blockId){
+			blocks.add(orderService.findBlockByBlockId(block1));
+		}
+      	for(Block b:blocks){
+      		orderService.removeBlock(b);
+      	}
+		return null;	
     }
 	
 	

@@ -36,5 +36,9 @@ public interface OrderService {
 
 	List<Block> displayBlockHistory(int traderId);
 
+	void removeBlock(Block b);
+
+	
+
 
 }

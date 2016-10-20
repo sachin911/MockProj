@@ -16,7 +16,7 @@
     <title>Test Page</title>
 </head>
 <body>
-<style>
+<!-- <style>
 	th {
 	
 	color: blue;
@@ -26,7 +26,7 @@ td {
 	width : 218px;
 	}
 
-</style>
+</style> -->
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -48,14 +48,14 @@ td {
  
  
 <%int i=0; %>
-  <div class="panel-group" id="accordion">
+  <!-- <div class="panel-group" id="accordion"> -->
 
-   <!--  <div class="panel panel-default">
-      <div class="panel-heading">  -->
-        <table class="table" > 
-
-             
-            <thead>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        
+ <table class="table" id="sendBlockTable">
+     <%int j=0;%>
+ <thead>
               <th></th>
                  <th>ID</th>
                  <th>Symbol</th>
@@ -63,10 +63,6 @@ td {
                  <th>Time stamp</th>
                  
              </thead>  
-             </table>
- <table id="sendBlockTable">
-     <%int j=0;%>
-
            <c:forEach items='${Blocks}' var="Orders" varStatus="Loop">   
            <%List<Block> l =(List<Block>) request.getAttribute("Blocks"); %>
       <!--          <div class="panel panel-default">
@@ -88,7 +84,7 @@ td {
                  <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
                 
               
-              <th></th>
+              <th>Block Details :</th>
                  <th>Status</th>
                  <th>Limit Price</th>
                  <th>Stop Price</th>
@@ -97,7 +93,7 @@ td {
           </tr>
           
              <tr  id="hideDetailsD${Loop.index +1}" style="display:none;">
-             <th></th>
+             <td></td>
               <td><%= l.get(j).getStatus() %></td>
                 <td><%= l.get(j).getLimitPrice() %></td>
                <td><%= l.get(j).getStopPrice() %></td>
@@ -145,13 +141,48 @@ td {
 
    <button type="button" class="btn btn-default" id="sendBlock">SEND</button>
 
-     <button type="button" class="btn btn-default">CANCEL</button>
+     <button type="button" class="btn btn-default" id="removeBlock">REMOVE BLOCK</button>
 
 </div>
     </div>
     
      <script>
     
+     $(document).ready(function(){
+     	$('#removeBlock').click(function() {
+     	
+  		
+     			
+     		var data=[];
+     	$('#sendBlockTable tr').each(function()
+     	{
+     	if($(this).find("input[type=checkbox]").prop("checked")===true)
+     	{
+     		
+     		
+ 		console.log("sakjs");
+     	var out=$(this).find('.blockId').html();
+     	console.log(out);
+     	data.push(out);
+     	}
+     	 
+     	}
+     	);	
+     	  console.log(data);  
+     	  
+     	  $.ajax({
+     		  type: "POST",
+     		  url: "removeBlock",
+     		  dataType: 'json',
+     		  data:"data="+data,
+     		  success: function(data) {
+     		    console.log("data is sent");
+     		  }
+     		});
+     	 location.href="PopulateBB";
+     	  
+     	});
+     
     
     $(document).ready(function(){
     	$('#sendBlock').click(function() {

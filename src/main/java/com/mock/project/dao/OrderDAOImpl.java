@@ -290,5 +290,15 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		return query.getResultList();
 	}
 
+	@Override
+	public void deleteBlock(Block b) {
+		System.out.println(b);
+		System.out.println("being removed");
+		em.remove(b);
+		
+	}
+
+	
+
 
 }

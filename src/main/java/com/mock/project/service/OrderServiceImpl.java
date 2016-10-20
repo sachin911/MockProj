@@ -106,4 +106,13 @@ public class OrderServiceImpl implements OrderService{
 		
 	}
 
+	@Override
+	public void removeBlock(Block b) {
+		
+		dao.deleteBlock(b);
+		
+	}
+
+	
+
 }
