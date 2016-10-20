@@ -142,7 +142,28 @@ public class Order implements Comparable<Order> {
 
 
 
-                @Override
+                public Order(Long idl, String symbol2, String side2, String orderType2, String orderqual,
+						String acctype, int qty, Long trader, Long port, double stopd, double limitd) {
+                	this.orderId =idl;
+                    this.symbol = symbol2;
+                    this.side = side2;
+                    this.orderType = orderType2;
+                    this.qualifier = orderqual;
+                    this.accountType = acctype;
+                    this.stopPrice = stopd;
+                    this.limitPrice = limitd;
+                    this.qtyPlaced = qty;
+                    this.traderId = trader;
+                    this.portfolioId = port;
+					
+				}
+
+
+
+
+
+
+				@Override
                 public int hashCode() {
                                 final int prime = 31;
                                 int result = 1;

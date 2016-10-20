@@ -27,5 +27,6 @@ public interface PMServices {
 	List<String> getTraderNameList();
 	public String getUserName(Long id);
 	public List<Order> displayPendingForPM(Long pmId);
-	
+	public Order getOrderById(Long id);
+	public void UpdateOrderById(Order order);
 }

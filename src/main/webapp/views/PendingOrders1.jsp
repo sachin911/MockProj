@@ -3,7 +3,7 @@
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+        pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.mock.project.model.Order"%>
 <%@ page import="com.mock.project.model.Block"%>
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
+  <!-- <style>
 .optionsDiv {
 padding-bottom:10px;
 font-weight:bold;
@@ -33,7 +33,7 @@ background:#CCFFEB;
 .even{
 background:#99FFD6;
 }
-</style>
+</style>  -->
 
   
 </head>
@@ -57,7 +57,7 @@ background:#99FFD6;
   
 
 <div class="container">
- <div class="well">
+<div class="well">
   <h2>Pending Orders</h2>
   
   <div class="optionsDiv"> Filter By Side: <select id="selectField">
@@ -67,14 +67,14 @@ background:#99FFD6;
                               
                               </select></div>      
 
- 
+
   
  
       <div class="Recommendations">
       <div style="height:300px;overflow-y:scroll;;">
     <div class="checkbox">
         
-    <table class="table table-bordered" id="PendingOrderTable">
+    <table class="table" id="PendingOrderTable">
     <thead>
       <tr>
          <th></th>
@@ -97,58 +97,58 @@ background:#99FFD6;
     </thead>
         <tbody>
 
-			
+                       
 
-									<c:forEach items='${Orders}' var="Orders">
-
-
-										<tr>
-
-											<td><label><input type="checkbox" id="check"
-													name="check" class="checkboxClick"></label></td>
-											<td><c:out value='${Orders.symbol}' /></td> 
-											<td class="orderSide"><c:out value='${Orders.side}' /></td>
-
-											<td><c:out value='${Orders.qtyPlaced}' /></td>
-											<td><c:out value='${Orders.limitPrice}' /></td>
-											<td><c:out value='${Orders.stopPrice}' /></td>
-											<td><c:out value='${Orders.price}' /></td>
-											<td><c:out value='${Orders.qtyExecuted}' /></td>
-											<td class="orderStatus"><c:out value='${Orders.status}' /></td>
-											<td><c:out value='${Orders.pmId}' /></td>
-											<td><c:out value='${Orders.accountType}' /></td>
-
-											<td><c:out value='${Orders.portfolioId}' /></td>
-
-											<td class="orderId"><c:out value='${Orders.orderId}' /></td>
+                                                                     <c:forEach items='${Orders}' var="Orders">
 
 
+                                                                            <tr>
+
+                                                                                    <td><label><input type="checkbox" id="check"
+                                                                                                    name="check" class="checkboxClick"></label></td>
+                                                                                    <td><c:out value='${Orders.symbol}' /></td> 
+                                                                                    <td class="orderSide"><c:out value='${Orders.side}' /></td>
+
+                                                                                    <td><c:out value='${Orders.qtyPlaced}' /></td>
+                                                                                    <td><c:out value='${Orders.limitPrice}' /></td>
+                                                                                    <td><c:out value='${Orders.stopPrice}' /></td>
+                                                                                    <td><c:out value='${Orders.price}' /></td>
+                                                                                    <td><c:out value='${Orders.qtyExecuted}' /></td>
+                                                                                    <td class="orderStatus"><c:out value='${Orders.status}' /></td>
+                                                                                    <td><c:out value='${Orders.pmId}' /></td>
+                                                                                    <td><c:out value='${Orders.accountType}' /></td>
+
+                                                                                    <td><c:out value='${Orders.portfolioId}' /></td>
+
+                                                                                    <td class="orderId"><c:out value='${Orders.orderId}' /></td>
 
 
 
 
-										</tr>
-
-									</c:forEach>
 
 
-								</tbody>
-		
+                                                                            </tr>
 
-							</table>
-																							
-												<button type="button" class="btn btn-success btn-sm" id="createBlock">Create
-			Block</button>
+                                                                     </c:forEach>
 
-		<button type="submit" class="btn btn-info btn-sm"
-			data-toggle="collapse" data-target="#demo" id="add">Add to
-			Block</button>
-										
-										
-						</div>
-					</div>
-				</div>
-				<script>
+
+                                                             </tbody>
+               
+
+                                                     </table>
+                                                                                                                                                                         
+                                                                                            <button type="button" class="btn btn-success btn-sm" id="createBlock">Create
+                       Block</button>
+
+               <button type="submit" class="btn btn-info btn-sm"
+                       data-toggle="collapse" data-target="#demo" id="add">Add to
+                       Block</button>
+                                                                            
+                                                                            
+                                              </div>
+                                      </div>
+                               </div>
+                               <script>
 
     
     
@@ -157,55 +157,55 @@ background:#99FFD6;
     
     </script>
 
-				</tbody>
-				</table>
-			</div>
-		</div>
-		</div>
+                               </tbody>
+                               </table>
+                       </div>
+               </div>
+               </div>
 
 
 
-		<script>
+               <script>
 
     
     
     $(document).ready(function(){
-    	$('#createBlock').click(function() {
-    		var data=[];
-    	$('#PendingOrderTable tr').each(function()
-    	{
-    	if($(this).find("input[type=checkbox]").prop("checked")===true)
-    	{
-    		
-    		
-		console.log("sakjs");
-    	var out=$(this).find('.orderId').html();
-    	console.log(out);
-    	data.push(out);
-    	}
-    	 
-    	}
-    	);	
-    	  console.log(data);  
-    	  
-    	  $.ajax({
-    		  type: "POST",
-    		  url: "fetchOrder2",
-    		  dataType: 'json',
-    		  data:"data="+data,
-    		  success: function(data) {
-    		    console.log("data is sent");
-    		  }
-    		});
-    	  
-    	  
-    	});
- 	});
-    	</script>
-    	
-    	
-    	
-    	<script>
+        $('#createBlock').click(function() {
+               var data=[];
+        $('#PendingOrderTable tr').each(function()
+        {
+        if($(this).find("input[type=checkbox]").prop("checked")===true)
+        {
+               
+               
+               console.log("sakjs");
+        var out=$(this).find('.orderId').html();
+        console.log(out);
+        data.push(out);
+        }
+         
+        }
+        );      
+          console.log(data);  
+          
+          $.ajax({
+                 type: "POST",
+                 url: "fetchOrder2",
+                 dataType: 'json',
+                 data:"data="+data,
+                 success: function(data) {
+                   console.log("data is sent");
+                 }
+               });
+          
+          
+        });
+       });
+        </script>
+       
+        
+        
+        <script>
 
 $(document).ready(function() {
 
@@ -250,120 +250,120 @@ $(document).ready(function() {
 
 </script>
 
-    	
-    	 <script>
-    	$(document).ready(function(){
-        	$('#add').click(function() {
-        		var data1=[];
-        		var data2=[];
-        		var data3=[];
-        		var random=false;
-        		var replace = true;
-        	    $('#PendingOrderTable tr').each(function()
-        	    {
-        	          if($(this).find("input[type=checkbox]").prop("checked")===true)
-        	          {
-        		
-        		random=true;
-    		console.log("sakjs");
-        	var out1=$(this).find('.orderId').html();
-        	var out2=$(this).find('.orderSymbol').html();
-        	var out3=$(this).find('.orderSide').html();
-        	
-        	data1.push(out1);
-        	data2.push(out2);
-        	data3.push(out3);
-        	
-        	var firstelement1=data1[0];
-        	var firstelement2=data2[0];
-        	var firstelement3=data3[0];
-        	
-        	for(var i = 1; i < data1.length; i++)
-        	{
-        	    if(data2[i] != firstelement2 || data3[i] != firstelement3)
-        	    {
-        	        replace = false;
-        	        break;
-        	    }
-        	}
-        	          }
-        	    });
+        
+         <script>
+        $(document).ready(function(){
+               $('#add').click(function() {
+                       var data1=[];
+                       var data2=[];
+                       var data3=[];
+                       var random=false;
+                       var replace = true;
+                   $('#PendingOrderTable tr').each(function()
+                   {
+                         if($(this).find("input[type=checkbox]").prop("checked")===true)
+                         {
+                       
+                       random=true;
+               console.log("sakjs");
+               var out1=$(this).find('.orderId').html();
+               var out2=$(this).find('.orderSymbol').html();
+               var out3=$(this).find('.orderSide').html();
+               
+               data1.push(out1);
+               data2.push(out2);
+               data3.push(out3);
+               
+               var firstelement1=data1[0];
+               var firstelement2=data2[0];
+               var firstelement3=data3[0];
+               
+               for(var i = 1; i < data1.length; i++)
+               {
+                   if(data2[i] != firstelement2 || data3[i] != firstelement3)
+                   {
+                       replace = false;
+                       break;
+                   }
+               }
+                         }
+                   });
 
-        	if(replace)
-        	{
-        		$.ajax({
-          		  type: "GET",
-          		  url: "fetchOrder5",
-          		  dataType: 'json',
-          		  data:"data="+data1,
-          		  success: function(data1) {
-          		    console.log("data is sent");
-          		  }
-          		});
-        	}
-        	else
-        	{
-        		alert("please select order of same side and symbol");
-        	}
-        	
-        	
-        	    if(random==false){
-            		alert("please select some order");
-        	    }
-        	});
-        	});
+               if(replace)
+               {
+                       $.ajax({
+                         type: "GET",
+                         url: "fetchOrder5",
+                         dataType: 'json',
+                         data:"data="+data1,
+                         success: function(data1) {
+                           console.log("data is sent");
+                         }
+                       });
+               }
+               else
+               {
+                       alert("please select order of same side and symbol");
+               }
+               
+               
+                   if(random==false){
+                       alert("please select some order");
+                   }
+               });
+               });
         
         
         
         </script>
 
-    		       <!--   </tbody></table></div></div> -->
+                      <!--   </tbody></table></div></div> -->
             
-    	
-    	  <script>
-    	
-    	  $(document).ready(function(){
-      	$('#sub').click(function() {
-      		console.log("teststs");
-      		var data=[];
-      		var test=false;
-      	$('#recommendedBlocks tr').each(function()
-      	{
-      	if($(this).find("input[type=checkbox]").prop("checked")===true)
-      	{
-      		
-      		
-      	console.log("sakjdsaass");
-      	var out=$(this).find('.blockid').html();
-      	console.log(out);
-      	data.push(out);
-      	test=true;
-      	}
-      	 
-      	}
-      	);	
-      	  console.log(data);  
-      	  if(test){
-      		alert("The order has been successfully added");
-      	
-      	  $.ajax({
-      		  type: "GET",
-      		  url: "fetchOrder6",
-      		  dataType: 'json',
-      		  data:"data="+data,
-      		  success: function(data) {
-      		    console.log("data is sent");
-      		  
-      		  }
-      		});
-      	  }
-      	  else
-      		  {
-      		  alert("Please select some block");
-      		  }
-      	  
-      	});
-        	});
+        
+          <script>
+        
+          $(document).ready(function(){
+        $('#sub').click(function() {
+               console.log("teststs");
+               var data=[];
+               var test=false;
+        $('#recommendedBlocks tr').each(function()
+        {
+        if($(this).find("input[type=checkbox]").prop("checked")===true)
+        {
+               
+               
+        console.log("sakjdsaass");
+        var out=$(this).find('.blockid').html();
+        console.log(out);
+        data.push(out);
+        test=true;
+        }
+         
+        }
+        );      
+          console.log(data);  
+          if(test){
+               alert("The order has been successfully added");
+        
+          $.ajax({
+                 type: "GET",
+                 url: "fetchOrder6",
+                 dataType: 'json',
+                 data:"data="+data,
+                 success: function(data) {
+                   console.log("data is sent");
+                
+                 }
+               });
+          }
+          else
+                 {
+                 alert("Please select some block");
+                 }
+          
+        });
+               });
 
     
     </script>
@@ -389,7 +389,7 @@ $(document).ready(function() {
         
           <div class="Recommendations">
           <div style="height:200px;overflow-y:scroll;;">
-           <table class="table table-bordered" id="recommendedBlocks">
+           <table class="table" id="recommendedBlocks">
     <thead>
       <tr>
          <th></th>
@@ -407,84 +407,81 @@ $(document).ready(function() {
           <tbody>
       <c:forEach items='${Blocks}' var="Blocks">   
         
-			<tr>
-			
-			  <td> <label><input type="checkbox" id="checks" name="checks" class="checkboxClicks"></label></td>
-			  <td class="blockid"><c:out value='${Blocks.blockId}'/></td>
-		 <td><c:out value='${Blocks.qtyPlaced}'/></td>
-			  <td><c:out value='${Blocks.qtyExecuted}'/></td>
-			  <td><c:out value='${Blocks.qtyPlaced-Blocks.qtyExecuted}'/></td>
-			  <td><c:out value='${Blocks.limitPrice}'/></td>
-			  <td><c:out value='${Blocks.stopPrice}'/></td>
-			  <td><c:out value='${Blocks.status}'/></td> 
-		
-			</tr>
-			</c:forEach> 
+                       <tr>
+                       
+                         <td> <label><input type="checkbox" id="checks" name="checks" class="checkboxClicks"></label></td>
+                         <td class="blockid"><c:out value='${Blocks.blockId}'/></td>
+               <td><c:out value='${Blocks.qtyPlaced}'/></td>
+                         <td><c:out value='${Blocks.qtyExecuted}'/></td>
+                         <td><c:out value='${Blocks.qtyPlaced-Blocks.qtyExecuted}'/></td>
+                         <td><c:out value='${Blocks.limitPrice}'/></td>
+                         <td><c:out value='${Blocks.stopPrice}'/></td>
+                         <td><c:out value='${Blocks.status}'/></td> 
+               
+                       </tr>
+                       </c:forEach> 
         </tbody></table>
                 </div></div>
           <button type="submit" class="btn btn-info btn-sm" id="sub">OK
       </button>
 
 
-		</div>
+               </div>
 
 
-		<!-- <script>
+               <!-- <script>
     
     
     $(document).ready(function(){
-    	console.log(":asd")
-    	$('#ok').click(function() {
-    		console.log(":asd")
-    		var data1=0;
-    	$('#recommendedBlocks tr').each(function()
-    	{
-    	if($(this).find("input[type=checkbox]").prop("checked")===true)
-    	{
-    		
-    		
-		console.log("hi");
-    	var data1=$(this).find('.blockid').html();
-    	//var out2=$(this).find('.orderSymbol').html();
-    	//var out3=$(this).find('.orderStatus').html();
-    	//var out4=$(this).find('.orderSide').html();
-    	console.log(data1);
-    	/*console.log(out2);
-    	console.log(out3);
-    	console.log(out4);*/
-    	
-    	//data.push(out2);
-    	//data.push(out3);
-    	//data.push(out4);
-    	}
-    	 
-    	}
-    	);	
-    	  console.log(data1);  
-    	  
-    	  $.ajax({
-    		  type: "GET",
-    		  url: "fetchOrder6",
-    		  dataType: 'json',
-    		  data:"data1="+data1,
-    		  success: function(data1) {
-    		    console.log("data is sent");
-    		  }
-    		});
-    	  
-    	  
-    	});
-    	});
+        console.log(":asd")
+        $('#ok').click(function() {
+               console.log(":asd")
+               var data1=0;
+        $('#recommendedBlocks tr').each(function()
+        {
+        if($(this).find("input[type=checkbox]").prop("checked")===true)
+        {
+               
+               
+               console.log("hi");
+        var data1=$(this).find('.blockid').html();
+        //var out2=$(this).find('.orderSymbol').html();
+        //var out3=$(this).find('.orderStatus').html();
+        //var out4=$(this).find('.orderSide').html();
+        console.log(data1);
+        /*console.log(out2);
+        console.log(out3);
+        console.log(out4);*/
+        
+        //data.push(out2);
+        //data.push(out3);
+        //data.push(out4);
+        }
+         
+        }
+       );      
+          console.log(data1);  
+          
+          $.ajax({
+                 type: "GET",
+                 url: "fetchOrder6",
+                 dataType: 'json',
+                 data:"data1="+data1,
+                 success: function(data1) {
+                   console.log("data is sent");
+                 }
+               });
+          
+          
+        });
+        });
     
     
     
     </script> -->
-		</div>
-		</div>
-		</div>
-	</nav>
+               </div>
+               </div>
+               </div>
+        </nav>
 </body>
 </html>
-
-
-
