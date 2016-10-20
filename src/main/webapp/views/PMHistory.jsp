@@ -20,19 +20,23 @@
 <%@ page isELIgnored="false"%>
 
 <script type="text/javascript">
-                function addMessage(){
-                	var isPortfolio = ${specialPortfolio};
-                	var mess = "${message}";          	
-                	var orderContainer = document.getElementById("pending-order-data");
-                	orderContainer.innerHTML = mess;
-                	//document.body.innerHTML += mess;
-                	console.log("ADDED HTML TO BODY: " + mess);
-                	
-                	if(specialPortfolio == false){
-                		orderContainer.innerHTML = mess;
-                	}	             	
-                }	
-    </script>
+	function addMessage() {
+		var isPortfolio = $
+		{
+			specialPortfolio
+		}
+		;
+		var mess = "${message}";
+		var orderContainer = document.getElementById("pending-order-data");
+		orderContainer.innerHTML = mess;
+		//document.body.innerHTML += mess;
+		console.log("ADDED HTML TO BODY: " + mess);
+
+		if (specialPortfolio == false) {
+			orderContainer.innerHTML = mess;
+		}
+	}
+</script>
 
 
 </head>
@@ -54,7 +58,15 @@
 	</nav>
 
 	<div class="container">
-		<h2 id="pending-order-title">Order History</h2>
+		<%
+			String portfolioType = (String) session.getAttribute("PortfolioType");
+		%>
+
+		<h2 id="pending-order-title">
+			<%
+				out.println(portfolioType);
+			%>
+		</h2>
 		<div id="pending-order-container">
 			<!-- order in blotter -->
 			<div class="row well" id="pending-order-headers">
@@ -73,8 +85,7 @@
 				<div class="col col-sm-1">Order Date</div>
 			</div>
 
-			<div class="row well" id="pending-order-data">
-			</div>
+			<div class="row well" id="pending-order-data"></div>
 
 		</div>
 	</div>

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,82 +25,121 @@ import com.mock.project.service.PMServices;
 
 @Controller
 public class DisplayPortfolioController {
-
+	
 	@RequestMapping("views/Mining")
 	public ModelAndView displayPortfolioMining(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Mining", request);
-		return mav;
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Mining");
+		
+	    return mav;
 	}
 
 	@RequestMapping("views/Banking")
 	public ModelAndView displayPortfolioBanking(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Banking", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Banking");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/Automobile")
 	public ModelAndView displayPortfolioAutomobile(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Automobile", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Automobile");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/Energy")
 	public ModelAndView displayPortfolioEnergy(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Energy", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Energy");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/Pharma")
 	public ModelAndView displayPortfolioPharma(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Pharma", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Pharma");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/Textile")
 	public ModelAndView displayPortfolioTextile(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Textile", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Textile");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/FMCG")
 	public ModelAndView displayPortfolioFMCG(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("FMCG", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "FMCG");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/Cement")
 	public ModelAndView displayPortfolioCement(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Cement", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Cement");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/Aluminium")
 	public ModelAndView displayPortfolioAluminium(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Aluminium", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Aluminium");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/All")
 	public ModelAndView displayPortfolioAll(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrdersGeneral(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "All Portfolios");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/Transport")
 	public ModelAndView displayPortfolioTransport(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Transportation", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Transportation");
+		
 		return mav;
 	}
 	
 	@RequestMapping("views/GeneralView")
 	public ModelAndView displayPortfolioGeneral(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrdersGeneral(request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Order History");
+		
 		return mav;
 	}
 
 	@RequestMapping("views/Other")
 	public ModelAndView displayPortfolioOther(HttpServletRequest request){
 		ModelAndView mav = getPortfolioOrders("Other", request);
+		HttpSession session = request.getSession();
+		session.setAttribute("PortfolioType", "Other Portfolios");
+		
 		return mav;
 	}
 	
@@ -176,7 +216,5 @@ public class DisplayPortfolioController {
 		ModelAndView view = new ModelAndView("PMHistory", "message", messageToSend);
 		view.addObject("specialPortfolio", false);
 		return view;
-	}
-	
-
+	}	
 }
