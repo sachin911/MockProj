@@ -35,7 +35,7 @@ public class TraderServiceImpl implements TraderService {
     }
    @Override
     public void addToSelectedBlock(Integer selectedBlock) {
-	  // System.out.println("selected");
+	  System.out.println("selected");
 	  // System.out.println("addtoselectedblock:::::"+TraderServiceImpl.listOforder);
              for(Order order:listOforder){
             	// System.out.println(order);

@@ -28,7 +28,7 @@ font-weight:bold;
     <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Execution Trader</a>
+      <a class="navbar-brand" href="TraderHome.jsp">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="PopulateBB">View Blocks</a></li>

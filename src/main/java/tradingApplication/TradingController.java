@@ -92,7 +92,7 @@ public class TradingController {
 		container.registerShutdownHook();
 		TraderService traderService = container.getBean(TraderService.class);
 		int bid;
-		String []blockId=(req.getParameterValues("data"));
+		String[] blockId=(req.getParameterValues("data"));
 		System.out.println(blockId[0]);
 		String[] tokens=blockId[0].split(",");
 

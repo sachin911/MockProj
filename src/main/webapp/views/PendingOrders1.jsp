@@ -40,7 +40,7 @@ font-weight:bold;
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Execution Trader</a>
+      <a class="navbar-brand" href="TraderHome.jsp">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
      
@@ -301,8 +301,7 @@ font-weight:bold;
                            console.log("data is sent");
                          }
                        });
-                       alert("Order Added to Block");
-                       ref();
+                      
                }
                else
                {
@@ -351,7 +350,7 @@ font-weight:bold;
         
           $.ajax({
                  type: "GET",
-                 url: "fetchOrder6",
+                 url: "addToBlock",
                  dataType: 'json',
                  data:"data="+data,
                  success: function(data) {
