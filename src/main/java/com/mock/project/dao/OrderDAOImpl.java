@@ -1,6 +1,7 @@
 package com.mock.project.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -43,6 +44,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	Query query=em.createQuery("from Order where block_id is null and status=:stat");
 	query.setParameter("stat", "Open");
 	List<Order>l1=query.getResultList();
+	Collections.sort(l1);
 	
 	
 	for(Order i:l1){
@@ -51,7 +53,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	}
 	
 
-	return query.getResultList(); 
+	return l1; 
 	 }
 
 	@SuppressWarnings("unchecked")

@@ -1,4 +1,4 @@
-<% response.addHeader("Refresh","60"); %>
+<% response.addHeader("Refresh","15"); %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -43,7 +43,7 @@
   <h2>Pending Orders</h2>
   <p>You can select multiple orders to create a block</p>
   
-  <%-- <form:form id="yourForm" action="/views/fetchOrder" method="POST" modelAttribute="functionList"> --%>
+ 
       <div class="Recommendations">
       <div style="height:300px;overflow-y:scroll;;">
     <div class="checkbox">
