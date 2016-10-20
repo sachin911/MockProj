@@ -183,10 +183,10 @@ public class TradingController {
       
       	User user = (User) req.getSession().getAttribute("user");
       	int trader_id = (int) user.getId();
-
+      	
         
         List<Block> Blocks =new ArrayList<Block>();
-      	Blocks = orderService.displayBlock(12);
+      	Blocks = orderService.displayBlock(trader_id);
 
       	ModelAndView model = new ModelAndView("BlockBlotter");
 

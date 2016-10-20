@@ -382,7 +382,7 @@ font-weight:bold;
     $("table",myDataTable).dataTable({});
 }
 $(document).ready(function() {
-    $("#recommendedBlocks").click(LoadData);
+    $("#add").click(LoadData);
     LoadData();
 })
 </script>

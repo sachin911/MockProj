@@ -90,8 +90,16 @@ public class Block {
                 }
 
 
+                //              @XmlElement
+                public double getExecuted_price() {
+					return executed_price;
+				}
 
-//            @XmlElement
+				public void setExecuted_price(double executed_price) {
+					this.executed_price = 0;
+				}
+
+				//            @XmlElement
                 public Long getBlockId() {
                                 return block_id;
                 }
