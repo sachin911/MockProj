@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Propagation;
@@ -31,13 +34,11 @@ import com.sapient.model.Block;
 import com.sapient.model.Securities;
 import com.sapient.model.ViewFills;
 
+
 @Service("brokerService")
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class BrokerServiceImpl implements BrokerService {
 
-	// public BrokerServiceImpl() {
-	//
-	// }
 
 	@Autowired
 	BlockDAO blockDAO;
@@ -45,10 +46,14 @@ public class BrokerServiceImpl implements BrokerService {
 	SecuritiesDAO securitiesDAO;
 	@Autowired
 	ViewFillsDAO viewFillsDAO;
+	
+	private static final Logger logger = Logger.getLogger(BrokerServiceImpl.class);
 
+	
+	@Async
 	@Override
 	public void StartExecution() {
-
+		System.out.println("------------------------Entered Broker Service --------------------------------------");
 		List<Block> blockList = new ArrayList<>();
 		//blockList = blockDAO.findAll();
 		blockList = blockDAO.findOpenPartial();
@@ -56,8 +61,7 @@ public class BrokerServiceImpl implements BrokerService {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		MarshallAndSend send = (MarshallAndSend) context.getBean("MessageProducer");
-		LoggerConfig logConfig = new LoggerConfig();
-		Logger log = logConfig.getLogConfig();
+
 		for (Block blocks : blockList) {
 			System.out.println(blocks);
 			// delete this condition
@@ -69,13 +73,7 @@ public class BrokerServiceImpl implements BrokerService {
 				// get similar block_id and set remaining quantity
 				Long remainingQty = blocks.getTotal_quantity() - blocks.getExecuted_quantity();
 
-				/*
-				 * securities.setSecurity_symbol("GOOG");
-				 * securities.setLast_trade_price(12.0);
-				 * securities.setMax_price_spread(20.0);
-				 * securities.setMax_executions(100);
-				 */
-				// System.out.println(securitiesDAO.toString());
+				
 
 				securities = securitiesDAO.findByPrimaryKey(blocks.getSymbol());
 				if (securities == null) {
@@ -95,10 +93,10 @@ public class BrokerServiceImpl implements BrokerService {
 						tempExecutedQty = blocks.getExecuted_quantity();
 					}
 					System.out.println("Total Q " + blocks.getTotal_quantity());
-					log.info("Total Q " + blocks.getTotal_quantity());
+					logger.info("Total Q " + blocks.getTotal_quantity());
 
 					System.out.println("Executed Q " + tempExecutedQty);
-					log.info("Executed Q " + tempExecutedQty);
+					logger.info("Executed Q " + tempExecutedQty);
 
 					System.out.println("TotalQtyToExecute " + remainingQty);
 
@@ -152,7 +150,7 @@ public class BrokerServiceImpl implements BrokerService {
 					}
 
 					viewFills.setExecutedDate(new Date());
-					if (QtyExecuted == 0) {
+					if (QtyExecuted != 0) {
 						viewFills.setExecutedPrice(priceExecuted);
 					} else {
 						viewFills.setExecutedPrice(0);

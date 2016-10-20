@@ -133,35 +133,10 @@ li:last-child {
 					<td><%=blocks.getExecuted_date()%></td>
 					<td><%=blocks.getStatus()%></td>
 				</tr>
-				<!-- <tr>
-				<td>1</td>
-				<td>GOOG</td>
-				<td>BUY</td>
-				<td>Market</td>
-				<td>0</td>
-				<td>0</td>
-				<td>150.36</td>
-				<td>800</td>
-				<td>500</td>
-				<td>10/2/2016</td>
-				<td>OPEN</td>
-			</tr> 
-			<tr>
-				<td>2</td>
-				<td>GOOG</td>
-				<td>SELL</td>
-				<td>Market</td>
-				<td>0</td>
-				<td>0</td>
-				<td>150.36</td>
-				<td>800</td>
-				<td>500</td>
-				<td>10/2/2016</td>
-				<td>OPEN</td>
-			</tr>  -->
-				<%
-					}
-				%>
+				
+								
+					<%}%>
+				
 			</tbody>
 		</table>
 	</div>
@@ -179,13 +154,23 @@ li:last-child {
 		</form>
 		
 		<form method="post" action="checkStatus">
+						<span id="error-message"></span>
 			<input type="submit" name="status" value="status"
 				class="btn btn-info btn-lg" style="display:inline;margin-left: 8px">
-			<div class="led-red" style="display: none; margin-left: 2rem"></div>
+				<% if(request.getSession().getAttribute("status") == "true"){ %>
 			<div class="led-green" style="margin-left: 2rem"></div>
+				<%} else { %>
+			<div class="led-red" style="margin-left: 2rem"></div>
+			<% } %>
 
 		</form>
 	</div>
+	<script   src="https://code.jquery.com/jquery-3.1.1.js"   
+	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   
+	crossorigin="anonymous">
+	
+	
+	</script>
 	<script>
 		function sortTable(f, n) {
 			var rows = $('#mytable tbody  tr').get();

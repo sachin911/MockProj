@@ -58,7 +58,9 @@ li:last-child {
          <li><a href="Login.jsp">Logout</a></li>
          <li><a onclick="confirmstop()">Stop</a></li>
   </ul>
+
   <div style="height:600px;overflow-y:scroll;;">
+
   <table class="table table-striped" id="dataTable">
 			<thead >
 				<tr>

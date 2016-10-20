@@ -52,7 +52,7 @@ public class Securities {
 	public Securities() {
 		super();
 	}
-
+	
 	public String getSecurity_symbol() {
 		return security_symbol;
 	}
