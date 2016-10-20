@@ -199,11 +199,11 @@ $time: 0.15s;
                
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Stop Price: </div>
-               <div class="form-input-fields col col-sm-8"><input name = "stopPrice" type="number" id="stop" min="0" disabled required/></div>
+               <div class="form-input-fields col col-sm-8"><input name = "stopPrice" type="number" id="stop" min="0" step="any" disabled required/></div>
                   </div>
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Limit Price: </div>
-               <div class="form-input-fields col col-sm-8"><input  name = "limitPrice" type="number" id="limit" min="0"  disabled required/></div>
+               <div class="form-input-fields col col-sm-8"><input  name = "limitPrice" type="number" step="any" id="limit" min="0"  disabled required/></div>
                    </div>
                  </div>
 							 <input type="submit" class="btn btn-default"  value="CREATE"/>

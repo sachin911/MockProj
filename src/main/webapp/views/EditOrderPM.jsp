@@ -60,7 +60,8 @@ $time: 0.15s;
    
    function changetextbox(obj)
    {  
-        var limit = document.getElementById("limit1");
+        console.log(obj);
+	   	var limit = document.getElementById("limit1");
         var stop = document.getElementById("stop1");
        	stop.disabled =(obj.value == "limit" || obj.value == "market");
 		limit.disabled =(obj.value == "stop" || obj.value == "market");
@@ -91,6 +92,8 @@ $time: 0.15s;
 	   limitPrice = document.getElementById("limit1").value;
 	   console.log(stopPrice);
 	   console.log(limitPrice);
+	   var select = document.getElementById("orderType");
+	   changetextbox(select);
 	});
  
 </script>
@@ -134,7 +137,7 @@ $time: 0.15s;
                 
                 <div id="" class="form-input-label col col-sm-4"> Order Type: </div>
                <div class="form-input-fields col col-sm-8">
-               <select id="orderType" name="orderType1" onChange="changetextbox(this)">
+               <select id="orderType" name="orderType1" onchange="changetextbox(this)">
                	<option value="market" id="market"> Market</option>
                   <option value="limit" id="limit"> Limit</option>
                   <option value="stoplimit" id="stoplimit"> Stop-Limit</option>
@@ -159,9 +162,9 @@ $time: 0.15s;
                <div class="form-input-fields col col-sm-8"><input type = "text" id="portfolio" name="portfolio1" value='<%=o.getPortfolioId() %>'>
                    </div>
                 <div id="stop" class="form-input-label col col-sm-4"> Stop Price: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" id="stop1" name="stop1" value='<%=o.getStopPrice() %>'></div>
+               <div class="form-input-fields col col-sm-8"><input type="number" id="stop1" name="stop1" step="any" value='<%=o.getStopPrice() %>'></div>
                  <div id="limit" class="form-input-label col col-sm-4"> Limit Price: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" id="limit1" name="limit1" value='<%=o.getLimitPrice() %>'></div>
+               <div class="form-input-fields col col-sm-8"><input type="number" id="limit1" name="limit1" step="any" value='<%=o.getLimitPrice() %>'></div>
                    </div>
              <input type="submit" class="btn btn-default"  value="Save"/>
              
