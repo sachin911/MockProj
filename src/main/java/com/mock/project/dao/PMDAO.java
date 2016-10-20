@@ -14,7 +14,7 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 	
 	public void updateStatus(Status status,List order_id);
 
-	Order edit(Order object);
+	void edit(Order order);
 
 	Order ammend(Order object);
 
@@ -32,6 +32,6 @@ public interface PMDAO<Order> extends GenericDAO<Order,Long> {
 	//Fetch a user's name based on ID
 	public String getUserNameFromID(Long id);
 
-	public void findOrderForUpdate(Long id);
-
+	public void findOrderForDrop(Long id);
+	public Order findOrderForEdit(Long id);
 }
