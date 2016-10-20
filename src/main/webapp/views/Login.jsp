@@ -10,6 +10,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--     <link rel="icon" href="https://getbootstrap.com/favicon.ico"> -->
 <link id="page_favicon" href="https://rawgit.com/Govind-jha/online-resources/master/login-page-icon" rel="icon" type="image/x-icon" />
     <title>MoneyTree</title>
@@ -26,7 +27,7 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="https://getbootstrap.com//assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="https://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
-
+	<%@ page isELIgnored="false"%>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -35,7 +36,7 @@
   </head>
 
   <body>
-
+	<center><h3>${message}</h3></center>
     <div class="container">
 
       <form class="form-signin" action="handleLogin">

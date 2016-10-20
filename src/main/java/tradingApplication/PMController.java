@@ -158,10 +158,8 @@ public class PMController {
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
 		PMServices pmservice = container.getBean(PMServices.class);
-		String out = req.getParameter("message");
-		System.out.println("out:" + out);
+		String out = req.getParameter("message").trim();
 		Long idl = Long.parseLong(out);
-		System.out.println("controller" + idl);
 		pmservice.findOrderForUpdate(idl);
 		ModelAndView view = new ModelAndView("PendingOrder");
 		container.close();
