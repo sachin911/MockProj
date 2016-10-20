@@ -89,20 +89,23 @@ li:last-child {
 			id="mytable">
 			<thead>
 				<tr>
-					<th>Block Id</th>    
-					<th onmouseover="this.style.background='#AAA'" id="nm">Ticker</th>
-					   
+
+					<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Block Id</th>    
+					<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Ticker</th>    
 					<!-- <th>Name</th> -->
-					<th>Side</th>
-					<th>Type</th>
-					<th>Stop Price</th>
-					<th>Limit Price</th>
-					<th>Executed Price</th>
-					<th>Total Quantity</th>
-					<th>Executed Quantity</th>
-					<th onmouseover="this.style.background='#AAA'" id="sl">Executed
-						Date</th>
-					<th>Status</th>  
+					<th id="nm1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Side</th>
+					<th id="nm2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Type</th>
+					<th id="nm3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Stop Price</th>
+					<th id="nm4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Limit Price</th>
+					<th id="nm5" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Price</th>
+					<th id="nm6" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Total Quantity</th>
+					<th id="nm7" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Quantity</th>
+					<th id="nm8" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Date
+						</th>
+					<th id="nm9" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Status</th>  
+
+					
+
 				</tr>
 			</thead>
 			<tbody>
@@ -123,42 +126,23 @@ li:last-child {
 					<td><%=blocks.getExecuted_date()%></td>
 					<td><%=blocks.getStatus()%></td>
 				</tr>
-				<!-- <tr>
-				<td>1</td>
-				<td>GOOG</td>
-				<td>BUY</td>
-				<td>Market</td>
-				<td>0</td>
-				<td>0</td>
-				<td>150.36</td>
-				<td>800</td>
-				<td>500</td>
-				<td>10/2/2016</td>
-				<td>OPEN</td>
-			</tr> 
-			<tr>
-				<td>2</td>
-				<td>GOOG</td>
-				<td>SELL</td>
-				<td>Market</td>
-				<td>0</td>
-				<td>0</td>
-				<td>150.36</td>
-				<td>800</td>
-				<td>500</td>
-				<td>10/2/2016</td>
-				<td>OPEN</td>
-			</tr>  -->
-				<%
-					}
-				%>
+				
+								
+					<%}%>
+				
 			</tbody>
 		</table>
 	</div>
 	<div class="container">
 		<form method="post" action="startStopService">
-			<input type="submit" name="start" value="start"
-				class="btn btn-info btn-lg" style="display:inline;float:left">
+			<input type="submit" name="start" value="start" class="btn btn-info btn-lg" style="display:inline;float:left">
+
+			<!-- <input type="submit" name="stop" value="stop" class="btn btn-info btn-lg""> -->
+
+			<!-- <input type="submit" name="start" value="start"	class="btn btn-info btn-lg"">
+			<input type="submit" name="stop" value="stop" class="btn btn-info btn-lg""> -->
+
+				
 			<!-- 			<input type="submit"  name="stop" value="stop" class="btn btn-info btn-lg""> -->
 		</form>
 		
@@ -218,6 +202,51 @@ li:last-child {
 			sortTable(f_sl, n);
 		});
 		$("#nm").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#nm1").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm2").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm3").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm4").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm5").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm6").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm7").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm8").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm9").click(function() {
 			f_nm *= -1;
 			var n = $(this).prevAll().length;
 			sortTable(f_nm, n);

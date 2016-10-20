@@ -39,9 +39,6 @@ import com.sapient.model.ViewFills;
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class BrokerServiceImpl implements BrokerService {
 
-	// public BrokerServiceImpl() {
-	//
-	// }
 
 	@Autowired
 	BlockDAO blockDAO;
@@ -75,13 +72,7 @@ public class BrokerServiceImpl implements BrokerService {
 				// get similar block_id and set remaining quantity
 				Long remainingQty = blocks.getTotal_quantity() - blocks.getExecuted_quantity();
 
-				/*
-				 * securities.setSecurity_symbol("GOOG");
-				 * securities.setLast_trade_price(12.0);
-				 * securities.setMax_price_spread(20.0);
-				 * securities.setMax_executions(100);
-				 */
-				// System.out.println(securitiesDAO.toString());
+				
 
 				securities = securitiesDAO.findByPrimaryKey(blocks.getSymbol());
 				if (securities == null) {

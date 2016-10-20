@@ -52,23 +52,23 @@ li:last-child {
          <li><a href="Login.jsp">Logout</a></li>
          <li><a onclick="confirmstop()">Stop</a></li>
   </ul>
-  <div style="height:300px;overflow-y:scroll;;">
+  <div style="height:700px;overflow-y:scroll;;">
   <table class="table table-striped" id="dataTable">
-			<thead class="thead-inverse">
+			<thead >
 				<tr>
-				<th onmouseover="this.style.background='#AAA'" id="nm">Block Id</th>    
-				<th>Ticker</th>    
+				<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Block Id</th>    
+				<th id="nm1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Ticker</th>    
 				<!-- <th>Name</th> -->
-				<th>Side</th>
-				<th>Type</th>
-				<th>Stop Price</th>
-				<th>Limit Price</th>
-				<th>Executed Price</th>
-				<th>Total Quantity</th>
-				<th>Remaining Quantity</th>
-				<th>Executed Quantity</th>
-				<th>Executed Date</th>
-				<th>Status</th>  
+				<th id="nm2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Side</th>
+				<th id="nm3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Type</th>
+				<th id="nm4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Stop Price</th>
+				<th id="nm5" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Limit Price</th>
+				<th id="nm6" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Price</th>
+				<th id="nm7" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Total Quantity</th>
+				<th id="nm8" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Remaining Quantity</th>
+				<th id="nm9" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Quantity</th>
+				<th id="nmm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Date</th>
+				<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Status</th>  
 			</tr>
 			</thead>
 			<tbody>
@@ -95,7 +95,7 @@ li:last-child {
 				<%
 					}
 				%>
-				</div>
+				
 			<!-- <tr>
 				<td>1</td>
 				<td>GOOG</td>
@@ -122,13 +122,13 @@ li:last-child {
 				<td>10/2/2016</td>
 				<td>OPEN</td>
 			</tbody> -->
-
+</tbody>
 		</table>
 </div >
 </div>
 <script>
 		function sortTable(f, n) {
-			var rows = $('#mytable tbody  tr').get();
+			var rows = $('#dataTable tbody  tr').get();
 
 			rows.sort(function(a, b) {
 
@@ -153,7 +153,7 @@ li:last-child {
 			}
 
 			$.each(rows, function(index, row) {
-				$('#mytable').children('tbody').append(row);
+				$('#dataTable').children('tbody').append(row);
 			});
 		}
 		var f_sl = 1;
@@ -168,9 +168,57 @@ li:last-child {
 			var n = $(this).prevAll().length;
 			sortTable(f_nm, n);
 		});
-		
-		
-	</script>
+		$("#nm1").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+	 $("#nm2").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm3").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm4").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm5").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm6").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm7").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm8").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nm9").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		});
+		$("#nmm").click(function() {
+			f_nm *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_nm, n);
+		}); 
+		</script>
 	<script type="text/javascript">
 	function confirmstop()
 	{

@@ -77,16 +77,16 @@ thead {
 			<thead>
 				<tr>
 					   
-					<th id="nm" onmouseover="this.style.background='#AAA'">Ticker</th>
+					<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Ticker</th>
 					   
-					<th id="nme" onmouseover="this.style.background='#AAA'">Name</th>
+					<th id="nme" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Name</th>
 					   
-					<th id="sl" onmouseover="this.style.background='#AAA'">Last
+					<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Last
 						Traded Price</th>
-					<th>Maximum price Spread(%)</th>
-					<th>Maximum executions</th>
-					<th>Maximum Interval</th>
-					<th>Max Probable(%)</th>  
+					<th id="sl1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum price Spread(%)</th>
+					<th id="sl2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum executions</th>
+					<th id="sl3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum Interval</th>
+					<th id="sl4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Max Probable(%)</th>  
 				</tr>
 			</thead>
 			<tbody>
@@ -164,7 +164,7 @@ thead {
 				</div>
 				<div class="modal-body">
 					<p>
-					<form method="post" class="container">
+					<form method="post" class="container" action="editSecurity">
 
 						<!-- CSS -->
 						<style>
@@ -251,26 +251,26 @@ thead {
 											<tbody>
 												<tr>
 													<td style="text-align: center;">Ticker</td>
-													<td style="text-align: center;"><input id="ticker1"
-														disabled="disabled" type="text" placeholder="Ticker" /></td>
+													<td style="text-align: center;"><input id="ticker"
+													readonly name="ticker" type="text" placeholder="Ticker" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Name</td>
 													<td style="text-align: center;"><input id="Symbol"
-														disabled="disabled" name="Symbol name" type="text"
-														value="Google" placeholder="Symbol Name" /></td>
+														readonly name="Symbol name" type="text"
+														 placeholder="Symbol Name" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Last Traded Price</td>
 													<td style="text-align: center;"><input
 														id="Last traded Price" name="Last traded Price"
-														type="Number" step="any" value="120.0" /></td>
+														type="Number" step="any"  /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Price Spread</td>
 													<td style="text-align: center;"><input
 														id="Maximum Price Spread " name="Maximum Price Spread "
-														type="Number" step="any" value="12" /></td>
+														type="Number" step="any"  /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum exection per
@@ -278,13 +278,13 @@ thead {
 													<td style="text-align: center;"><input
 														id="Maximum Executions Per Order "
 														name="Maximum Executions Per Order " type="Number"
-														value="100" /></td>
+														 /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum interval</td>
 													<td style="text-align: center;"><input
 														id="Maximum Interval" name="Maximum Interval "
-														type="Number" value="100" /></td>
+														type="Number"  /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Probable
@@ -292,12 +292,12 @@ thead {
 													<td style="text-align: center;"><input
 														id="Maximum Probable Percentage"
 														name="Maximum Probable Percentage" type="Number"
-														step="any" value="10" /></td>
+														step="any"  /></td>
 												</tr>
 												<tr>
 													<td></td>
 													<td style="text-align: center;"><input type="submit"
-														class="btn btn-primary" value="Save" /></td>
+														class="btn btn-primary" value="save" /></td>
 												</tr>
 												</tbody>
 												</table>
@@ -325,7 +325,7 @@ thead {
 				</div>
 				<div class="modal-body">
 					<p>
-					<form method="post" class="container">
+					<form method="post" class="container" action="addsecurity">
 
 						<!-- CSS -->
 						<style>
@@ -412,53 +412,53 @@ thead {
 											<tbody>
 												<tr>
 													<td style="text-align: center;">Ticker</td>
-													<td style="text-align: center;"><input id="ticker1"
+													<td style="text-align: center;"><input id="Ticker2"  name="Ticker2"
 														type="text" placeholder="Ticker" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Name</td>
-													<td style="text-align: center;"><input id="Symbol"
-														name="Symbol name" type="text"
-														value="Google" placeholder="Symbol Name" /></td>
+													<td style="text-align: center;"><input id="SymbolName"
+														name="SymbolName" type="text"
+														 placeholder="Symbol Name" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Last Traded Price</td>
 													<td style="text-align: center;"><input
-														id="Last traded Price" name="Last traded Price"
-														type="Number" step="any" value="120.0" /></td>
+														id="LastTradedPrice" name="LastTradedPrice"
+														type="Number" step="any"  /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Price Spread</td>
 													<td style="text-align: center;"><input
-														id="Maximum Price Spread " name="Maximum Price Spread "
-														type="Number" step="any" value="12" /></td>
+														id="MaximumPriceSpread " name="MaximumPriceSpread"
+														type="Number" step="any"  /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum exection per
 														order</td>
 													<td style="text-align: center;"><input
-														id="Maximum Executions Per Order "
-														name="Maximum Executions Per Order " type="Number"
-														value="100" /></td>
+														id="MaximumExecutionsPerOrder "
+														name="MaximumExecutionsPerOrder" type="Number"
+														 /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum interval</td>
 													<td style="text-align: center;"><input
-														id="Maximum Interval" name="Maximum Interval "
-														type="Number" value="100" /></td>
+														id="MaximumInterval" name="MaximumInterval"
+														type="Number" /></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Probable
 														Percentage</td>
 													<td style="text-align: center;"><input
-														id="Maximum Probable Percentage"
-														name="Maximum Probable Percentage" type="Number"
-														step="any" value="10" /></td>
+														id="MaximumProbablePercentage"
+														name="MaximumProbablePercentage" type="Number"
+														step="any"  /></td>
 												</tr>
 												<tr>
 													<td></td>
 													<td style="text-align: center;"><input type="submit"
-														class="btn btn-primary" value="Save" /></td>
+														class="btn btn-primary" value="Add" /></td>
 												</tr>
 												</tbody>
 												</table>
@@ -485,7 +485,7 @@ thead {
 			 window.location.href="RemoveServlet?uname="+u; */
 
 			//document.Removeform.submit();
-			document.getElementById("ticker1").value = document
+			document.getElementById("ticker").value = document
 					.getElementById("securities").rows[rown].cells[0].innerHTML;
 			document.getElementById("Symbol").value = document
 					.getElementById("securities").rows[rown].cells[1].innerHTML;
@@ -538,6 +538,26 @@ thead {
 			var n = $(this).prevAll().length;
 			sortTable(f_sl, n);
 		});
+		$("#sl1").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#sl2").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#sl3").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
+		$("#sl4").click(function() {
+			f_sl *= -1;
+			var n = $(this).prevAll().length;
+			sortTable(f_sl, n);
+		});
 		$("#nme").click(function() {
 			f_sl *= -1;
 			var n = $(this).prevAll().length;
@@ -562,8 +582,3 @@ thead {
 </body>
 </html>
 												
-																							
-
-
-
-
