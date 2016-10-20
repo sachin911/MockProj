@@ -17,7 +17,7 @@ public class EditSecuritiesController {
 	public String edit_security(HttpServletRequest req) {
 		
 		
-		 //System.out.println("executionStartStop"); String stop =
+		 System.out.println("editSecurity"); 
 		// * req.getParameter("stop"); System.out.println("password: " + stop);
 		 
 		Securities security = new Securities();

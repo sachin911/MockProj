@@ -32,8 +32,11 @@ public class AddSecurityController {
 				com.sapient.config.AppConfig.class);
 		container.registerShutdownHook();
 		SecuritiesService securitiesService = (SecuritiesService) container.getBean("securitiesService");
-		System.out.println(symbol);
-		System.out.println("symbolName"+symbolName);
+		//System.out.println(symbol);
+		//System.out.println("symbolName"+symbolName);
+		System.out.println("LastTradedPrice"+last_trade_price);
+		System.out.println("max_price_spread"+max_price_spread);
+		System.out.println("max_interval"+max_interval);
 		System.out.println("max_executions"+max_executions);
 		
 		//security = securitiesService.findByPrimaryKey(symbol);

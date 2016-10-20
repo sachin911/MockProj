@@ -126,35 +126,10 @@ li:last-child {
 					<td><%=blocks.getExecuted_date()%></td>
 					<td><%=blocks.getStatus()%></td>
 				</tr>
-				<!-- <tr>
-				<td>1</td>
-				<td>GOOG</td>
-				<td>BUY</td>
-				<td>Market</td>
-				<td>0</td>
-				<td>0</td>
-				<td>150.36</td>
-				<td>800</td>
-				<td>500</td>
-				<td>10/2/2016</td>
-				<td>OPEN</td>
-			</tr> 
-			<tr>
-				<td>2</td>
-				<td>GOOG</td>
-				<td>SELL</td>
-				<td>Market</td>
-				<td>0</td>
-				<td>0</td>
-				<td>150.36</td>
-				<td>800</td>
-				<td>500</td>
-				<td>10/2/2016</td>
-				<td>OPEN</td>
-			</tr>  -->
-				<%
-					}
-				%>
+				
+								
+					<%}%>
+				
 			</tbody>
 		</table>
 	</div>
