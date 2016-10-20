@@ -257,11 +257,11 @@ public class Block {
 		builder.append(symbol);
 		builder.append(", side=");
 		builder.append(side);
-		builder.append(", orderType=");
+		builder.append(", type=");
 		builder.append(type);
-		builder.append(", qtyPlaced=");
+		builder.append(", total_quantity=");
 		builder.append(total_quantity);
-		builder.append(", qtyExecuted=");
+		builder.append(", executed_quantity=");
 		builder.append(executed_quantity);
 		builder.append(", stopPrice=");
 		builder.append(stopPrice);

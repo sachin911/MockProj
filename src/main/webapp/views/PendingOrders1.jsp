@@ -298,7 +298,7 @@ $(document).ready(function() {
                {
                        $.ajax({
                          type: "GET",
-                         url: "fetchOrder5",
+                         url: "recommendBlock",
                          dataType: 'json',
                          data:"data="+data1,
                          success: function(data1) {
