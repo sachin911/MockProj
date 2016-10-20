@@ -219,17 +219,17 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	}
 
 	public List<Block> findAllBlocks(int traderId) {
-		Query query = em.createQuery("from Block where status=:stat");
+		Query query = em.createQuery("from Block where status=:stat and trader_id=:tid");
 		query.setParameter("stat", "New");
-
+		query.setParameter("tid", (long)traderId);
 		return query.getResultList();
 
 	}
 	
 	public List<Block> findAllBlocksHistory(int traderId) {
-		Query query = em.createQuery("from Block where status!=:stat");
+		Query query = em.createQuery("from Block where status!=:stat and tader_id=:tid");
 		query.setParameter("stat", "New");
-
+		query.setParameter("tid", (long)traderId);
 		return query.getResultList();
 
 	}

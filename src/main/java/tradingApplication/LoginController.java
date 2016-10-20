@@ -59,8 +59,7 @@ public class LoginController {
 			return new ModelAndView("PMHome");
 		} else if (ourType.equals("TRADER")){
 			request.getSession().setAttribute("currentType", "Trader");
-			TradingController tc = new TradingController();
-			return tc.populateBlockBlotter();
+			return new ModelAndView("TraderHome");
 		} else if (ourType.equals("PMTRADER")) {
 			request.getSession().setAttribute("currentType", "PM");
 			return new ModelAndView("PMHome");
