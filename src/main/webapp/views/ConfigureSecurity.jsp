@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap Case</title>
+<title>Configure Securities</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -29,6 +29,13 @@
 </head>
 
 <body>
+<div class="pen-title" >
+	
+	<img src="http://www.aiiria.com/wp-content/uploads/2015/11/Aiiria-original-logos_2015.png" height="90px" width="130px" style="float:left; margin-left:20px">
+	
+		
+		
+	</div>
 <style>
 li:last-child {
 	float: right;
@@ -251,26 +258,34 @@ thead {
 											<tbody>
 												<tr>
 													<td style="text-align: center;">Ticker</td>
-													<td style="text-align: center;"><input id="ticker"
-													readonly name="ticker" type="text" placeholder="Ticker" /></td>
+
+													<td style="text-align: center;"><input id="ticker1"
+														 readonly type="text" placeholder="Ticker" /></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Name</td>
 													<td style="text-align: center;"><input id="Symbol"
-														readonly name="Symbol name" type="text"
-														 placeholder="Symbol Name" /></td>
+
+														 readonly name="Symbol name" type="text"
+														value="Google" placeholder="Symbol Name" /></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Last Traded Price</td>
 													<td style="text-align: center;"><input
 														id="Last traded Price" name="Last traded Price"
-														type="Number" step="any"  /></td>
+
+														type="Number" min=0 step="any" value="120.0" /></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Price Spread</td>
 													<td style="text-align: center;"><input
 														id="Maximum Price Spread " name="Maximum Price Spread "
-														type="Number" step="any"  /></td>
+
+														type="Number" min=0 step="any" value="12" /></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum exection per
@@ -278,13 +293,17 @@ thead {
 													<td style="text-align: center;"><input
 														id="Maximum Executions Per Order "
 														name="Maximum Executions Per Order " type="Number"
-														 /></td>
+
+														min=0 value="100" /></td>
+9
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum interval</td>
 													<td style="text-align: center;"><input
 														id="Maximum Interval" name="Maximum Interval "
-														type="Number"  /></td>
+
+														type="Number" min=0 value="100" /></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Probable
@@ -292,7 +311,9 @@ thead {
 													<td style="text-align: center;"><input
 														id="Maximum Probable Percentage"
 														name="Maximum Probable Percentage" type="Number"
-														step="any"  /></td>
+
+														step="any" min=0 value="10" /></td>
+
 												</tr>
 												<tr>
 													<td></td>
@@ -406,54 +427,66 @@ thead {
 
 								<form class="container" method="post" action="addsecurity">
 									<fieldset>
-										<legend>Edit Configuration of Securities</legend>
+										<legend>Add Securities</legend>
 
 										<table style="height: 293px;" width="401">
 											<tbody>
 												<tr>
 													<td style="text-align: center;">Ticker</td>
-													<td style="text-align: center;"><input id="Ticker2"  name="Ticker2"
-														type="text" placeholder="Ticker" /></td>
+
+													<td style="text-align: center;"><input id="ticker1"
+														type="text" pattern="[A-Z]{3,10}" placeholder="Ticker" required/></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Name</td>
-													<td style="text-align: center;"><input id="SymbolName"
-														name="SymbolName" type="text"
-														 placeholder="Symbol Name" /></td>
+													<td style="text-align: center;"><input id="Symbol"
+														name="Symbol name" type="text"
+														pattern="[A-Za-z]{4,}" placeholder="Symbol Name" required/></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Last Traded Price</td>
 													<td style="text-align: center;"><input
-														id="LastTradedPrice" name="LastTradedPrice"
-														type="Number" step="any"  /></td>
+
+														id="Last traded Price" name="Last traded Price"
+														type="Number" min=0 step="any" placeholder="Last traded Price" required/></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Price Spread</td>
 													<td style="text-align: center;"><input
-														id="MaximumPriceSpread " name="MaximumPriceSpread"
-														type="Number" step="any"  /></td>
+
+														id="Maximum Price Spread " name="Maximum Price Spread "
+														type="Number" min=0 step="any" placeholder="Maximum Price Spread" required/></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Exection per
 														order</td>
 													<td style="text-align: center;"><input
-														id="MaximumExecutionsPerOrder "
-														name="MaximumExecutionsPerOrder" type="Number"
-														 /></td>
+
+														id="Maximum Executions Per Order "
+														name="Maximum Executions Per Order " type="Number"
+														min=0 placeholder="Maximum Executions Per Order" required/></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum interval</td>
 													<td style="text-align: center;"><input
-														id="MaximumInterval" name="MaximumInterval"
-														type="Number" /></td>
+
+														id="Maximum Interval" name="Maximum Interval "
+														type="Number" min=0 placeholder="Maximum Interval " required/></td>
+
 												</tr>
 												<tr>
 													<td style="text-align: center;">Maximum Probable
 														Percentage</td>
 													<td style="text-align: center;"><input
-														id="MaximumProbablePercentage"
-														name="MaximumProbablePercentage" type="Number"
-														step="any"  /></td>
+
+														id="Maximum Probable Percentage"
+														name="Maximum Probable Percentage" type="Number"
+														step="any" min=0 placeholder="Maximum Probable Percentage" /></td>
+
 												</tr>
 												<tr>
 													<td></td>

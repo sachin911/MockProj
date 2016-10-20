@@ -103,7 +103,7 @@ public class Login {
 
 
 
-public void updatepass(User user) {
+public boolean updatepass(User user) {
 	// TODO Auto-generated method stub
 	AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 
@@ -121,8 +121,10 @@ public void updatepass(User user) {
 		if(userkey.get(user.getUser_name()).equals(user.getSecret_key()))
 {
 	userService.changePass(user);
+	return true;
 }
 			}
+	return false;
 		
 }
 

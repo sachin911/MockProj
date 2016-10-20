@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Flat Login Form 3.0</title>
+<title>Broker Login Form 3.0</title>
 
 
 <link rel='stylesheet prefetch'
@@ -12,8 +12,8 @@
 
 <style>
 body {
-	background: #e9e9e9;
-	color: #666666;
+	background: #98AFC7;
+	color: #3090C7;
 	font-family: 'RobotoDraft', 'Roboto', sans-serif;
 	font-size: 14px;
 	-webkit-font-smoothing: antialiased;
@@ -183,7 +183,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup,
 }
 
 body {
-	line-height: 1
+	line-height: 1;
+	
 }
 
 ol, ul {
@@ -205,11 +206,9 @@ table {
 }
 </style>
 </head>
-<body>
+<body >
 	<form name="login-form" class="login-form" action="hello" method="post">
-
-
-
+	 
 
 
 
@@ -221,8 +220,11 @@ table {
 	<!-- Input Mixin-->
 	<!-- Button Mixin-->
 	<!-- Pen Title-->
-	<div class="pen-title">
-		<h1>Welcome to Broker Site</h1>
+	<div class="pen-title" >
+	<h1 >Welcome to Broker Site</h1>
+	<img src="http://www.aiiria.com/wp-content/uploads/2015/11/Aiiria-original-logos_2015.png" height="100px" width="300px" style="float:center">
+	
+		
 		
 	</div>
 	<!-- Form Module-->
@@ -244,6 +246,13 @@ table {
 		<div class="cta">
 			<a href="ForgetPassword.jsp">Forgot your password?</a>
 		</div>
+		<%
+    if (request.getSession().getAttribute("message") == null) {
+       
+    } else {
+        out.println(request.getSession().getAttribute("message"));
+    }
+%>
 	</div>
 	<script
 		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

@@ -22,11 +22,16 @@ public class Log4JDemo {
 
 	public static void main(String[] args) {
 
-		String path = "log4j.properties";
-
-		PropertyConfigurator.configure(path);
-		Log4JDemo obj = new Log4JDemo();
-		obj.runMe("Logs are here");
+		logger.warn("This is warn : " );
+		logger.error("This is error : " );
+		logger.fatal("This is fatal : " );
+		
+		
+//		String path = "log4j.properties";
+//
+//		PropertyConfigurator.configure(path);
+//		Log4JDemo obj = new Log4JDemo();
+//		obj.runMe("Logs are here");
 		
 //		Date current = new Date();
 //		Block obj = new Block("BUY", "GOOG", 300L, "MARKET", "OPEN", 221.0, 30.0, 100L, current, 120.0);

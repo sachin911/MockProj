@@ -24,6 +24,7 @@ public class SecuritiesServiceImpl implements SecuritiesService {
 	public void savesecurities(Securities security) {
 		securitiesDAO.save(security);
 		
+		
 	}
 	@Override
 	public Securities findByPrimaryKey(String id) {

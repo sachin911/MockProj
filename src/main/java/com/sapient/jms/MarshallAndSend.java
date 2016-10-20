@@ -18,7 +18,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
-import com.sapient.config.LoggerConfig;
 import com.sapient.model.Block;
 
 public class MarshallAndSend {
@@ -27,7 +26,9 @@ public class MarshallAndSend {
 
 	private JAXBContext jaxbContext;
 	private Marshaller jaxbMarshaller;
-
+	private static final Logger logger = Logger.getLogger(MarshallAndSend.class.getName());
+	
+	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws URISyntaxException, Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -57,12 +58,12 @@ public class MarshallAndSend {
 	}
 
 	public void marshallAndSendBlock(Block block) throws JAXBException {
-		LoggerConfig logConfig = new LoggerConfig();
-		Logger log = logConfig.getLogConfig();
+
 		
-		log.info("Entered the Marshalling block.");
+		logger.info("Entered the Marshalling block.");
+		System.out.println("Entered the Marshalling block");
 		String convertedObj = marshal(block);
-		log.info("Marshalling Done----------" + convertedObj);
+		logger.info("Marshalling Done----------" + convertedObj);
 		getJmsTemplate().convertAndSend("sendBlockQueue", convertedObj);
 	}
 
@@ -70,15 +71,13 @@ public class MarshallAndSend {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		MarshallAndSend ms = (MarshallAndSend) context.getBean("MessageProducer");
 
-		LoggerConfig logConfig = new LoggerConfig();
-		Logger log = logConfig.getLogConfig();
 		if (blockList == null) {
-			log.info("The list is empty. Please send a list of blocks------------");
+			logger.debug("The list is empty. Please send a list of blocks------------");
 			System.exit(0);
 		}
 
 		for (Block iter : blockList) {
-			log.info("The Block being sent is" + iter);
+			logger.info("The Block being sent is" + iter);
 			System.out.println("The Block being sent is" + iter);
 			ms.marshallAndSendBlock(iter);
 		}
