@@ -134,22 +134,25 @@ public class TradingController {
 			//System.out.println(orders1);
 			orders.add(orderService.findOrderByOrderId(orders1));
 		}
+     	User user = (User) req.getSession().getAttribute("user");
+      	int trader_id = (int) user.getId();
 		TraderService traderSevice=container.getBean(TraderService.class);
-		traderSevice.createBlock(orders);
+		traderSevice.createBlock(orders, trader_id);
 		return null;
 	}
 
 
 	@RequestMapping(value = "/views/updateTable", method = RequestMethod.GET)
-	public ModelAndView methodToUpdateTable(HttpServletResponse httpServletResponse) 
+	public ModelAndView methodToUpdateTable(HttpServletRequest req) 
 	{
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
 		OrderService orderService = container.getBean(OrderService.class);
 		List<Order> p=new ArrayList<Order>();
 
-
-		p=orderService.displaylist();
+     	User user = (User) req.getSession().getAttribute("user");
+      	int trader_id = (int) user.getId();
+		p=orderService.displaylistPendingOrder(trader_id);
 		
 
 		model.addObject("Orders",p);

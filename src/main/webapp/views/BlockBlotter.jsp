@@ -15,7 +15,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Home</title>
 </head>
-<body>
+<body style="font-family:courier;">
 <style>
 .optionsDiv {
 padding-bottom:10px;
@@ -42,7 +42,7 @@ font-weight:bold;
     <div class="container">
  
   <div class="well">
-      <h2>Block Blotter</h2><br/>
+      <h2><strong>Block Blotter</strong></h2><br/>
        <div class="optionsDiv"> Filter By Side: <select id="selectField">
                               <option>All</option>
                               <option>Buy</option>

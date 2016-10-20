@@ -45,7 +45,7 @@ public class TraderServiceImpl implements TraderService {
     }       
 
 	@Override
-	public void createBlock(List<Order> orders)
+	public void createBlock(List<Order> orders ,int traderId)
 	{
 		
 		//conditions to be checked
@@ -177,6 +177,7 @@ public class TraderServiceImpl implements TraderService {
 			block.setQtyExecuted(quantityExecuted);
 			block.setStopPrice(blockStopPrice);
 			block.setLimitPrice(blockLimitPrice);
+			block.setTraderId(traderId);
 			
 		
 			//System.out.println(block);

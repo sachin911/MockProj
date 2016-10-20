@@ -36,13 +36,14 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 	 @SuppressWarnings("unchecked")
 	 @Override 
-	 public List<Order> findAll() {
+	 public List<Order> findAllOrders(int traderId) {
 	//	 System.out.println("hey");
 	List<Order> l=new ArrayList<Order>();
 
 	
-	Query query=em.createQuery("from Order where block_id is null and status=:stat");
+	Query query=em.createQuery("from Order where block_id is null and status=:stat and trader_id=:tid");
 	query.setParameter("stat", "Open");
+	query.setParameter("tid", traderId);
 	List<Order>l1=query.getResultList();
 	Collections.sort(l1);
 	

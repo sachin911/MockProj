@@ -11,7 +11,7 @@ public interface OrderService {
 	
 	List<Order> displaylist(int traderId);
 
-	List<Order> displaylist();
+	List<Order> displaylistPendingOrder(int traderId);
 	
 	List<Block> displayBlock(int i);
 

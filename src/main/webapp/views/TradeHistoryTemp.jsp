@@ -18,7 +18,7 @@
     <!-- hello -->
     <title>Trader History</title>
 </head>
-<body>
+<body style="font-family:courier;">
 
  <style>
 .optionsDiv {
@@ -49,7 +49,7 @@ font-weight:bold;
     <div class="container">
         
     <div class="well">
-      <h2>Trader History</h2><br/>
+      <h2><strong>Trader History</strong></h2><br/>
         <div class="optionsDiv"> Filter By Side: <select id="selectField">
                               <option>All</option>
                               <option>Buy</option>
