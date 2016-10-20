@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Propagation;
@@ -31,6 +34,7 @@ import com.sapient.model.Block;
 import com.sapient.model.Securities;
 import com.sapient.model.ViewFills;
 
+
 @Service("brokerService")
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class BrokerServiceImpl implements BrokerService {
@@ -42,10 +46,12 @@ public class BrokerServiceImpl implements BrokerService {
 	SecuritiesDAO securitiesDAO;
 	@Autowired
 	ViewFillsDAO viewFillsDAO;
-
+	
+	
+	@Async
 	@Override
 	public void StartExecution() {
-
+		System.out.println("------------------------Entered Broker Service --------------------------------------");
 		List<Block> blockList = new ArrayList<>();
 		//blockList = blockDAO.findAll();
 		blockList = blockDAO.findOpenPartial();

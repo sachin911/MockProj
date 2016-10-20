@@ -147,13 +147,23 @@ li:last-child {
 		</form>
 		
 		<form method="post" action="checkStatus">
+						<span id="error-message"></span>
 			<input type="submit" name="status" value="status"
 				class="btn btn-info btn-lg" style="display:inline;margin-left: 8px">
-			<div class="led-red" style="display: none; margin-left: 2rem"></div>
+				<% if(request.getSession().getAttribute("status") == "true"){ %>
 			<div class="led-green" style="margin-left: 2rem"></div>
+				<%} else { %>
+			<div class="led-red" style="margin-left: 2rem"></div>
+			<% } %>
 
 		</form>
 	</div>
+	<script   src="https://code.jquery.com/jquery-3.1.1.js"   
+	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   
+	crossorigin="anonymous">
+	
+	
+	</script>
 	<script>
 		function sortTable(f, n) {
 			var rows = $('#mytable tbody  tr').get();
