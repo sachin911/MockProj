@@ -85,7 +85,7 @@ font-weight:bold;
                   <td><button id ="editButton" class="btn btn-sm btn-info" onclick="toggleEdit('${Loop.index +1}')">Edit</button></td></tr>
                 
                  
-                 <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
+                 <tr id="hideDetailsH${Loop.index +1}" style="display:none;" position = "notShownByFilter">
                 
               
               <th>Block Details :</th>
@@ -96,7 +96,7 @@ font-weight:bold;
                  
           </tr>
           
-             <tr  id="hideDetailsD${Loop.index +1}" style="display:none;">
+             <tr  id="hideDetailsD${Loop.index +1}" style="display:none;" position = "notShownByFilter">
              <td></td>
               <td><%= l.get(j).getStatus() %></td>
                 <td><%= l.get(j).getLimitPrice() %></td>
@@ -105,7 +105,7 @@ font-weight:bold;
                </tr>
 
      		
-              <tr id="hideEditH${Loop.index +1}" style="display:none;">
+              <tr id="hideEditH${Loop.index +1}" style="display:none;" position = "notShownByFilter">
                 
              	
               <th></th><th></th>
@@ -114,11 +114,11 @@ font-weight:bold;
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
                  
-                 <th><button type="button" class="btn btn-info btn-sm" id="cancelOrder">CANCEL</button></th>
+                 <th><button type="button" class="btn btn-danger btn-sm" id="cancelOrder">Remove</button></th>
                  
           </tr>
           
-             <tr id="hideEditD${Loop.index +1}" style="display:none;">
+             <tr id="hideEditD${Loop.index +1}" style="display:none;" position = "notShownByFilter">
              <th></th>
              <td><input type="checkbox" class="sjahdjassads"/></td>
              <td><%= l.get(j).getBlockId() %></td> 
@@ -313,6 +313,7 @@ function toggleEdit(i) {
 	         } else {
 
 	             rows.show();
+	             rows.filter("[position=notShownByFilter]").hide();
 	             addRemoveClass(rows);
 
 	         }
