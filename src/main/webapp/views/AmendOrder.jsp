@@ -102,7 +102,7 @@ $time: 0.15s;
                <div class="form-input-fields col col-sm-8"><input type="text" id="acctype" name="acctype1" readonly value='<%=o.getAccountType() %>'>
                   </div>
                 <div id="" class="form-input-label col col-sm-4"> Quantity: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" id="qtyPlaced" name="qtyPlaced1" value='<%=o.getQtyPlaced() %>'>
+               <div class="form-input-fields col col-sm-8"><input type="number" id="qtyPlaced" name="qtyPlaced1" min="1" value='<%=o.getQtyPlaced() %>'>
                   </div>
                 <div id="" class="form-input-label col col-sm-4"> Trader: </div>
                <div class="form-input-fields col col-sm-8"><input type="text" id="trader" name="trader1" readonly value='<%=o.getTraderId() %>'>
