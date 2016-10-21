@@ -223,7 +223,20 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		Query query = em.createQuery("from Block where status=:stat and trader_id=:tid");
 		query.setParameter("stat", "New");
 		query.setParameter("tid", (long)traderId);
-		return query.getResultList();
+		List<Block> blocks =  query.getResultList();
+		for(Block block : blocks){
+			Query query2 = em.createQuery("from Order where block_id=:b_id");
+			query2.setParameter("b_id", block.getBlockId());
+			System.out.println("asydfhasdf" + block.getBlockId());
+			if(query2.getResultList().isEmpty()){
+				em.remove(block);
+			}
+		}
+		Query query3 = em.createQuery("from Block where status=:stat and trader_id=:tid");
+		query3.setParameter("stat", "New");
+		query3.setParameter("tid", (long)traderId);
+		blocks =  query.getResultList();
+		return blocks;
 
 	}
 	
@@ -326,10 +339,8 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	@Override
 	public void removeOrderFromBlock(List<Integer> orderId) {
 		for(Integer o:orderId){
-			
 			Query query2 = em.createQuery("update Order set block_id = null" + " where order_id = :o_id" );
 	        query2.setParameter("o_id", (long)o);
-	       
 	        query2.executeUpdate();
 	        
 		}
