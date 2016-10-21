@@ -43,25 +43,27 @@ public class MarshallAndSend {
 
 	public void sendExecutedBlock(List<Block> blockList) throws URISyntaxException, Exception, JAXBException {
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationcontext.xml");
-		 MarshallAndSend ms= (MarshallAndSend) context.getBean("MessageProducer");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationcontext.xml");
+        MarshallAndSend ms= (MarshallAndSend) context.getBean("MessageProducer");
+        
+      Object broker = BrokerFactory.createBroker(new
+      URI("broker:(tcp://localhost:61616)"));
+      ((BrokerService) broker).start();
 
-		 /*Object broker = BrokerFactory.createBroker(new
-		 URI("broker:(tcp://localhost:61616)"));
-		 ((BrokerService) broker).start();*/
+        Date current = new Date();
 
-		Date current = new Date();
+        if (blockList == null) {
+               System.out.println("The list is empty. Please send a list of blocks------------");
+               System.exit(0);
+        }
 
-		if (blockList == null) {
-			System.out.println("The list is empty. Please send a list of blocks------------");
-			System.exit(0);
-		}
+        for (Block iter : blockList) {
+               System.out.println("The Block being sent is" + iter);
+               //iter.setStatus("Open");
+               ms.marshallAndSendBlock(iter);
+        }
+ }
 
-		for (Block iter : blockList) {
-			System.out.println("The Block being sent is" + iter);
-			ms.marshallAndSendBlock(iter);
-		}
-	}
 
 	public JmsTemplate getJmsTemplate() {
 		return jmsTemplate;
