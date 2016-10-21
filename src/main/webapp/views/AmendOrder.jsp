@@ -3,9 +3,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page
 	import="org.springframework.context.support.AbstractApplicationContext"%>
-<%
-	response.addHeader("Refresh", "10");
-%> 
 <%@page import="com.mock.project.config.AppConfig"%>
 <%@page
 	import="org.springframework.context.annotation.AnnotationConfigApplicationContext"%>
