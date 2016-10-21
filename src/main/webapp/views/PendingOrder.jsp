@@ -58,8 +58,9 @@ function cancel(i){
 	                type: "POST",
 	                url: "DeleteOrder",
 	                data: "message=" + message ,
-	                success: function(data) {
+	                success: function(data){
 	                  console.log("data is sent");
+	                  alert("Order cancelled.");
 	                },
 	                     error:function(jqXHR, textStatus, errorThrown) {
 	                       console.log(textStatus, errorThrown);
@@ -166,8 +167,8 @@ scroll bar cutomization . #pending-order-headers::-webkit-scrollbar {
 				<div class="col col-sm-1">Stop</div>
 				<div class="col col-sm-1">Limit</div>
 				<div class="col col-sm-1">Status</div>
-				<div class="col col-sm-1">Amend</div>
-				<div class="col col-sm-1">Cancel</div>
+				<div class="col col-sm-1"></div>
+				<div class="col col-sm-1"></div>
 			</div>
 
 			<div class="row well" id="pending-order-data">
@@ -207,7 +208,7 @@ scroll bar cutomization . #pending-order-headers::-webkit-scrollbar {
 						</div>
 						<div class="col col-sm-1">
 							<button id="orderId1-cancel${loop.index +1}" type="button"
-								class="btn btn-danger" onclick="amend(${loop.index +1})">Amend</button>
+								class="btn btn-warning" onclick="amend(${loop.index +1})">Amend</button>
 						</div>
 						<div class="col col-sm-1">
 							<button id="orderId1-cancel${loop.index +1}"
