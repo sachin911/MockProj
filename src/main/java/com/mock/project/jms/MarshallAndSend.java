@@ -46,9 +46,9 @@ public class MarshallAndSend {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationcontext.xml");
 		 MarshallAndSend ms= (MarshallAndSend) context.getBean("MessageProducer");
 
-		 Object broker = BrokerFactory.createBroker(new
+		 /*Object broker = BrokerFactory.createBroker(new
 		 URI("broker:(tcp://localhost:61616)"));
-		 ((BrokerService) broker).start();
+		 ((BrokerService) broker).start();*/
 
 		Date current = new Date();
 
