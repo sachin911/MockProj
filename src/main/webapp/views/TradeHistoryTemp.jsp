@@ -35,17 +35,21 @@ font-weight:bold;
 </style> 
 
 <!--  .td { width = "10%" } -->
-    <nav class="navbar navbar-default">
+   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="TraderHome.jsp">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="PopulateBB">View Blocks</a></li>
+      <li ><a href="PopulateBB">View Blocks</a></li>
+
       <li><a href="updateTable">Pending Orders</a></li>
-      <li class="active"><a href="PopulateTraderHistory">History</a></li>  
+
+      <li class="active"><a href="PopulateTraderHistory">History</a></li> 
+
     </ul>
   </div>
+   </nav>   
     <div class="container">
         
     <div class="well">
@@ -94,7 +98,7 @@ font-weight:bold;
                  <td>'${Blocks.executed_price}'</td>
                  <td><c:out value='${Blocks.status}'/></td>
                  <td><c:out value='${Blocks.executedDate}'/></td>
-                 <td><button id ="detailsButton${Loop.index +1}" class="btn btn-info btn-sm" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
+                
                  </tr>  </c:forEach>
                  <tr id="hideDetailsH${Loop.index +1}" style="display:none;">
                 

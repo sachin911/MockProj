@@ -43,13 +43,15 @@ font-weight:bold;
       <a class="navbar-brand" href="TraderHome.jsp">Execution Trader</a>
     </div>
     <ul class="nav navbar-nav">
-     
-      <li ><a href="PopulateBB">View Blocks</a></li>
-      <li class="active"><a href="updateTable" id="pending_orders" value="pending_orders">Pending Orders</a></li>
-      
-      <li><a href="PopulateTraderHistory">History</a></li>
+      <li><a href="PopulateBB">View Blocks</a></li>
+
+      <li  class="active"><a href="updateTable">Pending Orders</a></li>
+
+      <li><a href="PopulateTraderHistory">History</a></li> 
+
     </ul>
   </div>
+   </nav>   
 
   
 
@@ -306,6 +308,7 @@ font-weight:bold;
                    if(random==false){
                        alert("please select some order");
                    }
+                   
                });
                });
         
@@ -357,6 +360,7 @@ font-weight:bold;
                  {
                  alert("Please select some block");
                  }
+          ref();
           
         });
                });

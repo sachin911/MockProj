@@ -39,7 +39,7 @@ font-weight:bold;
 
     </ul>
   </div>
-      
+   </nav>   
     <div class="container">
  
   <div class="well">
