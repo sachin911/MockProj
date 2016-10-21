@@ -123,7 +123,7 @@ font-weight:bold;
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
                  
-                 <th><button type="button" class="btn btn-danger btn-sm" id="cancelOrder">Remove</button></th>
+                 <th><button type="button" class="btn btn-danger btn-sm" id="cancelOrder${Loop.index +1}">Remove</button></th>
                  
         
              <th></th>
@@ -132,9 +132,9 @@ font-weight:bold;
            <!--  <tbody id="hideEditD${Loop.index +1}" style="display:none;" position = "notShownByFilter"> -->
              <% for(int k=0;k<orders.size();k++) {%>
              
-             <tr>
+             <tr id="hideEditD">
               <td><input type="checkbox" class="sjahdjassads"/></td>
-              <td><%= orders.get(k).getOrderId() %></td>
+              <td class = orderIdForCancel><%= orders.get(k).getOrderId() %></td>
                 <td><%= orders.get(k).getLimitPrice() %></td>
                <td><%= orders.get(k).getStopPrice() %></td>
                 <td><%= orders.get(k).getQtyPlaced() %></td>
@@ -166,7 +166,50 @@ font-weight:bold;
 
 </div>
     </div>
-    
+    <script>
+    $("button[id^='editButton']").click(function(){
+		
+		$('.orderCheckBox').attr('checked', false);
+			
+		});
+	
+	
+	
+	$("button[id^='cancelOrder']").click(function(){
+		var data=[];
+		$("tr[id^='hideEditD']").each(function()
+				{
+			if($(this).find("input[type=checkbox]").prop("checked")===true){
+				
+				var out=$(this).find('.orderIdForCancel').html();
+		    	console.log(out);
+				data.push(out);
+				
+			}
+			
+			
+				}
+				
+		
+		
+		);
+	
+		$.ajax({
+    		  type: "POST",
+    		  url: "cancelOrder",
+    		  dataType: 'json',
+    		  data:"data="+data,
+    		  success: function(data) {
+    		    console.log("data is sent");
+    		  }
+    		});
+		});
+
+	
+	
+	});
+
+    </script>]
      <script>
     
      $(document).ready(function(){

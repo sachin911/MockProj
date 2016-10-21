@@ -378,7 +378,7 @@ font-weight:bold;
 
       
       function LoadData() {
-    var myDataTable = $("#recommendedBlocks").jsp("<table><thead></thead><tbody></tbody></table>");
+    var myDataTable = $("#PendingOrderTable").jsp("<table><thead></thead><tbody></tbody></table>");
     $("table",myDataTable).dataTable({});
 }
 $(document).ready(function() {

@@ -39,6 +39,10 @@ public interface OrderService {
 
 	void removeBlock(Block b);
 
+	void removeOrderFromBlock(List<Integer> orderId);
+
+	
+
 	
 
 

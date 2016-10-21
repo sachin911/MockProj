@@ -322,6 +322,18 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		return query.getResultList();
 	}
 
+	@Override
+	public void removeOrderFromBlock(List<Integer> orderId) {
+		for(Integer o:orderId){
+			
+			Query query2 = em.createQuery("update Order set block_id = null" + " where order_id = :o_id" );
+	        query2.setParameter("o_id", (long)o);
+	       
+	        query2.executeUpdate();
+		}
+		
+	}
+
 	
 
 

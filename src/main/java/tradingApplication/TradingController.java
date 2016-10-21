@@ -199,6 +199,31 @@ public class TradingController {
 		return model;	
 	}
 
+	
+	@RequestMapping(value = "/views/cancelOrder", method = RequestMethod.GET)
+	public ModelAndView cancelOrder(HttpServletRequest req,HttpServletResponse httpServletResponse) 
+	{
+
+
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+		container.registerShutdownHook();  
+		OrderService orderService = container.getBean(OrderService.class);
+		List<Integer> orderId=new ArrayList<Integer>();
+		List<Block> blocks=new ArrayList<Block>();
+	//	System.out.println("remove block");
+		String[] out=req.getParameterValues("data");
+		String[] tokens=out[0].split(",");
+		for(String blockIdString:tokens){
+			orderId.add(Integer.parseInt(blockIdString));	
+		}
+		
+		orderService.removeOrderFromBlock(orderId);
+		
+		for(Block b:blocks){
+			orderService.removeBlock(b);
+		}
+		return null;	
+	}
 
 	@RequestMapping(value = "/views/removeBlock", method = RequestMethod.GET)
 	public ModelAndView removeBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) 

@@ -32,6 +32,7 @@ public interface OrderDAO extends GenericDAO<Order, Long>
 	List<Order> findAllOrders(int traderId);
 	void deleteBlock(Block b);
 	List<Order> getOrdersInBlock(Long block_id);
+	void removeOrderFromBlock(List<Integer> orderId);
 
 	
 }
