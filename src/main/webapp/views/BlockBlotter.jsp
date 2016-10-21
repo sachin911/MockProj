@@ -21,8 +21,8 @@
 padding-bottom:10px;
 font-weight:bold;
 }
-.odd{}
-.even{}
+
+
 
 </style>
     <nav class="navbar navbar-default">
@@ -39,6 +39,7 @@ font-weight:bold;
 
     </ul>
   </div>
+      
     <div class="container">
  
   <div class="well">
@@ -48,45 +49,60 @@ font-weight:bold;
                               <option>Buy</option>
                               <option>Sell</option>
                               
-                              </select></div>    
+                              </select></div>   
+                              <%int j=0;%> <%int i=0; %>
+ <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">
  
- 
-<%int i=0; %>
+
   <!-- <div class="panel-group" id="accordion"> -->
 
     <div class="panel panel-default">
       <div class="panel-heading"> 
-        
+      
  <table class="table" id="sendBlockTable">
-     <%int j=0;%>
-<tr>
+     
+<tr class="table-header">
               <th></th>
-                 <th>ID</th>
+                 <th>Block ID</th>
                  <th>Symbol</th>
                  <th>Side</th>
                  <th>Time stamp</th>
-                 
-          
-           <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">   
+                 <th>Order Type</th>
+                 <th>Limit Price</th>
+                 <th>Stop Price</th>
+                 <th>Total Quantity</th>
+          </tr>
+         
+            
            <%List<Block> l =(List<Block>) request.getAttribute("Blocks");
            System.out.println(l);%>
       <!--          <div class="panel panel-default">
       <div class="panel-heading">  -->
       
-             <tr id = "getId();" position='${Blocks.side }'>
+             <tr id = "getId();" class="table-header">
                  <td><input type="checkbox"/></td>
                   <td class="blockId"><c:out  value='${Blocks.blockId}'/></td>
 
                 <td><c:out  value='${Blocks.symbol}'/></td>
                <td><c:out  value='${Blocks.side}'/></td>
                 <td><c:out  value='${Blocks.orderDate}'/></td>
+                <td><c:out  value='${Blocks.orderType}'/></td>
+                     <% if(l.get(j).getLimitPrice()==0 && l.get(j).getStopPrice()==0) {%>
+                 <td>-</td>
+               <td>-</td>
+
+               <% } else {%>
+                <td><c:out  value='${Blocks.limitPrice}'/></td>
+               <td><c:out  value='${Blocks.stopPrice}'/></td>
+               <%} %>
+                 <td><c:out  value='${Blocks.qtyPlaced}'/></td>
                  
                
-                 <td><button id ="detailsButton" class="btn btn-sm btn-info" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
+                 <%-- <td><button id ="detailsButton" class="btn btn-sm btn-info" onclick="toggleDetails('${Loop.index +1}')">Details</button></td> --%>
                   <td><button id ="editButton" class="btn btn-sm btn-info" onclick="toggleEdit('${Loop.index +1}')">Edit</button></td></tr>
                </tr> 
                  
-                 <tr id="hideDetailsH${Loop.index +1}" style="display:none;" position = "notShownByFilter">
+           <%--       <tr id="hideDetailsH${Loop.index +1}" style="display:none;" position = "notShownByFilter">
                 
               
               <th>Block Details :</th>
@@ -95,7 +111,7 @@ font-weight:bold;
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
                  
-          </tr>
+          </tr> --%>
          <% 
          AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
          container.registerShutdownHook();
@@ -105,15 +121,15 @@ font-weight:bold;
          
           System.out.println(l.get(j).getBlockId());
           List<Order> orders = orderService.findOrders(l.get(j).getBlockId()); %> 
-          
+          <%-- 
              <tr  id="hideDetailsD${Loop.index +1}" style="display:none;" position = "notShownByFilter">
              <td></td>
           <td><%= l.get(j).getStatus() %></td>
                 <td><%= l.get(j).getLimitPrice() %></td>
                <td><%= l.get(j).getStopPrice() %></td>
                 <td><%= l.get(j).getQtyPlaced() %></td>
-               </tr>
-     		
+               </tr> --%>
+     		<table class="table">
               <tbody id="hideEditD${Loop.index +1}" style="display:none;" position = "notShownByFilter">
                 <tr>
              	
@@ -152,6 +168,7 @@ font-weight:bold;
                </tr>
 		<% } %>
 		</tbody>
+		</table>
 		   
               <%--   <td><%= l.get(j).getPmId() %></td> --%>
             
@@ -160,24 +177,28 @@ font-weight:bold;
          
                
            
-      </div>
-
-    </div>
+     
  
  <%j++; %>
  <thead></thead>
-      </c:forEach>
+   
         </table> 
-      <button type="button" class="btn btn-sm btn-success" id="sendBlock">SEND</button>
+        
+      
+</div>
+
+
+
+</div>
+   </c:forEach>
+   <button type="button" class="btn btn-sm btn-success" id="sendBlock">SEND</button>
 
      <button type="button" class="btn btn-sm btn-danger" id="removeBlock">REMOVE BLOCK</button>
-   
-</div>
-
-
-
-</div>
+   	
     </div>
+    
+    </div>
+    
     <script>
     $("button[id^='editButton']").click(function(){
 		
@@ -227,39 +248,7 @@ font-weight:bold;
      <script>
     
      $(document).ready(function(){
-     	$('#removeBlock').click(function() {
      	
-  			
-     			
-     		var data=[];
-     	$('#sendBlockTable tr').each(function()
-     	{
-     	if($(this).find("input[type=checkbox]").prop("checked")===true)
-     	{
-     		
-     		
- 		console.log("sakjs");
-     	var out=$(this).find('.blockId').html();
-     	console.log(out);
-     	data.push(out);
-     	}
-     	 
-     	}
-     	);	
-     	  console.log(data);  
-     	  
-     	  $.ajax({
-     		  type: "GET",
-     		  url: "removeBlock",
-     		  dataType: 'json',
-     		  data:"data="+data,
-     		  success: function(data) {
-     		    console.log("data is sent");
-     		  }
-     		});
-     	 alert("Block removed")
-     	  ref();
-     	});
      });
      
      function ref(){
@@ -270,47 +259,7 @@ font-weight:bold;
      <script>
     
     $(document).ready(function(){
-    	$('#sendBlock').click(function() {
     	
- 		
-    		location.href="PopulateBB";	
-    		var data=[];
-    	$('#sendBlockTable tr').each(function()
-    	{
-    	if($(this).find("input[type=checkbox]").prop("checked")===true)
-    	{
-    		
-    		
-		console.log("sakjs");
-    	var out=$(this).find('.blockId').html();
-    	console.log(out);
-    	data.push(out);
-    	}
-    	 
-    	}
-    	);	
-    	  console.log(data);  
-    	  
-    	  $.ajax({
-    		  type: "POST",
-    		  url: "saveBlock",
-    		  dataType: 'json',
-    		  data:"data="+data,
-    		  success: function(data) {
-    		    console.log("data is sent");
-    		  }
-    		});
-    	  alert("Blocks sent successfully");
-    	  ref();
-    	});
-    	
-    	$(document).on("click","#cancelOrder",function(){
-    		
-    		$("tr[id^='hideEditD']").each(function() {
-    			console.log("test");
-    		});
-    		
-    	});
     
     	
     	
@@ -321,44 +270,119 @@ font-weight:bold;
         
 </nav>
 </body>
-<script>
-function getId(){
-	return i++;
-}
 
-function toggleDetails(i) {
-	if( document.getElementById("hideDetailsH"+i).style.display=='none' ){
-	       document.getElementById("hideDetailsH"+i).style.display = 'table-row'; // set to table-row instead of an empty string
-	    }else{
-	       document.getElementById("hideDetailsH"+i).style.display = 'none';
-	    }
-    
-    if( document.getElementById("hideDetailsD"+i).style.display=='none' ){
-       document.getElementById("hideDetailsD"+i).style.display = 'table-row'; // set to table-row instead of an empty string
-    }else{
-       document.getElementById("hideDetailsD"+i).style.display = 'none';
-    }
-    }
-
-function toggleEdit(i) {
-	/* if( document.getElementById("hideEditH"+i).style.display=='none' ){
-	       document.getElementById("hideEditH"+i).style.display = 'table-row'; // set to table-row instead of an empty string
-	    }else{
-	       document.getElementById("hideEditH"+i).style.display = 'none';
-	    } */
-    
-    if( document.getElementById("hideEditD"+i).style.display=='none' ){
-       document.getElementById("hideEditD"+i).style.display = 'table-row'; // set to table-row instead of an empty string
-    }else{
-       document.getElementById("hideEditD"+i).style.display = 'none';
-    }
-    }
-
-</script>
  <script>
-    
+ function getId(){
+		return i++;
+	}
 
+	function toggleDetails(i) {
+		if( document.getElementById("hideDetailsH"+i).style.display=='none' ){
+		       document.getElementById("hideDetailsH"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+		    }else{
+		       document.getElementById("hideDetailsH"+i).style.display = 'none';
+		    }
+	    
+	    if( document.getElementById("hideDetailsD"+i).style.display=='none' ){
+	       document.getElementById("hideDetailsD"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+	    }else{
+	       document.getElementById("hideDetailsD"+i).style.display = 'none';
+	    }
+	    }
+
+	function toggleEdit(i) {
+		/* if( document.getElementById("hideEditH"+i).style.display=='none' ){
+		       document.getElementById("hideEditH"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+		    }else{
+		       document.getElementById("hideEditH"+i).style.display = 'none';
+		    } */
+	    
+	    if( document.getElementById("hideEditD"+i).style.display=='none' ){
+	       document.getElementById("hideEditD"+i).style.display = 'table-row'; // set to table-row instead of an empty string
+	    }else{
+	       document.getElementById("hideEditD"+i).style.display = 'none';
+	    }
+	    }
+
+	
+	
 	 $(document).ready(function() {
+		 $('#removeBlock').click(function() {
+		     	
+	  			
+  			
+	     		var data=[];
+	     	$('#sendBlockTable tr').each(function()
+	     	{
+	     	if($(this).find("input[type=checkbox]").prop("checked")===true)
+	     	{
+	     		
+	     		
+	 		console.log("sakjs");
+	     	var out=$(this).find('.blockId').html();
+	     	console.log(out);
+	     	data.push(out);
+	     	}
+	     	 
+	     	}
+	     	);	
+	     	  console.log(data);  
+	     	  
+	     	  $.ajax({
+	     		  type: "GET",
+	     		  url: "removeBlock",
+	     		  dataType: 'json',
+	     		  data:"data="+data,
+	     		  success: function(data) {
+	     		    console.log("data is sent");
+	     		  }
+	     		});
+	     	 alert("Block removed")
+	     	  ref();
+	     	});
+		 
+		 
+		 $('#sendBlock').click(function() {
+		    	
+		 		
+	    		location.href="PopulateBB";	
+	    		var data=[];
+	    	$('#sendBlockTable tr').each(function()
+	    	{
+	    	if($(this).find("input[type=checkbox]").prop("checked")===true)
+	    	{
+	    		
+	    		
+			console.log("sakjs");
+	    	var out=$(this).find('.blockId').html();
+	    	console.log(out);
+	    	data.push(out);
+	    	}
+	    	 
+	    	}
+	    	);	
+	    	  console.log(data);  
+	    	  
+	    	  $.ajax({
+	    		  type: "POST",
+	    		  url: "saveBlock",
+	    		  dataType: 'json',
+	    		  data:"data="+data,
+	    		  success: function(data) {
+	    		    console.log("data is sent");
+	    		  }
+	    		});
+	    	  alert("Blocks sent successfully");
+	    	  ref();
+	    	});
+	    	
+	    	$(document).on("click","#cancelOrder",function(){
+	    		
+	    		$("tr[id^='hideEditD']").each(function() {
+	    			console.log("test");
+	    		});
+	    		
+	    	});
 
 	     function addRemoveClass(theRows) {
 

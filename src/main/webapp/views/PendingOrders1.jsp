@@ -1,5 +1,5 @@
 
-<% response.addHeader("Refresh","30"); %>
+<% response.addHeader("Refresh","60"); %>
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -134,12 +134,7 @@ font-weight:bold;
 
                                                      </table>
                                                                                                                                                                          
-                                                                                            <button type="button" class="btn btn-success btn-sm" id="createBlock">Create
-                       Block</button>
-
-               <button type="submit" class="btn btn-info btn-sm"
-                       data-toggle="collapse" data-target="#demo" id="add">Add to
-                       Block</button>
+                                                                                            
                                                                             
                                                                             
                                               </div>
@@ -156,9 +151,8 @@ font-weight:bold;
 
                                </tbody>
                                </table>
-                       </div>
-               </div>
-               </div>
+                       
+
 
 
 
@@ -424,12 +418,21 @@ $(document).ready(function() {
                        </c:forEach> 
         </tbody></table>
                 </div></div>
-          <button type="submit" class="btn btn-info btn-sm" id="sub">OK
+          <button type="submit" class="btn btn-info btn-sm" id="sub">ADD
       </button>
 
 
                </div>
+               </div>
+                 <button type="button" class="btn btn-success btn-sm" id="createBlock">Create
+                       Block</button>
 
+               <button type="submit" class="btn btn-info btn-sm"
+                       data-toggle="collapse" data-target="#demo" id="add">Add to
+                       Block</button>
+				               </div>
+				             
+               </div>
 
                <!-- <script>
     
