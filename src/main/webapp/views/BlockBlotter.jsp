@@ -122,6 +122,8 @@ font-weight:bold;
                  <th>Limit Price</th>
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
+                 <th>PM ID</th>
+                 <th>Portfolio ID</th>
                  
                  <th><button type="button" class="btn btn-danger btn-sm" id="cancelOrder${Loop.index +1}">Remove</button></th>
                  
@@ -132,12 +134,21 @@ font-weight:bold;
            <!--  <tbody id="hideEditD${Loop.index +1}" style="display:none;" position = "notShownByFilter"> -->
              <% for(int k=0;k<orders.size();k++) {%>
              
-             <tr id="hideEditD">
+             <tr id="hideEditD" style = "background-color: Cornsilk" >
               <td><input type="checkbox" class="sjahdjassads"/></td>
               <td class = orderIdForCancel><%= orders.get(k).getOrderId() %></td>
-                <td><%= orders.get(k).getLimitPrice() %></td>
+              <%System.out.println(orders.get(k).getOrderType()); 
+              boolean b;%>
+               <% if(b = orders.get(k).getOrderType()=="market") { System.out.println(b);%>
+                <td><%=orders.get(k).getLimitPrice() %></td>
                <td><%= orders.get(k).getStopPrice() %></td>
+               <% } else {%>
+               <td>-</td>
+               <td>-</td>
+               <%} %>
                 <td><%= orders.get(k).getQtyPlaced() %></td>
+                <td><%= orders.get(k).getPmId() %></td>
+                  <td><%= orders.get(k).getPortfolioId() %></td> 
                </tr>
 		<% } %>
 		</tbody>
@@ -154,6 +165,7 @@ font-weight:bold;
     </div>
  
  <%j++; %>
+ <thead></thead>
       </c:forEach>
         </table> 
       <button type="button" class="btn btn-sm btn-success" id="sendBlock">SEND</button>
