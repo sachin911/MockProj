@@ -122,7 +122,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 	public List<Order> findAllStatusNew(Long pmId,Status status) {
 		List<Order> list = new ArrayList<>();
 
-		Query query = em.createQuery("from Order where pm_id= :pmId and status= :status");
+		Query query = em.createQuery("from Order where pm_id= :pmId and status= :status order by order_date desc");
 
 		query.setParameter("pmId", pmId);
 		query.setParameter("status", status.toString());
