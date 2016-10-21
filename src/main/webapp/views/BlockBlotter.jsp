@@ -203,13 +203,15 @@ font-weight:bold;
     		    console.log("data is sent");
     		  }
     		});
+		alert("Order removed")
+   	  ref();
 		});
 
 	
 	
-	});
 
-    </script>]
+
+    </script>
      <script>
     
      $(document).ready(function(){

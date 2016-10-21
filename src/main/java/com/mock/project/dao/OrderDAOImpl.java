@@ -330,6 +330,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	        query2.setParameter("o_id", (long)o);
 	       
 	        query2.executeUpdate();
+	        
 		}
 		
 	}

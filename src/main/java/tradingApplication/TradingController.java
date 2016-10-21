@@ -200,7 +200,7 @@ public class TradingController {
 	}
 
 	
-	@RequestMapping(value = "/views/cancelOrder", method = RequestMethod.GET)
+	@RequestMapping(value = "/views/cancelOrder", method = RequestMethod.POST)
 	public ModelAndView cancelOrder(HttpServletRequest req,HttpServletResponse httpServletResponse) 
 	{
 
@@ -209,7 +209,7 @@ public class TradingController {
 		container.registerShutdownHook();  
 		OrderService orderService = container.getBean(OrderService.class);
 		List<Integer> orderId=new ArrayList<Integer>();
-		List<Block> blocks=new ArrayList<Block>();
+		
 	//	System.out.println("remove block");
 		String[] out=req.getParameterValues("data");
 		String[] tokens=out[0].split(",");
@@ -219,9 +219,7 @@ public class TradingController {
 		
 		orderService.removeOrderFromBlock(orderId);
 		
-		for(Block b:blocks){
-			orderService.removeBlock(b);
-		}
+		
 		return null;	
 	}
 
