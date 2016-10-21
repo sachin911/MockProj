@@ -65,7 +65,8 @@ public class BrokerServiceImpl implements BrokerService {
 		for (Block blocks : blockList) {
 			System.out.println(blocks);
 			// delete this condition
-			if (!blocks.getStatus().equalsIgnoreCase("Completed") && !blocks.getStatus().equalsIgnoreCase("Expired")) {
+			String lowerCaseStatus=blocks.getStatus().toLowerCase();
+			if (!lowerCaseStatus.equalsIgnoreCase("Completed") && !lowerCaseStatus.equalsIgnoreCase("Expired")) {
 				// System.out.println(blocks.getStatus());
 				Securities securities = new Securities();
 				ViewFills viewFills = new ViewFills();
@@ -86,59 +87,72 @@ public class BrokerServiceImpl implements BrokerService {
 					double StopPrice = blocks.getStop_price();
 					String side = blocks.getSide();
 					String type = blocks.getType();
-					long tempExecutedQty = 0L;
+					System.out.println("type"+type);
+					/*long tempExecutedQty = 0L;
 					if (blocks.getExecuted_quantity().equals(null) || blocks.getExecuted_quantity().equals(0)) {
 						tempExecutedQty = 0;
 					} else {
 						tempExecutedQty = blocks.getExecuted_quantity();
-					}
-					System.out.println("Total Q " + blocks.getTotal_quantity());
-					logger.info("Total Q " + blocks.getTotal_quantity());
+					}*/
+					
 
-					System.out.println("Executed Q " + tempExecutedQty);
-					logger.info("Executed Q " + tempExecutedQty);
 
-					System.out.println("TotalQtyToExecute " + remainingQty);
-
-					Long QtyExecuted = 0L;
+					long QtyExecuted = 0L;
+					long maxQtyExecuted = 0L;
 
 					double priceExecuted = 0.0;
 					double priceSpred = RandomPrice(0.0, MaxPriceSpread);
 					double minPrice = LastTradedPrice - (LastTradedPrice * priceSpred / 100);
 					double maxPrice = LastTradedPrice + (LastTradedPrice * priceSpred / 100);
+					maxQtyExecuted = RandomQty(0, (long)MaxOrderPerOrder);
 					if (type.equalsIgnoreCase("market")) {
 
 						priceExecuted = RandomPrice(minPrice, maxPrice);
-						System.out.println("priceExecuted " + priceExecuted);
+						//System.out.println("priceExecuted " + priceExecuted);
 
-						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
-
+						
+						QtyExecuted=Math.min(maxQtyExecuted, remainingQty);
 					}
-					if (type.equalsIgnoreCase("stop")) {
-
-					}
-					if (type.equalsIgnoreCase("limit") && type.equalsIgnoreCase("buy")) {
+					
+					else if (type.equalsIgnoreCase("limit")){
+							if( type.equalsIgnoreCase("buy")) {
 						priceExecuted = RandomPrice(Math.min(LimitPrice, minPrice), Math.max(LimitPrice, minPrice));
-						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
+						QtyExecuted=Math.min(maxQtyExecuted, remainingQty);
 					}
-					if (type.equalsIgnoreCase("limit") && type.equalsIgnoreCase("sell")) {
+							else{
 						priceExecuted = RandomPrice(Math.min(LimitPrice, maxPrice), Math.max(LimitPrice, maxPrice));
-						QtyExecuted = RandomQty(0L, Math.min(remainingQty, MaxOrderPerOrder));
+						QtyExecuted=Math.min(maxQtyExecuted, remainingQty);
+					}
+					}
+					//if (type.equalsIgnoreCase("stop"))
+					else  {
+						System.out.println("Type not covered in broker system");
 					}
 
 					// Setting the Fields
-					
+					//System.out.println("Sock Name: "+blocks.getSymbol() );
+
+					//System.out.println("Total Q " + blocks.getTotal_quantity());
+					logger.info("Total Q " + blocks.getTotal_quantity());
+
+					//System.out.println("Executed Q " + QtyExecuted);
+					logger.info("Executed Q " + QtyExecuted);
 					if (QtyExecuted != 0) {
 						blocks.setExecuted_price(priceExecuted);
+						//System.out.println("priceExecuted " + priceExecuted);
+						blocks.setExecuted_date(new Date());
 					}
+					
 					blocks.setExecuted_quantity(QtyExecuted + blocks.getExecuted_quantity());
-					blocks.setExecuted_date(new Date());
+					System.out.println("TotalQtyToExecute " + (blocks.getTotal_quantity() - blocks.getExecuted_quantity()));
 					if (blocks.getExecuted_quantity() == blocks.getTotal_quantity())
 						blocks.setStatus("Completed");
-					else if (QtyExecuted == 0 && !(blocks.getStatus().equals("Partial")))
+					else if (QtyExecuted == 0 && !(lowerCaseStatus.equals("Partial")))
 						blocks.setStatus("Open");
 					else
 						blocks.setStatus("Partial");
+					System.out.println("Staus: "+blocks.getStatus() );
+					
 
 					// blocks.setTotal_quantity(TotalQtyToExecute);
 					blockDAO.save(blocks);
@@ -149,11 +163,13 @@ public class BrokerServiceImpl implements BrokerService {
 						e.printStackTrace();
 					}
 
-					viewFills.setExecutedDate(new Date());
+					
 					if (QtyExecuted != 0) {
 						viewFills.setExecutedPrice(priceExecuted);
+						viewFills.setExecutedDate(new Date());
 					} else {
 						viewFills.setExecutedPrice(0);
+						viewFills.setExecutedDate(blocks.getExecuted_date());
 					}
 					viewFills.setQtyExecuted(QtyExecuted);
 					viewFills.setBlock_Id(blocks.getId());
@@ -186,10 +202,11 @@ public class BrokerServiceImpl implements BrokerService {
 		return (r.nextInt((int) ((max - min) * 100 + 1)) + min * 100) / 100.0;
 	}
 
-	Long RandomQty(Long i, Long max) {
+	long RandomQty(long i, long max) {
 		Random r = new Random();
 		return (long) (r.nextInt((int) (max - i + 1)) + i);
 	}
+
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -223,5 +240,11 @@ public class BrokerServiceImpl implements BrokerService {
 	public Block findByPrimaryKey(long id) {
 		return blockDAO.findByPrimaryKey(id);
 
+	}
+
+	@Override
+	public List<Block> openPartialView() {
+		return blockDAO.findOpenPartial();
+		 
 	}
 }
