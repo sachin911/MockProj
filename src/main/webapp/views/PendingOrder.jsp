@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page
 	import="org.springframework.context.support.AbstractApplicationContext"%>
-<% response.addHeader("Refresh","4"); %>
+<% response.addHeader("Refresh","10"); %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.mock.project.config.AppConfig"%>
@@ -59,8 +59,10 @@ function cancel(i){
 	                url: "DeleteOrder",
 	                data: "message=" + message ,
 	                success: function(data){
+	                	
 	                  console.log("data is sent");
 	                  alert("Order cancelled.");
+	                  window.history.go(0);
 	                },
 	                     error:function(jqXHR, textStatus, errorThrown) {
 	                       console.log(textStatus, errorThrown);

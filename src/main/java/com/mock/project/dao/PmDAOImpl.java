@@ -105,7 +105,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 
 	@Override
 	public List<Order> findAllOrdersByID(Long id) {
-		Query query = em.createQuery("from Order where pm_id =:pid");
+		Query query = em.createQuery("from Order where pm_id =:pid order by order_date desc");
 		query.setParameter("pid", id);
 		List<Order> orders = new ArrayList<Order>();
 
