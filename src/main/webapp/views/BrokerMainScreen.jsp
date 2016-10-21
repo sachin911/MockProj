@@ -97,19 +97,19 @@ li:last-child {
 			<thead>
 				<tr>
 
-					<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Block Id</th>    
-					<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Ticker</th>    
+					<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>BlockId</pre></th>    
+					<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Ticker</pre></th>    
 					<!-- <th>Name</th> -->
-					<th id="nm1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Side</th>
-					<th id="nm2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Type</th>
-					<th id="nm3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Stop Price</th>
-					<th id="nm4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Limit Price</th>
-					<th id="nm5" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Price</th>
-					<th id="nm6" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Total Quantity</th>
-					<th id="nm7" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Quantity</th>
-					<th id="nm8" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Date
+					<th id="nm1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Side</pre></th>
+					<th id="nm2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Type</pre></th>
+					<th id="nm3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Stop Price</pre></th>
+					<th id="nm4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Limit Price</pre></th>
+					<th id="nm5" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Executed Price</pre></th>
+					<th id="nm6" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Total Quantity</pre></th>
+					<th id="nm7" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Executed Quantity</pre></th>
+					<th id="nm8" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Executed Date</pre>
 						</th>
-					<th id="nm9" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Status</th>  
+					<th id="nm9" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Status</pre></th>  
 
 					
 
@@ -153,7 +153,7 @@ li:last-child {
 			<!-- 			<input type="submit"  name="stop" value="stop" class="btn btn-info btn-lg""> -->
 		</form>
 		
-		<form method="post" action="checkStatus">
+<%-- 		<form method="post" action="checkStatus">
 						<span id="error-message"></span>
 			<input type="submit" name="status" value="status"
 				class="btn btn-info btn-lg" style="display:inline;margin-left: 8px">
@@ -163,7 +163,7 @@ li:last-child {
 			<div class="led-red" style="margin-left: 2rem"></div>
 			<% } %>
 
-		</form>
+		</form> --%>
 	</div>
 	<script   src="https://code.jquery.com/jquery-3.1.1.js"   
 	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   

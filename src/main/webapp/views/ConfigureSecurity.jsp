@@ -84,16 +84,15 @@ thead {
 			<thead>
 				<tr>
 					   
-					<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Ticker</th>
+					<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Ticker &#8693</pre></th>
 					   
-					<th id="nme" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Name</th>
+					<th id="nme" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Name &#8693</pre></th>
 					   
-					<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Last
-						Traded Price</th>
-					<th id="sl1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum price Spread(%)</th>
-					<th id="sl2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum executions</th>
-					<th id="sl3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Maximum Interval</th>
-					<th id="sl4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Max Probable(%)</th>  
+					<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Last Traded Price &#8693</pre></th>
+					<th id="sl1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Maximum price Spread(%) &#8693</pre></th>
+					<th id="sl2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Maximum executions &#8693</pre></th>
+					<th id="sl3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Maximum Interval &#8693</pre></th>
+					<th id="sl4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Max Probable(%) &#8693</pre></th>  
 				</tr>
 			</thead>
 			<tbody>
@@ -435,13 +434,13 @@ thead {
 													<td style="text-align: center;">Ticker</td>
 
 													<td style="text-align: center;"><input id="ticker1" name="Ticker2"
-														type="text" pattern="[A-Z]{3,10}" placeholder="Ticker" required/></td>
+														type="text" pattern="[A-Z]{1,4}" placeholder="Ticker" required/></td>
 												</tr>
 												<tr>
 													<td style="text-align: center;">Name</td>
 													<td style="text-align: center;"><input id="Symbol"
 														name="SymbolName" type="text"
-														pattern="[A-Za-z]{4,}" placeholder="Symbol Name" required/></td>
+														pattern="[A-Za-z]{2,}" placeholder="Symbol Name" required/></td>
 
 												</tr>
 												<tr>

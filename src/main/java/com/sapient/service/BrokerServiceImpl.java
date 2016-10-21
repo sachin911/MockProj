@@ -114,7 +114,7 @@ public class BrokerServiceImpl implements BrokerService {
 						}
 					}
 					// if (type.equalsIgnoreCase("stop"))
-					else if (type.equalsIgnoreCase("stop limit")) {
+					else if (type.equalsIgnoreCase("stoplimit")) {
 						if (stopPrice >= minPrice && stopPrice >= maxPrice) {
 							priceExecuted = stopPrice;
 							QtyExecuted = Math.min(maxQtyExecuted, remainingQty);

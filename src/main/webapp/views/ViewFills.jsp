@@ -64,19 +64,19 @@ li:last-child {
   <table class="table table-striped" id="dataTable">
 			<thead >
 				<tr>
-				<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Block Id</th>    
-				<th id="nm1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Ticker</th>    
+				<th id="nm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>BlockId</pre></th>    
+				<th id="nm1" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Ticker</pre></th>    
 				<!-- <th>Name</th> -->
-				<th id="nm2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Side</th>
-				<th id="nm3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Type</th>
-				<th id="nm4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Stop Price</th>
-				<th id="nm5" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Limit Price</th>
-				<th id="nm6" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Price</th>
-				<th id="nm7" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Total Quantity</th>
-				<th id="nm8" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Remaining Quantity</th>
-				<th id="nm9" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Quantity</th>
-				<th id="nmm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Executed Date</th>
-				<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'">Status</th>  
+				<th id="nm2" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Side</pre></th>
+				<th id="nm3" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Type</pre></th>
+				<th id="nm4" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Stop Price</pre></th>
+				<th id="nm5" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Limit Price</pre></th>
+				<th id="nm6" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Executed Price</pre></th>
+				<th id="nm7" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Total Quantity</pre></th>
+				<th id="nm8" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Remaining Quantity</pre></th>
+				<th id="nm9" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Executed Quantity</pre></th>
+				<th id="nmm" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Executed Date</pre></th>
+				<th id="sl" onmousedown="this.style.background='#AAA'" onmouseup="this.style.background='#FFF'"><pre>Status</pre></th>  
 			</tr>
 			</thead>
 			<tbody>

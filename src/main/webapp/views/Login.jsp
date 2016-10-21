@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Broker Login Form 3.0</title>
+<title>Broker Login</title>
 
 
 <link rel='stylesheet prefetch'
@@ -256,7 +256,7 @@ table {
 	</div>
 	<script
 		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	<script src='http://codepen.io/andytran/pen/vLmRVp.js'></script>
+	<!-- <script src='http://codepen.io/andytran/pen/vLmRVp.js'></script> -->
 
 	<script>
 		// Toggle Function
