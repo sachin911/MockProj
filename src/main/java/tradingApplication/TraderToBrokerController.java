@@ -48,7 +48,11 @@ public class TraderToBrokerController {
 			blocks.add(orderService.findBlockByBlockId(block1));
 		}
 		
+		
 		orderService.updateStatus(blocks.get(0).getStatus(), blocks);
+		for(Block b:blocks){
+			b.setStatus("Open");
+		}
 		MarshallAndSend msobj = new MarshallAndSend();
 		msobj.sendExecutedBlock(blocks);
 		

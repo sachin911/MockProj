@@ -96,7 +96,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 
 				Query query = em.createQuery("update Block set status =:changeStatus" + " where block_id =:b_id");
-
+				System.out.println(changeStatus.toString());
 				query.setParameter("changeStatus", changeStatus.toString());
 				query.setParameter("b_id", b_id);
 				query.executeUpdate();
@@ -245,6 +245,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		list = query.getResultList();
 		for (Order order1 : list) {
 		int q=order1.getQtyPlaced();
+		double executedPrice = order1.getPrice();
 		Status status = null;
 			if((q<= executedQty) && (executedQty>0))
 			{
@@ -253,7 +254,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 				System.out.println(q);
 				executedQty=executedQty-q;
 				
-				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty1, status=:status1 where orderId=:oid");
+				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty1, status=:status1, price=:executedPrice where orderId=:oid");
 				query1.setParameter("qty1",q);
 				query1.setParameter("status1",status.Completed.toString());
 				query1.setParameter("oid",order1.getOrderId());
@@ -265,7 +266,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 			else if(q>=executedQty && executedQty>0){
 				executedQty=q-executedQty;
 				System.out.println("Inside second loop");
-				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty2, status=:status2 where orderId=:oid");
+				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty2, status=:status2, price=:executedPrice where orderId=:oid");
 				query1.setParameter("qty2",executedQty);
 				query1.setParameter("status2", status.Partial.toString());
 				query1.setParameter("oid",order1.getOrderId());

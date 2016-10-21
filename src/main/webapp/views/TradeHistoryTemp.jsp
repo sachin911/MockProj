@@ -91,7 +91,7 @@ font-weight:bold;
                  <td><c:out value='${Blocks.qtyExecuted}'/></td>
                  <td><c:out value='${Blocks.stopPrice}'/></td>
                  <td><c:out value='${Blocks.limitPrice}'/></td>
-                 <td>To be added</td>
+                 <td>'${Blocks.executed_price}'</td>
                  <td><c:out value='${Blocks.status}'/></td>
                  <td><c:out value='${Blocks.executedDate}'/></td>
                  <td><button id ="detailsButton${Loop.index +1}" class="btn btn-info btn-sm" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
