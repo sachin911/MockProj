@@ -12,9 +12,14 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.mock.project.model.Order"%>
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
-<%@ page isELIgnored="false"%><!DOCTYPE html>
+<%@ page isELIgnored="false"%>
+
+<!DOCTYPE html>
 <html>
    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
          <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -22,6 +27,10 @@
    #creat-order-form{
     width:80%;
     border: 
+}
+#editable{
+background-color:#FFFFFF;
+border: 2px dotted black;
 }
 .form-input-label{
     margin-bottom: 10px;
@@ -53,9 +62,7 @@ $outcolor: #fff;
 $bdrwidth: 10px;
 $time: 0.15s;
    </style>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     
       <title>Trading Application</title>
      </head>
    <body >
@@ -83,38 +90,57 @@ $time: 0.15s;
                 <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Order Id: </div>
                 <div class="form-input-fields col col-sm-8"><input type="text" id="orderId" name="orderId1" value='<%=o.getOrderId() %>' readonly/></div>
-               
+                    </div>
+                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Symbol: </div>
                <div class="form-input-fields col col-sm-8"><input type="text" id="symbol" name="symbol1" value='<%=o.getSymbol() %>' readonly/></div>
                   
+                        </div>
+                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Side: </div>
                <div class="form-input-fields col col-sm-8"><input type = "text" id="side" name="side1" value='<%=o.getSide() %>' readonly>
-              </div>               
+              </div>  
+                        </div>
+                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Order Type: </div>
                <div class="form-input-fields col col-sm-8">
                 <input type = "text" id="ordertype" name="orderType1" value='<%=o.getOrderType() %>' readonly> 
-               </div>       
+               </div>   
+                        </div>
+                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Order Qualifier: </div>
                <div class="form-input-fields col col-sm-8"><input type="text" id="orderqual" name="orderqual1" readonly value='<%=o.getQualifier() %>'>
                   </div>
                 <%--  <input type="hidden" id="hidden" value="'<%=o.getOrderType()%>'"/>  --%>
+                        </div>
+                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Account Type: </div>
                <div class="form-input-fields col col-sm-8"><input type="text" id="acctype" name="acctype1" readonly value='<%=o.getAccountType() %>'>
                   </div>
+                        </div>
+                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Quantity: </div>
-               <div class="form-input-fields col col-sm-8"><input type="number" id="qtyPlaced" name="qtyPlaced1" value='<%=o.getQtyPlaced() %>'>
+               <div id="editable" class="form-input-fields col col-sm-8"><input type="number" id="qtyPlaced" name="qtyPlaced1" value='<%=o.getQtyPlaced() %>'>
                   </div>
+                        </div>
+                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Trader: </div>
                <div class="form-input-fields col col-sm-8"><input type="text" id="trader" name="trader1" readonly value='<%=o.getTraderId() %>'>
                  </div>
+                        </div>
+                  <div class="row">
                 <div id="" class="form-input-label col col-sm-4"> Portfolio: </div>
                <div class="form-input-fields col col-sm-8"><input type = "text" id="portfolio" name="portfolio1" readonly value='<%=o.getPortfolioId() %>'>
                    </div>
+                        </div>
+                  <div class="row">
                 <div id="stop" class="form-input-label col col-sm-4"> Stop Price: </div>
                <div class="form-input-fields col col-sm-8"><input type="number" id="stop" name="stop1" readonly value='<%=o.getStopPrice() %>'></div>
+                        </div>
+                  <div class="row">
                  <div id="limit" class="form-input-label col col-sm-4"> Limit Price: </div>
                <div class="form-input-fields col col-sm-8"><input type="number" id="limit" name="limit1" readonly value='<%=o.getLimitPrice() %>'></div>
-                   </div>
+              </div>
              <input type="submit" class="btn btn-default"  value="Save"/>    
             </form>   
          </div>

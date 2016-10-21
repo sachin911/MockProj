@@ -32,7 +32,7 @@
 				
 				<%	
 					String userType = (String) session.getAttribute("UserType");
-					String PMToTraderSwitch ="<li><a href=\"selectTrader\"><span class=\"glyphicon glyphicon-user\"></span> Trader Portal</a></li>";				
+					String PMToTraderSwitch ="<li><a href=\"TraderHome.jsp\"><span class=\"glyphicon glyphicon-user\"></span> Trader Portal</a></li>";				
 
 					if( userType.equalsIgnoreCase("PMTRADER")){
 						out.print(PMToTraderSwitch);
