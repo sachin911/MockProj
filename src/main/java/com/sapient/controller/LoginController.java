@@ -7,6 +7,8 @@ import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +24,8 @@ public class LoginController {
 	@RequestMapping("/views/hello")
 
 	public ModelAndView sysLogin(HttpServletRequest req) throws URISyntaxException, Exception {
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
 		ActiveMQControl bro = ActiveMQControl.getInstance();
 		String uname = req.getParameter("username");
 		System.out.println("username: " + uname);

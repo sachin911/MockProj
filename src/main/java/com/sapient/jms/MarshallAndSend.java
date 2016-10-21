@@ -42,6 +42,7 @@ public class MarshallAndSend {
 		 Block obj1 = new Block("BUY1", "nars", 300L, "MARKET1",
 		 "OPEN1", 200.0, 300.0, 100L, getCurrentDate(),
 		 120.0);
+		 obj1.setId(2490L);
 
 		Date current = new Date();
 		Block obj3 = new Block("SELL", "APPL", 200L, "Market", "Pending", 0.00, 0.00, 0L, current, 0.0, current, 12L);
@@ -60,8 +61,8 @@ public class MarshallAndSend {
 	public void marshallAndSendBlock(Block block) throws JAXBException {
 
 		
-		logger.info("Entered the Marshalling block.");
-		System.out.println("Entered the Marshalling block");
+		logger.info("sachin -- Entered the Marshalling block.");
+		System.out.println("sachin --Entered the Marshalling block");
 		String convertedObj = marshal(block);
 		logger.info("Marshalling Done----------" + convertedObj);
 		getJmsTemplate().convertAndSend("sendBlockQueue", convertedObj);

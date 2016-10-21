@@ -14,6 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,6 +32,7 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @DynamicInsert(true)
 @SelectBeforeUpdate
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Block implements Serializable {
 
 	/**
@@ -35,8 +41,9 @@ public class Block implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "BLOCK_ID")
+	//@XmlAttribute(name="blockId")
 	private Long block_id;
 	// private Securities secConfig;
 
@@ -65,17 +72,20 @@ public class Block implements Serializable {
 	private Long executed_quantity;
 
 	@Column(name = "EXECUTED_DATE", nullable = true)
+	@Temporal(TemporalType.DATE)
 	private Date executed_date;
 
 	@Column(name = "EXECUTED_PRICE", nullable = true)
 	private double executed_price;
 
-	@Column(name = "BLOCK_DATE", nullable = true)
-	private Date block_date;
+	@Column(name = "BLOCK_DATE", nullable = true )
+	@Temporal(TemporalType.DATE)
+	private Date orderDate;
 
 	@Column(name = "TRADER_ID", nullable = true)
 	private Long traderId;
-
+	
+//	@XmlElement
 	public Long getId() {
 		return block_id;
 	}
@@ -83,7 +93,8 @@ public class Block implements Serializable {
 	public void setId(Long block_id) {
 		this.block_id = block_id;
 	}
-
+	
+//	@XmlElement
 	public String getSide() {
 		return side;
 	}
@@ -91,7 +102,8 @@ public class Block implements Serializable {
 	public void setSide(String side) {
 		this.side = side;
 	}
-
+	
+//	@XmlElement
 	public String getSymbol() {
 		return symbol;
 	}
@@ -99,7 +111,8 @@ public class Block implements Serializable {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-
+	
+//	@XmlElement
 	public Long getTotal_quantity() {
 		return total_quantity;
 	}
@@ -107,7 +120,8 @@ public class Block implements Serializable {
 	public void setTotal_quantity(Long total_quantity) {
 		this.total_quantity = total_quantity;
 	}
-
+	
+//	@XmlElement
 	public String getType() {
 		return type;
 	}
@@ -115,7 +129,8 @@ public class Block implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	
+//	@XmlElement
 	public String getStatus() {
 		return status;
 	}
@@ -123,7 +138,8 @@ public class Block implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	
+//	@XmlElement
 	public double getLimit_price() {
 		return limit_price;
 	}
@@ -131,7 +147,8 @@ public class Block implements Serializable {
 	public void setLimit_price(double limit_price) {
 		this.limit_price = limit_price;
 	}
-
+	
+//	@XmlElement
 	public double getStop_price() {
 		return stop_price;
 	}
@@ -139,7 +156,8 @@ public class Block implements Serializable {
 	public void setStop_price(double stop_price) {
 		this.stop_price = stop_price;
 	}
-
+	
+//	@XmlElement
 	public Long getExecuted_quantity() {
 		return executed_quantity;
 	}
@@ -147,7 +165,8 @@ public class Block implements Serializable {
 	public void setExecuted_quantity(Long executed_quantity) {
 		this.executed_quantity = executed_quantity;
 	}
-
+	
+//	@XmlElement
 	public Date getExecuted_date() {
 		return executed_date;
 	}
@@ -155,7 +174,8 @@ public class Block implements Serializable {
 	public void setExecuted_date(Date executed_date) {
 		this.executed_date = executed_date;
 	}
-
+	
+//	@XmlElement
 	public double getExecuted_price() {
 		return executed_price;
 	}
@@ -163,15 +183,17 @@ public class Block implements Serializable {
 	public void setExecuted_price(double executed_price) {
 		this.executed_price = executed_price;
 	}
-
+	
+//	@XmlElement
 	public Date getBlock_date() {
-		return block_date;
+		return orderDate;
 	}
 
 	public void setBlock_date(Date block_date) {
-		this.block_date = block_date;
+		this.orderDate = block_date;
 	}
-
+	
+//	@XmlElement
 	public Long getTraderId() {
 		return traderId;
 	}
@@ -198,7 +220,7 @@ public class Block implements Serializable {
 		this.executed_quantity = executed_quantity;
 		this.executed_date = executed_date;
 		this.executed_price = executed_price;
-		this.block_date = block_date;
+		this.orderDate = block_date;
 		this.traderId = traderId;
 	}
 
@@ -228,7 +250,7 @@ public class Block implements Serializable {
 		builder.append(", executed_price=");
 		builder.append(executed_price);
 		builder.append(", block_date=");
-		builder.append(block_date);
+		builder.append(orderDate);
 		builder.append(", traderId=");
 		builder.append(traderId);
 		builder.append("]");
