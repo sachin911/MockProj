@@ -8,6 +8,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
 import com.sapient.model.Block;
@@ -22,12 +24,12 @@ public class UnmarshallAndSave {
 	private Marshaller jaxbMarshaller;
 	private Unmarshaller jaxbUnmarshaller = null;
 
-//	public static void main(String[] args) {
-//		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-//		// ServiceActivator springIntExample = (ServiceActivator)
-//		// context.getBean("springIntExample");
-//
-//	}
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		// ServiceActivator springIntExample = (ServiceActivator)
+		// context.getBean("springIntExample");
+
+	}
 
 	public JmsTemplate getJmsTemplate() {
 		return jmsTemplate;
@@ -49,11 +51,12 @@ public class UnmarshallAndSave {
 			e.printStackTrace();
 		}
 
-		System.out.println("reached unmarshal");
+		System.out.println("sachin -- reached unmarshal");
 		
 		Block blockToSave = null;
 		try {
 			blockToSave = unmarshal(blockAsString);
+			System.out.println(blockToSave.toString());
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
