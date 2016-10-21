@@ -185,7 +185,7 @@ public class PmDAOImpl extends GenericDAOImplementation<Order, Long> implements 
 		
 		Query query = em.createQuery("update Order set status=:status where order_id=:o_id");
 		query.setParameter("o_id", id);
-		query.setParameter("status", "Drop");
+		query.setParameter("status", "Cancel");
 		System.out.println("update query" + query.executeUpdate());
 	}
 	
