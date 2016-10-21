@@ -13,10 +13,22 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet"
 	href=" https://rawgit.com/Govind-jha/online-resources/master/pm-home.css">
     
-   
+
+<style>
+    .thumb-pm-home {
+    	margin-top:25vh;
+    }
+	
+	#menu-item-row{
+		margin-left:10vw;
+	}
+	
+    </style>
+
     
 <title>TRADER Home</title>
 </head>
@@ -29,14 +41,15 @@
 			</div>
 			<ul class="nav navbar-nav" style="float:right;">
 				
-				<%-- <%	
+				 <%	
 					String userType = (String) session.getAttribute("UserType");
-					String PMToTraderSwitch ="<li><a href=\"selectTrader\"><span class=\"glyphicon glyphicon-user\"></span> Trader Portal</a></li>";				
-
+					String PMToTraderSwitch ="<li><a href=\"PMHome.jsp\"><span class=\"glyphicon glyphicon-user\"></span> PM Portal</a></li>";				
+					
 					if( userType.equalsIgnoreCase("PMTRADER")){
-						out.print(PMToTraderSwitch);
+						out.print(PMToTraderSwitch); 
 					}
-				%>	 --%>
+					
+				%>	 
 				
 				 <li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>				 
 			</ul>
@@ -47,6 +60,7 @@
         <div id="menu-item-row" class="row">
                 
             <!-- thumb -->
+          
             <a href="PopulateBB"> 
                 <div id="thumb-create-order" class="thumb-pm-home col col-sm-3">
                 <div class="thumb-pm-home-container">

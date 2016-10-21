@@ -6,7 +6,7 @@ import com.mock.project.model.Order;
 
 public interface TraderService {
 
-	public void createBlock(List<Order> orders);
+	public void createBlock(List<Order> orders, int traderId);
 
 	void addToBlock(List<Order> listOforder);
 

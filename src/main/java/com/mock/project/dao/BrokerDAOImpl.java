@@ -26,9 +26,9 @@ public class BrokerDAOImpl extends GenericDAOImplementation<Order, Long> impleme
 		
 		Query query = em.createQuery("update Block set executed_date =:executed_date, qty_executed =:qty_executed, status =:status" + " where block_id = :b_id");		
 		query.setParameter("b_id", b_id);
-		query.setParameter("executed_date", new Date());
-		query.setParameter("qty_executed", 100);
-		query.setParameter("status", "complete");
+		query.setParameter("executed_date", block.getExecutedDate());
+		query.setParameter("qty_executed", block.getQtyExecuted());
+		query.setParameter("status", block.getStatus());
 		query.executeUpdate();
 	}
 

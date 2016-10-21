@@ -123,7 +123,7 @@ public class PMController {
 		portfolioId = pmservice.getPortfolioId(portfolioName);	
 		Order o = new Order(idl,symbol,side,orderType,orderqual,acctype,qty,traderId,portfolioId,stopd,limitd);		
 		pmservice.UpdateOrderById(o);
-		ModelAndView view = new ModelAndView("PMHome");
+		ModelAndView view = new ModelAndView("redirect:ViewOrderBlotter");
 		container.close();
 		return view;
 	}
@@ -154,7 +154,7 @@ public class PMController {
 		Long tradeId = Long.parseLong(trader);		
 		Order o = new Order(idl,symbol,side,orderType,orderqual,acctype,qty,tradeId,port,stopd,limitd);
 		pmservice.UpdateOrderById(o);
-		ModelAndView view = new ModelAndView("PMHome");
+		ModelAndView view = new ModelAndView("redirect:ViewPendingOrder");
 		container.close();
 		return view;
 	}

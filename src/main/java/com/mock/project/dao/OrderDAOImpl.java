@@ -36,13 +36,14 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 	 @SuppressWarnings("unchecked")
 	 @Override 
-	 public List<Order> findAll() {
+	 public List<Order> findAllOrders(int traderId) {
 	//	 System.out.println("hey");
 	List<Order> l=new ArrayList<Order>();
 
 	
-	Query query=em.createQuery("from Order where block_id is null and status=:stat");
+	Query query=em.createQuery("from Order where block_id is null and status=:stat and trader_id=:tid");
 	query.setParameter("stat", "Open");
+	query.setParameter("tid", traderId);
 	List<Order>l1=query.getResultList();
 	Collections.sort(l1);
 	
@@ -95,7 +96,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 
 
 				Query query = em.createQuery("update Block set status =:changeStatus" + " where block_id =:b_id");
-
+				System.out.println(changeStatus.toString());
 				query.setParameter("changeStatus", changeStatus.toString());
 				query.setParameter("b_id", b_id);
 				query.executeUpdate();
@@ -227,7 +228,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 	}
 	
 	public List<Block> findAllBlocksHistory(int traderId) {
-		Query query = em.createQuery("from Block where status!=:stat and tader_id=:tid");
+		Query query = em.createQuery("from Block where status!=:stat and trader_id=:tid");
 		query.setParameter("stat", "New");
 		query.setParameter("tid", (long)traderId);
 		return query.getResultList();
@@ -244,6 +245,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		list = query.getResultList();
 		for (Order order1 : list) {
 		int q=order1.getQtyPlaced();
+		double executedPrice = order1.getPrice();
 		Status status = null;
 			if((q<= executedQty) && (executedQty>0))
 			{
@@ -252,7 +254,7 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 				System.out.println(q);
 				executedQty=executedQty-q;
 				
-				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty1, status=:status1 where orderId=:oid");
+				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty1, status=:status1, price=:executedPrice where orderId=:oid");
 				query1.setParameter("qty1",q);
 				query1.setParameter("status1",status.Completed.toString());
 				query1.setParameter("oid",order1.getOrderId());
@@ -264,9 +266,9 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 			else if(q>=executedQty && executedQty>0){
 				executedQty=q-executedQty;
 				System.out.println("Inside second loop");
-				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty2, status=:status2 where orderId=:oid");
+				Query query1 = em.createQuery("Update Order set qtyExecuted=:qty2, status=:status2, price=:executedPrice where orderId=:oid");
 				query1.setParameter("qty2",executedQty);
-				query1.setParameter("status2", status.PartiallyAllocated.toString());
+				query1.setParameter("status2", status.Partial.toString());
 				query1.setParameter("oid",order1.getOrderId());
 				System.out.println(query1.executeUpdate());
 				//query1.executeUpdate();
@@ -308,6 +310,29 @@ public class OrderDAOImpl extends GenericDAOImplementation<Order, Long> implemen
 		
 		b = em.merge(b);  
 		em.remove(b); 
+		
+	}
+
+	@Override
+	public List<Order> getOrdersInBlock(Long block_id) {
+		System.out.println(block_id);
+		long b_id = block_id;
+		System.out.println(b_id);
+		Query query=em.createQuery("from Order where block_id =:blockId");
+		query.setParameter("blockId",block_id);
+		return query.getResultList();
+	}
+
+	@Override
+	public void removeOrderFromBlock(List<Integer> orderId) {
+		for(Integer o:orderId){
+			
+			Query query2 = em.createQuery("update Order set block_id = null" + " where order_id = :o_id" );
+	        query2.setParameter("o_id", (long)o);
+	       
+	        query2.executeUpdate();
+	        
+		}
 		
 	}
 

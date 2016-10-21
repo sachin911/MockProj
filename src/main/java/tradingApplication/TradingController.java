@@ -134,22 +134,25 @@ public class TradingController {
 			//System.out.println(orders1);
 			orders.add(orderService.findOrderByOrderId(orders1));
 		}
+     	User user = (User) req.getSession().getAttribute("user");
+      	int trader_id = (int) user.getId();
 		TraderService traderSevice=container.getBean(TraderService.class);
-		traderSevice.createBlock(orders);
+		traderSevice.createBlock(orders, trader_id);
 		return null;
 	}
 
 
 	@RequestMapping(value = "/views/updateTable", method = RequestMethod.GET)
-	public ModelAndView methodToUpdateTable(HttpServletResponse httpServletResponse) 
+	public ModelAndView methodToUpdateTable(HttpServletRequest req) 
 	{
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
 		OrderService orderService = container.getBean(OrderService.class);
 		List<Order> p=new ArrayList<Order>();
 
-
-		p=orderService.displaylist();
+     	User user = (User) req.getSession().getAttribute("user");
+      	int trader_id = (int) user.getId();
+		p=orderService.displaylistPendingOrder(trader_id);
 		
 
 		model.addObject("Orders",p);
@@ -196,6 +199,29 @@ public class TradingController {
 		return model;	
 	}
 
+	
+	@RequestMapping(value = "/views/cancelOrder", method = RequestMethod.POST)
+	public ModelAndView cancelOrder(HttpServletRequest req,HttpServletResponse httpServletResponse) 
+	{
+
+
+		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+		container.registerShutdownHook();  
+		OrderService orderService = container.getBean(OrderService.class);
+		List<Integer> orderId=new ArrayList<Integer>();
+		
+	//	System.out.println("remove block");
+		String[] out=req.getParameterValues("data");
+		String[] tokens=out[0].split(",");
+		for(String blockIdString:tokens){
+			orderId.add(Integer.parseInt(blockIdString));	
+		}
+		
+		orderService.removeOrderFromBlock(orderId);
+		
+		
+		return null;	
+	}
 
 	@RequestMapping(value = "/views/removeBlock", method = RequestMethod.GET)
 	public ModelAndView removeBlock(HttpServletRequest req,HttpServletResponse httpServletResponse) 
@@ -246,16 +272,18 @@ public class TradingController {
 	}
 
 	@RequestMapping(value = "/views/PopulateTraderHistory", method = RequestMethod.GET)
-	public ModelAndView populateTraderHistory(HttpServletResponse httpServletResponse) 
+	public ModelAndView populateTraderHistory(HttpServletRequest req,HttpServletResponse httpServletResponse) 
 	{
 		//	System.out.println("Comes here");
 		AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
 		container.registerShutdownHook();
 		//  System.out.println("Comes here too");
 		OrderService orderService = container.getBean(OrderService.class);
+		User user = (User) req.getSession().getAttribute("user");
+      	int trader_id = (int) user.getId();
 		//    System.out.println("Maybe comes here too");
 		List<Block> Blocks =new ArrayList<Block>();
-		Blocks = orderService.displayBlockHistory(5);
+		Blocks = orderService.displayBlockHistory(trader_id);
 
 		ModelAndView model = new ModelAndView("TradeHistoryTemp");
 		model.addObject("Blocks",Blocks);

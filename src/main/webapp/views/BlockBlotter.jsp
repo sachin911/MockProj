@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	 <%@ page import="java.util.List,com.mock.project.model.Block" %>
+	 <%@ page import="java.util.List,com.mock.project.model.Block,com.mock.project.model.Order,com.mock.project.service.OrderService,com.mock.project.service.OrderServiceImpl,org.springframework.context.support.AbstractApplicationContext,org.springframework.context.annotation.AnnotationConfigApplicationContext,com.mock.project.config.AppConfig" %>
 <!DOCTYPE html>
 <head>
 <%@ page isELIgnored="false" %>
@@ -15,7 +15,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Home</title>
 </head>
-<body>
+<body style="font-family:courier;">
 <style>
 .optionsDiv {
 padding-bottom:10px;
@@ -42,7 +42,7 @@ font-weight:bold;
     <div class="container">
  
   <div class="well">
-      <h2>Block Blotter</h2><br/>
+      <h2><strong>Block Blotter</strong></h2><br/>
        <div class="optionsDiv"> Filter By Side: <select id="selectField">
                               <option>All</option>
                               <option>Buy</option>
@@ -59,7 +59,7 @@ font-weight:bold;
         
  <table class="table" id="sendBlockTable">
      <%int j=0;%>
-
+<tr>
               <th></th>
                  <th>ID</th>
                  <th>Symbol</th>
@@ -68,7 +68,8 @@ font-weight:bold;
                  
           
            <c:forEach items='${Blocks}' var="Blocks" varStatus="Loop">   
-           <%List<Block> l =(List<Block>) request.getAttribute("Blocks"); %>
+           <%List<Block> l =(List<Block>) request.getAttribute("Blocks");
+           System.out.println(l);%>
       <!--          <div class="panel panel-default">
       <div class="panel-heading">  -->
       
@@ -83,7 +84,7 @@ font-weight:bold;
                
                  <td><button id ="detailsButton" class="btn btn-sm btn-info" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>
                   <td><button id ="editButton" class="btn btn-sm btn-info" onclick="toggleEdit('${Loop.index +1}')">Edit</button></td></tr>
-                
+               </tr> 
                  
                  <tr id="hideDetailsH${Loop.index +1}" style="display:none;" position = "notShownByFilter">
                 
@@ -95,40 +96,66 @@ font-weight:bold;
                  <th>Total Quantity</th>
                  
           </tr>
+         <% 
+         AbstractApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
+         container.registerShutdownHook();
+       
+         OrderService orderService = container.getBean(OrderService.class); 
+         
+         
+          System.out.println(l.get(j).getBlockId());
+          List<Order> orders = orderService.findOrders(l.get(j).getBlockId()); %> 
           
              <tr  id="hideDetailsD${Loop.index +1}" style="display:none;" position = "notShownByFilter">
              <td></td>
-              <td><%= l.get(j).getStatus() %></td>
+          <td><%= l.get(j).getStatus() %></td>
                 <td><%= l.get(j).getLimitPrice() %></td>
                <td><%= l.get(j).getStopPrice() %></td>
                 <td><%= l.get(j).getQtyPlaced() %></td>
                </tr>
-
      		
-              <tr id="hideEditH${Loop.index +1}" style="display:none;" position = "notShownByFilter">
-                
+              <tbody id="hideEditD${Loop.index +1}" style="display:none;" position = "notShownByFilter">
+                <tr>
              	
-              <th></th><th></th>
+              <th></th>
                  <th>Order ID</th>
                  <th>Limit Price</th>
                  <th>Stop Price</th>
                  <th>Total Quantity</th>
+                 <th>PM ID</th>
+                 <th>Portfolio ID</th>
                  
-                 <th><button type="button" class="btn btn-danger btn-sm" id="cancelOrder">Remove</button></th>
+                 <th><button type="button" class="btn btn-danger btn-sm" id="cancelOrder${Loop.index +1}">Remove</button></th>
                  
-          </tr>
-          
-             <tr id="hideEditD${Loop.index +1}" style="display:none;" position = "notShownByFilter">
+        
              <th></th>
-             <td><input type="checkbox" class="sjahdjassads"/></td>
-             <td><%= l.get(j).getBlockId() %></td> 
-                <td><%= l.get(j).getLimitPrice() %></td>
-               <td><%= l.get(j).getStopPrice() %></td>
-                <td><%= l.get(j).getQtyPlaced() %></td>
-                
+              </tr>
+         
+           <!--  <tbody id="hideEditD${Loop.index +1}" style="display:none;" position = "notShownByFilter"> -->
+             <% for(int k=0;k<orders.size();k++) {%>
+             
+             <tr id="hideEditD" style = "background-color: Cornsilk" >
+              <td><input type="checkbox" class="sjahdjassads"/></td>
+              <td class = orderIdForCancel><%= orders.get(k).getOrderId() %></td>
+              <%System.out.println(orders.get(k).getOrderType()); 
+              boolean b;%>
+               <% if(b = orders.get(k).getOrderType()=="market") { System.out.println(b);%>
+                <td><%=orders.get(k).getLimitPrice() %></td>
+               <td><%= orders.get(k).getStopPrice() %></td>
+               <% } else {%>
+               <td>-</td>
+               <td>-</td>
+               <%} %>
+                <td><%= orders.get(k).getQtyPlaced() %></td>
+                <td><%= orders.get(k).getPmId() %></td>
+                  <td><%= orders.get(k).getPortfolioId() %></td> 
+               </tr>
+		<% } %>
+		</tbody>
+		   
               <%--   <td><%= l.get(j).getPmId() %></td> --%>
             
-               </tr>
+              
                  
          
                
@@ -138,6 +165,7 @@ font-weight:bold;
     </div>
  
  <%j++; %>
+ <thead></thead>
       </c:forEach>
         </table> 
       <button type="button" class="btn btn-sm btn-success" id="sendBlock">SEND</button>
@@ -150,7 +178,52 @@ font-weight:bold;
 
 </div>
     </div>
-    
+    <script>
+    $("button[id^='editButton']").click(function(){
+		
+		$('.orderCheckBox').attr('checked', false);
+			
+		});
+	
+	
+	
+	$("button[id^='cancelOrder']").click(function(){
+		var data=[];
+		$("tr[id^='hideEditD']").each(function()
+				{
+			if($(this).find("input[type=checkbox]").prop("checked")===true){
+				
+				var out=$(this).find('.orderIdForCancel').html();
+		    	console.log(out);
+				data.push(out);
+				
+			}
+			
+			
+				}
+				
+		
+		
+		);
+	
+		$.ajax({
+    		  type: "POST",
+    		  url: "cancelOrder",
+    		  dataType: 'json',
+    		  data:"data="+data,
+    		  success: function(data) {
+    		    console.log("data is sent");
+    		  }
+    		});
+		alert("Order removed")
+   	  ref();
+		});
+
+	
+	
+
+
+    </script>
      <script>
     
      $(document).ready(function(){
@@ -268,11 +341,11 @@ function toggleDetails(i) {
     }
 
 function toggleEdit(i) {
-	if( document.getElementById("hideEditH"+i).style.display=='none' ){
+	/* if( document.getElementById("hideEditH"+i).style.display=='none' ){
 	       document.getElementById("hideEditH"+i).style.display = 'table-row'; // set to table-row instead of an empty string
 	    }else{
 	       document.getElementById("hideEditH"+i).style.display = 'none';
-	    }
+	    } */
     
     if( document.getElementById("hideEditD"+i).style.display=='none' ){
        document.getElementById("hideEditD"+i).style.display = 'table-row'; // set to table-row instead of an empty string

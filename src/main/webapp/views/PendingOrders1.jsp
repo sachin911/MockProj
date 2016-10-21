@@ -34,7 +34,7 @@ font-weight:bold;
 <title>Pending Orders</title>
   
 </head>
-<body>
+<body style="font-family:courier;">
 
 
 <nav class="navbar navbar-default">
@@ -55,7 +55,7 @@ font-weight:bold;
 
 <div class="container">
 <div class="well">
-  <h2>Pending Orders</h2><br/>
+  <h2><strong>Pending Orders</strong></h2><br/>
   
   <div class="optionsDiv"><strong> Filter By Side: </strong><select id="selectField">
                               <option>All</option>
@@ -378,7 +378,7 @@ font-weight:bold;
 
       
       function LoadData() {
-    var myDataTable = $("#recommendedBlocks").jsp("<table><thead></thead><tbody></tbody></table>");
+    var myDataTable = $("#PendingOrderTable").jsp("<table><thead></thead><tbody></tbody></table>");
     $("table",myDataTable).dataTable({});
 }
 $(document).ready(function() {

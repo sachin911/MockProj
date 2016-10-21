@@ -11,10 +11,11 @@ public interface OrderService {
 	
 	List<Order> displaylist(int traderId);
 
-	List<Order> displaylist();
+	List<Order> displaylistPendingOrder(int traderId);
 	
 	List<Block> displayBlock(int i);
 
+	List<Order> findOrders(Long block_id);
 	
 
 	void updateStatusInOrder(long block_id,List order_id);
@@ -37,6 +38,10 @@ public interface OrderService {
 	List<Block> displayBlockHistory(int traderId);
 
 	void removeBlock(Block b);
+
+	void removeOrderFromBlock(List<Integer> orderId);
+
+	
 
 	
 

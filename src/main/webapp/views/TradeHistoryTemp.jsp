@@ -18,7 +18,7 @@
     <!-- hello -->
     <title>Trader History</title>
 </head>
-<body>
+<body style="font-family:courier;">
 
  <style>
 .optionsDiv {
@@ -49,7 +49,7 @@ font-weight:bold;
     <div class="container">
         
     <div class="well">
-      <h2>Trader History</h2><br/>
+      <h2><strong>Trader History</strong></h2><br/>
         <div class="optionsDiv"> Filter By Side: <select id="selectField">
                               <option>All</option>
                               <option>Buy</option>
@@ -91,7 +91,7 @@ font-weight:bold;
                  <td><c:out value='${Blocks.qtyExecuted}'/></td>
                  <td><c:out value='${Blocks.stopPrice}'/></td>
                  <td><c:out value='${Blocks.limitPrice}'/></td>
-                 <td>To be added</td>
+                 <td>'${Blocks.executed_price}'</td>
                  <td><c:out value='${Blocks.status}'/></td>
                  <td><c:out value='${Blocks.executedDate}'/></td>
                  <td><button id ="detailsButton${Loop.index +1}" class="btn btn-info btn-sm" onclick="toggleDetails('${Loop.index +1}')">Details</button></td>

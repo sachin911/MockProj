@@ -232,7 +232,7 @@ $time: 0.15s;
 				<div class="row">
 					<div id="" class="form-input-label col col-sm-4">Quantity:</div>
 					<div class="form-input-fields col col-sm-8">
-						<input type="number" id="qtyPlaced" name="qtyPlaced1" min="0"
+						<input type="number" id="qtyPlaced" name="qtyPlaced1" min="1"
 							value='<%=o.getQtyPlaced()%>'>
 					</div>
 				</div>
