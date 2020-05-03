@@ -39,7 +39,7 @@ public class AllocatedOrder {
 		block.setStatus("PartiallyAllocated");
 		bs.saveblock(block);
 		order1service.allocateorder(block);
-		System.out.println("Inside   line 42 main1");
+		System.out.println("Inside main1");
 
 		container.close();
 	}
